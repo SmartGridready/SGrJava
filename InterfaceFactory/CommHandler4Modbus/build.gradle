@@ -15,6 +15,10 @@ repositories {
 	mavenLocal()
     mavenCentral() 
     gradlePluginPortal()
+
+    maven {
+        url "https://nexus.library.smartgridready.ch/repository/maven-releases/"
+    }
 }
 
 
