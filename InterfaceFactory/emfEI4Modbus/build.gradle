@@ -48,17 +48,16 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 task model2Java(type: Exec) {
 
-    if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
-        return;
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+
+        workingDir '../../'
+        commandLine 'cmd', '/K', 'model2Java.bat', project.findProperty('xsd2java.eclipse.home'), project.findProperty('xsd2java.xsd.resource')
+
+        inputs.files(fileTree('../../../SGrSpecifications/SchemaDatabase/SGr'))
+        outputs.files(fileTree('model'), fileTree('src'))
+
+        standardOutput = new ByteArrayOutputStream()
     }
-
-    workingDir '../../'
-    commandLine 'cmd', '/K', 'model2Java.bat', project.findProperty('xsd2java.eclipse.home'), project.findProperty('xsd2java.xsd.resource')
-
-    inputs.files(fileTree('../../../SGrSpecifications/SchemaDatabase/SGr'))
-    outputs.files(fileTree('model'), fileTree('src'))
-
-    standardOutput = new ByteArrayOutputStream()
 
     doFirst {
         def generatedSrc = fileTree('src')
