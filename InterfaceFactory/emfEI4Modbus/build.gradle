@@ -39,9 +39,7 @@ jar {
 }
 
 compileJava {
-    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
         dependsOn 'model2Java'
-    }
 }
 
 clean.doFirst {
@@ -52,13 +50,18 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 task model2Java(type: Exec) {
 
-    workingDir '../../'
-    commandLine 'cmd', '/K', 'model2Java.bat', project.findProperty('xsd2java.eclipse.home'), project.findProperty('xsd2java.xsd.resource')
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 
-    inputs.files(fileTree('../../../SGrSpecifications/SchemaDatabase/SGr'))
-    outputs.files(fileTree('model'), fileTree('src'))
+        workingDir '../../'
+        commandLine 'cmd', '/K', 'model2Java.bat', project.findProperty('xsd2java.eclipse.home'), project.findProperty('xsd2java.xsd.resource')
 
-    standardOutput = new ByteArrayOutputStream()
+        inputs.files(fileTree('../../../SGrSpecifications/SchemaDatabase/SGr'))
+        outputs.files(fileTree('model'), fileTree('src'))
+
+        standardOutput = new ByteArrayOutputStream()
+    } else {
+        commandLine 'echo', 'skipping model2Java on Unix'
+    }
 
     doFirst {
         def generatedSrc = fileTree('src')
