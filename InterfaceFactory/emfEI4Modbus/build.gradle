@@ -44,7 +44,13 @@ clean.doFirst {
     file('src').deleteDir()
 }
 
+import org.apache.tools.ant.taskdefs.condition.Os
+
 task model2Java(type: Exec) {
+
+    if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
+        return;
+    }
 
     workingDir '../../'
     commandLine 'cmd', '/K', 'model2Java.bat', project.findProperty('xsd2java.eclipse.home'), project.findProperty('xsd2java.xsd.resource')
