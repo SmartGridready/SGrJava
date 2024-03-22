@@ -31,7 +31,7 @@ import com.smartgridready.ns.v0.RestApiServiceCall;
 import communicator.common.api.Float64Value;
 import communicator.common.api.StringValue;
 import communicator.common.api.Value;
-import communicator.common.helper.JsonMapper;
+import communicator.common.helper.JsonHelper;
 import communicator.common.impl.SGrDeviceBase;
 import communicator.common.runtime.GenDriverException;
 import communicator.rest.api.GenDeviceApi4Rest;
@@ -166,7 +166,7 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 		}
 	}
 
-	private Value handleServiceResponse(RestApiDataPointConfiguration dpDescription, String response) throws RestApiResponseParseException{
+	private Value handleServiceResponse(RestApiDataPointConfiguration dpDescription, String response) throws GenDriverException, RestApiResponseParseException{
 
 		Optional<ResponseQuery> queryOpt = Optional.ofNullable(dpDescription.getRestApiServiceCall())
 				.map(RestApiServiceCall::getResponseQuery);
@@ -174,11 +174,10 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 		if (queryOpt.isPresent()) {
 			ResponseQuery responseQuery = queryOpt.get();
 			if (responseQuery.isSetQueryType() && ResponseQueryType.JMES_PATH_EXPRESSION == responseQuery.getQueryType()) {
-				return JsonMapper.parseJsonResponse(responseQuery.getQuery(), response);
+				return JsonHelper.parseJsonResponse(responseQuery.getQuery(), response);
 			} else if (responseQuery.isSetQueryType() && ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
-				return JsonMapper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
+				return JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
 			} else if (responseQuery.isSetQueryType()) {
-				throw new RestApiResponseParseException("Response query type " + responseQuery.getQueryType().getName() + " not supported yet");
 			}
 		}
 		// return plain response

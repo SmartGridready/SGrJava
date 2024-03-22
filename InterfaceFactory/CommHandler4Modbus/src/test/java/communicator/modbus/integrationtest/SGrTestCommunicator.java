@@ -9,8 +9,8 @@ import communicator.common.api.EnumValue;
 import communicator.common.api.StringValue;
 import communicator.common.api.Value;
 import communicator.common.helper.DataTypeHelper;
+import communicator.common.impl.SGrDeviceBase;
 import communicator.common.runtime.GenDriverException;
-import communicator.modbus.impl.SGrModbusDevice;
 import io.vavr.Tuple2;
 import io.vavr.Tuple3;
 import org.eclipse.emf.common.util.EList;
@@ -267,8 +267,7 @@ public class SGrTestCommunicator extends JFrame {
         TestDevice.DataPointDescriptor dpDescriptor = (TestDevice.DataPointDescriptor) selectedNode.getUserObject();
         Value value = StringValue.of(writeValueField.getText());
         try {
-            SGrModbusDevice device = testDevice.getTestSystem();
-
+            SGrDeviceBase<?, ?, ?> device = testDevice.getTestSystem();
             device.setVal(dpDescriptor.functionalProfile, dpDescriptor.dataPoint, value);
 
             Value readVal = device.getVal(dpDescriptor.functionalProfile, dpDescriptor.dataPoint);
@@ -300,7 +299,7 @@ public class SGrTestCommunicator extends JFrame {
 
         TestDevice.DataPointDescriptor dpDescriptor = (TestDevice.DataPointDescriptor) selectedNode.getUserObject();
         try {
-            SGrModbusDevice device = testDevice.getTestSystem();
+            SGrDeviceBase<?, ?, ?> device = testDevice.getTestSystem();
             Value readVal = device.getVal(dpDescriptor.functionalProfile, dpDescriptor.dataPoint);
             readValueField.setText(readVal.getString());
         } catch (Exception e) {
@@ -357,7 +356,7 @@ public class SGrTestCommunicator extends JFrame {
 
         TestDevice.DataPointDescriptor dpDescriptor = (TestDevice.DataPointDescriptor) selectedNode.getUserObject();
         try {
-            SGrModbusDevice device = testDevice.getTestSystem();
+            SGrDeviceBase<?, ?, ?> device = testDevice.getTestSystem();
 
             // Get the current bitmap values
             Value currentValue = device.getVal(dpDescriptor.functionalProfile, dpDescriptor.dataPoint);

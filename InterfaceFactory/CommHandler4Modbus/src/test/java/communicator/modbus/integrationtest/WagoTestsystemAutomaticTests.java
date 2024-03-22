@@ -4,9 +4,6 @@ import communicator.common.api.BitmapValue;
 import communicator.common.api.BooleanValue;
 import communicator.common.api.Float64Value;
 import communicator.common.api.Value;
-import communicator.common.runtime.GenDriverException;
-import communicator.common.runtime.GenDriverModbusException;
-import communicator.common.runtime.GenDriverSocketException;
 import org.apache.logging.log4j.util.TriConsumer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -134,7 +131,7 @@ class WagoTestsystemAutomaticTests extends TestDevice {
         assertTrue(Math.abs(fInValue - fOutValue) <= AD_CONV_FAULT_TOLERANCE_24V, errorMessage);
     }
 
-    private void checkDiscreteIO(int i, boolean value) throws GenDriverException, GenDriverSocketException, GenDriverModbusException {
+    private void checkDiscreteIO(int i, boolean value) throws Exception {
         String sensor = String.format("DigitalDiscrete_M1_IN_%d", i);
         String relais = String.format("DigitalDiscrete_M1_OUT_%d", i);
         getTestSystem().setVal(relais, "Relais", BooleanValue.of(value));

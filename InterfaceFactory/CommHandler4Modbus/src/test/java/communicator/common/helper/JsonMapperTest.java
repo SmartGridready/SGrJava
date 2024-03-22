@@ -27,7 +27,7 @@ class JsonMapperTest extends JsonMapperTestBase {
         String jsonResponse = loadJson("TariffInSwisspower.json");
         String expectedJson = loadJson("TariffOutSwisspower_withTariffName.json");
 
-        String jsonResult = JsonMapper.mapJsonResponse(jmesPathMapping, jsonResponse).getString();
+        String jsonResult = JsonHelper.mapJsonResponse(jmesPathMapping, jsonResponse).getString();
         LOG.info("JSON result: {}", jsonResult);
         assertEquals(MAPPER.readTree(expectedJson), MAPPER.readTree(jsonResult));
 
@@ -44,7 +44,7 @@ class JsonMapperTest extends JsonMapperTestBase {
         String jsonResponse = loadJson("TariffInGroupeE.json");
         String expectedJson = loadJson("TariffOutGroupeE.json");
 
-        String jsonResult = JsonMapper.mapJsonResponse(jmesPathMapping, jsonResponse).getString();
+        String jsonResult = JsonHelper.mapJsonResponse(jmesPathMapping, jsonResponse).getString();
         LOG.info("JSON result: {}", jsonResult);
         assertEquals(MAPPER.readTree(expectedJson), MAPPER.readTree(jsonResult));
     }

@@ -1,12 +1,13 @@
 package communicator.common.helper;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smartgridready.ns.v0.JMESPathMapping;
 import com.smartgridready.ns.v0.JMESPathMappingRecord;
 import communicator.common.api.StringValue;
 import communicator.common.api.Value;
-import communicator.rest.exception.RestApiResponseParseException;
+import communicator.common.runtime.GenDriverException;
 import io.burt.jmespath.Expression;
 import io.burt.jmespath.JmesPath;
 import io.burt.jmespath.jackson.JacksonRuntime;
@@ -19,17 +20,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class JsonMapper {
+public class JsonHelper {
 
-    public static final Logger LOG = LoggerFactory.getLogger(JsonMapper.class);
+    public static final Logger LOG = LoggerFactory.getLogger(JsonHelper.class);
 
-    private JsonMapper() {
+    private JsonHelper() {
         throw new IllegalStateException("Helper class");
     }
 
-    public static Value parseJsonResponse(String jmesPath, String jsonResp) throws RestApiResponseParseException {
+    public static Value parseJsonResponse(String jmesPath, String jsonResp) throws GenDriverException {
 
-        if (jmesPath.trim().isEmpty()) {
+        if (jmesPath == null || jmesPath.trim().isEmpty()) {
             // no parsing required
             return StringValue.of(jsonResp);
         }
@@ -44,11 +45,11 @@ public class JsonMapper {
             JsonNode res = expression.search(jsonNode);
             return StringValue.of(res.asText());
         } catch (IOException e) {
-            throw new RestApiResponseParseException("Parsing JSON response failed: " + e.getMessage(), e);
+            throw new GenDriverException("Failed to parse JSON response", e);
         }
     }
 
-    public static Value mapJsonResponse(JMESPathMapping jmesPathMapping, String response) throws RestApiResponseParseException {
+    public static Value mapJsonResponse(JMESPathMapping jmesPathMapping, String response) throws GenDriverException {
 
         // Build mapping tables from EI-XML mappings
         Map<String, String> mapFrom = new HashMap<>();
@@ -80,10 +81,10 @@ public class JsonMapper {
                 JsonWriter builder = new JsonWriter(mapTo);
                 return StringValue.of(builder.buildJson(enhancedMap.values()));
             } else {
-                throw new RestApiResponseParseException(errorMsg);
+                throw new GenDriverException(errorMsg);
             }
-        } catch (Exception e) {
-            throw new RestApiResponseParseException(errorMsg, e);
+        } catch (JsonProcessingException e) {
+            throw new GenDriverException(errorMsg, e);
         }
     }
 
