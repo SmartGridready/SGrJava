@@ -12,6 +12,8 @@ import com.smartgridready.ns.v0.ModbusInterfaceDescription;
 import communicator.common.api.dto.InterfaceType;
 import communicator.common.helper.DeviceDescriptionLoader;
 import communicator.common.runtime.GenDriverException;
+import communicator.contact.impl.SGrContactDevice;
+import communicator.generic.impl.SGrGenericDevice;
 import communicator.messaging.impl.SGrMessagingDevice;
 import communicator.modbus.api.ModbusGatewayFactory;
 import communicator.modbus.api.ModbusGatewayRegistry;
@@ -156,6 +158,12 @@ public class SGrDeviceBuilder {
 
             case MESSAGING:
                 return new SGrMessagingDevice(deviceFrame);
+
+            case CONTACT:
+                return new SGrContactDevice(deviceFrame);
+
+            case GENERIC:
+                return new SGrGenericDevice(deviceFrame);
 
             default:
                 throw new GenDriverException(String.format("Unsupported interface type %s", interfaceType));
