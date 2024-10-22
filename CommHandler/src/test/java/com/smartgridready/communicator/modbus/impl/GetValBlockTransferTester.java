@@ -3,13 +3,17 @@ package com.smartgridready.communicator.modbus.impl;
 import java.net.URL;
 
 import com.smartgridready.ns.v0.DeviceFrame;
+
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.modbus.api.GenDeviceApi4Modbus;
+import com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus;
+import com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.smartgridready.communicator.common.helper.DeviceDescriptionLoader;
-import de.re.easymodbus.adapter.GenDriverAPI4ModbusRTU;
+import com.smartgridready.communicator.common.helper.DriverFactoryLoader;
 
 @SuppressWarnings("java:S2925")
 public class GetValBlockTransferTester {
@@ -27,7 +31,8 @@ public class GetValBlockTransferTester {
 			DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
 			DeviceFrame tstMeter = loader.load( XML_BASE_DIR, deviceDesc != null ? deviceDesc.getPath() : null);
 			
-			GenDriverAPI4ModbusRTU mbRTU = new GenDriverAPI4ModbusRTU("COM3", 19200);
+			GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+			GenDriverAPI4Modbus mbRTU = factory.createRtuTransport("COM3", 19200);
 			mbRTU.connect();
 
 			GenDeviceApi4Modbus devWagoMeter = new SGrModbusDevice(tstMeter, mbRTU );

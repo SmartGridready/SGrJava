@@ -9,11 +9,11 @@ import com.smartgridready.ns.v0.ModbusDataType;
 import com.smartgridready.ns.v0.ModbusInterface;
 import com.smartgridready.ns.v0.RegisterType;
 import com.smartgridready.communicator.common.helper.DeviceDescriptionLoader;
+import com.smartgridready.communicator.common.helper.DriverFactoryLoader;
 import com.smartgridready.communicator.common.impl.SGrDeviceBase;
 import com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus;
+import com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory;
 import com.smartgridready.communicator.modbus.impl.SGrModbusDevice;
-import de.re.easymodbus.adapter.GenDriverAPI4ModbusRTU;
-import de.re.easymodbus.adapter.GenDriverAPI4ModbusTCP;
 import io.vavr.Tuple2;
 import io.vavr.Tuple3;
 
@@ -91,7 +91,8 @@ public class TestDevice {
         DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
         deviceDescriptor = loader.load("", deviceDescriptionUrl.getPath());
 
-        GenDriverAPI4Modbus driver = new GenDriverAPI4ModbusTCP(testsystemIp, Integer.parseInt(testsystemPort));
+        GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+        GenDriverAPI4Modbus driver = factory.createTcpTransport(testsystemIp, Integer.parseInt(testsystemPort));
         driver.connect();
         driver.setUnitIdentifier((short) 1);
 
@@ -109,13 +110,15 @@ public class TestDevice {
         ModbusInterface modbusInterface = deviceDescriptor.getInterfaceList().getModbusInterface();
         if (modbusInterface != null && modbusInterface.getModbusInterfaceDescription().getModbusTcp() != null) {
             Tuple2<String, Integer> connParams = getIpConnParams.apply("Enter IP Address and Port");
-            GenDriverAPI4Modbus driver = new GenDriverAPI4ModbusTCP(connParams._1, connParams._2);
+            GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+            GenDriverAPI4Modbus driver = factory.createTcpTransport(connParams._1, connParams._2);
             driver.connect();
             testSystem = new SGrModbusDevice(deviceDescriptor,driver );
         }
         if (modbusInterface != null && modbusInterface.getModbusInterfaceDescription().getModbusRtu() != null) {
             Tuple3<String, Integer, Integer> connParams = getComPortConnParams.apply("Enter COMx port, baud rate and modbus identifier.");
-            GenDriverAPI4Modbus driver = new GenDriverAPI4ModbusRTU(connParams._1, connParams._2);
+            GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+            GenDriverAPI4Modbus driver = factory.createRtuTransport(connParams._1, connParams._2);
             driver.connect();
             driver.setUnitIdentifier(connParams._3.shortValue());
             testSystem = new SGrModbusDevice(deviceDescriptor, driver);

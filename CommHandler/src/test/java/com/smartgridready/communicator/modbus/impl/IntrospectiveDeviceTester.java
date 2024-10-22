@@ -1,11 +1,15 @@
 package com.smartgridready.communicator.modbus.impl;
 
 import com.smartgridready.ns.v0.DeviceFrame;
+
 import com.smartgridready.communicator.common.helper.DeviceDescriptionLoader;
+import com.smartgridready.communicator.common.helper.DriverFactoryLoader;
 import com.smartgridready.communicator.common.impl.SGrDeviceBase;
 import com.smartgridready.communicator.rest.http.client.ApacheHttpRequestFactory;
 import com.smartgridready.communicator.rest.impl.SGrRestApiDevice;
-import de.re.easymodbus.adapter.GenDriverAPI4ModbusRTU;
+import com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus;
+import com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory;
+
 import io.vavr.Tuple3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,7 +124,8 @@ public class IntrospectiveDeviceTester {
         DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
         DeviceFrame devDesc = loader.load( XML_BASE_DIR, "SGr_04_0014_0000_WAGO_SmartMeterV0.2.1.xml");
 
-        GenDriverAPI4ModbusRTU mbRTU = new GenDriverAPI4ModbusRTU("COM3", 19200);
+        GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+        GenDriverAPI4Modbus mbRTU = factory.createRtuTransport("COM3", 19200);
         mbRTU.connect();
         return new Tuple3<>(devDesc, new SGrModbusDevice(devDesc, mbRTU), null);
     }

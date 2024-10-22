@@ -25,17 +25,18 @@ and significant traffic load conditions
 package com.smartgridready.communicator.modbus.impl;
 
 import com.smartgridready.ns.v0.DeviceFrame;
+
 import com.smartgridready.communicator.common.api.values.BooleanValue;
 import com.smartgridready.communicator.common.api.values.EnumRecord;
 import com.smartgridready.communicator.common.api.values.Float64Value;
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.common.helper.DeviceDescriptionLoader;
+import com.smartgridready.communicator.common.helper.DriverFactoryLoader;
 import com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus;
+import com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory;
 import com.smartgridready.driver.api.modbus.Parity;
 import com.smartgridready.communicator.modbus.api.GenDeviceApi4Modbus;
 
-import de.re.easymodbus.adapter.GenDriverAPI4ModbusRTU;
-import de.re.easymodbus.adapter.GenDriverAPI4ModbusTCP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -103,8 +104,9 @@ public class IBTlabLoopTester {
 			//DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
 
 			// Modbus RTU uses a single driver  (tailored to easymodbus)
-			mbRTU = (mockModbusDriver == null ? new GenDriverAPI4ModbusRTU("COM4", 9600, Parity.NONE) : mockModbusDriver);   // for Office RTU Interface
-			//mbRTU = (mockModbusDriver == null ? new GenDriverAPI4ModbusRTU("COM9", 9600, Parity.NONE) : mockModbusDriver);   // for Office RTU Interface
+			GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+			mbRTU = (mockModbusDriver == null ? factory.createRtuTransport("COM4", 9600, Parity.NONE) : mockModbusDriver);   // for Office RTU Interface
+			//mbRTU = (mockModbusDriver == null ? factory.createRtuTransport("COM9", 9600, Parity.NONE) : mockModbusDriver);   // for Office RTU Interface
 
 			mbRTU.connect();
 			if (devABBMeterTestIsOn)  {
@@ -634,7 +636,8 @@ public class IBTlabLoopTester {
 			// Modbus TCP uses a driver instance per device (Sockets, tailored to easymodbus)
 			GenDriverAPI4Modbus mbVGT_SGCP = mockModbusDriver;
 			if (mbVGT_SGCP == null) {
-				mbVGT_SGCP = new GenDriverAPI4ModbusTCP("192.168.1.50",502);
+				GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+				mbVGT_SGCP = factory.createTcpTransport("192.168.1.50",502);
 			}
 			devVGT_SGCP = new SGrModbusDevice(tstDesc, mbVGT_SGCP);
 
@@ -690,7 +693,8 @@ public class IBTlabLoopTester {
 			DeviceFrame tstDesc = loader.load(aBaseDir, aDescriptionFile);
 
 			// Modbus TCP uses a driver instance per device (Sockets, tailored to easymodbus)
-			GenDriverAPI4Modbus mbWbGaro = (mockModbusDriver == null ? new GenDriverAPI4ModbusTCP("192.168.1.182",502) : mockModbusDriver);
+			GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+			GenDriverAPI4Modbus mbWbGaro = (mockModbusDriver == null ? factory.createTcpTransport("192.168.1.182",502) : mockModbusDriver);
 			devGaroWallbox = new SGrModbusDevice(tstDesc, mbWbGaro);
 			mbWbGaro.connect();
 
@@ -795,7 +799,8 @@ public class IBTlabLoopTester {
 			DeviceFrame tstDesc = loader.load(aBaseDir, aDescriptionFile);
 
 			// Modbus TCP uses a driver instance per device (Sockets, tailored to easymodbus)
-			GenDriverAPI4Modbus mbWbOMCCI = (mockModbusDriver == null ? new GenDriverAPI4ModbusTCP("192.168.1.183", 502) : mockModbusDriver);
+			GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+			GenDriverAPI4Modbus mbWbOMCCI = (mockModbusDriver == null ? factory.createTcpTransport("192.168.1.183", 502) : mockModbusDriver);
 			devOMCCIWallbox = new SGrModbusDevice(tstDesc, mbWbOMCCI);
 			mbWbOMCCI.connect();
 
@@ -894,7 +899,8 @@ public class IBTlabLoopTester {
 			DeviceFrame tstDesc = loader.load(aBaseDir, aDescriptionFile);
 
 			// Modbus TCP uses a driver instance per device (Sockets, tailored to easymodbus)
-			GenDriverAPI4Modbus mbPVFroniusSymo = (mockModbusDriver == null ? new GenDriverAPI4ModbusTCP("192.168.1.181", 502) : mockModbusDriver);
+			GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+			GenDriverAPI4Modbus mbPVFroniusSymo = (mockModbusDriver == null ? factory.createTcpTransport("192.168.1.181", 502) : mockModbusDriver);
 			devFroniusSymo = new SGrModbusDevice(tstDesc, mbPVFroniusSymo);
 			mbPVFroniusSymo.connect();
 		}

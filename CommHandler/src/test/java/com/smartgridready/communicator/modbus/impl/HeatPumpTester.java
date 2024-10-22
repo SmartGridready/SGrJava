@@ -29,12 +29,14 @@ import java.time.format.DateTimeFormatter;
 
 import com.smartgridready.ns.v0.DataTypeProduct;
 import com.smartgridready.ns.v0.DeviceFrame;
+
 import com.smartgridready.communicator.common.api.values.BooleanValue;
 import com.smartgridready.communicator.common.api.values.EnumRecord;
 import com.smartgridready.communicator.common.api.values.EnumValue;
 import com.smartgridready.communicator.common.api.values.Float64Value;
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus;
+import com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,8 +44,7 @@ import org.slf4j.LoggerFactory;
 //proprietary definitions
 
 import com.smartgridready.communicator.common.helper.DeviceDescriptionLoader;
-import de.re.easymodbus.adapter.GenDriverAPI4ModbusRTU;
-import de.re.easymodbus.adapter.GenDriverAPI4ModbusTCP;
+import com.smartgridready.communicator.common.helper.DriverFactoryLoader;
 
 
 @SuppressWarnings("java:S2925")
@@ -62,7 +63,7 @@ public class HeatPumpTester {
 	private static SGrModbusDevice devHovalRTU=null;
 	
 	// we need a single driver instance for RTU and separate these by device address
-	private static GenDriverAPI4ModbusRTU mbRTU=null;
+	private static GenDriverAPI4Modbus mbRTU=null;
 	
 	// Modbus TCP devices
 	private static SGrModbusDevice devTCP_IOP=null;
@@ -105,7 +106,8 @@ public class HeatPumpTester {
 			if (devRTU_IOPIsOn)
 			{
 			  // Modbus RTU uses a single driver  (tailored to easymodbus)
-			  mbRTU=new GenDriverAPI4ModbusRTU("COM9");
+			  GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+			  mbRTU=factory.createRtuTransport("COM9");
 			  mbRTU.connect();			
 			}
 			
@@ -181,8 +183,9 @@ public class HeatPumpTester {
 				// // replace device specific for TCP  (easymodus uses Driver instance per device)
 				GenDriverAPI4Modbus mbHovalTCP = mockModbusDriver;
 				if (mockModbusDriver == null) {
-					mbHovalTCP = new GenDriverAPI4ModbusTCP("192.168.0.35", 502);
-					//mbHovalTCP = new GenDriverAPI4ModbusTCP("192.168.1.55", 502);
+					GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+					mbHovalTCP = factory.createTcpTransport("192.168.0.35", 502);
+					//mbHovalTCP = factory.createTcpTransport("192.168.1.55", 502);
 				}
 				devHovalTCP=new SGrModbusDevice(tstDesc, mbHovalTCP);							
 				//setting Hoval Lab 
@@ -428,7 +431,8 @@ public class HeatPumpTester {
 				  // replace device specific for TCP  (easymodus uses Driver instance per device)
 				  GenDriverAPI4Modbus mbStiebelISG = mockModbusDriver;
 				  if (mockModbusDriver == null) {
-					  mbStiebelISG = new GenDriverAPI4ModbusTCP("192.168.1.55", 502);
+					  GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+					  mbStiebelISG = factory.createTcpTransport("192.168.1.55", 502);
 				  }
 				  devStiebelISG=new SGrModbusDevice(tmpDesc, mbStiebelISG);							
 				  mbStiebelISG.connect();
@@ -614,7 +618,8 @@ public class HeatPumpTester {
 					// // replace device specific for TCP  (easymodus uses Driver instance per device)
 					GenDriverAPI4Modbus mbCTAoptiHeat = mockModbusDriver;
 					if (mockModbusDriver == null) {
-						mbCTAoptiHeat = new GenDriverAPI4ModbusTCP("192.168.1.55",502);
+						GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+						mbCTAoptiHeat = factory.createTcpTransport("192.168.1.55",502);
 					}
 					devCTAoptiHeat=new SGrModbusDevice(tstDesc, mbCTAoptiHeat);							
 					//mbCTAoptiHeat.connect();

@@ -31,7 +31,7 @@ public class SGrModbusGatewayRegistry implements ModbusGatewayRegistry {
     }
 
     public SGrModbusGatewayRegistry() {
-        this(new EasyModbusGatewayFactory());
+        this(new SGrModbusGatewayFactory());
     }
 
     @Override

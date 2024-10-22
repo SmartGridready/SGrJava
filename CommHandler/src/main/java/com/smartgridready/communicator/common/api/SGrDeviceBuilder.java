@@ -17,7 +17,7 @@ import com.smartgridready.driver.api.common.GenDriverException;
 import com.smartgridready.communicator.messaging.impl.SGrMessagingDevice;
 import com.smartgridready.communicator.modbus.api.ModbusGatewayFactory;
 import com.smartgridready.communicator.modbus.api.ModbusGatewayRegistry;
-import com.smartgridready.communicator.modbus.impl.EasyModbusGatewayFactory;
+import com.smartgridready.communicator.modbus.impl.SGrModbusGatewayFactory;
 import com.smartgridready.communicator.modbus.impl.SGrModbusDevice;
 import com.smartgridready.communicator.rest.exception.RestApiAuthenticationException;
 import com.smartgridready.communicator.rest.http.client.ApacheHttpRequestFactory;
@@ -45,7 +45,7 @@ public class SGrDeviceBuilder {
 
         // default implementations
         this.httpClientFactory = new ApacheHttpRequestFactory();
-        this.modbusGatewayFactory = new EasyModbusGatewayFactory();
+        this.modbusGatewayFactory = new SGrModbusGatewayFactory();
         this.messagingClientFactory = new HiveMqtt5MessagingClientFactory();
     }
 

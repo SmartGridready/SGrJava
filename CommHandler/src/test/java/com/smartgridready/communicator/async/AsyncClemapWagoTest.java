@@ -1,6 +1,7 @@
 package com.smartgridready.communicator.async;
 
 import com.smartgridready.ns.v0.DeviceFrame;
+
 import com.smartgridready.communicator.async.process.ExecStatus;
 import com.smartgridready.communicator.async.process.Parallel;
 import com.smartgridready.communicator.async.process.Processor;
@@ -8,10 +9,13 @@ import com.smartgridready.communicator.async.process.ReadExec;
 import com.smartgridready.communicator.async.process.Sequence;
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.common.helper.DeviceDescriptionLoader;
+import com.smartgridready.communicator.common.helper.DriverFactoryLoader;
 import com.smartgridready.communicator.modbus.impl.SGrModbusDevice;
 import com.smartgridready.communicator.rest.http.client.ApacheHttpRequestFactory;
 import com.smartgridready.communicator.rest.impl.SGrRestApiDevice;
-import de.re.easymodbus.adapter.GenDriverAPI4ModbusRTU;
+import com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus;
+import com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory;
+
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.internal.schedulers.IoScheduler;
 import io.reactivex.rxjava3.internal.schedulers.RxThreadFactory;
@@ -37,7 +41,7 @@ public class AsyncClemapWagoTest {
 
     private static SGrRestApiDevice clemapDevice;
 
-    private static GenDriverAPI4ModbusRTU wagoDriver;
+    private static GenDriverAPI4Modbus wagoDriver;
 
     @BeforeAll
     public static void createDevices() throws Exception {
@@ -139,7 +143,8 @@ public class AsyncClemapWagoTest {
         DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
         DeviceFrame deviceDesc = loader.load( XML_BASE_DIR, "SGr_04_0014_0000_WAGO_SmartMeterV0.2.1.xml");
 
-        wagoDriver = new GenDriverAPI4ModbusRTU("COM3", 19200);
+        GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getImplementation(GenDriverAPI4ModbusFactory.class);
+        wagoDriver = factory.createRtuTransport("COM3", 19200);
         wagoDriver.connect();
         wagoDriver.setUnitIdentifier((byte)1);
         return new SGrModbusDevice(deviceDesc, wagoDriver);
