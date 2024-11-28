@@ -5,7 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.1.0] - 2024-11-28
+
+### Added
+
+- support Modbus UDP
+- support contacts interface
 
 ### Changed
 
@@ -13,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - added build parameter to use snapshots of SGr dependencies.
 - set libraries as `api` dependencies, when they are exposed in interfaces.
 - added URI builder to factory interface.
+- refactored message filter handling in messaging.
 
 
 ## [2.0.0] - 2024-10-08
