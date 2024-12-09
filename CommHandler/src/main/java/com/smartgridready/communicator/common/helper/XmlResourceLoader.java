@@ -3,6 +3,7 @@ package com.smartgridready.communicator.common.helper;
 import java.io.IOException;
 import java.io.StringReader;
 
+import com.smartgridready.ns.v0.FunctionalProfileFrame;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
@@ -58,6 +59,8 @@ public class XmlResourceLoader<T> {
         if (result instanceof JAXBElement) {
             var jaxbElement = (JAXBElement<T>)result;
             return jaxbElement.getValue();
+        } else if (result instanceof FunctionalProfileFrame) {
+            return (T)result;
         }
 
         throw new JAXBException("Could not unmarshal, result is not a JAXB element");
