@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import com.smartgridready.communicator.common.helper.XmlResourceLoader;
 import com.smartgridready.ns.v0.DeviceFrame;
 import com.smartgridready.ns.v0.FunctionalProfileFrame;
+import com.smartgridready.ns.v0.VersionNumber;
 
 /**
  * A simple tool that validates the EIDs in SGrSpecifications against the
@@ -59,26 +60,36 @@ public class EidValidator {
             final String eidName = eidFP.getFunctionalProfile().getFunctionalProfileName();
             final String eidCategory = eidFP.getFunctionalProfile().getFunctionalProfileIdentification().getFunctionalProfileCategory().value();
             final String eidType = eidFP.getFunctionalProfile().getFunctionalProfileIdentification().getFunctionalProfileType();
-            final String eidVersion = eidFP.getFunctionalProfile().getFunctionalProfileIdentification().getVersionNumber().toString();
+            final String eidVersion = getVersionString(eidFP.getFunctionalProfile().getFunctionalProfileIdentification().getVersionNumber());
+            final String eidLevel = eidFP.getFunctionalProfile().getFunctionalProfileIdentification().getLevelOfOperation().value();
 
             final List<FunctionalProfileFrame> fpMatch = fps
                 .stream()
                 .filter(fp ->
                     eidCategory.equals(fp.getFunctionalProfile().getFunctionalProfileIdentification().getFunctionalProfileCategory().value()) &&
                     eidType.equals(fp.getFunctionalProfile().getFunctionalProfileIdentification().getFunctionalProfileType()) &&
-                    eidVersion.equals(fp.getFunctionalProfile().getFunctionalProfileIdentification().getVersionNumber().toString())
+                    eidVersion.equals(getVersionString(fp.getFunctionalProfile().getFunctionalProfileIdentification().getVersionNumber())) &&
+                    eidLevel.equals(fp.getFunctionalProfile().getFunctionalProfileIdentification().getLevelOfOperation().value())
                 )
                 .collect(Collectors.toList());
             if (fpMatch.size() == 0) {
-                messages.add(String.format("Validation Error: %s:%s - No matching FP Type %s:%s", devName, eidName, eidCategory, eidType));
+                messages.add(String.format("Validation Error: %s:%s - No matching FP Type %s:%s:%s:%s", devName, eidName, eidCategory, eidType, eidLevel, eidVersion));
                 return;
             } else if (fpMatch.size() > 1) {
-                messages.add(String.format("Validation Error: %s:%s - Multiple matching FP Type %s:%s", devName, eidName, eidCategory, eidType));
+                messages.add(String.format("Validation Error: %s:%s - Multiple matching FP Type %s:%s:%s:%s", devName, eidName, eidCategory, eidType, eidLevel, eidVersion));
                 return;
             }
         });
 
         messages.forEach(m -> System.out.println(m));
+    }
+
+    private static String getVersionString(VersionNumber v) {
+        return String.join(".",
+            String.valueOf(v.getPrimaryVersionNumber()),
+            String.valueOf(v.getSecondaryVersionNumber()),
+            String.valueOf(v.getSubReleaseVersionNumber())
+        );
     }
 
     private static List<FunctionalProfileFrame> loadFunctionalProfiles() {
