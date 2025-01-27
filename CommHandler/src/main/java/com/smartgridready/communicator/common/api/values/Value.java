@@ -4,7 +4,10 @@ import com.smartgridready.ns.v0.DataTypeProduct;
 import com.smartgridready.ns.v0.EnumMapProduct;
 import com.smartgridready.ns.v0.ModbusBoolean;
 import com.smartgridready.ns.v0.ModbusDataType;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.smartgridready.communicator.common.helper.JsonHelper;
 import com.smartgridready.communicator.modbus.helper.ConversionHelper;
+import com.smartgridready.driver.api.common.GenDriverException;
 
 import java.math.BigInteger;
 import java.time.Instant;
@@ -27,7 +30,7 @@ public abstract class Value  {
     public abstract EnumRecord getEnum();
     public abstract Map<String, Boolean> getBitmap();
     public abstract Instant getDateTime();
-    public abstract String getJson();
+    public abstract JsonNode getJson();
     public abstract void absValue();
     public abstract void roundToInt();
 
@@ -182,7 +185,11 @@ public abstract class Value  {
             return DateTimeValue.of(Instant.parse(value));
         }
         if (dataType.getJson() != null) {
-            return JsonValue.of(value);
+            try {
+                return JsonHelper.parseJsonResponse(null, value);
+            } catch (GenDriverException e) {
+                throw new IllegalArgumentException("Could not convert string to JSON", e);
+            }
         }
 
         throw new IllegalArgumentException(String.format("Generic type %s conversion from String to Value.class conversion from register not supported.",

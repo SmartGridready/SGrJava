@@ -106,8 +106,8 @@ public class DateTimeValue extends Value {
     }
 
     @Override
-    public String getJson() {
-        return value.toString();
+    public JsonNode getJson() {
+        return TextNode.valueOf(value.toString());
     }
 
     @Override
