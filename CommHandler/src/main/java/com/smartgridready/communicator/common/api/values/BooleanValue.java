@@ -91,6 +91,11 @@ public class BooleanValue extends Value {
     }
 
     @Override
+    public String getJson() {
+        return getString();
+    }
+
+    @Override
     public void absValue() {
         // no absolute value for boolean
     }

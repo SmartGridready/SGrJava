@@ -97,6 +97,11 @@ public class Int64UValue extends Value {
     }
 
     @Override
+    public String getJson() {
+        return value.toString();
+    }
+
+    @Override
     public Int64UValue[] asArray() {
         return new Int64UValue[]{this};
     }

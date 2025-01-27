@@ -27,6 +27,7 @@ public enum DataType {
     DATE_TIME,
     ENUM,
     BITMAP,
+    JSON,
     UNKNOWN;
 
     private static final Map<DataType, DataTypeInfo> TYPE_MAP = new EnumMap<>(DataType.class);
@@ -46,6 +47,7 @@ public enum DataType {
         TYPE_MAP.put(DATE_TIME, new DataTypeInfo(DATE_TIME, DataTypeProduct::getDateTime, ModbusDataType::getDateTime, DataTypeProduct::setDateTime, ModbusDataType::setDateTime, List.of()));
         TYPE_MAP.put(ENUM, new DataTypeInfo(ENUM, DataTypeProduct::getEnum, ModbusDataType::getEnum, null, null, List.of()));
         TYPE_MAP.put(BITMAP, new DataTypeInfo(BITMAP, DataTypeProduct::getBitmap, ModbusDataType::getBitmap, null, null, List.of()));
+        TYPE_MAP.put(JSON, new DataTypeInfo(JSON, DataTypeProduct::getJson, ModbusDataType::getString, DataTypeProduct::setString, ModbusDataType::setString, List.of()));
         TYPE_MAP.put(UNKNOWN, new DataTypeInfo(UNKNOWN, val -> null, val -> null, null, null, List.of()));
     }
 

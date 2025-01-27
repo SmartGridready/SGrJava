@@ -100,6 +100,11 @@ public abstract class NumberValue<T extends Number> extends Value {
         return Instant.ofEpochMilli(getInt64());
     }
 
+    @Override
+    public String getJson() {
+        return value.toString();
+    }
+
     public String toString() {
        return value.toString();
     }

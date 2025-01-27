@@ -115,6 +115,12 @@ public class StringValue extends Value {
         return Instant.parse(value);
     }
 
+    @Override
+    public String getJson() {
+        // pure JSON string should be enclosed in double-quotes
+        return "\"" + value + "\"";
+    }
+
     public void scaleDown(int mul, int powOf10) {
         if (mul != 1 || powOf10 !=0) {
             double dVal = toDouble() / mul;

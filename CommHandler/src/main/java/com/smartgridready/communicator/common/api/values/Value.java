@@ -27,6 +27,7 @@ public abstract class Value  {
     public abstract EnumRecord getEnum();
     public abstract Map<String, Boolean> getBitmap();
     public abstract Instant getDateTime();
+    public abstract String getJson();
     public abstract void absValue();
     public abstract void roundToInt();
 
@@ -179,6 +180,9 @@ public abstract class Value  {
         }
         if (dataType.getDateTime() != null) {
             return DateTimeValue.of(Instant.parse(value));
+        }
+        if (dataType.getJson() != null) {
+            return JsonValue.of(value);
         }
 
         throw new IllegalArgumentException(String.format("Generic type %s conversion from String to Value.class conversion from register not supported.",
