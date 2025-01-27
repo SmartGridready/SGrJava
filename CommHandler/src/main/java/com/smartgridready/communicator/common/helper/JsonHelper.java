@@ -3,11 +3,9 @@ package com.smartgridready.communicator.common.helper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.smartgridready.ns.v0.JMESPathMapping;
 import com.smartgridready.ns.v0.JMESPathMappingRecord;
-import com.smartgridready.communicator.common.api.values.StringValue;
+import com.smartgridready.communicator.common.api.values.JsonValue;
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.driver.api.common.GenDriverException;
 import io.burt.jmespath.Expression;
@@ -32,29 +30,18 @@ public class JsonHelper {
 
     public static Value parseJsonResponse(String jmesPath, String jsonResp) throws GenDriverException {
 
-        if (jmesPath == null || jmesPath.trim().isEmpty()) {
-            // no parsing required
-            return StringValue.of(jsonResp);
-        }
-
-        JmesPath<JsonNode> path = new JacksonRuntime();
-        Expression<JsonNode> expression = path.compile(jmesPath);
-
         ObjectMapper mapper = new ObjectMapper();
 
         try {
             JsonNode jsonNode = mapper.readTree(jsonResp);
-            JsonNode res = expression.search(jsonNode);
-
-            // complex nodes: return the result as JSON string
-            if (res instanceof ObjectNode) {
-                return StringValue.of(res.toString());
+            if (jmesPath == null || jmesPath.trim().isEmpty()) {
+                return JsonValue.of(jsonNode);
+            } else {
+                JmesPath<JsonNode> path = new JacksonRuntime();
+                Expression<JsonNode> expression = path.compile(jmesPath);
+                JsonNode res = expression.search(jsonNode);
+                return JsonValue.of(res);
             }
-            if (res instanceof ArrayNode) {
-                return StringValue.of(res.toString());
-            }
-
-            return StringValue.of(res.asText());
         } catch (IOException e) {
             throw new GenDriverException("Failed to parse JSON response", e);
         }
@@ -89,8 +76,9 @@ public class JsonHelper {
 
                 Map<Integer, Map<String, Object>> enhancedMap = enhanceWithNamings(flatRepresentation, names);
 
+                // TODO find a solution without parsing the JSON string again
                 JsonWriter builder = new JsonWriter(mapTo);
-                return StringValue.of(builder.buildJson(enhancedMap.values()));
+                return parseJsonResponse(null, builder.buildJson(enhancedMap.values()));
             } else {
                 throw new GenDriverException(errorMsg);
             }

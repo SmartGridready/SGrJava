@@ -2,6 +2,9 @@ package com.smartgridready.communicator.common.api.values;
 
 import com.smartgridready.ns.v0.BitmapEntryProduct;
 import com.smartgridready.ns.v0.BitmapProduct;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.smartgridready.communicator.modbus.helper.ConversionHelper;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -105,16 +108,15 @@ public class BitmapValue extends Value {
     @Override
     public Map<String, Boolean> getBitmap() {
         Map<String, Boolean> res = new LinkedHashMap<>();
-        value.forEach( bitmapRecord -> res.put(bitmapRecord.getLiteral(), bitmapRecord.getValue()));
+        value.forEach(bitmapRecord -> res.put(bitmapRecord.getLiteral(), bitmapRecord.getValue()));
         return res;
     }
 
     @Override
-    public String getJson() {
-        // TODO use actual JSON nodes in the future
-        return getBitmap().keySet().stream()
-                .map(key -> "\"" + key + "\":" + getBitmap().get(key))
-                .collect(Collectors.joining(", ", "{", "}"));
+    public JsonNode getJson() {
+        ObjectNode res = new ObjectNode(JsonNodeFactory.instance);
+        value.forEach(bitmapRecord -> res.put(bitmapRecord.getLiteral(), bitmapRecord.getValue()));
+        return res;
     }
 
     @Override

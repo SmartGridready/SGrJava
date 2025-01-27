@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 public class ArrayValue<T extends Value> extends Value {
 
     private final T[] values;
@@ -83,7 +85,7 @@ public class ArrayValue<T extends Value> extends Value {
     }
 
     @Override
-    public String getJson() {
+    public JsonNode getJson() {
         return values != null && values.length > 0 ? values[0].getJson() : null;
     }
 

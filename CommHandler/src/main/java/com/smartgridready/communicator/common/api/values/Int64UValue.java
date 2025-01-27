@@ -3,6 +3,9 @@ package com.smartgridready.communicator.common.api.values;
 import java.math.BigInteger;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.BigIntegerNode;
+
 public class Int64UValue extends Value {
 
     BigInteger value;
@@ -91,8 +94,8 @@ public class Int64UValue extends Value {
     }
 
     @Override
-    public String getJson() {
-        return value.toString();
+    public JsonNode getJson() {
+        return BigIntegerNode.valueOf(value);
     }
 
     @Override

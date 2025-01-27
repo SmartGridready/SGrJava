@@ -1,5 +1,7 @@
 package com.smartgridready.communicator.common.api.values;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import com.smartgridready.ns.v0.EnumEntryProductRecord;
 import com.smartgridready.ns.v0.EnumMapProduct;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -185,9 +187,8 @@ public class EnumValue extends Value {
     }
 
     @Override
-    public String getJson() {
-        // pure JSON string should be enclosed in double-quotes
-        return "\"" + enumRecord.getLiteral() + "\"";
+    public JsonNode getJson() {
+        return TextNode.valueOf(this.getString());
     }
 
     @Override

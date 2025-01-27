@@ -3,6 +3,9 @@ package com.smartgridready.communicator.common.api.values;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.TextNode;
+
 import java.math.BigInteger;
 import java.util.Map;
 
@@ -110,9 +113,8 @@ public class StringValue extends Value {
     }
 
     @Override
-    public String getJson() {
-        // pure JSON string should be enclosed in double-quotes
-        return "\"" + value + "\"";
+    public JsonNode getJson() {
+        return TextNode.valueOf(value);
     }
 
     public void scaleDown(int mul, int powOf10) {

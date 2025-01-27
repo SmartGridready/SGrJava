@@ -3,6 +3,12 @@ package com.smartgridready.communicator.common.api.values;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.BigIntegerNode;
+import com.fasterxml.jackson.databind.node.DoubleNode;
+import com.fasterxml.jackson.databind.node.FloatNode;
+import com.fasterxml.jackson.databind.node.LongNode;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Map;
@@ -10,6 +16,7 @@ import java.util.Map;
 public abstract class NumberValue<T extends Number> extends Value {
 
     protected T value;
+
     @Override
     public byte getInt8() {
         checkInt8(value.longValue());
@@ -95,8 +102,16 @@ public abstract class NumberValue<T extends Number> extends Value {
     }
 
     @Override
-    public String getJson() {
-        return value.toString();
+    public JsonNode getJson() {
+        if (value instanceof BigInteger) {
+            return BigIntegerNode.valueOf((BigInteger) value);
+        } else if (value instanceof Float) {
+            return FloatNode.valueOf(value.floatValue());
+        } else if (value instanceof Double) {
+            return DoubleNode.valueOf(value.doubleValue());
+        } else {
+            return LongNode.valueOf(value.longValue());
+        }
     }
 
     public String toString() {

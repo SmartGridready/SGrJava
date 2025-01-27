@@ -3,6 +3,9 @@ package com.smartgridready.communicator.common.api.values;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.BooleanNode;
+
 import java.math.BigInteger;
 import java.util.Map;
 
@@ -85,8 +88,8 @@ public class BooleanValue extends Value {
     }
 
     @Override
-    public String getJson() {
-        return getString();
+    public JsonNode getJson() {
+        return BooleanNode.valueOf(value);
     }
 
     @Override
