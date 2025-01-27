@@ -110,6 +110,14 @@ public class BitmapValue extends Value {
     }
 
     @Override
+    public String getJson() {
+        // TODO use actual JSON nodes in the future
+        return getBitmap().keySet().stream()
+                .map(key -> "\"" + key + "\":" + getBitmap().get(key))
+                .collect(Collectors.joining(", ", "{", "}"));
+    }
+
+    @Override
     public void absValue() {
         // not required
     }

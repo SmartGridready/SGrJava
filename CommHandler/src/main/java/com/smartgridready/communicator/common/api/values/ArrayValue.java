@@ -83,6 +83,11 @@ public class ArrayValue<T extends Value> extends Value {
     }
 
     @Override
+    public String getJson() {
+        return values != null && values.length > 0 ? values[0].getJson() : null;
+    }
+
+    @Override
     public void absValue() {
         Arrays.stream(values).forEach(Value::absValue);
     }

@@ -185,6 +185,12 @@ public class EnumValue extends Value {
     }
 
     @Override
+    public String getJson() {
+        // pure JSON string should be enclosed in double-quotes
+        return "\"" + enumRecord.getLiteral() + "\"";
+    }
+
+    @Override
     public void absValue() {
         // not available
     }

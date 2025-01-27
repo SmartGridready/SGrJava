@@ -25,6 +25,7 @@ public abstract class Value  {
     public abstract boolean getBoolean();
     public abstract EnumRecord getEnum();
     public abstract Map<String, Boolean> getBitmap();
+    public abstract String getJson();
     public abstract void absValue();
     public abstract void roundToInt();
 
@@ -168,6 +169,9 @@ public abstract class Value  {
         }
         if (dataType.getBoolean() != null) {
             return BooleanValue.of(Boolean.parseBoolean(value));
+        }
+        if (dataType.getJson() != null) {
+            return JsonValue.of(value);
         }
 
         throw new IllegalArgumentException(String.format("Generic type %s conversion from String to Value.class conversion from register not supported.",

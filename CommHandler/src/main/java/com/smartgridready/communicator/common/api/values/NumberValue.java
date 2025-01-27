@@ -94,6 +94,11 @@ public abstract class NumberValue<T extends Number> extends Value {
         return value.toString();
     }
 
+    @Override
+    public String getJson() {
+        return value.toString();
+    }
+
     public String toString() {
        return value.toString();
     }
