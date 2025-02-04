@@ -57,16 +57,16 @@ public class TestConfiguration {
 		}
 	}
 
-	private String deviceDescFolder;
+	private String descriptionFolder;
 	
 	private Collection<Description> descriptions;
 
-	public String getDeviceDescFolder() {
-		return deviceDescFolder;
+	public String getDescriptionFolder() {
+		return descriptionFolder;
 	}
 
-	public void setDeviceDescFolder(String deviceDescFolder) {
-		this.deviceDescFolder = deviceDescFolder;
+	public void setDescriptionFolder(String descriptionFolder) {
+		this.descriptionFolder = descriptionFolder;
 	}
 
 	public Collection<Description> getDescriptions() {

@@ -1,4 +1,4 @@
-deviceDescFolder: ..\..\SGrSpecifications\XMLInstances\ExtInterfaces\
+descriptionFolder: ..\..\SGrSpecifications\XMLInstances\ExtInterfaces\
 descriptions:
   - file: EI4_UniDirFlexFeedIn_3632Lv2.xml
   - file: EI4_UniDirFlexLoad_3631Lv2.xml
