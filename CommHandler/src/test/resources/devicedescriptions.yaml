@@ -23,7 +23,7 @@ descriptions:
       - name: tcp_address
         value: '0.0.0.0'
   - file: SGr_04_0014_0000_WAGO_SmartMeterV0.2.1.xml
-  - file: SGr_04_0015_xxxx_StiebelEltron_HeatPumpV0.2.1.xml
+  - file: SGr_04_0015_xxxx_StiebelEltron_HeatPump_V1.0.0.xml
     parameters:
       - name: tcp_address
         value: '0.0.0.0'
@@ -36,9 +36,9 @@ descriptions:
     parameters:
       - name: tcp_address
         value: '0.0.0.0'
-  - file: SGr_04_0017_xxxx_HOVAL_HeatPumpV0.2.1.xml
+  - file: SGr_04_0017_xxxx_HOVAL_HeatPump_V1.0.0.xml
     parameters:
-      - name: address
+      - name: tcp_address
         value: '0.0.0.0'
   - file: SGr_04_0019_0059_VGT_SPSDeviceforHomeAutomation_v0.2.1.xml
     parameters:
@@ -46,15 +46,15 @@ descriptions:
         value: '0.0.0.0'
   - file: SGr_04_0020_xxxx_Heliotherm_HeatPumpV0.2.1.xml
     parameters:
-      - name: address
+      - name: tcp_address
         value: '0.0.0.0'
   - file: SGr_04_0021_xxxx_FroniusSymoV0.2.1.xml
     parameters:
       - name: tcp_address
         value: '0.0.0.0'
-  - file: SGr_04_0033_0000_CTA_HeatPumpV0.2.1.xml
+  - file: SGr_04_0033_0000_CTA_HeatPump_V1.0.0.xml
     parameters:
-      - name: address
+      - name: tcp_address
         value: '0.0.0.0'
   - file: SGr_04_mmmm_dddd_CLEMAPEnergyMonitorEIV0.2.1.xml
   - file: SGr_04_mmmm_dddd_WallboxAsymV0.2.1.xml
