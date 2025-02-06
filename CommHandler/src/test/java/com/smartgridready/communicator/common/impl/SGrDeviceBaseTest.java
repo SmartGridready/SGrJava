@@ -58,6 +58,7 @@ import static com.smartgridready.communicator.common.api.values.DataType.UNKNOWN
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyShort;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -244,7 +245,7 @@ class SGrDeviceBaseTest {
         var modbusValue = Float32Value.of(voltage).toModbusRegister(modbusDataType);
 
         when(modbusClientFactory.createRtuTransport(anyString(), anyInt(), any(), any(), any())).thenReturn(genDriverAPI4Modbus);
-        when(genDriverAPI4Modbus.ReadHoldingRegisters(anyInt(), anyInt()))
+        when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt()))
                 .thenReturn(modbusValue);
 
         var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-GenericAttributes.xml");
@@ -261,7 +262,7 @@ class SGrDeviceBaseTest {
         value = Float32Value.of(unitConversionFactor * voltage);
         dataPoint.setVal(value);
 
-        verify(genDriverAPI4Modbus).WriteMultipleRegisters(intCaptor1.capture(), intCaptor2.capture());
+        verify(genDriverAPI4Modbus).writeMultipleRegisters(anyShort(), intCaptor1.capture(), intCaptor2.capture());
         assertEquals(20482, intCaptor1.getValue());   // Address
         assertArrayEquals(modbusValue, intCaptor2.getValue()); // float value on modbus
     }
@@ -348,7 +349,7 @@ class SGrDeviceBaseTest {
         System.arraycopy(modbusValue, 0, modbusValues, 2*modbusValue.length,modbusValue.length);
 
         when(modbusClientFactory.createRtuTransport(anyString(), anyInt(), any(), any(), any())).thenReturn(genDriverAPI4Modbus);
-        when(genDriverAPI4Modbus.ReadHoldingRegisters(anyInt(), anyInt()))
+        when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt()))
                 .thenReturn(modbusValues);
 
         var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-Arrays.xml");
@@ -366,7 +367,7 @@ class SGrDeviceBaseTest {
         // Check write value
         dataPoint.setVal(ArrayValue.of(values));
 
-        verify(genDriverAPI4Modbus).WriteMultipleRegisters(intCaptor1.capture(), intCaptor2.capture());
+        verify(genDriverAPI4Modbus).writeMultipleRegisters(anyShort(), intCaptor1.capture(), intCaptor2.capture());
         assertEquals(20482, intCaptor1.getValue());   // Address
         assertArrayEquals(modbusValues, intCaptor2.getValue()); // float value on modbus
     }

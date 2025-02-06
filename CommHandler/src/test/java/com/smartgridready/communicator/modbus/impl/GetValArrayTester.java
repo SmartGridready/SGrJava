@@ -37,9 +37,6 @@ public class GetValArrayTester {
 			GenDeviceApi4Modbus devWagoMeter = new SGrModbusDevice(tstMeter, mbRTU );
 			
 			try {	
-				// set device address of devWagoMeter
-					
-				mbRTU.setUnitIdentifier((byte) 1);
 				Value[] voltages = devWagoMeter.getVal("VoltageAC", "Voltage-L1-L2-L3").asArray();
 				
 				// Voltages as GDP type

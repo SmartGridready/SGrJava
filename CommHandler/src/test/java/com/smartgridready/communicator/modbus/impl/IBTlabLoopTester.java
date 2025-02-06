@@ -210,7 +210,6 @@ public class IBTlabLoopTester {
 		String  sVal1 = "0.0", sVal2 = "0.0", sVal3 = "0.0", sVal4 ="0.0";
 
 		try {
-			mbRTU.setUnitIdentifier((byte) 7);
 			LOG.info("\n@:Testing TestBox: WAGO Meter");
 			Thread.sleep(25);
 			fVal1 = devWagoMeter.getVal("VoltageAC", "VoltageL1").getFloat64();
@@ -359,7 +358,6 @@ public class IBTlabLoopTester {
 		String  sVal1 = "0.0", sVal2 = "0.0", sVal3 = "0.0", sVal4 ="0.0";
 
 		try {
-			mbRTU.setUnitIdentifier((byte) 11);
 			LOG.info("\n@:Testing ABBMeter: ");
 			Thread.sleep(25);
 			fVal1 = devABBMeter.getVal("VoltageAC", "VoltageL1").getFloat64();
@@ -501,9 +499,6 @@ public class IBTlabLoopTester {
 		String  sVal1 = "0.0", sVal2 = "0.0", sVal3 = "0.0", sVal4 ="0.0";
 
 		try {
-			mbRTU.setUnitIdentifier((byte) 1 );
-
-
 			LOG.info("\n@:Testing TestBox: ABBMeter: ");
 			Thread.sleep(50);
 			fVal1 = devTB_ABBMeter.getVal("VoltageAC", "VoltageL1").getFloat64();
@@ -1021,9 +1016,6 @@ public class IBTlabLoopTester {
 		String  sVal1 = "0.0", sVal2 = "0.0", sVal3 = "0.0", sVal4 ="0.0";
 
 		try {
-			// if RTU is used, set address here
-			// mbRTU.setUnitIdentifier((byte) 7);
-
 			LOG.info("@:Testing   xxxxx");
 			Thread.sleep(25);
 

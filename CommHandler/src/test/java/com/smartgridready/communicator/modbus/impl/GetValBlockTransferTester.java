@@ -38,11 +38,6 @@ public class GetValBlockTransferTester {
 			GenDeviceApi4Modbus devWagoMeter = new SGrModbusDevice(tstMeter, mbRTU );
 			
 			try {	
-				// set device address of devWagoMeter
-					
-				mbRTU.setUnitIdentifier((byte) 1);				
-				
-				
 				// Voltages from device
 				Value voltage1 = devWagoMeter.getVal("VoltageAC", "VoltageACL1-L2");
 				Value voltage2 = devWagoMeter.getVal("VoltageAC", "VoltageACL1-L3");

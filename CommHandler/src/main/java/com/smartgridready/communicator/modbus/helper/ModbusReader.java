@@ -41,29 +41,14 @@ public class ModbusReader {
         if (isFirstRegAddrOne) {
             regAddr = regAddr - 1;
         }
-        // shared Modbus driver instances require exclusive access
         if (RegisterType.HOLD_REGISTER == regType) {
-            // TODO synchronize on method parameter is dangerous and may result in unpredictable behaviour
-            // consider using a specific synch object.
-            synchronized(drv4Modbus) {
-                drv4Modbus.setUnitIdentifier(unitIdentifier);
-                response.setMbregresp(drv4Modbus.ReadHoldingRegisters(regAddr, length));
-            }
+            response.setMbregresp(drv4Modbus.readHoldingRegisters(unitIdentifier, regAddr, length));
         } else if (RegisterType.INPUT_REGISTER == regType) {
-            synchronized(drv4Modbus) {
-                drv4Modbus.setUnitIdentifier(unitIdentifier);
-                response.setMbregresp(drv4Modbus.ReadInputRegisters(regAddr, length));
-            }
+            response.setMbregresp(drv4Modbus.readInputRegisters(unitIdentifier, regAddr, length));
         } else if (RegisterType.DISCRETE_INPUT == regType) {
-            synchronized(drv4Modbus) {
-                drv4Modbus.setUnitIdentifier(unitIdentifier);
-                response.setMbbitresp(drv4Modbus.ReadDiscreteInputs(regAddr, length));
-            }
+            response.setMbbitresp(drv4Modbus.readDiscreteInputs(unitIdentifier, regAddr, length));
         } else if (RegisterType.COIL == regType) {
-            synchronized(drv4Modbus) {
-                drv4Modbus.setUnitIdentifier(unitIdentifier);
-                response.setMbbitresp(drv4Modbus.ReadCoils(regAddr, length));
-            }
+            response.setMbbitresp(drv4Modbus.readCoils(unitIdentifier, regAddr, length));
         } else {
             throw new GenDriverException("ModbusReader, unhandled register type requested.");
         }

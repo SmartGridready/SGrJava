@@ -170,7 +170,6 @@ public class IOPdemoBOX {
 		String  sVal1 = "0.0", sVal2 = "0.0", sVal3 = "0.0", sVal4 ="0.0";
 
 		try {
-			mbRTU.setUnitIdentifier(rtuAddr);
 			LOG.info("@:Testing IOPMeterData: ");
 			Thread.sleep(25);
 			fVal1 = devIOPMeter.getVal("VoltageAC", "VoltageL1").getFloat64();

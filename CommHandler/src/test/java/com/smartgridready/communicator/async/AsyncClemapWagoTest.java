@@ -150,7 +150,6 @@ public class AsyncClemapWagoTest {
         GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getModbusDriver();
         wagoDriver = factory.createRtuTransport("COM3", 19200);
         wagoDriver.connect();
-        wagoDriver.setUnitIdentifier((byte)1);
         return new SGrModbusDevice(deviceDesc, wagoDriver);
     }
 

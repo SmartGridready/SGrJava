@@ -650,9 +650,6 @@ public class HeatPumpTester {
 				DataTypeProduct  modeCmd = new DataTypeProduct();
 				
 					try {	
-						// if RTU is used, set address here
-						// mbRTU.setUnitIdentifier((byte) 7);
-					     
 						LOG.info(String.format("Testing CTAoptiHeat"));
 						Thread.sleep(25);
 						

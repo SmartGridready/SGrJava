@@ -36,6 +36,9 @@ public class GenDriverAPI4ModbusRTUMock implements GenDriverAPI4Modbus {
 	public void setIsIntegerType(boolean returnInteger) {
 		this.returnInteger = returnInteger;
 	}
+
+	@Override
+	public void setUnitIdentifier(short unitId) {}
 	
 	@Override
 	public int[] ReadInputRegisters(int startingAddress, int quantity) {
