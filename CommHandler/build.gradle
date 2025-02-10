@@ -61,7 +61,7 @@ test {
 // spec. release date
 def sgr_spec_suffix = '_2024-12-19'
 def sgr_driver_suffix = '-SNAPSHOT'
-def easymodbus_suffix = '-SNAPSHOT'
+def modbus_suffix = ''
 def apachehttp_suffix = ''
 def hivemq_suffix = ''
 
@@ -76,9 +76,9 @@ if (project.hasProperty("snapshots")) {
         println "using snapshots of sgr-driver-api"
         sgr_driver_suffix = '-SNAPSHOT'
     }
-    if (snapList.contains("easymodbus")) {
-        println "using snapshots of easymodbus"
-        easymodbus_suffix = '-SNAPSHOT'
+    if (snapList.contains("sgr-driver-modbus")) {
+        println "using snapshots of modbus"
+        modbus_suffix = '-SNAPSHOT'
     }
     if (snapList.contains("sgr-driver-apachehttp")) {
         println "using snapshots of sgr-driver-apachehttp"
@@ -96,7 +96,7 @@ dependencies {
     implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '4.0.5'
 
     api group: 'com.smartgridready', name: 'sgr-driver-api', version: "2.2.0${sgr_driver_suffix}"
-    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-j2mod', version: "0.1.0${easymodbus_suffix}"
+    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-j2mod', version: "1.0.0${modbus_suffix}"
     testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-apachehttp', version: "2.0.0${apachehttp_suffix}"
     testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-hivemq', version: "2.0.0${hivemq_suffix}"
 
