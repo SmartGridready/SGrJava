@@ -19,6 +19,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyShort;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -41,10 +42,10 @@ class SetValUnitConversionTest
 
         modbusDevice.setVal("VoltageAC", "VoltageL1", Float32Value.of(expectedValue));
 
-        verify(modbusDriver).WriteMultipleRegisters(anyInt(), intArrayCaptor.capture());
+        verify(modbusDriver).writeMultipleRegisters(anyShort(), anyInt(), intArrayCaptor.capture());
         assertArrayEquals(modbusRegisters, intArrayCaptor.getValue());
 
-        when(modbusDriver.ReadHoldingRegisters(anyInt(), anyInt())).thenReturn(modbusRegisters);
+        when(modbusDriver.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(modbusRegisters);
 
         float resVal = createModbusDevice().getVal("VoltageAC", "VoltageL1").getFloat32();
         LOG.info("getSetValWithConversion: expectedVal={}, resVal={}", expectedValue, resVal);
@@ -61,10 +62,10 @@ class SetValUnitConversionTest
 
         modbusDevice.setVal("ActiveEnergyAC", "ActiveEnergyACtot", Float32Value.of(expectedValue));
 
-        verify(modbusDriver).WriteMultipleRegisters(anyInt(), intArrayCaptor.capture());
+        verify(modbusDriver).writeMultipleRegisters(anyShort(), anyInt(), intArrayCaptor.capture());
         assertArrayEquals(modbusRegisters, intArrayCaptor.getValue());
 
-        when(modbusDriver.ReadHoldingRegisters(anyInt(), anyInt())).thenReturn(modbusRegisters);
+        when(modbusDriver.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(modbusRegisters);
 
         float resVal = createModbusDevice().getVal("ActiveEnergyAC", "ActiveEnergyACtot").getFloat32();
         LOG.info("getSetValWithScaling: expectedVal={}, resVal={}", expectedValue, resVal);
@@ -79,7 +80,7 @@ class SetValUnitConversionTest
         int[] modbusRegisters = new int[]{0x00000024, 0x00000a4}; // int H2L 36kW 164W
         int expectedValue = 36164;
 
-        when(modbusDriver.ReadHoldingRegisters(anyInt(), anyInt())).thenReturn(modbusRegisters);
+        when(modbusDriver.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(modbusRegisters);
 
         Value resVal = modbusDevice.getVal("ActiveEnergyAC", "ActiveEnergyACL1");
         LOG.info("setGetValWithLayer6Deviation_H2L: expectedVal={}, resVal={}", expectedValue, resVal.getInt32());
@@ -94,7 +95,7 @@ class SetValUnitConversionTest
         int[] modbusRegisters = new int[]{0x000000a4, 0x0000024}; // int H2L 36kW 164W
         int expectedValue = 36164;
 
-        when(modbusDriver.ReadHoldingRegisters(anyInt(), anyInt())).thenReturn(modbusRegisters);
+        when(modbusDriver.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(modbusRegisters);
 
         Value resVal = modbusDevice.getVal("ActiveEnergyAC", "ActiveEnergyACL2");
         LOG.info("setGetValWithLayer6Deviation_L2H: expectedVal={}, resVal={}", expectedValue, resVal.getInt32());

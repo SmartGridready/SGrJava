@@ -170,6 +170,9 @@ public class ModbusUtil {
 
             case RTU:
                 return ModbusType.RTU;
+            
+            case RTU_ASCII:
+                return ModbusType.RTU_ASCII;
 
             case UDPIP:
                 return ModbusType.UDP;

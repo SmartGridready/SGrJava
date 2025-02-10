@@ -4,5 +4,6 @@ public enum ModbusType {
     UNKNOWN,
     RTU,
     TCP,
-    UDP
+    UDP,
+    RTU_ASCII
 }

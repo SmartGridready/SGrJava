@@ -6,13 +6,13 @@ import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.common.helper.DeviceDescriptionLoader;
 import com.smartgridready.communicator.common.helper.DriverFactoryLoader;
 import com.smartgridready.communicator.modbus.api.GenDeviceApi4Modbus;
-import com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus;
 import com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
+import java.util.Properties;
 
 public class GetValArrayTester {
 		
@@ -26,20 +26,19 @@ public class GetValArrayTester {
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 		URL deviceDesc = classloader.getResource("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-Arrays.xml");
 		
-		try {	
+		try {
+			Properties props = new Properties();
+			props.setProperty("portName", "COM3");
+
 			DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
-			DeviceFrame tstMeter = loader.load( XML_BASE_DIR, deviceDesc != null ?deviceDesc.getPath() : null);
+			DeviceFrame tstMeter = loader.load(XML_BASE_DIR, deviceDesc != null ? deviceDesc.getPath() : null, props);
 			
 			GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getModbusDriver();
-			GenDriverAPI4Modbus mbRTU = factory.createRtuTransport("COM3", 19200);
-			mbRTU.connect();	
 			
-			GenDeviceApi4Modbus devWagoMeter = new SGrModbusDevice(tstMeter, mbRTU );
+			GenDeviceApi4Modbus devWagoMeter = new SGrModbusDevice(tstMeter, factory);
+			devWagoMeter.connect();
 			
 			try {	
-				// set device address of devWagoMeter
-					
-				mbRTU.setUnitIdentifier((byte) 1);
 				Value[] voltages = devWagoMeter.getVal("VoltageAC", "Voltage-L1-L2-L3").asArray();
 				
 				// Voltages as GDP type
@@ -67,13 +66,14 @@ public class GetValArrayTester {
 				voltages = devWagoMeter.getVal("VoltageAC", "Voltage-L1-L2-L3").asArray();
 				LOG.info("WAGO Meter Voltages AC run 4; L1: {}V - L2 {}V - L3: {}V",
 						voltages[0], voltages[1], voltages[2]);
-				
 			}
 			catch ( Exception e)
 			{
 				System.out.println( "Error reading value from device. " + e);
 				e.printStackTrace();
 			}
+
+			devWagoMeter.disconnect();
 		}		
 		catch ( Exception e )
 		{

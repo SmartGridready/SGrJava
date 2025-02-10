@@ -116,7 +116,8 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
 
 		if (
 			(aGatewayRegistry != null) &&
-			(ModbusUtil.getModbusType(getModbusInterfaceDescription()) == ModbusType.RTU)
+			(ModbusUtil.getModbusType(getModbusInterfaceDescription()) == ModbusType.RTU ||
+				ModbusUtil.getModbusType(getModbusInterfaceDescription()) == ModbusType.RTU_ASCII)
 		) {
 			// only use shared registry with RTU transports
 			drvRegistry = aGatewayRegistry;
@@ -571,31 +572,18 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
 	}
 
 	private void writeToModbus(short unitIdentifier, int[] mbregsnd, boolean[] mbbitsnd, boolean bRegisterCMDs, boolean bDiscreteCMDs, BigInteger regad, int mbsize) throws GenDriverException, GenDriverSocketException, GenDriverModbusException {
-		// shared Modbus driver instances require exclusive access
 		GenDriverAPI4Modbus drv4Modbus = drv4ModbusGateway.getTransport();
 		if (bRegisterCMDs) {
 			if (mbsize > 1) {
-				synchronized (drv4Modbus) {
-					drv4Modbus.setUnitIdentifier(unitIdentifier);
-					drv4Modbus.WriteMultipleRegisters(regad.intValue(), mbregsnd);
-				}
+				drv4Modbus.writeMultipleRegisters(unitIdentifier, regad.intValue(), mbregsnd);
 			} else {
-				synchronized (drv4Modbus) {
-					drv4Modbus.setUnitIdentifier(unitIdentifier);
-					drv4Modbus.WriteSingleRegister(regad.intValue(), mbregsnd[0]);
-				}
+				drv4Modbus.writeSingleRegister(unitIdentifier, regad.intValue(), mbregsnd[0]);
 			}
 		} else if (bDiscreteCMDs) {
 			if (mbsize > 1) {
-				synchronized (drv4Modbus) {
-					drv4Modbus.setUnitIdentifier(unitIdentifier);
-					drv4Modbus.WriteMultipleCoils(regad.intValue(), mbbitsnd);
-				}
+				drv4Modbus.writeMultipleCoils(unitIdentifier, regad.intValue(), mbbitsnd);
 			} else {
-				synchronized (drv4Modbus) {
-					drv4Modbus.setUnitIdentifier(unitIdentifier);
-					drv4Modbus.WriteSingleCoil(regad.intValue(), mbbitsnd[0]);
-				}
+				drv4Modbus.writeSingleCoil(unitIdentifier, regad.intValue(), mbbitsnd[0]);
 			}
 		}
 	}

@@ -26,6 +26,7 @@ package com.smartgridready.communicator.modbus.impl;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Properties;
 
 import com.smartgridready.ns.v0.DataTypeProduct;
 import com.smartgridready.ns.v0.DeviceFrame;
@@ -111,9 +112,16 @@ public class HeatPumpTester {
 			  mbRTU.connect();			
 			}
 			
-			if (devStiebelISGIsOn) initStiebelISG(XML_BASE_DIR, "SGr_04_0015_xxxx_StiebelEltron_HeatPumpV0.2.1.xml");			
-			if (devCTAoptiHeatIsOn) initCTAoptiHeat(XML_BASE_DIR, "SGr_04_0033_0000_CTA_HeatPumpV0.2.1.xml");
-			if (devHovalTCPIsOn) initHovalTCP (XML_BASE_DIR, "SGr_04_0017_xxxx_HOVAL_HeatPumpV0.2.1.xml");
+			// TODO device parameters, e.g. slave ID, must be set HERE!
+			if (devStiebelISGIsOn) {
+				initStiebelISG(XML_BASE_DIR, "SGr_04_0015_xxxx_StiebelEltron_HeatPumpV0.2.1.xml");
+			}
+			if (devCTAoptiHeatIsOn) {
+				initCTAoptiHeat(XML_BASE_DIR, "SGr_04_0033_0000_CTA_HeatPumpV0.2.1.xml");
+			}
+			if (devHovalTCPIsOn) {
+				initHovalTCP(XML_BASE_DIR, "SGr_04_0017_xxxx_HOVAL_HeatPumpV0.2.1.xml");
+			}
 			
 			// **************************   Start device Testing   **********************************						
    			
@@ -650,9 +658,6 @@ public class HeatPumpTester {
 				DataTypeProduct  modeCmd = new DataTypeProduct();
 				
 					try {	
-						// if RTU is used, set address here
-						// mbRTU.setUnitIdentifier((byte) 7);
-					     
 						LOG.info(String.format("Testing CTAoptiHeat"));
 						Thread.sleep(25);
 						

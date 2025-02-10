@@ -21,7 +21,10 @@ public class ModbusTransportUtil {
         ModbusType modbusType = ModbusUtil.getModbusType(interfaceDescription);
         switch (modbusType) {
             case RTU:
-                return createRtuTransport(interfaceDescription.getModbusRtu(), factory);
+                return createRtuTransport(interfaceDescription.getModbusRtu(), false, factory);
+			
+			case RTU_ASCII:
+                return createRtuTransport(interfaceDescription.getModbusRtu(), true, factory);
  
             case TCP:
                 return createTcpTransport(interfaceDescription.getModbusTcp(), factory);
@@ -34,7 +37,7 @@ public class ModbusTransportUtil {
         }
 	}
 
-	private static GenDriverAPI4Modbus createRtuTransport(ModbusRtu rtu, GenDriverAPI4ModbusFactory factory) throws GenDriverException {
+	private static GenDriverAPI4Modbus createRtuTransport(ModbusRtu rtu, boolean asciiEncoding, GenDriverAPI4ModbusFactory factory) throws GenDriverException {
 		if (rtu == null) {
 			throw new GenDriverException("No Modbus RTU configuration found");
 		}
@@ -45,7 +48,7 @@ public class ModbusTransportUtil {
 		DataBits dataBits = ModbusUtil.getSerialDataBits(rtu.getByteLenSelected());
 		StopBits stopBits = ModbusUtil.getSerialStopBits(rtu.getStopBitLenSelected());
 
-		return factory.createRtuTransport(serialPort, baudrate, parity, dataBits, stopBits);
+		return factory.createRtuTransport(serialPort, baudrate, parity, dataBits, stopBits, asciiEncoding);
 	}
 
 	private static GenDriverAPI4Modbus createTcpTransport(ModbusTcp tcp, GenDriverAPI4ModbusFactory factory) throws GenDriverException {

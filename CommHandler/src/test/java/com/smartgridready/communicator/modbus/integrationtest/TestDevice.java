@@ -94,7 +94,6 @@ public class TestDevice {
         GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getModbusDriver();
         GenDriverAPI4Modbus driver = factory.createTcpTransport(testsystemIp, Integer.parseInt(testsystemPort));
         driver.connect();
-        driver.setUnitIdentifier((short) 1);
 
         testSystem = new SGrModbusDevice(deviceDescriptor, driver);
     }
@@ -120,7 +119,6 @@ public class TestDevice {
             GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getModbusDriver();
             GenDriverAPI4Modbus driver = factory.createRtuTransport(connParams._1, connParams._2);
             driver.connect();
-            driver.setUnitIdentifier(connParams._3.shortValue());
             testSystem = new SGrModbusDevice(deviceDescriptor, driver);
         }
 

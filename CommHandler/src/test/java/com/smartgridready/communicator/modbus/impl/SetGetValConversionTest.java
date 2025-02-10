@@ -83,6 +83,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyShort;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -494,22 +495,22 @@ class SetGetValConversionTest {
         Fixture<boolean[]> fixture = new Fixture<>(BooleanValue.of(testParam._2), BooleanValue.of(testParam._2),
                 new boolean[]{testParam._2()}, deviceFrame);
 
-        when(genDriverAPI4Modbus.ReadCoils(anyInt(), anyInt())).thenReturn(new boolean[]{testParam._2} );
+        when(genDriverAPI4Modbus.readCoils(anyShort(), anyInt(), anyInt())).thenReturn(new boolean[]{testParam._2} );
 
         SGrModbusDevice modbusDevice = new SGrModbusDevice(
                 fixture.getDeviceFrame(),           // model
                 genDriverAPI4Modbus);                     // mock
 
         modbusDevice.setVal("ActivePowerAC", "ActivePowerACL1", fixture.getWriteValue());
-        verify(genDriverAPI4Modbus).WriteSingleCoil(anyInt(), booleanCaptor.capture());
+        verify(genDriverAPI4Modbus).writeSingleCoil(anyShort(), anyInt(), booleanCaptor.capture());
 
         LOG.info("Modbus write coils: {}", booleanCaptor.getAllValues().isEmpty() ? "-" : booleanCaptor.getValue());
         assertEquals(fixture.getExpectedModbusValue()[0], booleanCaptor.getValue());
-        when(genDriverAPI4Modbus.ReadCoils(anyInt(), anyInt())).thenReturn(new boolean[]{booleanCaptor.getValue()});
+        when(genDriverAPI4Modbus.readCoils(anyShort(), anyInt(), anyInt())).thenReturn(new boolean[]{booleanCaptor.getValue()});
 
         Value res = modbusDevice.getVal("ActivePowerAC", "ActivePowerACL1");
 
-        verify(genDriverAPI4Modbus).ReadCoils(anyInt(), anyInt());
+        verify(genDriverAPI4Modbus).readCoils(anyShort(), anyInt(), anyInt());
         LOG.info("Modbus read value: {}", res.getBoolean());
         assertEquals(fixture.readValue.getBoolean(), res.getBoolean());
     }
@@ -529,12 +530,12 @@ class SetGetValConversionTest {
         SGrModbusDevice modbusDevice = new SGrModbusDevice(deviceFrame, genDriverAPI4Modbus);
 
         modbusDevice.setVal("ActivePowerAC", "ActivePowerACL1", EnumValue.of("DHW_PUSH"));
-        verify(genDriverAPI4Modbus).WriteMultipleRegisters(anyInt(), intArrayCaptor.capture());
+        verify(genDriverAPI4Modbus).writeMultipleRegisters(anyShort(), anyInt(), intArrayCaptor.capture());
 
         if (!intArrayCaptor.getAllValues().isEmpty()) {
             LOG.info("Modbus write enum: {}", intArrayCaptor.getValue());
             assertArrayEquals(new int[]{0, 255}, intArrayCaptor.getValue());
-            when(genDriverAPI4Modbus.ReadHoldingRegisters(anyInt(),anyInt())).thenReturn(intArrayCaptor.getValue());
+            when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(intArrayCaptor.getValue());
         }
 
         Value res = modbusDevice.getVal("ActivePowerAC", "ActivePowerACL1");
@@ -571,11 +572,11 @@ class SetGetValConversionTest {
 
         modbusDevice.setVal("ActivePowerAC", "ActivePowerACL1", BitmapValue.of(bitsToSet));
 
-        verify(genDriverAPI4Modbus).WriteMultipleRegisters(anyInt(), intArrayCaptor.capture());
+        verify(genDriverAPI4Modbus).writeMultipleRegisters(anyShort(), anyInt(), intArrayCaptor.capture());
         LOG.info("Modbus write bitmap: {}", intArrayCaptor.getValue());
         assertArrayEquals(expectedModbusValue, intArrayCaptor.getValue());
 
-        when(genDriverAPI4Modbus.ReadHoldingRegisters(anyInt(), anyInt())).thenReturn(intArrayCaptor.getValue());
+        when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(intArrayCaptor.getValue());
 
         Value res = modbusDevice.getVal("ActivePowerAC", "ActivePowerACL1");
         LOG.info("Modbus read value: {}", res);
@@ -610,7 +611,7 @@ class SetGetValConversionTest {
         SGrModbusDevice modbusDevice = new SGrModbusDevice(deviceFrame, genDriverAPI4Modbus);
 
         int[] expectedModbusValue = new int[]{0x00000004, 0x0000010B};
-        when(genDriverAPI4Modbus.ReadHoldingRegisters(anyInt(), anyInt())).thenReturn(expectedModbusValue);
+        when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(expectedModbusValue);
 
 
         Value res = modbusDevice.getVal("ActivePowerAC", "ActivePowerACL1");
@@ -645,11 +646,11 @@ class SetGetValConversionTest {
         modbusDevice.setVal("ActivePowerAC", "ActivePowerACL1", BitmapValue.of(modifiedBitmap));
 
 
-        verify(genDriverAPI4Modbus).WriteMultipleRegisters(anyInt(), intArrayCaptor.capture());
+        verify(genDriverAPI4Modbus).writeMultipleRegisters(anyShort(), anyInt(), intArrayCaptor.capture());
         LOG.info("Modbus write bitmap: {}", intArrayCaptor.getValue());
         assertArrayEquals(expectedModbusValue, intArrayCaptor.getValue());
 
-        when(genDriverAPI4Modbus.ReadHoldingRegisters(anyInt(), anyInt())).thenReturn(intArrayCaptor.getValue());
+        when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(intArrayCaptor.getValue());
 
         res = modbusDevice.getVal("ActivePowerAC", "ActivePowerACL1");
         LOG.info("Modbus read value: {}", res);
@@ -681,7 +682,7 @@ class SetGetValConversionTest {
         int[] expectedModbusValues = new int[]{23363, 19180, 23619, 0, 23619, -15072};
 
 
-        when(genDriverAPI4Modbus.ReadHoldingRegisters(anyInt(), anyInt())).thenReturn(expectedModbusValues);
+        when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(expectedModbusValues);
 
         SGrModbusDevice modbusDevice = new SGrModbusDevice(
                 deviceFrame,                              // model
@@ -691,7 +692,7 @@ class SetGetValConversionTest {
         var values = ArrayValue.of(expectedValues);
 
         modbusDevice.setVal("ActivePowerAC", "ActivePowerAC-ARRAY", values);
-        verify(genDriverAPI4Modbus, atLeast(1)).WriteMultipleRegisters(anyInt(), intArrayCaptor.capture());
+        verify(genDriverAPI4Modbus, atLeast(1)).writeMultipleRegisters(anyShort(), anyInt(), intArrayCaptor.capture());
 
         if (!intArrayCaptor.getAllValues().isEmpty()) {
             int[] modbusreg = intArrayCaptor.getValue();
@@ -702,7 +703,7 @@ class SetGetValConversionTest {
             modbusreg = adjustSign(modbusreg);
             LOG.info("Modbus write-read-back registers: {}", intArrayToShortHex(modbusreg));
             assertArrayEquals(expectedModbusValues, modbusreg);
-            when(genDriverAPI4Modbus.ReadHoldingRegisters(anyInt(), anyInt())).thenReturn(modbusreg);
+            when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(modbusreg);
         }
 
         Value[] res = modbusDevice.getVal("ActivePowerAC", "ActivePowerAC-ARRAY").asArray();
@@ -728,7 +729,7 @@ class SetGetValConversionTest {
 
 
         modbusDevice.setVal("ActivePowerAC", "ActivePowerAC-BLOCK", expectedValue);
-        verify(genDriverAPI4Modbus).WriteMultipleRegisters(anyInt(), intArrayCaptor.capture());
+        verify(genDriverAPI4Modbus).writeMultipleRegisters(anyShort(), anyInt(), intArrayCaptor.capture());
         LOG.info("Modbus write multiple registers (single value): {}", intArrayCaptor.getAllValues().isEmpty() ? "-" : intArrayToShortHex(intArrayCaptor.getValue()));
 
         if (!intArrayCaptor.getAllValues().isEmpty()) {
@@ -746,7 +747,7 @@ class SetGetValConversionTest {
             assertArrayEquals(expectedModbusValues, modbusregRead);
             modbusregRead = adjustSign(modbusregRead);
             LOG.info("Modbus read multiple registers: {}", intArrayToShortHex(modbusregRead));
-            when(genDriverAPI4Modbus.ReadHoldingRegisters(anyInt(), anyInt())).thenReturn(modbusregRead);
+            when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(modbusregRead);
         }
 
         // Mock the read cache before doing the read test.
@@ -760,7 +761,7 @@ class SetGetValConversionTest {
 
         // Test the block read.
         Value res = modbusDevice.getVal("ActivePowerAC", "ActivePowerAC-BLOCK");
-        verify(genDriverAPI4Modbus).ReadHoldingRegisters(TIME_SYNC_BLOCK_ADDRESS, TIME_SYNC_BLOCK_SIZE);
+        verify(genDriverAPI4Modbus).readHoldingRegisters((short)1, TIME_SYNC_BLOCK_ADDRESS, TIME_SYNC_BLOCK_SIZE);
 
         assertEquals(1, cacheRecords.size(), "Cache has not been written during modbus read.");
 
@@ -788,8 +789,8 @@ class SetGetValConversionTest {
         modbusDevice.setVal("ActivePowerAC", "ActivePowerACL1", fixture.getWriteValue());
 
         // then
-        verify(genDriverAPI4Modbus, atLeast(0)).WriteMultipleRegisters(anyInt(), intArrayCaptor.capture());
-        verify(genDriverAPI4Modbus, atLeast(0)).WriteSingleRegister(anyInt(), intCaptor.capture());
+        verify(genDriverAPI4Modbus, atLeast(0)).writeMultipleRegisters(anyShort(), anyInt(), intArrayCaptor.capture());
+        verify(genDriverAPI4Modbus, atLeast(0)).writeSingleRegister(anyShort(), anyInt(), intCaptor.capture());
 
         if (!intArrayCaptor.getAllValues().isEmpty()) {
             int[] modbusRegReceived = intArrayCaptor.getValue();
@@ -798,11 +799,11 @@ class SetGetValConversionTest {
             assertEquals(fixture.getExpectedModbusValue().length, modbusRegReceived.length,
                     "Invalid length of values written to the modbus registers.");
 
-            when(genDriverAPI4Modbus.ReadHoldingRegisters(anyInt(), anyInt())).thenReturn(modbusRegReceived);
+            when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(modbusRegReceived);
 
         } else if (!intCaptor.getAllValues().isEmpty()){
             LOG.info("Modbus write-read-back single register: {}", Integer.toHexString(intCaptor.getValue()));
-            when(genDriverAPI4Modbus.ReadHoldingRegisters(anyInt(), anyInt())).thenReturn(new int[]{intCaptor.getValue()});
+            when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(new int[]{intCaptor.getValue()});
         }
 
         Value resVal = modbusDevice.getVal("ActivePowerAC", "ActivePowerACL1");

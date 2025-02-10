@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyShort;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -70,7 +71,7 @@ class SetGetValValidationTest {
             if(isWrite) {
                 assertDoesNotThrow(() -> modbusDevice.setVal("VoltageAC", dataPointName, Float32Value.of(380.0f)));
             } else {
-                when(modbusDriver.ReadHoldingRegisters(anyInt(), anyInt())).thenReturn(new int[]{0,0});
+                when(modbusDriver.readHoldingRegisters(anyShort(), anyInt(), anyInt())).thenReturn(new int[]{0,0});
                 assertDoesNotThrow(() -> modbusDevice.getVal("VoltageAC", dataPointName));
             }
         } else {

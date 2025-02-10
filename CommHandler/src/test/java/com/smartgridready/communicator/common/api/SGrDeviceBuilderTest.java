@@ -172,7 +172,7 @@ public class SGrDeviceBuilderTest {
         Properties properties = new Properties();
         properties.put("portName", "COM3");
 
-        when(modbusClientFactory.createRtuTransport(anyString(), anyInt(), any(), any(), any())).thenReturn(modbusDriver);
+        when(modbusClientFactory.createRtuTransport(anyString(), anyInt(), any(), any(), any(), anyBoolean())).thenReturn(modbusDriver);
 
         GenDeviceApi device = new SGrDeviceBuilder()
                 .useModbusClientFactory(modbusClientFactory)
