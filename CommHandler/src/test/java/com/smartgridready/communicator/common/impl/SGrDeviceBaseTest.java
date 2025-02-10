@@ -57,6 +57,7 @@ import static com.smartgridready.communicator.common.api.values.DataType.ENUM;
 import static com.smartgridready.communicator.common.api.values.DataType.UNKNOWN;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyShort;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -244,7 +245,7 @@ class SGrDeviceBaseTest {
 
         var modbusValue = Float32Value.of(voltage).toModbusRegister(modbusDataType);
 
-        when(modbusClientFactory.createRtuTransport(anyString(), anyInt(), any(), any(), any())).thenReturn(genDriverAPI4Modbus);
+        when(modbusClientFactory.createRtuTransport(anyString(), anyInt(), any(), any(), any(), anyBoolean())).thenReturn(genDriverAPI4Modbus);
         when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt()))
                 .thenReturn(modbusValue);
 
@@ -348,7 +349,7 @@ class SGrDeviceBaseTest {
         System.arraycopy(modbusValue, 0, modbusValues, modbusValue.length, modbusValue.length);
         System.arraycopy(modbusValue, 0, modbusValues, 2*modbusValue.length,modbusValue.length);
 
-        when(modbusClientFactory.createRtuTransport(anyString(), anyInt(), any(), any(), any())).thenReturn(genDriverAPI4Modbus);
+        when(modbusClientFactory.createRtuTransport(anyString(), anyInt(), any(), any(), any(), anyBoolean())).thenReturn(genDriverAPI4Modbus);
         when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt()))
                 .thenReturn(modbusValues);
 

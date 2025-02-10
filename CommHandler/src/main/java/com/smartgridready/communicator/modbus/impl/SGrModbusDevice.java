@@ -116,7 +116,8 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
 
 		if (
 			(aGatewayRegistry != null) &&
-			(ModbusUtil.getModbusType(getModbusInterfaceDescription()) == ModbusType.RTU)
+			(ModbusUtil.getModbusType(getModbusInterfaceDescription()) == ModbusType.RTU ||
+				ModbusUtil.getModbusType(getModbusInterfaceDescription()) == ModbusType.RTU_ASCII)
 		) {
 			// only use shared registry with RTU transports
 			drvRegistry = aGatewayRegistry;
