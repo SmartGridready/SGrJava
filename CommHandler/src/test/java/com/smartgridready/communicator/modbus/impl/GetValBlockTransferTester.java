@@ -1,12 +1,12 @@
 package com.smartgridready.communicator.modbus.impl;
 
 import java.net.URL;
+import java.util.Properties;
 
 import com.smartgridready.ns.v0.DeviceFrame;
 
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.modbus.api.GenDeviceApi4Modbus;
-import com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus;
 import com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory;
 
 import org.slf4j.Logger;
@@ -27,15 +27,17 @@ public class GetValBlockTransferTester {
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 		URL deviceDesc = classloader.getResource("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-Blocktransfer.xml");
 		
-	try {
+		try {
+			Properties props = new Properties();
+			props.setProperty("portName", "COM3");
+
 			DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
-			DeviceFrame tstMeter = loader.load( XML_BASE_DIR, deviceDesc != null ? deviceDesc.getPath() : null);
+			DeviceFrame tstMeter = loader.load(XML_BASE_DIR, deviceDesc != null ? deviceDesc.getPath() : null, props);
 			
 			GenDriverAPI4ModbusFactory factory = DriverFactoryLoader.getModbusDriver();
-			GenDriverAPI4Modbus mbRTU = factory.createRtuTransport("COM3", 19200);
-			mbRTU.connect();
 
-			GenDeviceApi4Modbus devWagoMeter = new SGrModbusDevice(tstMeter, mbRTU );
+			GenDeviceApi4Modbus devWagoMeter = new SGrModbusDevice(tstMeter, factory);
+			devWagoMeter.connect();
 			
 			try {	
 				// Voltages from device
@@ -70,6 +72,8 @@ public class GetValBlockTransferTester {
 				System.out.println( "Error reading value from device. " + e);
 				e.printStackTrace();
 			}
+
+			devWagoMeter.disconnect();
 		}
 		catch ( Exception e )
 		{

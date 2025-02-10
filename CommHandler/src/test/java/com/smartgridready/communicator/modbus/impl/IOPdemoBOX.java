@@ -26,6 +26,7 @@ package com.smartgridready.communicator.modbus.impl;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Properties;
 
 // WIP/cb import com.smartgridready.ns.v0.SGrBool2BitRankType;
 import com.smartgridready.ns.v0.DeviceFrame;
@@ -146,16 +147,15 @@ public class IOPdemoBOX {
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Device IOPMeter Testing
 	// -----------------------------------------------------------------------------------------------------------------------------
-	static byte rtuAddr=0;
-
 	static void initIOPMeter(String aBaseDir, String aDescriptionFile, byte deviceAddr ) {
 
 		try {
-			rtuAddr = deviceAddr;
-			DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
-			DeviceFrame tstDesc = loader.load(aBaseDir, aDescriptionFile);
-			devIOPMeter =  new SGrModbusDevice(tstDesc, mbRTU );
+			Properties props = new Properties();
+			props.setProperty("slave_id", String.valueOf(deviceAddr));
 
+			DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
+			DeviceFrame tstDesc = loader.load(aBaseDir, aDescriptionFile, props);
+			devIOPMeter =  new SGrModbusDevice(tstDesc, mbRTU);
 		}
 
 		catch ( Exception e )

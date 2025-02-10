@@ -65,7 +65,7 @@
         <modbusRtu>
           <slaveAddr>1</slaveAddr>
           <portName>{{portName}}</portName>
-          <baudRateSelected>9600</baudRateSelected>
+          <baudRateSelected>19200</baudRateSelected>
           <byteLenSelected>8</byteLenSelected>
           <paritySelected>EVEN</paritySelected>
           <stopBitLenSelected>1</stopBitLenSelected>

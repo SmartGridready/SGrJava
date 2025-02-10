@@ -42,6 +42,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Properties;
 
 public class IBTlabLoopTester {
 
@@ -110,7 +111,7 @@ public class IBTlabLoopTester {
 
 			mbRTU.connect();
 			if (devABBMeterTestIsOn)  {
-				LOG.info(" -init devABBMeterTest @:" + dtf.format(LocalDateTime.now())+ " ");initABBMeter(XML_BASE_DIR, "SGr_00_0016_dddd_ABB_B23_V0.2.xml");
+				LOG.info(" -init devABBMeterTest @:" + dtf.format(LocalDateTime.now())+ " ");initABBMeter(XML_BASE_DIR, "SGr_00_0016_dddd_ABB_B23_ModbusRTU_V0.3.xml", (short) 11);
 			}
 			if (devVGT_SGCPTestIsOn)   {
 				LOG.info(" -init devVGT_SGCPTest @:" + dtf.format(LocalDateTime.now())+ " ");initVGT_SGCP (XML_BASE_DIR,"SGr_04_0019_0059_VGT_SPSDeviceforHomeAutomation_v0.2.1.xml");
@@ -124,11 +125,11 @@ public class IBTlabLoopTester {
 
 			// TestBox
 			if (devTB_ABBMeterTestIsOn)  {
-				LOG.info(" -init TestBox: devTB_ABBMeterTest @:" + dtf.format(LocalDateTime.now())+ " ");initTB_ABBMeter(XML_BASE_DIR, "SGr_00_0016_dddd_ABB_B23_V0.2.xml");
+				LOG.info(" -init TestBox: devTB_ABBMeterTest @:" + dtf.format(LocalDateTime.now())+ " ");initTB_ABBMeter(XML_BASE_DIR, "SGr_00_0016_dddd_ABB_B23_ModbusRTU_V0.3.xml", (short) 1);
 			}
 			if (devWagoMeterTestIsOn) {
 				LOG.info(" -init TestBox: devWagoMeterTest @: " + dtf.format(LocalDateTime.now())+ " ");
-				initWagoMeter(XML_BASE_DIR, "SGr_04_0014_0000_WAGO_SmartMeterV0.2.1.xml");
+				initWagoMeter(XML_BASE_DIR, "SGr_04_0014_0000_WAGO_SmartMeterV0.2.3.xml", (short) 7);
 			}
 			if (devOMCCIWallboxTestIsOn) {
 				//TODO: complete and use OMCCI EI.xml
@@ -186,18 +187,17 @@ public class IBTlabLoopTester {
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// WAGO Meter testing
 	// -----------------------------------------------------------------------------------------------------------------------------
-	static void initWagoMeter(String aBaseDir, String aDescriptionFile ) {
+	static void initWagoMeter(String aBaseDir, String aDescriptionFile, short slaveId) {
 
 		try {
+			Properties props = new Properties();
+			props.setProperty("slave_id", String.valueOf(slaveId));
+
 			DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
-			DeviceFrame tstMeter = loader.load(aBaseDir,aDescriptionFile);
+			DeviceFrame tstMeter = loader.load(aBaseDir, aDescriptionFile, props);
 
-
-			devWagoMeter =  new SGrModbusDevice(tstMeter, mbRTU );
-
-
+			devWagoMeter =  new SGrModbusDevice(tstMeter, mbRTU);
 		}
-
 		catch ( Exception e )
 		{
 			LOG.info( "Error loading device description devWagoMeter:" + e);
@@ -337,15 +337,16 @@ public class IBTlabLoopTester {
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Device ABBMeter Testing
 	// -----------------------------------------------------------------------------------------------------------------------------
-	static void initABBMeter(String aBaseDir, String aDescriptionFile ) {
+	static void initABBMeter(String aBaseDir, String aDescriptionFile, short slaveId) {
 
 		try {
+			Properties props = new Properties();
+			props.setProperty("slave_id", String.valueOf(slaveId));
+
 			DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
-			DeviceFrame tstDesc = loader.load(aBaseDir, aDescriptionFile);
-			devABBMeter =  new SGrModbusDevice(tstDesc, mbRTU );
-
+			DeviceFrame tstDesc = loader.load(aBaseDir, aDescriptionFile, props);
+			devABBMeter =  new SGrModbusDevice(tstDesc, mbRTU);
 		}
-
 		catch ( Exception e )
 		{
 			LOG.info( "Error loading device description. " + e);
@@ -478,13 +479,15 @@ public class IBTlabLoopTester {
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Device ABBMeter Testing
 	// -----------------------------------------------------------------------------------------------------------------------------
-	static void initTB_ABBMeter(String aBaseDir, String aDescriptionFile ) {
+	static void initTB_ABBMeter(String aBaseDir, String aDescriptionFile, short slaveId) {
 
 		try {
+			Properties props = new Properties();
+			props.setProperty("slave_id", String.valueOf(slaveId));
+
 			DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
 			DeviceFrame tstDesc = loader.load(aBaseDir, aDescriptionFile);
 			devTB_ABBMeter =  new SGrModbusDevice(tstDesc, mbRTU );
-
 		}
 
 		catch ( Exception e )
@@ -988,11 +991,14 @@ public class IBTlabLoopTester {
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Device testing frame
 	// -----------------------------------------------------------------------------------------------------------------------------
-	static void initEmptyDevFrame(String aBaseDir, String aDescriptionFile ) {
+	static void initEmptyDevFrame(String aBaseDir, String aDescriptionFile, short slaveId) {
 
 		try {
+			Properties props = new Properties();
+			props.setProperty("slave_id", String.valueOf(slaveId));
+
 			DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
-			DeviceFrame tstDesc = loader.load(aBaseDir, aDescriptionFile);
+			DeviceFrame tstDesc = loader.load(aBaseDir, aDescriptionFile, props);
 
 			// replace device specific for RTU
 			//add devXXXX =  new SGrModbusDevice(tstDesc, mbRTU );
@@ -1003,7 +1009,6 @@ public class IBTlabLoopTester {
 			// mbXXXXX.initDevice("192.168.1.182",502);
 
 		}
-
 		catch ( Exception e )
 		{
 			LOG.info( "Error loading device description. " + e);
