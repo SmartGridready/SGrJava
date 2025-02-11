@@ -76,9 +76,8 @@ public class JsonHelper {
 
                 Map<Integer, Map<String, Object>> enhancedMap = enhanceWithNamings(flatRepresentation, names);
 
-                // TODO find a solution without parsing the JSON string again
                 JsonWriter builder = new JsonWriter(mapTo);
-                return parseJsonResponse(null, builder.buildJson(enhancedMap.values()));
+                return JsonValue.of(builder.buildJsonNode(enhancedMap.values()));
             } else {
                 throw new GenDriverException(errorMsg);
             }

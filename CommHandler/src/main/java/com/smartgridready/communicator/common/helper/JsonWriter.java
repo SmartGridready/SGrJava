@@ -1,6 +1,7 @@
 package com.smartgridready.communicator.common.helper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -27,7 +28,11 @@ public class JsonWriter {
         this.keywordMap = keywordMap;
     }
 
-    public String buildJson(Collection<Map<String, Object>> flatDataRecords) throws JsonProcessingException {
+    public String buildJsonString(Collection<Map<String, Object>> flatDataRecords) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(buildJsonNode(flatDataRecords));
+    }
+
+    public JsonNode buildJsonNode(Collection<Map<String, Object>> flatDataRecords) throws JsonProcessingException {
 
         JsonWriter builder = new JsonWriter(keywordMap);
 
@@ -82,7 +87,7 @@ public class JsonWriter {
             rootNode.add(firstLevelNode);
         });
 
-        return objectMapper.writeValueAsString(rootNode);
+        return rootNode;
     }
 
 

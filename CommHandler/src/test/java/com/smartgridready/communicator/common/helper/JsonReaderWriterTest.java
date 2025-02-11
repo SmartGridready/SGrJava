@@ -150,7 +150,7 @@ class JsonReaderWriterTest extends JsonMapperTestBase
         Map<JsonReader.Key, Map<String, Object>> tariffRecords = JsonReader.mapToFlatList(inputJson, KEYWORD_MAP_TARIFF_IN1);
 
         JsonWriter builder = new JsonWriter(KEYWORD_MAP_TARIFF_OUT1);
-        String jsonResult = builder.buildJson(tariffRecords.values());
+        String jsonResult = builder.buildJsonString(tariffRecords.values());
 
         assertEquals(MAPPER.readTree(expectedOutputJson), MAPPER.readTree(jsonResult));
     }
@@ -162,7 +162,7 @@ class JsonReaderWriterTest extends JsonMapperTestBase
         Map<JsonReader.Key, Map<String, Object>> tariffRecords = JsonReader.mapToFlatList(inputJson, KEYWORD_MAP_TARIFF_SWISSPOWER);
 
         JsonWriter builder = new JsonWriter(KEYWORD_MAP_TARIFF_OUT1);
-        String jsonResult = builder.buildJson(tariffRecords.values());
+        String jsonResult = builder.buildJsonString(tariffRecords.values());
 
         assertEquals(MAPPER.readTree(expectedOutputJson), MAPPER.readTree(jsonResult));
     }
