@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class JsonValue extends Value {
 
-    private JsonNode value;
+    private final JsonNode value;
 
     private JsonValue(JsonNode value) {
         this.value = value;
@@ -123,6 +123,7 @@ public class JsonValue extends Value {
             // return JSON string without quotes
             return value.asText();
         }
+        // stringify object
         return value.toString();
     }
 
@@ -158,6 +159,7 @@ public class JsonValue extends Value {
 
     @Override
     public JsonValue[] asArray() {
+        // cannot create actual JSON array here
         return new JsonValue[]{this};
     }
 
