@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.Instant;
 import java.util.Map;
 
 public abstract class NumberValue<T extends Number> extends Value {
@@ -92,6 +93,11 @@ public abstract class NumberValue<T extends Number> extends Value {
     @Override
     public String getString() {
         return value.toString();
+    }
+
+    @Override
+    public Instant getDateTime() {
+        return Instant.ofEpochMilli(getInt64());
     }
 
     public String toString() {

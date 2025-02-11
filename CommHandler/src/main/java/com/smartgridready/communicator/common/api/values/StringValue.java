@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.math.BigInteger;
+import java.time.Instant;
 import java.util.Map;
 
 public class StringValue extends Value {
@@ -107,6 +108,11 @@ public class StringValue extends Value {
     @Override
     public Map<String, Boolean> getBitmap() {
         throw new UnsupportedOperationException("Cannot convert from String to a bitmap.");
+    }
+
+    @Override
+    public Instant getDateTime() {
+        return Instant.parse(value);
     }
 
     public void scaleDown(int mul, int powOf10) {

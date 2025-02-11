@@ -7,67 +7,79 @@ import java.math.BigInteger;
 import java.time.Instant;
 import java.util.Map;
 
-public class BooleanValue extends Value {
+public class DateTimeValue extends Value {
 
-    private final boolean value;
+    private Instant value;
 
-    private BooleanValue(boolean value) {
+    private DateTimeValue(Instant value) {
         this.value = value;
     }
 
     @Override
     public byte getInt8() {
-        return value ? (byte)1 : (byte)0;
+        long val = getInt64();
+        Value.checkInt8(val);
+        return (byte) val;
     }
 
     @Override
     public short getInt8U() {
-        return value ? (short) 1 : (short)0;
+        long val = getInt64();
+        Value.checkInt8U(val);
+        return (short) val;
     }
 
     @Override
     public short getInt16() {
-        return value ? (short) 1 : (short)0;
+        long val = getInt64();
+        Value.checkInt16(val);
+        return (short) val;
     }
 
     @Override
     public int getInt16U() {
-        return value ? 1 : 0;
+        long val = getInt64();
+        Value.checkInt16U(val);
+        return (int) val;
     }
 
     @Override
     public int getInt32() {
-        return value ? 1 : 0;
+        long val = getInt64();
+        Value.checkInt32(val);
+        return (int) val;
     }
 
     @Override
     public long getInt32U() {
-        return value ? (long)1 : (long)0;
+        long val = getInt64();
+        Value.checkInt32U(val);
+        return val;
     }
 
     @Override
     public long getInt64() {
-        return value ? (long)1 : (long)0;
+        return value.toEpochMilli();
     }
 
     @Override
     public BigInteger getInt64U() {
-        return value ? BigInteger.ONE : BigInteger.ZERO;
+        return BigInteger.valueOf(getInt64());
     }
 
     @Override
     public float getFloat32() {
-        return value ? 1 : 0;
+        return getInt64();
     }
 
     @Override
     public double getFloat64() {
-        return value ? 1 : 0;
+        return getInt64();
     }
 
     @Override
     public String getString() {
-        return value ? Boolean.TRUE.toString() : Boolean.FALSE.toString();
+        return value.toString();
     }
 
     @Override
@@ -82,31 +94,31 @@ public class BooleanValue extends Value {
 
     @Override
     public boolean getBoolean() {
-        return value;
+        return getInt64() != 0L;
     }
 
     @Override
     public Instant getDateTime() {
-        return Instant.ofEpochMilli(getInt64());
+        return value;
     }
 
     @Override
     public void absValue() {
-        // no absolute value for boolean
+        value = Instant.ofEpochMilli(Math.abs(getInt64()));
     }
 
     @Override
     public void roundToInt() {
-        // no rounding for int
+        // is already an int
     }
 
-    public static BooleanValue of(boolean value) {
-        return new BooleanValue(value);
+    public static DateTimeValue of(Instant value) {
+        return new DateTimeValue(value);
     }
 
     @Override
-    public BooleanValue[] asArray() {
-        return new BooleanValue[]{this};
+    public DateTimeValue[] asArray() {
+        return new DateTimeValue[]{this};
     }
 
     @Override
@@ -115,7 +127,7 @@ public class BooleanValue extends Value {
 
         if (o==null || getClass()!=o.getClass()) return false;
 
-        BooleanValue that = (BooleanValue) o;
+        DateTimeValue that = (DateTimeValue) o;
 
         return new EqualsBuilder().append(value, that.value).isEquals();
     }
