@@ -35,7 +35,7 @@ jobs:
         working-directory: CommHandler
         run: |
           chmod +x ./gradlew
-          ./gradlew clean build --no-daemon
+          ./gradlew clean build javadoc --no-daemon
 
       - name: Publish SGrJava CommHandler
         # publish after committing to master or creating tag commhandler-{version}

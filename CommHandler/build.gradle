@@ -188,6 +188,23 @@ publishing {
 
     }
 
+    javadoc {
+        source = sourceSets.main.allJava
+        destinationDir = file("$projectDir/../docs/build/html/commhandler/javadoc")
+
+        // Exclude specific packages
+        include 'com/smartgridready/communicator/common/api/**'
+
+        // Additional Javadoc options
+        options {
+            encoding 'UTF-8'
+            charSet 'UTF-8'
+            links 'https://docs.oracle.com/javase/8/docs/api/'
+            title 'SmartGridready communication handler'
+        }
+    }
+
+
     publications {
         mavenJava(MavenPublication) {
             groupId = 'com.smartgridready'

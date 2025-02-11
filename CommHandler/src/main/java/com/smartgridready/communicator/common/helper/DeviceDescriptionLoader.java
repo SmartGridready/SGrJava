@@ -142,7 +142,7 @@ public class DeviceDescriptionLoader {
 	 * <pre>
 	 *   Properties properties = new Properties();
 	 *   properties.put("ipAddress", "127.0.0.1");
-	 *   String xml = "<xml>...</xml>";
+	 *   String xml = {@code <xml>...</xml>"}
 	 *   deviceDescriptionLoader.load(xml, properties);
 	 * </pre>
 	 * will replace {@code {{ipAddress}}} within the EI-XML with  the value 127.0.0.1
