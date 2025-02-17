@@ -2,6 +2,11 @@ package com.smartgridready.communicator.common.api;
 
 import com.smartgridready.ns.v0.EmptyType;
 import com.smartgridready.ns.v0.ModbusDataType;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.NullNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import com.smartgridready.communicator.common.api.values.StringValue;
 import com.smartgridready.communicator.common.api.values.Value;
 import org.junit.jupiter.api.Test;
@@ -125,5 +130,33 @@ class StringValueTest {
         value = StringValue.of("-3.14159");
         value.absValue();
         assertEquals(3.14159f, value.getFloat32());
+    }
+
+    @Test
+    void jsonConversion() {
+        // empty
+        value = StringValue.of("");
+        assertEquals(TextNode.valueOf(""), value.getJson());
+
+        // null
+        value = StringValue.of("null");
+        assertEquals(NullNode.getInstance(), value.getJson());
+
+        // plain text
+        value = StringValue.of("someText");
+        assertEquals(TextNode.valueOf("someText"), value.getJson());
+
+        // object
+        final ObjectNode objNode1 = new ObjectNode(JsonNodeFactory.instance);
+        objNode1.put("key", "value");
+        value = StringValue.of("{\"key\":\"value\"}");
+        assertEquals(objNode1, value.getJson());
+
+        // array
+        final ArrayNode arrNode1 = new ArrayNode(JsonNodeFactory.instance);
+        arrNode1.add(TextNode.valueOf("val1"));
+        arrNode1.add(TextNode.valueOf("val2"));
+        value = StringValue.of("[\"val1\",\"val2\"]");
+        assertEquals(arrNode1, value.getJson());
     }
 }
