@@ -3,7 +3,9 @@ package com.smartgridready.communicator.common.api.values;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.TextNode;
 
 import java.math.BigInteger;
@@ -120,6 +122,15 @@ public class StringValue extends Value {
 
     @Override
     public JsonNode getJson() {
+        if (!value.isBlank()) {
+            // avoid MissingNode type when reading blank string
+            try {
+                // value may be JSON object or array
+                ObjectMapper mapper = new ObjectMapper();
+                return mapper.readTree(value);
+            } catch (JsonProcessingException e) {}
+        }
+
         return TextNode.valueOf(value);
     }
 

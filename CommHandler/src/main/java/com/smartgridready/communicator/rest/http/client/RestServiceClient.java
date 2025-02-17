@@ -206,7 +206,9 @@ public class RestServiceClient {
 	}
 
 	private static RestApiServiceCall cloneRestApiServiceCall(RestApiServiceCall restApiServiceCall) throws IOException {
-		var clone = objectMapper.writeValueAsString(restApiServiceCall);
-		return objectMapper.readValue(clone, RestApiServiceCall.class);
+		return objectMapper.readValue(
+			objectMapper.writeValueAsString(restApiServiceCall),
+			RestApiServiceCall.class
+		);
 	}
 }
