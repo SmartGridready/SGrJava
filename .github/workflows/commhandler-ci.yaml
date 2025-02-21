@@ -56,4 +56,4 @@ jobs:
         with:
           branch: gh-pages  # Change this if using a different branch
           folder: CommHandler/build/docs/javadoc  # Path where Javadoc is generated
-          target-folder: commhandler        
+          target-folder: docs/commhandler        
