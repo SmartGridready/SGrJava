@@ -46,7 +46,9 @@ jobs:
           ./gradlew publishMavenJavaPublicationToNexusRepository -Pnexus.username=smartgrid -Pnexus.password=${{ secrets.NEXUS_PASSWORD }} --no-daemon
       
       - name: Build Javadoc
-        run: ./gradlew javadoc
+        run: 
+          chmod +x ./gradlew
+          ./gradlew javadoc
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
