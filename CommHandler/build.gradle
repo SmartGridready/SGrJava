@@ -164,7 +164,6 @@ def integrationTestTask = tasks.register('integrationTest', Test) {
     shouldRunAfter(tasks.named('build'))
 }
 
-
 publishing {
     java {
         withSourcesJar()

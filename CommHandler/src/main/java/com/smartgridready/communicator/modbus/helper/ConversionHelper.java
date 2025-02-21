@@ -145,7 +145,7 @@ public class ConversionHelper {
     /**
      * Converts a String to 16 - Bit Registers
      *
-     * @param stringToConvert String to Convert<
+     * @param stringToConvert String to Convert>
      * @return Converted String
      */
     public static int[] convStringToRegisters(String stringToConvert) {
