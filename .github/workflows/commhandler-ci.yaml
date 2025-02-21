@@ -46,6 +46,7 @@ jobs:
           ./gradlew publishMavenJavaPublicationToNexusRepository -Pnexus.username=smartgrid -Pnexus.password=${{ secrets.NEXUS_PASSWORD }} --no-daemon
       
       - name: Build Javadoc
+        working-directory: CommHandler
         run: |
           chmod +x ./gradlew
           ./gradlew javadoc
