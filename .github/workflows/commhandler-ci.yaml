@@ -52,6 +52,7 @@ jobs:
           ./gradlew javadoc
 
       - name: Deploy to GitHub Pages
+        working-directory: CommHandler
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages  # Change this if using a different branch
