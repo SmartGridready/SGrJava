@@ -1,0 +1,7 @@
+com.smartgridready.driver.api.common
+com.smartgridready.driver.api.contacts
+com.smartgridready.driver.api.http
+com.smartgridready.driver.api.messaging
+com.smartgridready.driver.api.messaging.model
+com.smartgridready.driver.api.messaging.model.authentication
+com.smartgridready.driver.api.modbus
