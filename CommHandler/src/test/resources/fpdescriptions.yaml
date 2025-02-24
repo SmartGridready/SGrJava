@@ -1,0 +1,10 @@
+descriptionFolder: ..\..\SGrSpecifications\XMLInstances\FuncProfiles\
+descriptions:
+  - file: FP_SGr_DeviceInformation_DeviceInformation_m_0.1.xml
+  - file: FP_SGr_Actuator_Relais_2m_0.1.xml
+  - file: FP_SGr_Metering_CurrentAC_m_1.0.xml
+  - file: FP_SGr_Metering_Frequency_m_1.0.xml
+  - file: FP_SGr_Metering_ActiveEnergyAC_m_1.0.xml
+  - file: FP_SGr_Metering_ActivePowerAC_m_1.0.xml
+  - file: FP_SGr_Metering_ReactivePowerAC_m_1.0.xml
+  - file: FP_0_0011_7_4_0.2_VoltageAC.xml
