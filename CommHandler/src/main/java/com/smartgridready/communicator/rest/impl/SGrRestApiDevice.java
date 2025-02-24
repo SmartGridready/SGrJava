@@ -35,7 +35,6 @@ import com.smartgridready.ns.v0.RestApiServiceCall;
 import com.smartgridready.ns.v0.RestApiValueMapping;
 import com.smartgridready.ns.v0.ValueMapping;
 
-import com.smartgridready.communicator.common.api.values.Float64Value;
 import com.smartgridready.communicator.common.api.values.StringValue;
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.common.helper.JsonHelper;
@@ -56,7 +55,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Properties;
-import java.util.function.DoubleBinaryOperator;
 
 public class SGrRestApiDevice extends SGrDeviceBase<
 		DeviceFrame,
@@ -151,7 +149,7 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 
 			if (value != null) {
 				checkOutOfRange(new Value[]{value}, dataPoint);
-				value = applyUnitConversion(dataPoint, value, this::divide);
+				value = applyUnitConversion(dataPoint, value, SGrDeviceBase::divide);
 
 				// substitute value mappings generic -> device
 				substitutions.put(
@@ -168,7 +166,7 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 
 			if (value == null) {
 				value = handleServiceResponse(serviceCall, response);
-				return applyUnitConversion(dataPoint, value, this::multiply);
+				return applyUnitConversion(dataPoint, value, SGrDeviceBase::multiply);
 			}
 
 			return StringValue.of(response);
@@ -283,37 +281,6 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 
 	private RestApiInterfaceDescription getRestApiInterfaceDescription() {
 		return getRestApiInterface().getRestApiInterfaceDescription();
-	}
-
-	private Value applyUnitConversion(RestApiDataPoint dataPoint, Value value, DoubleBinaryOperator conversionFunction) {
-
-		if (dataPoint.getDataPoint().getUnitConversionMultiplicator() != null
-				&& isNumeric(value)
-				&& dataPoint.getDataPoint().getUnitConversionMultiplicator() != 0.0) {
-			return Float64Value.of(conversionFunction.applyAsDouble(value.getFloat64(), dataPoint.getDataPoint().getUnitConversionMultiplicator()));
-		}
-		return value;
-	}
-
-	private boolean isNumeric(Value value) {
-		if (value == null) {
-			return false;
-		}
-
-		try {
-			value.getFloat64();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-
-	private double divide(double dividend, double divisor) {
-		return  dividend / divisor;
-	}
-
-	private double multiply(double factor1, double factor2) {
-		return  factor1 * factor2;
 	}
 
 	private String getMappedDeviceValue(String genericValue, RestApiValueMapping valueMapping) {
