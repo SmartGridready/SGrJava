@@ -415,12 +415,7 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
 			((StringValue) retVal).scaleUp(mul, pwof10);
 		}
 
-		float unitConversionFactor = getUnitConversionFactor(aDataPoint);
-		if (unitConversionFactor != 1.0f) {
-			retVal = Float64Value.of(retVal.getFloat64() * unitConversionFactor);
-		}
-
-		return retVal;
+		return applyUnitConversion(aDataPoint, retVal, SGrDeviceBase::multiply);
 	}
 
 	private int[] manageLayer6deviation(ModbusLayer6Deviation mBlayer6Scheme, int[] mbregresp, int size) throws GenDriverException {
@@ -604,10 +599,7 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
 		BitOrder bitOrder = getModbusInterfaceDescription().getBitOrder();
 		IntBuffer mbRegBuf = IntBuffer.allocate(32);
 
-		float unitConversionFactor = getUnitConversionFactor(dataPoint);
-		if (unitConversionFactor != 1.0f) {
-			sgrValue = Float64Value.of(sgrValue.getFloat64() / unitConversionFactor);
-		}
+		sgrValue = applyUnitConversion(dataPoint, sgrValue, SGrDeviceBase::divide);
 
 		if (bRegisterCMDs) {
 			if (sgrValue instanceof EnumValue) {
@@ -687,13 +679,6 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
 
 	private ModbusInterfaceDescription getModbusInterfaceDescription() {
 		return getModbusInterface().getModbusInterfaceDescription();
-	}
-
-	private float getUnitConversionFactor(ModbusDataPoint aDataPoint) {
-		if (aDataPoint.getDataPoint().getUnitConversionMultiplicator() != null) {
-			return aDataPoint.getDataPoint().getUnitConversionMultiplicator();
-		}
-		return 1.0f;
 	}
 
 	private void checkConnection() throws GenDriverModbusException {

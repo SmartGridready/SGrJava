@@ -136,8 +136,6 @@ public class SGrMessagingDevice extends SGrDeviceBase<
                 .map(MessagingDataPointConfiguration::getInMessage)
                 .map(InMessage::getFilter).orElse(null);
 
-
-
         if (outReadCmdTopicOpt.isPresent()) {
             // Read value from device
             OutMessage outMessage = outReadCmdTopicOpt.get();
@@ -177,17 +175,24 @@ public class SGrMessagingDevice extends SGrDeviceBase<
                     .map(MessagingDataPointConfiguration::getInMessage)
                     .map(InMessage::getResponseQuery);
 
+            Value value;
             if (queryOpt.isPresent()) {
                 ResponseQuery responseQuery = queryOpt.get();
                 if (responseQuery.getQueryType() != null && ResponseQueryType.JMES_PATH_EXPRESSION == responseQuery.getQueryType()) {
-                    return JsonHelper.parseJsonResponse(responseQuery.getQuery(), response);
+                    value = JsonHelper.parseJsonResponse(responseQuery.getQuery(), response);
                 } else if (responseQuery.getQueryType() != null && ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
-                    return JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
+                    value = JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
                 } else if (responseQuery.getQueryType() != null) {
                     throw new GenDriverException("Response query type " + responseQuery.getQueryType().name() + " not supported yet");
+                } else {
+                    throw new GenDriverException("Response query type missing");
                 }
+            } else {
+                value = StringValue.of(response);
             }
-            return StringValue.of(response);
+
+            // unit conversion before returning to client
+            return applyUnitConversion(dataPoint, value, SGrDeviceBase::multiply);
         } else {
             throw new GenDriverException(result.getLeft());
         }
@@ -212,6 +217,9 @@ public class SGrMessagingDevice extends SGrDeviceBase<
                 .map(MessagingDataPointConfiguration::getWriteCmdMessage)
                 .map(OutMessage::getTemplate)
                 .orElseThrow(() -> new IllegalArgumentException("W and RW data-points need an outMessageTemplate to send the read command within EI-XML"));
+
+        // unit conversion before output
+        value = applyUnitConversion(dataPoint, value, SGrDeviceBase::divide);
 
         // noinspection RegExpRedundantEscape
         outMessageTemplate = outMessageTemplate.replace("{{value}}", value.getString());
@@ -277,6 +285,9 @@ public class SGrMessagingDevice extends SGrDeviceBase<
             }
             LOG.debug("Received subscribed message on topic={}, filter={}, payload={}",
                     inMessageTopic, queryOpt.isPresent() ? queryOpt.get().getQuery() : "none", response);
+
+            // unit conversion before inserting into cache
+            value = applyUnitConversion(dataPoint, value, SGrDeviceBase::multiply);
 
             messageCache.put(MessageCacheKey.of(inMessageTopic, messageFilter), MessageCacheRecord.of(value));
             callbackFunction.accept(Either.right(value));

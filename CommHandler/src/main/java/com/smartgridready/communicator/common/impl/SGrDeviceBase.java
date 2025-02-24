@@ -2,6 +2,7 @@ package com.smartgridready.communicator.common.impl;
 
 import com.smartgridready.communicator.common.api.values.DataType;
 import com.smartgridready.communicator.common.api.values.EnumValue;
+import com.smartgridready.communicator.common.api.values.Float64Value;
 import com.smartgridready.ns.v0.ConfigurationList;
 import com.smartgridready.ns.v0.ConfigurationListElement;
 import com.smartgridready.ns.v0.DataDirectionProduct;
@@ -31,6 +32,7 @@ import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.function.Consumer;
+import java.util.function.DoubleBinaryOperator;
 
 
 public abstract class SGrDeviceBase<
@@ -278,4 +280,35 @@ public abstract class SGrDeviceBase<
     public void unsubscribe(String profileName, String dataPointName) throws GenDriverException {
         throw new GenDriverException("Unsubscribe not allowed");
     }
+
+    protected static <P extends DataPointBase> Value applyUnitConversion(P dataPoint, Value value, DoubleBinaryOperator conversionFunction) {
+
+		if (dataPoint.getDataPoint().getUnitConversionMultiplicator() != null
+				&& isNumeric(value)
+				&& dataPoint.getDataPoint().getUnitConversionMultiplicator() != 0.0) {
+			return Float64Value.of(conversionFunction.applyAsDouble(value.getFloat64(), dataPoint.getDataPoint().getUnitConversionMultiplicator()));
+		}
+		return value;
+	}
+
+	protected static boolean isNumeric(Value value) {
+		if (value == null) {
+			return false;
+		}
+
+		try {
+			value.getFloat64();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	protected static double divide(double dividend, double divisor) {
+		return  dividend / divisor;
+	}
+
+	protected static double multiply(double factor1, double factor2) {
+		return  factor1 * factor2;
+	}
 }
