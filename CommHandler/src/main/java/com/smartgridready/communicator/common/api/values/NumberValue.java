@@ -3,9 +3,7 @@ package com.smartgridready.communicator.common.api.values;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.BigIntegerNode;
 import com.fasterxml.jackson.databind.node.DoubleNode;
 import com.fasterxml.jackson.databind.node.FloatNode;
@@ -15,8 +13,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.Instant;
 import java.util.Map;
-
-import javax.naming.OperationNotSupportedException;
 
 public abstract class NumberValue<T extends Number> extends Value {
 
@@ -121,18 +117,6 @@ public abstract class NumberValue<T extends Number> extends Value {
             return DoubleNode.valueOf(value.doubleValue());
         } else {
             return LongNode.valueOf(value.longValue());
-        }
-    }
-
-    @Override
-    public <T> T getJson(Class<T> aClass) {
-        JsonNode node = getJson();
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.treeToValue(node, aClass);
-        } catch (JsonProcessingException e) {
-            var msg = String.format("Unable to map JSON node to the given class '%s'", aClass.getSimpleName());
-            throw new IllegalArgumentException(msg);
         }
     }
 

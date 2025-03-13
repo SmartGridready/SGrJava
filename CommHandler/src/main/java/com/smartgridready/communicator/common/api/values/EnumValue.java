@@ -1,8 +1,6 @@
 package com.smartgridready.communicator.common.api.values;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.smartgridready.ns.v0.EnumEntryProductRecord;
 import com.smartgridready.ns.v0.EnumMapProduct;
@@ -197,18 +195,6 @@ public class EnumValue extends Value {
     @Override
     public JsonNode getJson() {
         return TextNode.valueOf(this.getString());
-    }
-
-    @Override
-    public <T> T getJson(Class<T> aClass) {
-        JsonNode node = getJson();
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.treeToValue(node, aClass);
-        } catch (JsonProcessingException e) {
-            var msg = String.format("Unable to map JSON node to the given class '%s'", aClass.getSimpleName());
-            throw new IllegalArgumentException(msg);
-        }
     }
 
     @Override
