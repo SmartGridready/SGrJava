@@ -31,6 +31,7 @@ public abstract class Value  {
     public abstract Map<String, Boolean> getBitmap();
     public abstract Instant getDateTime();
     public abstract JsonNode getJson();
+    public abstract <T> T getJson(Class<T> aClass);
     public abstract void absValue();
     public abstract void roundToInt();
 

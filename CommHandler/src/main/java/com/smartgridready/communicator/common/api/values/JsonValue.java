@@ -3,7 +3,10 @@ package com.smartgridready.communicator.common.api.values;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.math.BigInteger;
 import java.time.Instant;
@@ -158,6 +161,17 @@ public class JsonValue extends Value {
     }
 
     @Override
+    public <T> T getJson(Class<T> aClass) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.treeToValue(value, aClass);
+        } catch (JsonProcessingException e) {
+            var msg = String.format("Unable to map JSON node to the given class '%s'", aClass.getSimpleName());
+            throw new IllegalArgumentException(msg);
+        }
+    }
+
+    @Override
     public JsonValue[] asArray() {
         // cannot create actual JSON array here
         return new JsonValue[]{this};
@@ -180,6 +194,21 @@ public class JsonValue extends Value {
 
     public static JsonValue of(JsonNode value) {
         return new JsonValue(value);
+    }
+
+    public static JsonValue of(Object object) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return new JsonValue(objectMapper.valueToTree(object));
+    }
+
+    public static JsonValue of(String json) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return new JsonValue(objectMapper.readTree(json));
+        } catch (Exception e) {
+            var msg = String.format("Unable to deserialize JSON string '%s'", json);
+            throw new IllegalArgumentException(msg);
+        }
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.smartgridready.communicator.common.api;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.node.NullNode;
@@ -79,10 +81,15 @@ class JsonValueTest {
 
         // object
         final ObjectNode objNode1 = new ObjectNode(JsonNodeFactory.instance);
-        objNode1.put("prop_long", 1234567890L);
-        objNode1.put("prop_bool", false);
+        objNode1.put("propLong", 1234567890L);
+        objNode1.put("propBool", false);
         value = JsonValue.of(objNode1);
-        assertEquals("{\"prop_long\":1234567890,\"prop_bool\":false}", value.getString());
+        assertEquals("{\"propLong\":1234567890,\"propBool\":false}", value.getString());
+
+        // convert object to class
+        TestObject convObj = value.getJson(TestObject.class);
+        assertEquals(1234567890L, convObj.getPropLong());
+        assertEquals(false, convObj.getPropBool());
 
         // array
         final ArrayNode arrNode1 = new ArrayNode(JsonNodeFactory.instance);
@@ -90,6 +97,10 @@ class JsonValueTest {
         arrNode1.add(TextNode.valueOf("def"));
         value = JsonValue.of(arrNode1);
         assertEquals("[\"abc\",\"def\"]", value.getString());
+
+        // convert array to class
+        String[] convArr = value.getJson(String[].class);
+        assertEquals(2, convArr.length);
     }
 
     @Test
@@ -116,5 +127,61 @@ class JsonValueTest {
         // string
         value = JsonValue.of(TextNode.valueOf("abc"));
         assertArrayEquals(new int[]{0x6162,0x6300}, value.toModbusRegister(modbusDataTypeString));
+    }
+
+    @Test
+    void create() {
+        // object
+        TestObject obj = TestObject.of(123456789L, true);
+        Value value = JsonValue.of(obj);
+        TestObject jobj = value.getJson(TestObject.class);
+        assertEquals(obj, jobj);
+
+        // string
+        String jstr = "{\"propLong\":123456789,\"propBool\":true}";
+        value = JsonValue.of(jstr);
+        jobj = value.getJson(TestObject.class);
+        assertEquals(obj, jobj);
+    }
+
+    private static class TestObject {
+        private Long propLong;
+        private Boolean propBool;
+
+        public Long getPropLong() {
+            return propLong;
+        }
+
+        public void setPropLong(Long value) {
+            propLong = value;
+        }
+
+        public Boolean getPropBool() {
+            return propBool;
+        }
+
+        public void setPropBool(Boolean value) {
+            propBool = value;
+        }
+
+        public static TestObject of(Long prop_long, Boolean prop_bool) {
+            var obj = new TestObject();
+            obj.setPropLong(prop_long);
+            obj.setPropBool(prop_bool);
+            return obj;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this==o) return true;
+            if (o==null || getClass()!=o.getClass()) return false;
+            TestObject that = (TestObject) o;
+            return new EqualsBuilder().append(propLong, that.propLong).append(propBool, that.propBool).isEquals();
+        }
+
+        @Override
+        public int hashCode() {
+            return new HashCodeBuilder(17, 37).append(propLong).append(propBool).toHashCode();
+        }
     }
 }

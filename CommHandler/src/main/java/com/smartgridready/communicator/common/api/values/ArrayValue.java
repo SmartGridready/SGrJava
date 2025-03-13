@@ -5,7 +5,9 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 
@@ -102,6 +104,18 @@ public class ArrayValue<T extends Value> extends Value {
             }
         }
         return res;
+    }
+
+    @Override
+    public <T> T getJson(Class<T> aClass) {
+        JsonNode node = getJson();
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.treeToValue(node, aClass);
+        } catch (JsonProcessingException e) {
+            var msg = String.format("Unable to map JSON node to the given class '%s'", aClass.getSimpleName());
+            throw new IllegalArgumentException(msg);
+        }
     }
 
     @Override

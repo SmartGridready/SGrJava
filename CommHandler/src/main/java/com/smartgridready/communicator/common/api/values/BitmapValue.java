@@ -2,7 +2,9 @@ package com.smartgridready.communicator.common.api.values;
 
 import com.smartgridready.ns.v0.BitmapEntryProduct;
 import com.smartgridready.ns.v0.BitmapProduct;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.smartgridready.communicator.modbus.helper.ConversionHelper;
@@ -123,6 +125,18 @@ public class BitmapValue extends Value {
         ObjectNode res = new ObjectNode(JsonNodeFactory.instance);
         value.forEach(bitmapRecord -> res.put(bitmapRecord.getLiteral(), bitmapRecord.getValue()));
         return res;
+    }
+
+    @Override
+    public <T> T getJson(Class<T> aClass) {
+        JsonNode node = getJson();
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.treeToValue(node, aClass);
+        } catch (JsonProcessingException e) {
+            var msg = String.format("Unable to map JSON node to the given class '%s'", aClass.getSimpleName());
+            throw new IllegalArgumentException(msg);
+        }
     }
 
     @Override

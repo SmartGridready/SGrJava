@@ -134,6 +134,17 @@ public class StringValue extends Value {
         return TextNode.valueOf(value);
     }
 
+    @Override
+    public <T> T getJson(Class<T> aClass) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(value, aClass);
+        } catch (JsonProcessingException e) {
+            var msg = String.format("Unable to map JSON string '%s' to the given class '%s'", value, aClass.getSimpleName());
+            throw new IllegalArgumentException(msg);
+        }
+    }
+
     public void scaleDown(int mul, int powOf10) {
         if (mul != 1 || powOf10 !=0) {
             double dVal = toDouble() / mul;
