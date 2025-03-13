@@ -7,6 +7,7 @@ import com.smartgridready.ns.v0.ModbusDataType;
 import com.smartgridready.communicator.modbus.helper.ConversionHelper;
 
 import java.math.BigInteger;
+import java.time.Instant;
 import java.util.Map;
 
 public abstract class Value  {
@@ -25,6 +26,7 @@ public abstract class Value  {
     public abstract boolean getBoolean();
     public abstract EnumRecord getEnum();
     public abstract Map<String, Boolean> getBitmap();
+    public abstract Instant getDateTime();
     public abstract void absValue();
     public abstract void roundToInt();
 
@@ -68,6 +70,9 @@ public abstract class Value  {
         if (modbusDataType.getBoolean() != null) {
             short booleanAsShort = mapBooleanToShort(modbusDataType.getBoolean(), getBoolean());
             return ConversionHelper.shortToRegister(booleanAsShort);
+        }
+        if (modbusDataType.getDateTime() != null) {
+            return ConversionHelper.longToRegisters(getInt64());
         }
 
         throw new IllegalArgumentException(
@@ -125,6 +130,9 @@ public abstract class Value  {
             short booleanAsShort = ConversionHelper.byteBufFromRegisters(registers).getShort();
             return BooleanValue.of(mapShortToBoolean(modbusDataType.getBoolean(), booleanAsShort));
         }
+        if (modbusDataType.getDateTime() != null) {
+            return DateTimeValue.of(Instant.ofEpochMilli(ConversionHelper.byteBufFromRegisters(registers).getLong()));
+        }
 
         throw new IllegalArgumentException(String.format("Modbus register type %s to Value.class conversion from register not supported.",
                 DataType.getModbusDataTypeName(modbusDataType)));
@@ -168,6 +176,9 @@ public abstract class Value  {
         }
         if (dataType.getBoolean() != null) {
             return BooleanValue.of(Boolean.parseBoolean(value));
+        }
+        if (dataType.getDateTime() != null) {
+            return DateTimeValue.of(Instant.parse(value));
         }
 
         throw new IllegalArgumentException(String.format("Generic type %s conversion from String to Value.class conversion from register not supported.",

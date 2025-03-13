@@ -1,6 +1,7 @@
 package com.smartgridready.communicator.common.api.values;
 
 import java.math.BigInteger;
+import java.time.Instant;
 import java.util.Map;
 
 public class Int64UValue extends Value {
@@ -88,6 +89,11 @@ public class Int64UValue extends Value {
     @Override
     public Map<String, Boolean> getBitmap() {
         throw new UnsupportedOperationException("Cannot convert from int64U value to a bitmap value.");
+    }
+
+    @Override
+    public Instant getDateTime() {
+        return Instant.ofEpochMilli(getInt64());
     }
 
     @Override

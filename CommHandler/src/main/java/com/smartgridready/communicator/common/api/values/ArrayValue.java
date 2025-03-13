@@ -1,6 +1,7 @@
 package com.smartgridready.communicator.common.api.values;
 
 import java.math.BigInteger;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -80,6 +81,11 @@ public class ArrayValue<T extends Value> extends Value {
     @Override
     public Map<String, Boolean> getBitmap() {
         return values != null && values.length > 0 ? values[0].getBitmap() : Map.of();
+    }
+
+    @Override
+    public Instant getDateTime() {
+        return values != null && values.length > 0 ? values[0].getDateTime() : null;
     }
 
     @Override

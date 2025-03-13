@@ -8,6 +8,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.time.Instant;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -107,6 +108,11 @@ public class BitmapValue extends Value {
         Map<String, Boolean> res = new LinkedHashMap<>();
         value.forEach( bitmapRecord -> res.put(bitmapRecord.getLiteral(), bitmapRecord.getValue()));
         return res;
+    }
+
+    @Override
+    public Instant getDateTime() {
+        throw new UnsupportedOperationException("Cannot convert bitmap to datetime.");
     }
 
     @Override
