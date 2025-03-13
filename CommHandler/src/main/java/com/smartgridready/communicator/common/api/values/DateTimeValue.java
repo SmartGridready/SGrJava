@@ -116,6 +116,14 @@ public class DateTimeValue extends Value {
         return new DateTimeValue(value);
     }
 
+    public static DateTimeValue of(String dateTimeStr) {
+        return new DateTimeValue(Instant.parse(dateTimeStr));
+    }
+
+    public static DateTimeValue of(long epochMillis) {
+        return new DateTimeValue(Instant.ofEpochMilli(epochMillis));
+    }
+
     @Override
     public DateTimeValue[] asArray() {
         return new DateTimeValue[]{this};
