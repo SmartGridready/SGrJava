@@ -3,6 +3,8 @@ package com.smartgridready.communicator.common.api;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.Instant;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,7 @@ import com.fasterxml.jackson.databind.node.FloatNode;
 import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.LongNode;
+import com.smartgridready.communicator.common.api.values.EnumRecord;
 import com.smartgridready.communicator.common.api.values.JsonValue;
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.ns.v0.EmptyType;
@@ -101,6 +104,28 @@ class JsonValueTest {
         // convert array to class
         String[] convArr = value.getJson(String[].class);
         assertEquals(2, convArr.length);
+    }
+
+    @Test
+    void dateTimeConversion() {
+        final Instant ts = Instant.EPOCH;
+
+        // string
+        value = JsonValue.of(TextNode.valueOf(ts.toString()));
+        assertEquals(ts, value.getDateTime());
+
+        // numeric
+        value = JsonValue.of(LongNode.valueOf(ts.toEpochMilli()));
+        assertEquals(ts, value.getDateTime());
+    }
+
+    @Test
+    void enumConversion() {
+        final EnumRecord enumValue = new EnumRecord("ENUM_VALUE", null, null);
+
+        // string
+        value = JsonValue.of(TextNode.valueOf(enumValue.getLiteral()));
+        assertEquals(enumValue, value.getEnum());
     }
 
     @Test

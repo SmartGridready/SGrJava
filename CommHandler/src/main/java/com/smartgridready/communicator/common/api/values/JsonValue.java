@@ -140,7 +140,10 @@ public class JsonValue extends Value {
 
     @Override
     public EnumRecord getEnum() {
-        throw new UnsupportedOperationException("Cannot convert from JSON to enum.");
+        if (value.isTextual()) {
+            return new EnumRecord(value.textValue(), null, null);
+        }
+        throw new UnsupportedOperationException("Cannot convert from JSON object to enum.");
     }
 
     @Override
@@ -150,7 +153,12 @@ public class JsonValue extends Value {
 
     @Override
     public Instant getDateTime() {
-        throw new UnsupportedOperationException("Cannot convert from JSON to datetime.");
+        if (value.isTextual()) {
+            return Instant.parse(value.textValue());
+        } else if (value.isNumber()) {
+            return Instant.ofEpochMilli(value.longValue());
+        }
+        throw new UnsupportedOperationException("Cannot convert from JSON object to datetime.");
     }
 
     @Override
