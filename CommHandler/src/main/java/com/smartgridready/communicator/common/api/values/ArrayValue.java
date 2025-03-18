@@ -5,6 +5,10 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+
 public class ArrayValue<T extends Value> extends Value {
 
     private final T[] values;
@@ -86,6 +90,18 @@ public class ArrayValue<T extends Value> extends Value {
     @Override
     public Instant getDateTime() {
         return values != null && values.length > 0 ? values[0].getDateTime() : null;
+    }
+
+    @Override
+    public JsonNode getJson() {
+        ArrayNode res = new ArrayNode(JsonNodeFactory.instance);
+        if (values != null && values.length > 0) {
+            // create actual JSON array node
+            for (int i = 0; i < values.length; i++) {
+                res.add(values[i].getJson());
+            }
+        }
+        return res;
     }
 
     @Override

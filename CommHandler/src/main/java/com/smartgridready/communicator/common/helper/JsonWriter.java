@@ -1,6 +1,7 @@
 package com.smartgridready.communicator.common.helper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class JsonWriter {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     private final Map<String, String> keywordMap;
 
@@ -27,12 +28,14 @@ public class JsonWriter {
         this.keywordMap = keywordMap;
     }
 
-    public String buildJson(Collection<Map<String, Object>> flatDataRecords) throws JsonProcessingException {
+    public String buildJsonString(Collection<Map<String, Object>> flatDataRecords) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(buildJsonNode(flatDataRecords));
+    }
 
-        JsonWriter builder = new JsonWriter(keywordMap);
+    public JsonNode buildJsonNode(Collection<Map<String, Object>> flatDataRecords) throws JsonProcessingException {
 
         // Group by first level group.
-        List<Map.Entry<String, String>> keywordsForIteration = builder.getKeywordsForIteration(1);
+        List<Map.Entry<String, String>> keywordsForIteration = this.getKeywordsForIteration(1);
 
         // Put all records that have the same first level values into one group with a combined key, built from the values.
         Map<String, List<Map<String, Object>>> firstLevelGroups = new LinkedHashMap<>();
@@ -82,7 +85,7 @@ public class JsonWriter {
             rootNode.add(firstLevelNode);
         });
 
-        return objectMapper.writeValueAsString(rootNode);
+        return rootNode;
     }
 
 

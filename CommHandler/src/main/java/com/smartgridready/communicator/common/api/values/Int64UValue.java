@@ -4,6 +4,9 @@ import java.math.BigInteger;
 import java.time.Instant;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.BigIntegerNode;
+
 public class Int64UValue extends Value {
 
     BigInteger value;
@@ -94,6 +97,11 @@ public class Int64UValue extends Value {
     @Override
     public Instant getDateTime() {
         return Instant.ofEpochMilli(getInt64());
+    }
+
+    @Override
+    public JsonNode getJson() {
+        return BigIntegerNode.valueOf(value);
     }
 
     @Override

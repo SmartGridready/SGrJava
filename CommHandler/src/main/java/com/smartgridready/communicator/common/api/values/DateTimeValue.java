@@ -3,6 +3,9 @@ package com.smartgridready.communicator.common.api.values;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.TextNode;
+
 import java.math.BigInteger;
 import java.time.Instant;
 import java.util.Map;
@@ -100,6 +103,11 @@ public class DateTimeValue extends Value {
     @Override
     public Instant getDateTime() {
         return value;
+    }
+
+    @Override
+    public JsonNode getJson() {
+        return TextNode.valueOf(value.toString());
     }
 
     @Override

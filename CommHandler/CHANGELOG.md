@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2025-03-13
+
+### Fixed
+
+- fixed unit conversion in messaging
+
+### Added
+
+- added support for datetime data type (as ISO-8601 string or 64bit time stamp)
+- added support for json data type (with JsonNode and conversion to objects)
+
+### Changed
+
+- improved internal processing of JSON data
+
+
 ## [2.2.0] - 2025-02-10
 
 ### Changed

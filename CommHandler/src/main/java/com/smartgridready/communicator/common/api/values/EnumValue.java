@@ -1,5 +1,7 @@
 package com.smartgridready.communicator.common.api.values;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import com.smartgridready.ns.v0.EnumEntryProductRecord;
 import com.smartgridready.ns.v0.EnumMapProduct;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -188,6 +190,11 @@ public class EnumValue extends Value {
     @Override
     public Instant getDateTime() {
         throw new UnsupportedOperationException("Cannot convert from an enum value to a datetime value.");
+    }
+
+    @Override
+    public JsonNode getJson() {
+        return TextNode.valueOf(this.getString());
     }
 
     @Override
