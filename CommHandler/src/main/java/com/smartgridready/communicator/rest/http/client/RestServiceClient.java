@@ -181,12 +181,11 @@ public class RestServiceClient {
 	}
 
 	private static String replacePropertyPlaceholders(String template, Properties properties) {
-
 		String convertedTemplate = template;
 		if (template != null && properties != null) {
 			for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-				// noinspection RegExpRedundantEscape
-				convertedTemplate = convertedTemplate.replaceAll("\\{\\{" + entry.getKey() + "\\}\\}", (String)entry.getValue());
+				// no regex here, string literal replacement is sufficient
+				convertedTemplate = convertedTemplate.replace("{{" + (String)entry.getKey() + "}}", (String)entry.getValue());
 			}
 		}
 		return convertedTemplate;

@@ -195,9 +195,10 @@ public class DeviceDescriptionLoader {
 	
 	private static String replacePropertyPlaceholders(String deviceDescriptionXml, Properties properties) {
 		String convertedXml = deviceDescriptionXml;
-		if (properties != null) {
+		if (deviceDescriptionXml != null && properties != null) {
 			for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-				convertedXml = convertedXml.replaceAll("\\{\\{" + entry.getKey() + "\\}\\}", (String)entry.getValue());
+				// no regex here, string literal replacement is sufficient
+				convertedXml = convertedXml.replace("{{" + (String)entry.getKey() + "}}", (String)entry.getValue());
 				LOG.debug("replaced property '{}':'{}'", entry.getKey(), entry.getValue());
 			}
 		}
