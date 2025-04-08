@@ -108,17 +108,21 @@ public class SGrMessagingDevice extends SGrDeviceBase<
 
     @Override
     public Value getVal(String profileName, String dataPointName) throws GenDriverException {
-        return getVal(profileName, dataPointName, SYNC_READ_TIMEOUT_MSEC);
+        return getVal(profileName, dataPointName, null, SYNC_READ_TIMEOUT_MSEC);
     }
 
     @Override
     public Value getVal(String profileName, String dataPointName, Properties parameters) throws GenDriverException {
-        // parameters not supported, just return getVal()
-        return getVal(profileName, dataPointName);
+        return getVal(profileName, dataPointName, parameters, SYNC_READ_TIMEOUT_MSEC);
     }
 
     @Override
-    public Value getVal(String profileName, String dataPointName, long timeoutMs)
+    public Value getVal(String profileName, String dataPointName, long timeoutMs) throws GenDriverException {
+        return getVal(profileName, dataPointName, null, timeoutMs);
+    }
+
+    @Override
+    public Value getVal(String profileName, String dataPointName, Properties parameters, long timeoutMs)
             throws GenDriverException {
 
         MessagingDataPoint dataPoint = findDatapoint(profileName, dataPointName);
@@ -139,7 +143,7 @@ public class SGrMessagingDevice extends SGrDeviceBase<
         if (outReadCmdTopicOpt.isPresent()) {
             // Read value from device
             OutMessage outMessage = outReadCmdTopicOpt.get();
-            return getValueFromDevice(timeoutMs, dataPoint, outMessage.getTopic(), outMessage.getTemplate(), inMessageTopic, inMessageFilter);
+            return getValueFromDevice(parameters, timeoutMs, dataPoint, outMessage.getTopic(), outMessage.getTemplate(), inMessageTopic, inMessageFilter);
         } else {
             // Read value from cache
             MessageCacheRecord cacheRecord =  messageCache.get(MessageCacheKey.of(inMessageTopic, inMessageFilter));
@@ -150,7 +154,7 @@ public class SGrMessagingDevice extends SGrDeviceBase<
         }
     }
 
-    private Value getValueFromDevice(long timeoutMs, MessagingDataPoint dataPoint, String outMessageTopic, String outMessageTemplate, String inMessageTopic, MessageFilter messageFilter) throws GenDriverException {
+    private Value getValueFromDevice(Properties parameters, long timeoutMs, MessagingDataPoint dataPoint, String outMessageTopic, String outMessageTemplate, String inMessageTopic, MessageFilter messageFilter) throws GenDriverException {
         if (messagingClient == null) {
             throw new GenDriverException(NOT_CONNECTED);
         }
@@ -159,7 +163,7 @@ public class SGrMessagingDevice extends SGrDeviceBase<
 
         Either<Throwable, Message> result = messagingClient.readSync(
                 outMessageTopic,
-                Message.of(outMessageTemplate),
+                Message.of(replacePropertyPlaceholders(outMessageTemplate, parameters)),
                 inMessageTopic,
                 messageFilterHandler,
                 timeoutMs
@@ -221,8 +225,8 @@ public class SGrMessagingDevice extends SGrDeviceBase<
         // unit conversion before output
         value = applyUnitConversion(dataPoint, value, SGrDeviceBase::divide);
 
-        // noinspection RegExpRedundantEscape
-        outMessageTemplate = outMessageTemplate.replace("{{value}}", value.getString());
+        // no regex here, string literal replacement is sufficient
+        outMessageTemplate = outMessageTemplate.replace("[[value]]", value.getString());
 
         messagingClient.sendSync(outMessageTopic, Message.of(outMessageTemplate));
     }
@@ -372,4 +376,16 @@ public class SGrMessagingDevice extends SGrDeviceBase<
         });
         return count.get();
     }
+
+    private static String replacePropertyPlaceholders(String template, Properties properties) {
+		// this is for dynamic parameters
+		String convertedTemplate = template;
+		if (template != null && properties != null) {
+			for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+				// no regex here, string literal replacement is sufficient
+				convertedTemplate = convertedTemplate.replace("[[" + (String)entry.getKey() + "]]", (String)entry.getValue());
+			}
+		}
+		return convertedTemplate;
+	}
 }

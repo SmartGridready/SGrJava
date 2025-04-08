@@ -98,6 +98,7 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 		return isConnected;
 	}
 	
+	// TODO make private after removal from interface
 	@Override
 	public void authenticate() throws RestApiAuthenticationException, IOException, RestApiServiceCallException, RestApiResponseParseException {
 		httpAuthenticator.getAuthorizationHeaderValue(deviceDescription, httpClientFactory);
