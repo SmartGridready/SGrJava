@@ -196,6 +196,22 @@ public class DataPoint {
     }
 
     /**
+     * Gets a value from the device by reading
+     * This operation is supported for messaging devices only
+     * @param timeoutMs The read timeout in milliseconds
+     * @return The value received from the device
+     * @throws GenDriverException if an error occurs
+     */
+    public Value getVal(Properties parameters, long timeoutMs) throws GenDriverException {
+        if (genDeviceApi instanceof GenDeviceApi4Messaging) {
+            return ((GenDeviceApi4Messaging) genDeviceApi).getVal(functionalProfileName, name, parameters, timeoutMs);
+        } else {
+            throw new UnsupportedOperationException(
+                    "Method getVal() with an additional timeout parameter is supported for messaging devices only.");
+        }
+    }
+
+    /**
      * Subscribes to messages that are related to the given datapoint
      * This operation is supported for messaging devices only
      * @param callbackFunction A callback function that provides the received value

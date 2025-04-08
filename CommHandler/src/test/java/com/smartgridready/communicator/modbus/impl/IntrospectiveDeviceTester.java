@@ -168,7 +168,7 @@ public class IntrospectiveDeviceTester {
     private static Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> createSwisspowerDevice() throws Exception {
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        URL deviceDescUrl = classloader.getResource("SGr_05_Swisspower_Dynamic_Tariffs_0.0.1.xml");
+        URL deviceDescUrl = classloader.getResource("SGr_05_Swisspower_Dynamic_Tariffs_0.1.xml");
 
         DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
         DeviceFrame devDesc = loader.load("", deviceDescUrl != null ? deviceDescUrl.getPath() : null);
@@ -187,7 +187,7 @@ public class IntrospectiveDeviceTester {
     private static Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> createGroupeEDevice() throws Exception {
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        URL deviceDescUrl = classloader.getResource("SGr_05_GroupeE_Dynamic_Tariffs_0.0.1.xml");
+        URL deviceDescUrl = classloader.getResource("SGr_05_GroupeE_Dynamic_Tariffs_0.1.xml");
 
         DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
         DeviceFrame devDesc = loader.load("", deviceDescUrl != null ? deviceDescUrl.getPath() : null);

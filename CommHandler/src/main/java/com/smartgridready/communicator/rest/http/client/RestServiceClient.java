@@ -60,7 +60,7 @@ public class RestServiceClient {
 	}
 
 	protected RestServiceClient(String baseUri, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory, Properties substitutions) throws IOException {
-		this.baseUri = replacePropertyPlaceholders(baseUri, substitutions);
+		this.baseUri = baseUri;
 		this.restServiceCall = cloneRestServiceCallWithSubstitutions(serviceCall, substitutions);
 		this.httpClientFactory = httpClientFactory;
 	}
@@ -75,11 +75,7 @@ public class RestServiceClient {
 	}
 
 	public String getBaseUri() {
-		return getBaseUri(new Properties());
-	}
-
-	public String getBaseUri(Properties substitutions) {
-		return replacePropertyPlaceholders(baseUri, substitutions);
+		return baseUri;
 	}
 
 	public RestApiServiceCall getRestServiceCall() {
@@ -90,7 +86,7 @@ public class RestServiceClient {
 
 		var serviceCall = cloneRestApiServiceCall(restServiceCall);
 
-		// Substitutions can appear within the request path, request body or even the response query.
+		// Substitutions can appear within the request path, request headers, request body or even the response query.
 		serviceCall.setRequestPath(replacePropertyPlaceholders(serviceCall.getRequestPath(), substitutions));
 		serviceCall.setRequestBody(replacePropertyPlaceholders(serviceCall.getRequestBody(), substitutions));
 
@@ -181,12 +177,12 @@ public class RestServiceClient {
 	}
 
 	private static String replacePropertyPlaceholders(String template, Properties properties) {
-
+		// this is for dynamic parameters
 		String convertedTemplate = template;
 		if (template != null && properties != null) {
 			for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-				// noinspection RegExpRedundantEscape
-				convertedTemplate = convertedTemplate.replaceAll("\\{\\{" + entry.getKey() + "\\}\\}", (String)entry.getValue());
+				// no regex here, string literal replacement is sufficient
+				convertedTemplate = convertedTemplate.replace("[[" + (String)entry.getKey() + "]]", (String)entry.getValue());
 			}
 		}
 		return convertedTemplate;
