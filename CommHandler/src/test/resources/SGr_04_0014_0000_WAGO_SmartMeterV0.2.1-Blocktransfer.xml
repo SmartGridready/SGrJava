@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/xsl/SGr.xsl"?>
 <DeviceFrame xmlns="http://www.smartgridready.com/ns/V0/"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.smartgridready.com/ns/V0/ ../../../../../SGrSpecifications/SchemaDatabase/SGr/Product/Product.xsd" >
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.smartgridready.com/ns/V0/ ../../../../../SGrSpecifications/SchemaDatabase/SGr/Product/Product.xsd">
   <deviceName>WAGOMeterV0.2.1</deviceName>
   <manufacturerName>WAGO</manufacturerName>
   <specificationOwnerIdentification>0</specificationOwnerIdentification>
@@ -39,12 +39,31 @@
     <nominalPower>4 Watt</nominalPower>
     <generalRemarks>WAGO/ls</generalRemarks>
     <levelOfOperation>4</levelOfOperation>
+    <versionNumber>
+      <primaryVersionNumber>0</primaryVersionNumber>
+      <secondaryVersionNumber>2</secondaryVersionNumber>
+      <subReleaseVersionNumber>1</subReleaseVersionNumber>
+    </versionNumber>
   </deviceInformation>
+  <configurationList>
+    <configurationListElement>
+      <name>portName</name>
+      <dataType>
+        <string />
+      </dataType>
+      <defaultValue></defaultValue>
+      <configurationDescription>
+        <textElement>The serial port name when accessed via serial port.</textElement>
+        <language>en</language>
+        <label>Serial port name</label>
+      </configurationDescription>
+    </configurationListElement>
+  </configurationList>
   <genericAttributeList>
     <genericAttributeListElement>
       <name>SpecialQualityRequirement</name>
       <dataType>
-        <string/>
+        <string />
       </dataType>
       <value>METAS</value>
       <unit>NONE</unit>
@@ -52,7 +71,7 @@
     <genericAttributeListElement>
       <name>PrecisionPercent</name>
       <dataType>
-        <float32/>
+        <float32 />
       </dataType>
       <value>2.0</value>
       <unit>NONE</unit>
@@ -116,8 +135,8 @@
               <dataPoint>
                 <dataPointName>VoltageL1</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>VOLTS</unit>
                 <alternativeNames>
@@ -126,7 +145,7 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20482</address>
                 <registerType>HoldRegister</registerType>
@@ -137,8 +156,8 @@
               <dataPoint>
                 <dataPointName>VoltageL2</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>VOLTS</unit>
                 <alternativeNames>
@@ -147,7 +166,7 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20484</address>
                 <registerType>HoldRegister</registerType>
@@ -158,8 +177,8 @@
               <dataPoint>
                 <dataPointName>VoltageL3</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>VOLTS</unit>
                 <alternativeNames>
@@ -168,7 +187,7 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20486</address>
                 <registerType>HoldRegister</registerType>
@@ -179,8 +198,8 @@
               <dataPoint>
                 <dataPointName>VoltageACL1-L2</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>VOLTS</unit>
                 <alternativeNames>
@@ -189,7 +208,7 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20530</address>
                 <registerType>HoldRegister</registerType>
@@ -201,8 +220,8 @@
               <dataPoint>
                 <dataPointName>VoltageACL1-L3</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>VOLTS</unit>
                 <alternativeNames>
@@ -211,7 +230,7 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20532</address>
                 <registerType>HoldRegister</registerType>
@@ -223,8 +242,8 @@
               <dataPoint>
                 <dataPointName>VoltageACL2-L3</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>VOLTS</unit>
                 <alternativeNames>
@@ -233,7 +252,7 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20534</address>
                 <registerType>HoldRegister</registerType>
@@ -263,8 +282,8 @@
               <dataPoint>
                 <dataPointName>Frequency</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>HERTZ</unit>
                 <alternativeNames>
@@ -277,7 +296,7 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20488</address>
                 <registerType>HoldRegister</registerType>
@@ -313,8 +332,8 @@
               <dataPoint>
                 <dataPointName>CurrentACL1</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>AMPERES</unit>
                 <alternativeNames>
@@ -327,7 +346,7 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20492</address>
                 <registerType>HoldRegister</registerType>
@@ -338,8 +357,8 @@
               <dataPoint>
                 <dataPointName>CurrentACL2</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>AMPERES</unit>
                 <legibleDescription>
@@ -349,19 +368,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20494</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>CurrentACL3</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>AMPERES</unit>
                 <legibleDescription>
@@ -371,12 +396,18 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20496</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
           </dataPointList>
         </functionalProfileListElement>
@@ -407,8 +438,8 @@
               <dataPoint>
                 <dataPointName>ActivePowerACtot</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATTS</unit>
                 <legibleDescription>
@@ -418,19 +449,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20498</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>ActivePowerACL1</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATTS</unit>
                 <legibleDescription>
@@ -440,19 +477,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20500</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>ActivePowerACL2</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATTS</unit>
                 <legibleDescription>
@@ -462,19 +505,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20502</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>ActivePowerACL3</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATTS</unit>
                 <legibleDescription>
@@ -484,12 +533,18 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20504</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
           </dataPointList>
         </functionalProfileListElement>
@@ -520,8 +575,8 @@
               <dataPoint>
                 <dataPointName>ReactivePowerACtot</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOVOLT_AMPERES_REACTIVE</unit>
                 <legibleDescription>
@@ -531,19 +586,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20506</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>ReactivePowerACL1</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOVOLT_AMPERES_REACTIVE</unit>
                 <legibleDescription>
@@ -553,19 +614,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20508</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>ReactivePowerACL2</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOVOLT_AMPERES_REACTIVE</unit>
                 <legibleDescription>
@@ -575,19 +642,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20510</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>ReactivePowerACL3</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOVOLT_AMPERES_REACTIVE</unit>
                 <legibleDescription>
@@ -597,12 +670,18 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20512</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
           </dataPointList>
         </functionalProfileListElement>
@@ -633,8 +712,8 @@
               <dataPoint>
                 <dataPointName>ApparentPowerACtot</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOVOLT_AMPERES</unit>
                 <legibleDescription>
@@ -644,19 +723,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20514</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>ApparentPowerACL1</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOVOLT_AMPERES</unit>
                 <legibleDescription>
@@ -666,19 +751,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20536</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>ApparentPowerACL2</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOVOLT_AMPERES</unit>
                 <legibleDescription>
@@ -688,19 +779,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20518</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>ApparentPowerACL3</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOVOLT_AMPERES</unit>
                 <legibleDescription>
@@ -710,12 +807,18 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20520</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
           </dataPointList>
         </functionalProfileListElement>
@@ -743,8 +846,8 @@
               <dataPoint>
                 <dataPointName>PowerFactor</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>NONE</unit>
                 <legibleDescription>
@@ -754,19 +857,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20522</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>PowerFactorL1</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>NONE</unit>
                 <legibleDescription>
@@ -776,19 +885,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20524</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>PowerFactorL2</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>NONE</unit>
                 <legibleDescription>
@@ -798,19 +913,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>205226</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>PowerFactorL3</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>NONE</unit>
                 <legibleDescription>
@@ -820,12 +941,18 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20528</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
           </dataPointList>
         </functionalProfileListElement>
@@ -853,8 +980,8 @@
               <dataPoint>
                 <dataPointName>ActiveEnergyACtot</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
                 <legibleDescription>
@@ -864,19 +991,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>20576</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>ActiveEnergyACL1</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
                 <legibleDescription>
@@ -886,19 +1019,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>24582</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>ActiveEnergyACL2</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
                 <legibleDescription>
@@ -908,19 +1047,25 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>24584</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
             <dataPointListElement>
               <dataPoint>
                 <dataPointName>ActiveEnergyACL3</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
                 <legibleDescription>
@@ -930,12 +1075,18 @@
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>24586</address>
                 <registerType>HoldRegister</registerType>
                 <numberOfRegisters>2</numberOfRegisters>
               </modbusDataPointConfiguration>
+              <modbusAttributes>
+                <scalingFactor>
+                  <multiplicator>1</multiplicator>
+                  <powerof10>-2</powerof10>
+                </scalingFactor>
+              </modbusAttributes>
             </dataPointListElement>
           </dataPointList>
         </functionalProfileListElement>
@@ -959,14 +1110,14 @@
               <dataPoint>
                 <dataPointName>ReactiveEnergyACtot</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>24612</address>
                 <registerType>HoldRegister</registerType>
@@ -977,14 +1128,14 @@
               <dataPoint>
                 <dataPointName>ReactiveEnergyACL1</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>24618</address>
                 <registerType>HoldRegister</registerType>
@@ -995,14 +1146,14 @@
               <dataPoint>
                 <dataPointName>ReactiveEnergyACL2</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>24620</address>
                 <registerType>HoldRegister</registerType>
@@ -1013,14 +1164,14 @@
               <dataPoint>
                 <dataPointName>ReactiveEnergyACL3</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>24622</address>
                 <registerType>HoldRegister</registerType>
@@ -1049,14 +1200,14 @@
               <dataPoint>
                 <dataPointName>ActiveImportAC</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>24588</address>
                 <registerType>HoldRegister</registerType>
@@ -1067,14 +1218,14 @@
               <dataPoint>
                 <dataPointName>ActiveExportAC</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>24600</address>
                 <registerType>HoldRegister</registerType>
@@ -1085,14 +1236,14 @@
               <dataPoint>
                 <dataPointName>ActiveNetAC</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>24576</address>
                 <registerType>HoldRegister</registerType>
@@ -1122,14 +1273,14 @@
               <dataPoint>
                 <dataPointName>ReactiveImportAC</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>24624</address>
                 <registerType>HoldRegister</registerType>
@@ -1140,14 +1291,14 @@
               <dataPoint>
                 <dataPointName>ReactiveExportAC</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>24636</address>
                 <registerType>HoldRegister</registerType>
@@ -1158,14 +1309,14 @@
               <dataPoint>
                 <dataPointName>ReactiveNetAC</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>KILOWATT_HOURS</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <float32/>
+                  <float32 />
                 </modbusDataType>
                 <address>24612</address>
                 <registerType>HoldRegister</registerType>
@@ -1195,14 +1346,14 @@
               <dataPoint>
                 <dataPointName>PwrQuadACtot</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>NONE</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <int16/>
+                  <int16 />
                 </modbusDataType>
                 <address>16407</address>
                 <registerType>HoldRegister</registerType>
@@ -1213,14 +1364,14 @@
               <dataPoint>
                 <dataPointName>PwrQuadACL1</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>NONE</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <int16/>
+                  <int16 />
                 </modbusDataType>
                 <address>16408</address>
                 <registerType>HoldRegister</registerType>
@@ -1231,14 +1382,14 @@
               <dataPoint>
                 <dataPointName>PwrQuadACL2</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>NONE</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <int16/>
+                  <int16 />
                 </modbusDataType>
                 <address>16409</address>
                 <registerType>HoldRegister</registerType>
@@ -1249,14 +1400,14 @@
               <dataPoint>
                 <dataPointName>PwrQuadACL3</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <float64/>
+                <dataType>
+                  <float64 />
                 </dataType>
                 <unit>NONE</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <int16/>
+                  <int16 />
                 </modbusDataType>
                 <address>16510</address>
                 <registerType>HoldRegister</registerType>
@@ -1291,14 +1442,14 @@
               <dataPoint>
                 <dataPointName>CurrentDirL1</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <string/>
+                <dataType>
+                  <string />
                 </dataType>
                 <unit>NONE</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <string/>
+                  <string />
                 </modbusDataType>
                 <address>16402</address>
                 <registerType>HoldRegister</registerType>
@@ -1309,14 +1460,14 @@
               <dataPoint>
                 <dataPointName>CurrentDirL2</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <string/>
+                <dataType>
+                  <string />
                 </dataType>
                 <unit>NONE</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <string/>
+                  <string />
                 </modbusDataType>
                 <address>16403</address>
                 <registerType>HoldRegister</registerType>
@@ -1327,14 +1478,14 @@
               <dataPoint>
                 <dataPointName>CurrentDirL3</dataPointName>
                 <dataDirection>R</dataDirection>
-                    <dataType>
-                  <string/>
+                <dataType>
+                  <string />
                 </dataType>
                 <unit>NONE</unit>
               </dataPoint>
               <modbusDataPointConfiguration>
                 <modbusDataType>
-                  <string/>
+                  <string />
                 </modbusDataType>
                 <address>16404</address>
                 <registerType>HoldRegister</registerType>
