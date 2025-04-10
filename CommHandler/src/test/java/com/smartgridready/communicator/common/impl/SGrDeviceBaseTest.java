@@ -93,6 +93,8 @@ class SGrDeviceBaseTest {
 
     private static final Value STRING_VALUE_1000 = StringValue.of("1000");
 
+    private static final String WAGO_PORTNAME = "COM3";
+
     enum Expect {
         OK,
         ERROR
@@ -139,7 +141,10 @@ class SGrDeviceBaseTest {
     @MethodSource("checkRangeArguments")
     void checkRange(Value[] values, Comparator comparator, double limit, Expect expect) throws Exception {
 
-        SGrModbusDevice device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-GenericAttributes.xml");
+        Properties properties = new Properties();
+        properties.setProperty("portName", WAGO_PORTNAME);
+
+        SGrModbusDevice device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-GenericAttributes.xml", properties);
 
         if (expect.equals(Expect.ERROR)) {
             assertThrows(GenDriverException.class, () -> device.checkOutOfRange(values, limit, comparator));
@@ -151,7 +156,10 @@ class SGrDeviceBaseTest {
     @Test
     void getDeviceInfo() throws Exception {
 
-        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-GenericAttributes.xml");
+        var properties = new Properties();
+        properties.setProperty("portName", WAGO_PORTNAME);
+
+        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-GenericAttributes.xml", properties);
         var deviceInfo = device.getDeviceInfo();
 
         assertEquals("WAGOMeterV0.2.1", deviceInfo.getName());
@@ -205,13 +213,16 @@ class SGrDeviceBaseTest {
     @Test
     void getDeviceInfoDeviceData() throws Exception {
 
-        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-GenericAttributes.xml");
+        var properties = new Properties();
+        properties.setProperty("portName", WAGO_PORTNAME);
+
+        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-GenericAttributes.xml", properties);
         var deviceInfo = device.getDeviceInfo();
 
         assertEquals( "WAGOMeterV0.2.1", deviceInfo.getName());
         assertEquals("WAGO", deviceInfo.getManufacturer());
         assertEquals(DeviceCategory.SUB_METER_ELECTRICITY, deviceInfo.getDeviceCategory());
-        assertEquals( "0.2.3", deviceInfo.getVersionNumber());
+        assertEquals( "0.2.1", deviceInfo.getVersionNumber());
         assertEquals( "1.0.0", deviceInfo.getHardwareVersion());
         assertEquals( "1.0.0", deviceInfo.getSoftwareVersion());
         assertEquals( InterfaceType.MODBUS, deviceInfo.getInterfaceType());
@@ -221,7 +232,10 @@ class SGrDeviceBaseTest {
     @Test
     void getFunctionalProfiles() throws Exception {
 
-        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-GenericAttributes.xml");
+        var properties = new Properties();
+        properties.setProperty("portName", WAGO_PORTNAME);
+
+        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-GenericAttributes.xml", properties);
         var functionalProfiles = device.getFunctionalProfiles();
 
         checkFunctionalProfiles(functionalProfiles);
@@ -229,7 +243,11 @@ class SGrDeviceBaseTest {
 
     @Test
     void getFunctionalProfile() throws Exception {
-        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-GenericAttributes.xml");
+
+        var properties = new Properties();
+        properties.setProperty("portName", WAGO_PORTNAME);
+
+        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-GenericAttributes.xml", properties);
         var functionalProfile = device.getFunctionalProfile("VoltageAC");
         checkFunctionalProfileDetailsVoltageAC(functionalProfile);
     }
@@ -249,7 +267,10 @@ class SGrDeviceBaseTest {
         when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt()))
                 .thenReturn(modbusValue);
 
-        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-GenericAttributes.xml");
+        var properties = new Properties();
+        properties.setProperty("portName", WAGO_PORTNAME);
+
+        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-GenericAttributes.xml", properties);
         var dataPoint = device.getDataPoint("VoltageAC", "VoltageL1");
 
         // Check all metadata
@@ -270,7 +291,7 @@ class SGrDeviceBaseTest {
 
     @Test
     void getEnumDataPoint() throws Exception {
-        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_Testsystem_V1.0.xml");
+        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_Testsystem_V1.0.xml", null);
         var dataPoint = device.getDataPoint("DigitalRegister_M2_OUT_Enum", "Register");
 
         List<EnumValue> expected = new ArrayList<>();
@@ -298,7 +319,7 @@ class SGrDeviceBaseTest {
         expectedDatapointEnumsMap.put("SGReadyOpModeCmd", sgReadyStateAndOpModeCmds);
         expectedDatapointEnumsMap.put("SGReadyState", sgReadyStateAndOpModeCmds);
 
-        var device = createSGrModbusDevice("SGr_04_0015_xxxx_StiebelEltron_HeatPump_V1.0.0.xml");
+        var device = createSGrModbusDevice("SGr_04_0015_xxxx_StiebelEltron_HeatPump_V1.0.0.xml", null);
 
         var enumResults = new HashMap<String, String[]>();
         device.getFunctionalProfiles().forEach(
@@ -318,7 +339,7 @@ class SGrDeviceBaseTest {
     @Test
     void getBitmapDataPoint() throws Exception {
 
-        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_Testsystem_V1.0.xml");
+        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_Testsystem_V1.0.xml", null);
         var dataPoint = device.getDataPoint("DigitalRegister_M1_IN_1", "Register");
 
         List<Value> expected = new ArrayList<>();
@@ -353,7 +374,10 @@ class SGrDeviceBaseTest {
         when(genDriverAPI4Modbus.readHoldingRegisters(anyShort(), anyInt(), anyInt()))
                 .thenReturn(modbusValues);
 
-        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-Arrays.xml");
+        var properties = new Properties();
+        properties.setProperty("portName", WAGO_PORTNAME);
+
+        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-Arrays.xml", properties);
         var dataPoint = device.getDataPoint("VoltageAC", "Voltage-L1-L2-L3");
 
         // Check the datapoint's array length
@@ -383,7 +407,7 @@ class SGrDeviceBaseTest {
         Mockito.lenient().when(uriBuilder.setQueryString(any())).thenReturn(uriBuilder);
         when(uriBuilder.build()).thenReturn(TEST_URI);
 
-        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml");
+        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml", null);
         var dataPoint = device.getDataPoint("ActivePowerAC", "ActivePowerACtot");
 
         when(httpRequest.execute()).thenReturn(GenHttpResponse.of(CLEMAP_AUTH_RESP));
@@ -408,7 +432,7 @@ class SGrDeviceBaseTest {
         Mockito.lenient().when(uriBuilder.setQueryString(any())).thenReturn(uriBuilder);
         when(uriBuilder.build()).thenReturn(TEST_URI);
 
-        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml");
+        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml", null);
         var dataPoint = device.getDataPoint("ActivePowerAC", "ActivePowerACtot");
 
         when(httpRequest.execute()).thenReturn(GenHttpResponse.of(CLEMAP_AUTH_RESP));
@@ -427,14 +451,14 @@ class SGrDeviceBaseTest {
 
     @Test
     void getConfiguration() throws Exception {
-        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml");
+        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml", null);
         var configuration = device.getDeviceConfigurationInfo();
         checkBaseUriConfigList(configuration);
     }
 
     @Test
     void getDeviceInfoWithConfiguration() throws Exception {
-        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml");
+        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml", null);
         var deviceInfo = device.getDeviceInfo();
         var configurationInfo = deviceInfo.getConfigurationInfo();
         checkBaseUriConfigList(configurationInfo);
@@ -538,25 +562,25 @@ class SGrDeviceBaseTest {
     }
 
     @SuppressWarnings("SameParameterValue")
-    private SGrModbusDevice createSGrModbusDevice(String deviceDescriptionXml) throws Exception {
+    private SGrModbusDevice createSGrModbusDevice(String deviceDescriptionXml, Properties properties) throws Exception {
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         URL devDescUrl = classloader.getResource(deviceDescriptionXml);
 
         DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
-        DeviceFrame devDesc = loader.load("", Optional.ofNullable(devDescUrl).map(URL::getPath).orElse(""));
+        DeviceFrame devDesc = loader.load("", Optional.ofNullable(devDescUrl).map(URL::getPath).orElse(""), properties);
 
         return new SGrModbusDevice(devDesc, modbusClientFactory);
     }
 
     @SuppressWarnings("SameParameterValue")
-    private SGrRestApiDevice createSGrRestApiDevice(String deviceDescriptionXml) throws Exception {
+    private SGrRestApiDevice createSGrRestApiDevice(String deviceDescriptionXml, Properties properties) throws Exception {
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         URL devDescUrl = classloader.getResource(deviceDescriptionXml);
 
         DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
-        DeviceFrame devDesc = loader.load("", Optional.ofNullable(devDescUrl).map(URL::getPath).orElse(""));
+        DeviceFrame devDesc = loader.load("", Optional.ofNullable(devDescUrl).map(URL::getPath).orElse(""), properties);
 
         return new SGrRestApiDevice(devDesc, httpClientFactory);
     }
