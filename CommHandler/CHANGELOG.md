@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - implemented value mappings in messaging interface similar to REST interface
+- added option to disable SSL certificate validation to REST interface
 - implemented introspection methods of dynamic data point parameters
 
 

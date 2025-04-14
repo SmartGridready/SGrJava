@@ -136,6 +136,7 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 			throws IOException, RestApiServiceCallException, RestApiResponseParseException, GenDriverException {
 		
 		String host = getRestApiInterfaceDescription().getRestApiUri();
+		boolean verifyCertificate = (getRestApiInterfaceDescription().getRestApiVerifyCertificate() != null) ? Boolean.valueOf(getRestApiInterfaceDescription().getRestApiVerifyCertificate()) : true;
 
 		Optional<RestApiDataPointConfiguration> dpDescriptionOpt
 				= Optional.ofNullable(dataPoint.getRestApiDataPointConfiguration());
@@ -162,7 +163,7 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 				substitutions.putAll(parameters);
 			}
 
-			RestServiceClient restServiceClient = RestServiceClient.of(host, serviceCall, httpClientFactory, substitutions);
+			RestServiceClient restServiceClient = RestServiceClient.of(host, verifyCertificate, serviceCall, httpClientFactory, substitutions);
 			String response = handleServiceCall(restServiceClient, httpAuthenticator.isTokenRenewalSupported());
 
 			if (value == null) {
