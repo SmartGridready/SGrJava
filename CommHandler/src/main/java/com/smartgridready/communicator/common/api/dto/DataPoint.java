@@ -30,6 +30,7 @@ public class DataPoint {
     private final Double minimumValue;
     private final Double maximumValue;
     private final Integer arrayLen;
+    private final List<DynamicRequestParameter> dynamicRequestParameters;
     private final List<GenericAttribute> genericAttributes;
 
     protected final GenDeviceApi genDeviceApi;
@@ -44,6 +45,7 @@ public class DataPoint {
                      Double maximumValue,
                      Integer arrayLen,
                      List<GenericAttribute> genericAttributes,
+                     List<DynamicRequestParameter> dynamicRequestParameters,
                      GenDeviceApi genDeviceApi) {
         this.name = name;
         this.functionalProfileName = functionalProfileName;
@@ -54,6 +56,7 @@ public class DataPoint {
         this.maximumValue = maximumValue;
         this.arrayLen = arrayLen;
         this.genericAttributes = genericAttributes;
+        this.dynamicRequestParameters = dynamicRequestParameters;
         this.genDeviceApi = genDeviceApi;
     }
 
@@ -116,6 +119,15 @@ public class DataPoint {
      */
     public List<GenericAttribute> getGenericAttributes() {
         return genericAttributes;
+    }
+
+    /**
+     * @return A list of the request parameters that need to be provided as {@code Properties}
+     *         when calling the method
+     *         {@link com.smartgridready.communicator.common.api.GenDeviceApi#getVal(String, String, Properties)}
+     */
+    public List<DynamicRequestParameter> getDynamicRequestParameters() {
+        return dynamicRequestParameters;
     }
 
     /**

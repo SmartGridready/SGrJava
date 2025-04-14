@@ -92,7 +92,7 @@ if (project.hasProperty("snapshots")) {
 
 
 dependencies {
-    api group: 'com.smartgridready', name: 'sgr-specification', version: "2.0${sgr_spec_suffix}"
+    api group: 'com.smartgridready', name: 'sgr-specification', version: "2.1${sgr_spec_suffix}"
     implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '4.0.5'
 
     api group: 'com.smartgridready', name: 'sgr-driver-api', version: "2.2.0${sgr_driver_suffix}"

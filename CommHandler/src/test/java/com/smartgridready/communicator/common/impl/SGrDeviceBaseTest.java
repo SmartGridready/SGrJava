@@ -464,6 +464,28 @@ class SGrDeviceBaseTest {
         checkBaseUriConfigList(configurationInfo);
     }
 
+    @Test
+    void getDataPointInfoWithDynamicRequestParameters() throws Exception {
+
+        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml", null);
+        var dataPoint = device.getDataPoint("GPIO", "ContactRW");
+        var dynamicRequestParameters = dataPoint.getDynamicRequestParameters();
+
+        assertEquals(1, dynamicRequestParameters.size());
+        var dynamicRequestParameter = dynamicRequestParameters.get(0);
+
+        assertEquals("sensor_id", dynamicRequestParameter.getName());
+        assertNull(dynamicRequestParameter.getDefaultValue());
+        assertEquals(DataType.INT16U, dynamicRequestParameter.getDataType().getType());
+
+        assertEquals("ID of the sensor", dynamicRequestParameter.getDescriptions().get(Language.EN).getDescription());
+        assertEquals("ID des Sensors", dynamicRequestParameter.getDescriptions().get(Language.DE).getDescription());
+
+        assertEquals("Sensor ID", dynamicRequestParameter.getDescriptions().get(Language.EN).getLabel());
+        assertEquals("Sensor ID", dynamicRequestParameter.getDescriptions().get(Language.DE).getLabel());
+    }
+
+
     private void checkVoltageACProfile(FunctionalProfile profile) {
         // check data points
         Set<String> expectedDataPointNames = new HashSet<>();
