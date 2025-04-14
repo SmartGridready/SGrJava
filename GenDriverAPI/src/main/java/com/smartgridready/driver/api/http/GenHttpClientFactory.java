@@ -25,5 +25,7 @@ public interface GenHttpClientFactory {
 
 	GenHttpRequest createHttpRequest();
 
+	GenHttpRequest createHttpRequest(boolean verifyCertificate);
+
 	GenUriBuilder createUriBuilder(String baseUri) throws URISyntaxException;
 }
