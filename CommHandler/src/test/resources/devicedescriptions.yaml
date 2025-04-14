@@ -71,8 +71,8 @@ descriptions:
     parameters:
       - name: tcp_address
         value: '0.0.0.0'
-  - file: SGr_05_mmmm_dddd_Dynamic_Tariffs_Swisspower_V0.1.xml
-  - file: SGr_05_mmmm_dddd_Dynamic_Tariffs_GroupeE_V0.1.xml
+  - file: SGr_05_mmmm_dddd_Dynamic_Tariffs_Swisspower_V0.0.2.xml
+  - file: SGr_05_mmmm_dddd_Dynamic_Tariffs_GroupeE_V0.0.2.xml
   - file: SontexSupercal5V0.2.1.xml
     parameters:
       - name: port_name

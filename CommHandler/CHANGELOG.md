@@ -11,6 +11,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - fixed configuration parameter replacement in EID content when certain characters are used
 
+### Added
+
+- implemented value mappings in messaging interface similar to REST interface
+- implemented introspection methods of dynamic data point parameters
+
+
+### Changed
+
+- requires updated SGr specification
+- data point "{{value}}" placeholders must be replaced with "\[\[value\]\]"
+
 
 ## [2.3.0] - 2025-03-13
 
