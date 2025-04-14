@@ -42,6 +42,7 @@ public class RestServiceClient {
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 
 	private final String baseUri;
+	private final boolean verifyCertificate;
 
 	private final RestApiServiceCall restServiceCall;
 	private final GenHttpClientFactory httpClientFactory;
@@ -55,12 +56,13 @@ public class RestServiceClient {
 		HTTP_METHOD_MAP.put(HttpMethod.DELETE, com.smartgridready.driver.api.http.HttpMethod.DELETE);
 	}
 
-	protected RestServiceClient(String baseUri, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory) throws IOException {
-		this(baseUri, serviceCall, httpClientFactory, new Properties());
+	protected RestServiceClient(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory) throws IOException {
+		this(baseUri, verifyCertificate, serviceCall, httpClientFactory, new Properties());
 	}
 
-	protected RestServiceClient(String baseUri, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory, Properties substitutions) throws IOException {
+	protected RestServiceClient(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory, Properties substitutions) throws IOException {
 		this.baseUri = baseUri;
+		this.verifyCertificate = verifyCertificate;
 		this.restServiceCall = cloneRestServiceCallWithSubstitutions(serviceCall, substitutions);
 		this.httpClientFactory = httpClientFactory;
 	}
@@ -76,6 +78,10 @@ public class RestServiceClient {
 
 	public String getBaseUri() {
 		return baseUri;
+	}
+
+	public boolean isVerifyCertificate() {
+		return verifyCertificate;
 	}
 
 	public RestApiServiceCall getRestServiceCall() {
@@ -121,7 +127,7 @@ public class RestServiceClient {
 		}
 
 		RestApiServiceCall serviceCall = getRestServiceCall();
-		GenHttpRequest httpRequest = httpClientFactory.createHttpRequest();
+		GenHttpRequest httpRequest = httpClientFactory.createHttpRequest(verifyCertificate);
 
 		httpRequest.setHttpMethod(mapHttpMethod(serviceCall.getRequestMethod()));
 		try {
@@ -188,12 +194,12 @@ public class RestServiceClient {
 		return convertedTemplate;
 	}
 
-	public static RestServiceClient of(String baseUri, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory) throws IOException {
-		return new RestServiceClient(baseUri, serviceCall, httpClientFactory);
+	public static RestServiceClient of(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory) throws IOException {
+		return new RestServiceClient(baseUri, verifyCertificate, serviceCall, httpClientFactory);
 	}
 
-	public static RestServiceClient of(String baseUri, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory, Properties substitutions) throws IOException {
-		return new RestServiceClient(baseUri, serviceCall, httpClientFactory, substitutions);
+	public static RestServiceClient of(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory, Properties substitutions) throws IOException {
+		return new RestServiceClient(baseUri, verifyCertificate, serviceCall, httpClientFactory, substitutions);
 	}
 
 	private static com.smartgridready.driver.api.http.HttpMethod mapHttpMethod(HttpMethod httpMethod) throws IOException {

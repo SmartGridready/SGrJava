@@ -56,6 +56,13 @@ descriptions:
       - name: tcp_address
         value: '0.0.0.0'
   - file: SGr_04_mmmm_dddd_CLEMAPEnergyMonitorEIV0.2.1.xml
+    parameters:
+      - name: sensor_id
+        value: '123456'
+      - name: username
+        value: 'test@clemap.local'
+      - name: password
+        value: 'CLEMAP$783#'
   - file: SGr_04_mmmm_dddd_WallboxAsymV0.2.1.xml
     parameters:
       - name: tcp_address

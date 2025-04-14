@@ -87,7 +87,7 @@ public class SGrDeviceBuilderTest {
         responseQery.setQuery("status");
         restServiceCall.setResponseQuery(responseQery);
 
-        when(restServiceClientFactory.createHttpRequest()).thenReturn(httpRequest);
+        when(restServiceClientFactory.createHttpRequest(anyBoolean())).thenReturn(httpRequest);
         when(restServiceClientFactory.createUriBuilder(any())).thenReturn(uriBuilder);
         when(httpRequest.execute()).thenReturn(GenHttpResponse.of("{ \"token\" : \"dummyToken\" }", HttpStatus.OK, ""));
 

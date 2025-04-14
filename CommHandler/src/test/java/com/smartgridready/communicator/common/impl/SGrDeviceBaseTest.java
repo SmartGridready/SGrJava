@@ -400,7 +400,7 @@ class SGrDeviceBaseTest {
     @Test
     void readFromRestApiDataPoint() throws Exception {
 
-        when(httpClientFactory.createHttpRequest()).thenReturn(httpRequest);
+        when(httpClientFactory.createHttpRequest(anyBoolean())).thenReturn(httpRequest);
         when(httpClientFactory.createUriBuilder(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addPath(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addQueryParameter(any(), any())).thenReturn(uriBuilder);
@@ -425,7 +425,7 @@ class SGrDeviceBaseTest {
     @Test
     void writeToRestApiDataPoint() throws Exception {
 
-        when(httpClientFactory.createHttpRequest()).thenReturn(httpRequest);
+        when(httpClientFactory.createHttpRequest(anyBoolean())).thenReturn(httpRequest);
         when(httpClientFactory.createUriBuilder(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addPath(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addQueryParameter(any(), any())).thenReturn(uriBuilder);

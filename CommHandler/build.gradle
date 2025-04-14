@@ -95,9 +95,9 @@ dependencies {
     api group: 'com.smartgridready', name: 'sgr-specification', version: "2.1${sgr_spec_suffix}"
     implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '4.0.5'
 
-    api group: 'com.smartgridready', name: 'sgr-driver-api', version: "2.2.0${sgr_driver_suffix}"
+    api group: 'com.smartgridready', name: 'sgr-driver-api', version: "2.3.0${sgr_driver_suffix}"
     testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-j2mod', version: "1.0.0${modbus_suffix}"
-    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-apachehttp', version: "2.0.0${apachehttp_suffix}"
+    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-apachehttp', version: "2.1.0${apachehttp_suffix}"
     testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-hivemq', version: "2.0.0${hivemq_suffix}"
 
     api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.2'

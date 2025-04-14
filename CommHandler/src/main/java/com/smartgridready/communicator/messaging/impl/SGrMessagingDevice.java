@@ -15,9 +15,11 @@ import com.smartgridready.ns.v0.MessagingDataPoint;
 import com.smartgridready.ns.v0.MessagingDataPointConfiguration;
 import com.smartgridready.ns.v0.MessagingFunctionalProfile;
 import com.smartgridready.ns.v0.MessagingInterface;
+import com.smartgridready.ns.v0.MessagingValueMapping;
 import com.smartgridready.ns.v0.OutMessage;
 import com.smartgridready.ns.v0.ResponseQuery;
 import com.smartgridready.ns.v0.ResponseQueryType;
+import com.smartgridready.ns.v0.ValueMapping;
 import com.smartgridready.communicator.common.api.values.StringValue;
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.common.helper.JsonHelper;
@@ -29,7 +31,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -192,7 +196,8 @@ public class SGrMessagingDevice extends SGrDeviceBase<
                     throw new GenDriverException("Response query type missing");
                 }
             } else {
-                value = StringValue.of(response);
+                // mapping device -> generic (only for plain string values)
+                value = getMappedGenericValue(dataPoint.getMessagingDataPointConfiguration(), response);
             }
 
             // unit conversion before returning to client
@@ -225,8 +230,11 @@ public class SGrMessagingDevice extends SGrDeviceBase<
         // unit conversion before output
         value = applyUnitConversion(dataPoint, value, SGrDeviceBase::divide);
 
+        // mapping generic -> device
+        String outValue = getMappedDeviceValue(dataPoint.getMessagingDataPointConfiguration(), value);
+
         // no regex here, string literal replacement is sufficient
-        outMessageTemplate = outMessageTemplate.replace("[[value]]", value.getString());
+        outMessageTemplate = outMessageTemplate.replace("[[value]]", outValue);
 
         messagingClient.sendSync(outMessageTopic, Message.of(outMessageTemplate));
     }
@@ -285,7 +293,8 @@ public class SGrMessagingDevice extends SGrDeviceBase<
                         throw new GenDriverException("Response query type " + queryOpt.get().getQueryType().name() + " not supported yet");
                 }
             } else {
-                value = StringValue.of(response);
+                // mapping device -> generic (only for plain string values)
+                value = getMappedGenericValue(dataPoint.getMessagingDataPointConfiguration(), response);
             }
             LOG.debug("Received subscribed message on topic={}, filter={}, payload={}",
                     inMessageTopic, queryOpt.isPresent() ? queryOpt.get().getQuery() : "none", response);
@@ -375,6 +384,40 @@ public class SGrMessagingDevice extends SGrDeviceBase<
             }
         });
         return count.get();
+    }
+
+    private static Value getMappedGenericValue(MessagingDataPointConfiguration dataPointConfiguration, String value) {
+        String mappedValue = value;
+
+        List<ValueMapping> valueMappings = Optional.ofNullable(dataPointConfiguration)
+            .map(MessagingDataPointConfiguration::getInMessage)
+            .map(InMessage::getValueMapping)
+            .map(MessagingValueMapping::getMapping).orElse(Collections.emptyList());
+        for (ValueMapping mapping: valueMappings) {
+            if (mappedValue.equals(mapping.getDeviceValue())) {
+                mappedValue = mapping.getGenericValue();
+                break;
+            }
+        }
+
+        return StringValue.of(mappedValue);
+    }
+
+    private static String getMappedDeviceValue(MessagingDataPointConfiguration dataPointConfiguration, Value value) {
+        String mappedValue = value.getString();
+
+        List<ValueMapping> valueMappings = Optional.ofNullable(dataPointConfiguration)
+            .map(MessagingDataPointConfiguration::getWriteCmdMessage)
+            .map(OutMessage::getValueMapping)
+            .map(MessagingValueMapping::getMapping).orElse(Collections.emptyList());
+        for (ValueMapping mapping: valueMappings) {
+            if (mappedValue.equals(mapping.getGenericValue())) {
+                mappedValue = mapping.getDeviceValue();
+                break;
+            }
+        }
+
+        return mappedValue;
     }
 
     private static String replacePropertyPlaceholders(String template, Properties properties) {
