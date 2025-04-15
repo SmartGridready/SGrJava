@@ -331,6 +331,48 @@
                   <json />
                 </dataType>
                 <unit>NONE</unit>
+                <parameterList>
+                  <parameterListElement>
+                    <name>start_timestamp</name>
+                    <dataType>
+                      <string />
+                    </dataType>
+                    <parameterDescription>
+                      <textElement>
+                        Begin of tariff periods to be queried. Format according ISO 8601: YYYY-MM-DDThh:mm:ssTZD.
+                      </textElement>
+                      <language>en</language>
+                      <label>Period start time stamp</label>
+                    </parameterDescription>
+                    <parameterDescription>
+                      <textElement>
+                        Beginn der abzurufenden Tarifperiode. Format gem. ISO 8601: YYYY-MM-DDThh:mm:ssTZD.
+                      </textElement>
+                      <language>de</language>
+                      <label>Start-Zeitpunkt Periode</label>
+                    </parameterDescription>
+                  </parameterListElement>
+                  <parameterListElement>
+                    <name>end_timestamp</name>
+                    <dataType>
+                      <string />
+                    </dataType>
+                    <parameterDescription>
+                      <textElement>
+                        End of tariff periods to be queried. Format according ISO 8601: YYYY-MM-DDThh:mm:ssTZD.
+                      </textElement>
+                      <language>en</language>
+                      <label>Period end time stamp</label>
+                    </parameterDescription>
+                    <parameterDescription>
+                      <textElement>
+                        Ende der abzurufenden Tarifperiode. Format gem. ISO 8601: YYYY-MM-DDThh:mm:ssTZD.
+                      </textElement>
+                      <language>de</language>
+                      <label>End-Zeitpunkt Periode</label>
+                    </parameterDescription>
+                  </parameterListElement>
+                </parameterList>
                 <legibleDescription>
                   <textElement>
                     <![CDATA[

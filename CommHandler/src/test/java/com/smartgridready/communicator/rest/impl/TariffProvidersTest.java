@@ -1,5 +1,6 @@
 package com.smartgridready.communicator.rest.impl;
 
+import com.smartgridready.communicator.common.api.GenDeviceApi;
 import com.smartgridready.communicator.common.api.SGrDeviceBuilder;
 
 import org.hamcrest.CoreMatchers;
@@ -7,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.file.Path;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
@@ -17,8 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TariffProvidersTest {
 
     static final Logger LOG = LoggerFactory.getLogger(TariffProvidersTest.class);
-
-    private static final String XML_BASE_DIR="../../SGrSpecifications/XMLInstances/ExtInterfaces/";
 
     @Test
     void testSwisspower() throws Exception {
@@ -31,10 +29,7 @@ class TariffProvidersTest {
         dynamicParameters.put("start_timestamp", "2025-01-01T00:00:00+01:00");
         dynamicParameters.put("end_timestamp", "2025-01-01T01:00:00+01:00");
 
-        var device = new SGrDeviceBuilder()
-                .eid(Path.of(XML_BASE_DIR + "SGr_05_mmmm_dddd_Dynamic_Tariffs_Swisspower_V0.0.2.xml"))
-                .properties(properties)
-                .build();
+        var device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_Swisspower_V0.1.xml", properties);
         
         var dynamicRequestParameters = device
                 .getDataPoint("DynamicTariff", "TariffSupply")
@@ -58,9 +53,7 @@ class TariffProvidersTest {
         dynamicParameters.put("start_timestamp", "2025-01-01T00:00:00+01:00");
         dynamicParameters.put("end_timestamp", "2025-01-02T00:00:00+01:00");
 
-        var device = new SGrDeviceBuilder()
-                .eid(Path.of(XML_BASE_DIR + "SGr_05_mmmm_dddd_Dynamic_Tariffs_GroupeE_V0.0.2.xml"))
-                .build();
+        var device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_GroupeE_V0.1.xml", null);
 
         var dynamicRequestParameters = device
                 .getDataPoint("DynamicTariff", "TariffSupply")
@@ -75,5 +68,14 @@ class TariffProvidersTest {
 
         assertThat(result.getString(),
                 CoreMatchers.startsWith("[{\"start_timestamp\":\"2025-01-01T00:00:00"));
+    }
+
+    private GenDeviceApi createDevice(String deviceDescriptionXml, Properties properties) throws Exception {
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+
+        return new SGrDeviceBuilder()
+                .eid(classloader.getResourceAsStream(deviceDescriptionXml))
+                .properties(properties)
+                .build();
     }
 }
