@@ -159,6 +159,14 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 					(serviceCall.getValueMapping() != null) ? getMappedDeviceValue(value.getString(), serviceCall.getValueMapping()) : value.getString()
 				);
 			}
+			// substitute default values of request parameters
+			if (null != dataPoint.getDataPoint().getParameterList()) {
+				dataPoint.getDataPoint().getParameterList().getParameterListElement().forEach(p -> {
+					String pVal = (null != p.getDefaultValue()) ? p.getDefaultValue() : "";
+					substitutions.put(p.getName(), pVal);
+				});
+			}
+			// substitute actual request parameters
 			if (parameters != null) {
 				substitutions.putAll(parameters);
 			}

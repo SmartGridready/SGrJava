@@ -145,9 +145,22 @@ public class SGrMessagingDevice extends SGrDeviceBase<
                 .map(InMessage::getFilter).orElse(null);
 
         if (outReadCmdTopicOpt.isPresent()) {
+            Properties substitutions = new Properties();
+            // substitute default values of dynamic parameters
+            if (null != dataPoint.getDataPoint().getParameterList()) {
+				dataPoint.getDataPoint().getParameterList().getParameterListElement().forEach(p -> {
+					String pVal = (null != p.getDefaultValue()) ? p.getDefaultValue() : "";
+					substitutions.put(p.getName(), pVal);
+				});
+			}
+            // substitute actual request parameters
+			if (parameters != null) {
+				substitutions.putAll(parameters);
+			}
+
             // Read value from device
             OutMessage outMessage = outReadCmdTopicOpt.get();
-            return getValueFromDevice(parameters, timeoutMs, dataPoint, outMessage.getTopic(), outMessage.getTemplate(), inMessageTopic, inMessageFilter);
+            return getValueFromDevice(substitutions, timeoutMs, dataPoint, outMessage.getTopic(), outMessage.getTemplate(), inMessageTopic, inMessageFilter);
         } else {
             // Read value from cache
             MessageCacheRecord cacheRecord =  messageCache.get(MessageCacheKey.of(inMessageTopic, inMessageFilter));
