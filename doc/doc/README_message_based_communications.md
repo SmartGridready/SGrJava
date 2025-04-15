@@ -90,7 +90,7 @@ Receive message:<br> [SGrDevice] => [MessageBroker] => [Commhandler] => [Communi
 Each SGr device/datapoint is related to a topic from its character. It appears that in the MQTT world there might 
 be thousands of topics within an environment. In MQTT a topic is usually a path like 
 sensors/living_room/temperature, sensors/kitchen/humidity 
-or more generic {{sensors}}/{{sensor_id}}/{{value}}, {{actuator}}/{{actuator_id}}/{{value}}
+or more generic {{sensors}}/{{sensor_id}}/[[value]], {{actuator}}/{{actuator_id}}/[[value]]
 
 The datapoint can support publishing, subscribe or both. This is called "bi-directional-communication" or "round-trip messaging". 
 

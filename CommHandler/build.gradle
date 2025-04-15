@@ -59,7 +59,7 @@ test {
 
 // use release versions by default (no suffix)
 // spec. release date
-def sgr_spec_suffix = '_2024-12-19'
+def sgr_spec_suffix = '_2025-04-15'
 def sgr_driver_suffix = ''
 def modbus_suffix = ''
 def apachehttp_suffix = ''
@@ -92,13 +92,13 @@ if (project.hasProperty("snapshots")) {
 
 
 dependencies {
-    api group: 'com.smartgridready', name: 'sgr-specification', version: "2.0${sgr_spec_suffix}"
+    api group: 'com.smartgridready', name: 'sgr-specification', version: "2.1${sgr_spec_suffix}"
     implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '4.0.5'
 
     api group: 'com.smartgridready', name: 'sgr-driver-api', version: "2.2.0${sgr_driver_suffix}"
     testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-j2mod', version: "1.0.0${modbus_suffix}"
     testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-apachehttp', version: "2.0.0${apachehttp_suffix}"
-    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-hivemq', version: "2.0.0${hivemq_suffix}"
+    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-hivemq', version: "2.0.1${hivemq_suffix}"
 
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.16.0'
     implementation group: 'io.burt', name: 'jmespath-core', version: '0.5.1'

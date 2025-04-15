@@ -222,7 +222,7 @@ public class SGrMessagingDevice extends SGrDeviceBase<
         value = applyUnitConversion(dataPoint, value, SGrDeviceBase::divide);
 
         // noinspection RegExpRedundantEscape
-        outMessageTemplate = outMessageTemplate.replace("{{value}}", value.getString());
+        outMessageTemplate = outMessageTemplate.replace("[[value]]", value.getString());
 
         messagingClient.sendSync(outMessageTopic, Message.of(outMessageTemplate));
     }

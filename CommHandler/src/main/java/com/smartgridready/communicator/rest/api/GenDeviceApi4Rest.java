@@ -90,7 +90,7 @@ public interface GenDeviceApi4Rest extends GenDeviceApi {
      *
      * @param profileName The name of the functional profile.
      * @param dataPointName The name of the datapoint within the functional profile.
-     * @param  value The value to be written. Will replace the value tagged with {@code {{value}}} within the
+     * @param  value The value to be written. Will replace the value tagged with {@code [[value]]} within the
      *               external interface {@code <sgr:ServiceCall>} element for the given datapoint.
      * @throws IOException If the communication with the server failed.
      * @throws RestApiServiceCallException If the service call could not be executed on the remote side.

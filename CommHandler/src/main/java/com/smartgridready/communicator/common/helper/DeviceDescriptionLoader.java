@@ -197,7 +197,7 @@ public class DeviceDescriptionLoader {
 		String convertedXml = deviceDescriptionXml;
 		if (properties != null) {
 			for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-				convertedXml = convertedXml.replaceAll("\\{\\{" + entry.getKey() + "\\}\\}", (String)entry.getValue());
+				convertedXml = convertedXml.replace("{{" + (String)entry.getKey() + "}}", (String)entry.getValue());
 				LOG.debug("replaced property '{}':'{}'", entry.getKey(), entry.getValue());
 			}
 		}

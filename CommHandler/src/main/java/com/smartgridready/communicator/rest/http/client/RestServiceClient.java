@@ -60,7 +60,7 @@ public class RestServiceClient {
 	}
 
 	protected RestServiceClient(String baseUri, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory, Properties substitutions) throws IOException {
-		this.baseUri = replacePropertyPlaceholders(baseUri, substitutions);
+		this.baseUri = baseUri;
 		this.restServiceCall = cloneRestServiceCallWithSubstitutions(serviceCall, substitutions);
 		this.httpClientFactory = httpClientFactory;
 	}
@@ -186,7 +186,7 @@ public class RestServiceClient {
 		if (template != null && properties != null) {
 			for (Map.Entry<Object, Object> entry : properties.entrySet()) {
 				// noinspection RegExpRedundantEscape
-				convertedTemplate = convertedTemplate.replaceAll("\\{\\{" + entry.getKey() + "\\}\\}", (String)entry.getValue());
+				convertedTemplate = convertedTemplate.replace("[[" + (String)entry.getKey() + "]]", (String)entry.getValue());
 			}
 		}
 		return convertedTemplate;
