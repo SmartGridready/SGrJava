@@ -110,7 +110,7 @@
                 <restApiWriteServiceCall>
                   <requestMethod>POST</requestMethod>
                   <requestPath>/digitaltwins?sensor_id={{sensor_id}}</requestPath>
-                  <requestBody>{ "value": {{value}} }</requestBody>
+                  <requestBody>{ "value": [[value]] }</requestBody>
                 </restApiWriteServiceCall>
               </restApiDataPointConfiguration>
             </dataPointListElement>
@@ -283,7 +283,7 @@
                       <value>{{sensor_id}}</value>
                     </parameter>
                   </requestQuery>
-                  <requestBody>{ "pin" : 1, "value" : "{{value}}" }</requestBody>
+                  <requestBody>{ "pin" : 1, "value" : "[[value]]" }</requestBody>
                 </restApiWriteServiceCall>
               </restApiDataPointConfiguration>
             </dataPointListElement>
@@ -339,7 +339,7 @@
                       <value>2</value>
                     </parameter>
                   </requestQuery>
-                  <requestBody>{ "pin" : 2, "value" : "{{value}}" }</requestBody>
+                  <requestBody>{ "pin" : 2, "value" : "[[value]]" }</requestBody>
                 </restApiWriteServiceCall>
               </restApiDataPointConfiguration>
             </dataPointListElement>

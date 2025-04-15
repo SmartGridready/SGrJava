@@ -5,11 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [unreleased]
+## [2.3.1] - 2025-04-15
 
 ### Fixed
 
 - fixed configuration parameter replacement in EID content when certain characters are used
+
+### Changed
+
+- updated specification to `2.1_2025-04-15`
+- data point "{{value}}" placeholders must be replaced with "[[value]]"
 
 
 ## [2.3.0] - 2025-03-13
