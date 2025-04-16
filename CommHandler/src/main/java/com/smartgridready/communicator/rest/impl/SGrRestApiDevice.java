@@ -98,6 +98,7 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 		return isConnected;
 	}
 	
+	// TODO make private after removal from interface
 	@Override
 	public void authenticate() throws RestApiAuthenticationException, IOException, RestApiServiceCallException, RestApiResponseParseException {
 		httpAuthenticator.getAuthorizationHeaderValue(deviceDescription, httpClientFactory);
@@ -135,6 +136,7 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 			throws IOException, RestApiServiceCallException, RestApiResponseParseException, GenDriverException {
 		
 		String host = getRestApiInterfaceDescription().getRestApiUri();
+		boolean verifyCertificate = (getRestApiInterfaceDescription().getRestApiVerifyCertificate() != null) ? Boolean.valueOf(getRestApiInterfaceDescription().getRestApiVerifyCertificate()) : true;
 
 		Optional<RestApiDataPointConfiguration> dpDescriptionOpt
 				= Optional.ofNullable(dataPoint.getRestApiDataPointConfiguration());
@@ -157,11 +159,19 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 					(serviceCall.getValueMapping() != null) ? getMappedDeviceValue(value.getString(), serviceCall.getValueMapping()) : value.getString()
 				);
 			}
+			// substitute default values of request parameters
+			if (null != dataPoint.getDataPoint().getParameterList()) {
+				dataPoint.getDataPoint().getParameterList().getParameterListElement().forEach(p -> {
+					String pVal = (null != p.getDefaultValue()) ? p.getDefaultValue() : "";
+					substitutions.put(p.getName(), pVal);
+				});
+			}
+			// substitute actual request parameters
 			if (parameters != null) {
 				substitutions.putAll(parameters);
 			}
 
-			RestServiceClient restServiceClient = RestServiceClient.of(host, serviceCall, httpClientFactory, substitutions);
+			RestServiceClient restServiceClient = RestServiceClient.of(host, verifyCertificate, serviceCall, httpClientFactory, substitutions);
 			String response = handleServiceCall(restServiceClient, httpAuthenticator.isTokenRenewalSupported());
 
 			if (value == null) {

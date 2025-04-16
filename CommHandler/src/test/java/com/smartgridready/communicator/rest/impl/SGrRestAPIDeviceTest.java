@@ -99,7 +99,7 @@ class SGrRestAPIDeviceTest {
 	void testGetValSuccessWithBearerAuthentication() throws Exception {
 
 		// given
-		when(httpClientFactory.createHttpRequest()).thenReturn(httpRequest);
+		when(httpClientFactory.createHttpRequest(anyBoolean())).thenReturn(httpRequest);
 		when(httpClientFactory.createUriBuilder(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addPath(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addQueryParameter(any(), any())).thenReturn(uriBuilder);
@@ -123,7 +123,7 @@ class SGrRestAPIDeviceTest {
 	void testGetValSuccessWithTokenRenewal() throws Exception {
 		
 		// given
-		when(httpClientFactory.createHttpRequest()).thenReturn(httpRequest);
+		when(httpClientFactory.createHttpRequest(anyBoolean())).thenReturn(httpRequest);
 		when(httpClientFactory.createUriBuilder(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addPath(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addQueryParameter(any(), any())).thenReturn(uriBuilder);
@@ -148,7 +148,7 @@ class SGrRestAPIDeviceTest {
 	void testGetValSuccessWithParameters() throws Exception {
 
 		// given
-		when(httpClientFactory.createHttpRequest()).thenReturn(httpRequest);
+		when(httpClientFactory.createHttpRequest(anyBoolean())).thenReturn(httpRequest);
 		when(httpClientFactory.createUriBuilder(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addPath(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addQueryParameter(any(), any())).thenReturn(uriBuilder);
@@ -188,7 +188,7 @@ class SGrRestAPIDeviceTest {
 	void testGetValSuccessWithReadServiceCallV2(String dataPointName) throws Exception {
 
 		// given
-		when(httpClientFactory.createHttpRequest()).thenReturn(httpRequest);
+		when(httpClientFactory.createHttpRequest(anyBoolean())).thenReturn(httpRequest);
 		when(httpClientFactory.createUriBuilder(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addPath(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addQueryParameter(any(), any())).thenReturn(uriBuilder);
@@ -213,7 +213,7 @@ class SGrRestAPIDeviceTest {
 	void testSetValWithWriteServiceCallV2(String dataPointName) throws Exception {
 
 		// given
-		when(httpClientFactory.createHttpRequest()).thenReturn(httpRequest);
+		when(httpClientFactory.createHttpRequest(anyBoolean())).thenReturn(httpRequest);
 		when(httpClientFactory.createUriBuilder(any())).thenReturn(uriBuilder);
 		Mockito.lenient().when(uriBuilder.addPath(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addQueryParameter(any(), any())).thenReturn(uriBuilder);
@@ -307,7 +307,7 @@ class SGrRestAPIDeviceTest {
 	void testSetVal() throws Exception {
 		
 		//given
-		when(httpClientFactory.createHttpRequest()).thenReturn(httpRequest);
+		when(httpClientFactory.createHttpRequest(anyBoolean())).thenReturn(httpRequest);
 		when(httpClientFactory.createUriBuilder(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addPath(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addQueryParameter(any(), any())).thenReturn(uriBuilder);
@@ -333,7 +333,7 @@ class SGrRestAPIDeviceTest {
 			"101, Values [101] out of range. MAX value=100.0"})
 	void testSetValOutOfRange(String value, String expectedResponse) throws Exception {
 
-		when(httpClientFactory.createHttpRequest()).thenReturn(httpRequest);
+		when(httpClientFactory.createHttpRequest(anyBoolean())).thenReturn(httpRequest);
 		when(httpClientFactory.createUriBuilder(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addPath(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addQueryParameter(any(), any())).thenReturn(uriBuilder);
@@ -368,7 +368,7 @@ class SGrRestAPIDeviceTest {
 
 		LOG.info("Testing writePermissionCheckRest: {}", testName);
 
-		Mockito.lenient().when(httpClientFactory.createHttpRequest()).thenReturn(httpRequest);
+		Mockito.lenient().when(httpClientFactory.createHttpRequest(anyBoolean())).thenReturn(httpRequest);
 		Mockito.lenient().when(httpClientFactory.createUriBuilder(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addPath(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addQueryParameter(any(), any())).thenReturn(uriBuilder);
@@ -401,7 +401,7 @@ class SGrRestAPIDeviceTest {
 	void unitConversionWrite() throws Exception {
 
 		// Write conversion
-		when(httpClientFactory.createHttpRequest()).thenReturn(httpRequest);
+		when(httpClientFactory.createHttpRequest(anyBoolean())).thenReturn(httpRequest);
 		when(httpClientFactory.createUriBuilder(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addPath(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addQueryParameter(any(), any())).thenReturn(uriBuilder);
@@ -427,7 +427,7 @@ class SGrRestAPIDeviceTest {
 	@Test
 	void unitConversionRead() throws Exception {
 
-		when(httpClientFactory.createHttpRequest()).thenReturn(httpRequest);
+		when(httpClientFactory.createHttpRequest(anyBoolean())).thenReturn(httpRequest);
 		when(httpClientFactory.createUriBuilder(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addPath(any())).thenReturn(uriBuilder);
         Mockito.lenient().when(uriBuilder.addQueryParameter(any(), any())).thenReturn(uriBuilder);

@@ -20,15 +20,15 @@ class JsonMapperTest extends JsonMapperTestBase {
     @Test
     void mapSwisspower() throws Exception {
 
-        Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> device = createDevice("SGr_05_Swisspower_Dynamic_Tariffs_0.0.1.xml");
+        Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_Swisspower_V0.1.xml");
         DeviceFrame deviceFrame = device._1;
 
-        JMESPathMapping jmesPathMapping = getJmesPathMapping(deviceFrame);
+        String jmesQuery = getJmesQuery(deviceFrame);
 
         String jsonResponse = loadJson("TariffInSwisspower.json");
         String expectedJson = loadJson("TariffOutSwisspower_withTariffName.json");
 
-        String jsonResult = JsonHelper.mapJsonResponse(jmesPathMapping, jsonResponse).getString();
+        String jsonResult = JsonHelper.parseJsonResponse(jmesQuery, jsonResponse).getString();
         LOG.info("JSON result: {}", jsonResult);
         assertEquals(MAPPER.readTree(expectedJson), MAPPER.readTree(jsonResult));
 
@@ -37,7 +37,7 @@ class JsonMapperTest extends JsonMapperTestBase {
     @Test
     void mapGroupeE() throws Exception {
 
-        Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> device = createDevice("SGr_05_GroupeE_Dynamic_Tariffs_0.0.1.xml");
+        Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_GroupeE_V0.1.xml");
         DeviceFrame deviceFrame = device._1;
 
         JMESPathMapping jmesPathMapping = getJmesPathMapping(deviceFrame);
@@ -50,7 +50,7 @@ class JsonMapperTest extends JsonMapperTestBase {
         assertEquals(MAPPER.readTree(expectedJson), MAPPER.readTree(jsonResult));
     }
 
-    private JMESPathMapping getJmesPathMapping(DeviceFrame deviceFrame) {
+    private static JMESPathMapping getJmesPathMapping(DeviceFrame deviceFrame) {
 
         var restApiConfigurationContent = deviceFrame
                 .getInterfaceList()
@@ -63,6 +63,24 @@ class JsonMapperTest extends JsonMapperTestBase {
         for (var jaxbelement : restApiConfigurationContent) {
             if (jaxbelement.getValue() instanceof RestApiServiceCall) {
                 return ((RestApiServiceCall)jaxbelement.getValue()).getResponseQuery().getJmesPathMappings();
+            }
+        }
+        throw new IllegalArgumentException("Device Frame does not contain RestApiServiceCall");
+    }
+
+    private static String getJmesQuery(DeviceFrame deviceFrame) {
+
+        var restApiConfigurationContent = deviceFrame
+                .getInterfaceList()
+                .getRestApiInterface()
+                .getFunctionalProfileList()
+                .getFunctionalProfileListElement().get(0)
+                .getDataPointList().getDataPointListElement().get(0)
+                .getRestApiDataPointConfiguration().getContent();
+
+        for (var jaxbelement : restApiConfigurationContent) {
+            if (jaxbelement.getValue() instanceof RestApiServiceCall) {
+                return ((RestApiServiceCall)jaxbelement.getValue()).getResponseQuery().getQuery();
             }
         }
         throw new IllegalArgumentException("Device Frame does not contain RestApiServiceCall");

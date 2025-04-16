@@ -110,7 +110,7 @@
                 <restApiWriteServiceCall>
                   <requestMethod>POST</requestMethod>
                   <requestPath>/digitaltwins?sensor_id={{sensor_id}}</requestPath>
-                  <requestBody>{ "value": {{value}} }</requestBody>
+                  <requestBody>{ "value": [[value]] }</requestBody>
                 </restApiWriteServiceCall>
               </restApiDataPointConfiguration>
             </dataPointListElement>
@@ -240,12 +240,30 @@
                   <boolean/>
                 </dataType>
                 <unit>NONE</unit>
+                <parameterList>
+                  <parameterListElement>
+                    <name>sensor_id</name>
+                    <dataType>
+                      <int16U/>
+                    </dataType>
+                    <parameterDescription>
+                      <textElement>ID of the sensor</textElement>
+                      <language>en</language>
+                      <label>Sensor ID</label>
+                    </parameterDescription>
+                    <parameterDescription>
+                      <textElement>ID des Sensors</textElement>
+                      <language>de</language>
+                      <label>Sensor ID</label>
+                    </parameterDescription>
+                  </parameterListElement>
+                </parameterList>
               </dataPoint>
               <restApiDataPointConfiguration>
                 <dataType>JSON_boolean</dataType>
                 <restApiReadServiceCall>
                   <requestMethod>GET</requestMethod>
-                  <requestPath>/digitaltwins?sensor_id={{sensor_id}}</requestPath>
+                  <requestPath>/digitaltwins?sensor_id=[[sensor_id]]</requestPath>
                   <responseQuery>
                     <queryType>JMESPathExpression</queryType>
                     <query>value</query>
@@ -261,6 +279,24 @@
                   <boolean/>
                 </dataType>
                 <unit>NONE</unit>
+                <parameterList>
+                  <parameterListElement>
+                    <name>sensor_id</name>
+                    <dataType>
+                      <int16U/>
+                    </dataType>
+                    <parameterDescription>
+                      <textElement>ID of the sensor</textElement>
+                      <language>en</language>
+                      <label>Sensor ID</label>
+                    </parameterDescription>
+                    <parameterDescription>
+                      <textElement>ID des Sensors</textElement>
+                      <language>de</language>
+                      <label>Sensor ID</label>
+                    </parameterDescription>
+                  </parameterListElement>
+                </parameterList>
               </dataPoint>
               <restApiDataPointConfiguration>
                 <dataType>JSON_boolean</dataType>
@@ -280,10 +316,10 @@
                   <requestQuery>
                     <parameter>
                       <name>sensor_id</name>
-                      <value>{{sensor_id}}</value>
+                      <value>[[sensor_id]]</value>
                     </parameter>
                   </requestQuery>
-                  <requestBody>{ "pin" : 1, "value" : "{{value}}" }</requestBody>
+                  <requestBody>{ "pin" : 1, "value" : "[[value]]" }</requestBody>
                 </restApiWriteServiceCall>
               </restApiDataPointConfiguration>
             </dataPointListElement>
@@ -295,6 +331,24 @@
                   <boolean/>
                 </dataType>
                 <unit>NONE</unit>
+                <parameterList>
+                  <parameterListElement>
+                    <name>sensor_id</name>
+                    <dataType>
+                      <int16U/>
+                    </dataType>
+                    <parameterDescription>
+                      <textElement>ID of the sensor</textElement>
+                      <language>en</language>
+                      <label>Sensor ID</label>
+                    </parameterDescription>
+                    <parameterDescription>
+                      <textElement>ID des Sensors</textElement>
+                      <language>de</language>
+                      <label>Sensor ID</label>
+                    </parameterDescription>
+                  </parameterListElement>
+                </parameterList>
               </dataPoint>
               <restApiDataPointConfiguration>
                 <dataType>JSON_boolean</dataType>
@@ -304,7 +358,7 @@
                   <requestQuery>
                     <parameter>
                       <name>sensor_id</name>
-                      <value>{{sensor_id}}</value>
+                      <value>[[sensor_id]]</value>
                     </parameter>
                     <parameter>
                       <name>pin</name>
@@ -332,14 +386,14 @@
                   <requestQuery>
                     <parameter>
                       <name>sensor_id</name>
-                      <value>{{sensor_id}}</value>
+                      <value>[[sensor_id]]</value>
                     </parameter>
                     <parameter>
                       <name>pin</name>
                       <value>2</value>
                     </parameter>
                   </requestQuery>
-                  <requestBody>{ "pin" : 2, "value" : "{{value}}" }</requestBody>
+                  <requestBody>{ "pin" : 2, "value" : "[[value]]" }</requestBody>
                 </restApiWriteServiceCall>
               </restApiDataPointConfiguration>
             </dataPointListElement>

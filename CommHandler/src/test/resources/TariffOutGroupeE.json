@@ -1,85 +1,41 @@
 [
   {
-    "start_time": "2023-09-06T00:00:00+02:00",
-    "end_time": "2023-09-06T00:15:00+02:00",
-    "tariffs": [
+    "start_timestamp": "2023-09-06T00:00:00+02:00",
+    "end_timestamp": "2023-09-06T00:15:00+02:00",
+    "integrated": [
       {
-        "tariff": 9.23,
-        "unit": "Rp./kWh",
-        "name": "vario_grid"
-      },
-      {
-        "tariff": 32.09,
-        "unit": "Rp./kWh",
-        "name": "vario_plus"
-      },
-      {
-        "tariff": 25.08,
-        "unit": "Rp./kWh",
-        "name": "dt_plus"
+        "value": 9.23,
+        "unit": "Rp./kWh"
       }
     ]
   },
   {
-    "start_time": "2023-09-06T00:15:00+02:00",
-    "end_time": "2023-09-06T00:30:00+02:00",
-    "tariffs": [
+    "start_timestamp": "2023-09-06T00:15:00+02:00",
+    "end_timestamp": "2023-09-06T00:30:00+02:00",
+    "integrated": [
       {
-        "tariff": 8.46,
-        "unit": "Rp./kWh",
-        "name": "vario_grid"
-      },
-      {
-        "tariff": 31.25,
-        "unit": "Rp./kWh",
-        "name": "vario_plus"
-      },
-      {
-        "tariff": 25.08,
-        "unit": "Rp./kWh",
-        "name": "dt_plus"
+        "value": 8.46,
+        "unit": "Rp./kWh"
       }
     ]
   },
   {
-    "start_time": "2023-09-06T00:30:00+02:00",
-    "end_time": "2023-09-06T00:45:00+02:00",
-    "tariffs": [
+    "start_timestamp": "2023-09-06T00:30:00+02:00",
+    "end_timestamp": "2023-09-06T00:45:00+02:00",
+    "integrated": [
       {
-        "tariff": 7.2,
-        "unit": "Rp./kWh",
-        "name": "vario_grid"
-      },
-      {
-        "tariff": 29.89,
-        "unit": "Rp./kWh",
-        "name": "vario_plus"
-      },
-      {
-        "tariff": 25.08,
-        "unit": "Rp./kWh",
-        "name": "dt_plus"
+        "value": 7.2,
+        "unit": "Rp./kWh"
       }
     ]
   },
   {
-    "start_time": "2023-09-06T00:45:00+02:00",
-    "end_time": "2023-09-06T01:00:00+02:00",
-    "tariffs": [
+    "start_timestamp": "2023-09-06T00:45:00+02:00",
+    "end_timestamp": "2023-09-06T01:00:00+02:00",
+    "integrated": [
       {
-        "tariff": 6.06,
-        "unit": "Rp./kWh",
-        "name": "vario_grid"
-      },
-      {
-        "tariff": 28.65,
-        "unit": "Rp./kWh",
-        "name": "vario_plus"
-      },
-      {
-        "tariff": 25.08,
-        "unit": "Rp./kWh",
-        "name": "dt_plus"
+        "value": 6.06,
+        "unit": "Rp./kWh"
       }
     ]
   }
