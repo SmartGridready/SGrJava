@@ -3,7 +3,13 @@ package com.smartgridready.communicator.common.api.values;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.TextNode;
+
 import java.math.BigInteger;
+import java.time.Instant;
 import java.util.Map;
 
 public class StringValue extends Value {
@@ -107,6 +113,36 @@ public class StringValue extends Value {
     @Override
     public Map<String, Boolean> getBitmap() {
         throw new UnsupportedOperationException("Cannot convert from String to a bitmap.");
+    }
+
+    @Override
+    public Instant getDateTime() {
+        return Instant.parse(value);
+    }
+
+    @Override
+    public JsonNode getJson() {
+        if (!value.isBlank()) {
+            // avoid MissingNode type when reading blank string
+            try {
+                // value may be JSON object or array
+                ObjectMapper mapper = new ObjectMapper();
+                return mapper.readTree(value);
+            } catch (JsonProcessingException e) {}
+        }
+
+        return TextNode.valueOf(value);
+    }
+
+    @Override
+    public <T> T getJson(Class<T> aClass) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(value, aClass);
+        } catch (JsonProcessingException e) {
+            var msg = String.format("Unable to map JSON string '%s' to the given class '%s'", value, aClass.getSimpleName());
+            throw new IllegalArgumentException(msg);
+        }
     }
 
     public void scaleDown(int mul, int powOf10) {

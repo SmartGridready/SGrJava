@@ -59,8 +59,8 @@ test {
 
 // use release versions by default (no suffix)
 // spec. release date
-def sgr_spec_suffix = '_2024-12-19'
-def sgr_driver_suffix = '-SNAPSHOT'
+def sgr_spec_suffix = '_2025-04-15'
+def sgr_driver_suffix = ''
 def modbus_suffix = ''
 def apachehttp_suffix = ''
 def hivemq_suffix = ''
@@ -92,17 +92,17 @@ if (project.hasProperty("snapshots")) {
 
 
 dependencies {
-    api group: 'com.smartgridready', name: 'sgr-specification', version: "2.0${sgr_spec_suffix}"
+    api group: 'com.smartgridready', name: 'sgr-specification', version: "2.1${sgr_spec_suffix}"
     implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '4.0.5'
 
-    api group: 'com.smartgridready', name: 'sgr-driver-api', version: "2.2.0${sgr_driver_suffix}"
+    api group: 'com.smartgridready', name: 'sgr-driver-api', version: "2.3.0${sgr_driver_suffix}"
     testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-j2mod', version: "1.0.0${modbus_suffix}"
-    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-apachehttp', version: "2.0.0${apachehttp_suffix}"
-    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-hivemq', version: "2.0.0${hivemq_suffix}"
+    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-apachehttp', version: "2.1.0${apachehttp_suffix}"
+    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-hivemq', version: "2.0.1${hivemq_suffix}"
 
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.16.0'
-    implementation group: 'io.burt', name: 'jmespath-core', version: '0.5.1'
-    implementation group: 'io.burt', name: 'jmespath-jackson', version: '0.5.1'
+    api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.2'
+    implementation group: 'io.burt', name: 'jmespath-core', version: '0.6.0'
+    implementation group: 'io.burt', name: 'jmespath-jackson', version: '0.6.0'
     implementation group: 'commons-io', name: 'commons-io', version: '2.15.1'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
     implementation group: 'jakarta.annotation', name: 'jakarta.annotation-api', version: '2.1.1'

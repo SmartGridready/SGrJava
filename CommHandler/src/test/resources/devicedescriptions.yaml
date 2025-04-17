@@ -22,12 +22,11 @@ descriptions:
     parameters:
       - name: tcp_address
         value: '0.0.0.0'
-  - file: SGr_04_0014_0000_WAGO_SmartMeterV0.2.1.xml
+  - file: SGr_04_0014_0000_WAGO_SmartMeterV0.2.3.xml
   - file: SGr_04_0015_xxxx_StiebelEltron_HeatPump_V1.0.0.xml
     parameters:
       - name: tcp_address
         value: '0.0.0.0'
-  - file: SGr_00_0016_dddd_ABB_B23_V0.2.xml
   - file: SGr_00_0016_dddd_ABB_B23_ModbusRTU_V0.3.xml
     parameters:
       - name: serial_port
@@ -57,6 +56,13 @@ descriptions:
       - name: tcp_address
         value: '0.0.0.0'
   - file: SGr_04_mmmm_dddd_CLEMAPEnergyMonitorEIV0.2.1.xml
+    parameters:
+      - name: sensor_id
+        value: '123456'
+      - name: username
+        value: 'test@clemap.local'
+      - name: password
+        value: 'CLEMAP$783#'
   - file: SGr_04_mmmm_dddd_WallboxAsymV0.2.1.xml
     parameters:
       - name: tcp_address
@@ -65,8 +71,8 @@ descriptions:
     parameters:
       - name: tcp_address
         value: '0.0.0.0'
-  - file: SGr_05_mmmm_dddd_Dynamic_Tariffs_Swisspower_V0.0.1.xml
-  - file: SGr_05_mmmm_dddd_Dynamic_Tariffs_GroupeE_V0.0.1.xml
+  - file: SGr_05_mmmm_dddd_Dynamic_Tariffs_Swisspower_V0.0.2.xml
+  - file: SGr_05_mmmm_dddd_Dynamic_Tariffs_GroupeE_V0.0.2.xml
   - file: SontexSupercal5V0.2.1.xml
     parameters:
       - name: port_name

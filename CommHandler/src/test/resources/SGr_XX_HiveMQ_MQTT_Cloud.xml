@@ -99,7 +99,7 @@
                 </readCmdMessage>
                 <writeCmdMessage>
                   <topic>stations/1/safecurrent/limit</topic>
-                  <template>{{value}}</template>
+                  <template>[[value]]</template>
                 </writeCmdMessage>
                 <inMessage>
                   <topic>stations/1/safecurrent/limit</topic>
@@ -135,7 +135,7 @@
                 </readCmdMessage>
                 <writeCmdMessage>
                   <topic>stations/1/max_receive_time</topic>
-                  <template>{{value}}</template>
+                  <template>[[value]]</template>
                 </writeCmdMessage>
                 <inMessage>
                   <topic>stations/1/max_receive_time</topic>
@@ -158,7 +158,7 @@
                 <writeCmdMessage>
                   <!-- The datapoint needs to be writable for tests -->
                   <topic>stations/1/charging_current</topic>
-                  <template>{{value}}</template>
+                  <template>[[value]]</template>
                 </writeCmdMessage>
                 <inMessage>
                   <topic>stations/1/charging_current</topic>
@@ -191,7 +191,7 @@
                 <writeCmdMessage>
                   <!-- The datapoint needs to be writable for tests -->
                   <topic>stations/1/charging_current</topic>
-                  <template>{{value}}</template>
+                  <template>[[value]]</template>
                 </writeCmdMessage>
                 <inMessage>
                   <topic>stations/1/charging_current</topic>

@@ -1,5 +1,7 @@
 package com.smartgridready.communicator.common.api.values;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import com.smartgridready.ns.v0.EnumEntryProductRecord;
 import com.smartgridready.ns.v0.EnumMapProduct;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -7,6 +9,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.time.Instant;
 import java.util.Map;
 
 public class EnumValue extends Value {
@@ -182,6 +185,16 @@ public class EnumValue extends Value {
     @Override
     public Map<String, Boolean> getBitmap() {
         throw new UnsupportedOperationException("Cannot convert from an enum value to a bitmap value.");
+    }
+
+    @Override
+    public Instant getDateTime() {
+        throw new UnsupportedOperationException("Cannot convert from an enum value to a datetime value.");
+    }
+
+    @Override
+    public JsonNode getJson() {
+        return TextNode.valueOf(this.getString());
     }
 
     @Override

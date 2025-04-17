@@ -1,13 +1,18 @@
 package com.smartgridready.communicator.common.impl;
 
+import com.smartgridready.communicator.common.api.dto.DynamicRequestParameter;
+import com.smartgridready.communicator.common.api.dto.InfoText;
 import com.smartgridready.communicator.common.api.values.DataType;
 import com.smartgridready.communicator.common.api.values.EnumValue;
+import com.smartgridready.communicator.common.api.values.Float64Value;
 import com.smartgridready.ns.v0.ConfigurationList;
 import com.smartgridready.ns.v0.ConfigurationListElement;
 import com.smartgridready.ns.v0.DataDirectionProduct;
 import com.smartgridready.ns.v0.DataPointBase;
 import com.smartgridready.ns.v0.DataPointDescription;
 import com.smartgridready.ns.v0.DeviceFrame;
+import com.smartgridready.ns.v0.DynamicParameterDescription;
+import com.smartgridready.ns.v0.DynamicParameterDescriptionListElement;
 import com.smartgridready.ns.v0.FunctionalProfileBase;
 import com.smartgridready.ns.v0.Language;
 
@@ -31,6 +36,7 @@ import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.function.Consumer;
+import java.util.function.DoubleBinaryOperator;
 
 
 public abstract class SGrDeviceBase<
@@ -244,6 +250,10 @@ public abstract class SGrDeviceBase<
                                 .map(GenericAttribute::of)
                                 .collect(Collectors.toList()));
 
+        var dynReqParameterList = Optional.ofNullable(dataPointElem.getDataPoint().getParameterList())
+                .map(list -> Optional.ofNullable(list.getParameterListElement()).orElse(List.of()))
+                .orElse(List.of());
+
         return new DataPoint(
                 dataPointName,
                 functionalProfileName,
@@ -254,6 +264,7 @@ public abstract class SGrDeviceBase<
                 dataPoint.getMaximumValue() != null ? dataPoint.getMaximumValue() : null,
                 dataPoint.getArrayLength() != null ? dataPoint.getArrayLength() : null,
                 genericAttributes.orElse(List.of()),
+                mapToDynamicRequestParameters(dynReqParameterList),
                 this );
     }
 
@@ -277,5 +288,59 @@ public abstract class SGrDeviceBase<
     @Override
     public void unsubscribe(String profileName, String dataPointName) throws GenDriverException {
         throw new GenDriverException("Unsubscribe not allowed");
+    }
+
+    protected static <P extends DataPointBase> Value applyUnitConversion(P dataPoint, Value value, DoubleBinaryOperator conversionFunction) {
+
+		if (dataPoint.getDataPoint().getUnitConversionMultiplicator() != null
+				&& isNumeric(value)
+				&& dataPoint.getDataPoint().getUnitConversionMultiplicator() != 0.0) {
+			return Float64Value.of(conversionFunction.applyAsDouble(value.getFloat64(), dataPoint.getDataPoint().getUnitConversionMultiplicator()));
+		}
+		return value;
+	}
+
+	protected static boolean isNumeric(Value value) {
+		if (value == null) {
+			return false;
+		}
+
+		try {
+			value.getFloat64();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	protected static double divide(double dividend, double divisor) {
+		return  dividend / divisor;
+	}
+
+	protected static double multiply(double factor1, double factor2) {
+		return  factor1 * factor2;
+	}
+
+    private List<DynamicRequestParameter> mapToDynamicRequestParameters(List<DynamicParameterDescriptionListElement> reqParamDescriptions ) {
+
+        List<DynamicRequestParameter> requestParameters = new LinkedList<>();
+
+        reqParamDescriptions.forEach(reqParamDesc ->
+                requestParameters.add(
+                        new DynamicRequestParameter(
+                                reqParamDesc.getName(),
+                                reqParamDesc.getDefaultValue(),
+                                DataType.getDataTypeInfo(reqParamDesc.getDataType()).orElse(null),
+                                mapToReqParameterDescriptions(reqParamDesc.getParameterDescription()))));
+
+        return requestParameters;
+    }
+
+    private Map<Language, InfoText> mapToReqParameterDescriptions(List<DynamicParameterDescription> parameterDescriptions) {
+        var descriptions = new EnumMap<Language, InfoText>(Language.class);
+        parameterDescriptions.forEach( paramDesc ->
+                descriptions.put(paramDesc.getLanguage(),
+                        new InfoText(paramDesc.getLabel(), paramDesc.getTextElement())));
+        return descriptions;
     }
 }

@@ -1,8 +1,13 @@
 package com.smartgridready.communicator.common.api.values;
 
 import java.math.BigInteger;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Map;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 
 public class ArrayValue<T extends Value> extends Value {
 
@@ -80,6 +85,23 @@ public class ArrayValue<T extends Value> extends Value {
     @Override
     public Map<String, Boolean> getBitmap() {
         return values != null && values.length > 0 ? values[0].getBitmap() : Map.of();
+    }
+
+    @Override
+    public Instant getDateTime() {
+        return values != null && values.length > 0 ? values[0].getDateTime() : null;
+    }
+
+    @Override
+    public JsonNode getJson() {
+        ArrayNode res = new ArrayNode(JsonNodeFactory.instance);
+        if (values != null && values.length > 0) {
+            // create actual JSON array node
+            for (int i = 0; i < values.length; i++) {
+                res.add(values[i].getJson());
+            }
+        }
+        return res;
     }
 
     @Override

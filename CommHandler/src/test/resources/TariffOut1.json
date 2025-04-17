@@ -1,33 +1,44 @@
 [
   {
-    "start_time":        "2023-11-17T00:00:00+01:00",
-    "end_time":          "2023-11-17T00:15:00+01:00",
-    "tariffs":
-    [
-      { "name": "sunlight",  "tariff": 15.0 },
-      { "name": "moonlight", "tariff": 12.0 }
-    ]
-  },
-  {
-    "start_time":        "2023-11-17T00:15:00+01:00",
-    "end_time":          "2023-11-17T00:30:00+01:00",
-    "tariffs":
-    [
-      { "name": "sunlight",
-        "tariff": 17.0
+    "start_timestamp": "2023-11-17T00:00:00+01:00",
+    "end_timestamp": "2023-11-17T00:15:00+01:00",
+    "integrated": [
+      {
+        "component": "sunlight",
+        "value": 15.0
       },
-      { "name": "moonlight",
-        "tariff": 14.0
+      {
+        "component": "moonlight",
+        "value": 12.0
       }
     ]
   },
   {
-    "start_time":        "2023-11-17T00:30:00+01:00",
-    "end_time":          "2023-11-17T00:45:00+01:00",
-    "tariffs":
-    [
-      { "name": "sunlight",  "tariff": 16.0 },
-      { "name": "moonlight", "tariff": 13.0 }
+    "start_timestamp": "2023-11-17T00:15:00+01:00",
+    "end_timestamp": "2023-11-17T00:30:00+01:00",
+    "integrated": [
+      {
+        "component": "sunlight",
+        "value": 17.0
+      },
+      {
+        "component": "moonlight",
+        "value": 14.0
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2023-11-17T00:30:00+01:00",
+    "end_timestamp": "2023-11-17T00:45:00+01:00",
+    "integrated": [
+      {
+        "component": "sunlight",
+        "value": 16.0
+      },
+      {
+        "component": "moonlight",
+        "value": 13.0
+      }
     ]
   }
 ]
