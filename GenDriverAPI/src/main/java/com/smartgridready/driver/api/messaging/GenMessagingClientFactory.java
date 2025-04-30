@@ -6,22 +6,21 @@ import com.smartgridready.driver.api.messaging.model.MessagingInterfaceDescripti
 import com.smartgridready.driver.api.messaging.model.MessagingPlatformType;
 
 /**
- * Interface to be used to create smartgridready messaging clients.
+ * Defines the interface of a messaging client factory.
  */
 @SuppressWarnings("unused")
 public interface GenMessagingClientFactory {
 
     /**
-     * Factory method to create a new instance of the smartgridready messaging client.
-     *
-     * @param interfaceDescription Describes the messaging interface and it's parameters.
-     * @return A new messaging client instance.
+     * Factory method to create a new instance of the messaging client.
+     * @param interfaceDescription Describes the messaging interface and it's parameters
+     * @return A new instance of {@code GenMessagingClient}
      */
     GenMessagingClient create(MessagingInterfaceDescription interfaceDescription);
 
     /**
      * Gets the messaging platforms supported by the implementation.
-     * @return a set of platform types
+     * @return a set of {@code MessagingPlatformType}
      */
     Set<MessagingPlatformType> getSupportedPlatforms();
 }

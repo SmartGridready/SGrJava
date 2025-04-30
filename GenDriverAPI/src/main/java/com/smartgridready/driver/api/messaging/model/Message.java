@@ -1,7 +1,7 @@
 package com.smartgridready.driver.api.messaging.model;
 
 /**
- * Represents a message within the smartgridready messaging API
+ * Represents a message conveyed by messaging clients.
  */
 @SuppressWarnings("unused")
 public class Message {
@@ -15,7 +15,7 @@ public class Message {
     }
 
     /**
-     * Constructor using an optional message key and the message payload
+     * Constructor using an optional message key and the message payload.
      * @param key The optional message key
      * @param payload The message payload
      */
@@ -25,6 +25,7 @@ public class Message {
     }
 
     /**
+     * Gets the message key.
      * @return The optional message key, may return {@code null}
      */
     public String getKey() {
@@ -32,7 +33,8 @@ public class Message {
     }
 
     /**
-     * @return The message payload.
+     * Gets the message payload.
+     * @return The message payload
      */
     public String getPayload() {
         return payload;
@@ -48,7 +50,7 @@ public class Message {
     }
 
     /**
-     * Facotory method for a message with payload and an additional message key.
+     * Factory method for a message with payload and an additional message key.
      * @param key The optional message key
      * @param payload The message payload
      * @return A new instance of {@code Message}
