@@ -1,7 +1,13 @@
 package com.smartgridready.driver.api.modbus;
 
-public enum Parity {	
+/**
+ * Defines an enumeration of serial connection parity bit options.
+ */
+public enum Parity {
+	/** No parity. */
 	NONE,
+	/** Odd parity. */
 	ODD,
+	/** Even parity. */
 	EVEN	
 }

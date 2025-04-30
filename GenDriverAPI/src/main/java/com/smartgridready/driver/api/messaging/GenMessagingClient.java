@@ -9,7 +9,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 /**
- * Interface to be used by smartgridready messaging client implementations.
+ * Defines the interface of a messaging client.
  */
 @SuppressWarnings("unused")
 public interface GenMessagingClient extends Closeable {
@@ -17,7 +17,7 @@ public interface GenMessagingClient extends Closeable {
     /**
      * This method publishes a message to the given topic. The method is blocking
      * until the message is acknowledged by the message broker.
-     * @param topic The topic to send the message to.
+     * @param topic The topic to send the message to
      * @param message The message to send
      */
     void sendSync(String topic, Message message);
@@ -30,6 +30,7 @@ public interface GenMessagingClient extends Closeable {
      * @param readCmdMessage The read command message that triggers the response message
      * @param inMessageTopic The topic that receives the response message
      * @param messageFilterHandler An optional filter that filters messages received on the {@code inMessageTopic}
+     * @param timeoutMs A message timeout, in ms
      * @return Either the message received or a Throwable if an error occurred.
      */
     Either<Throwable, Message> readSync(
@@ -44,7 +45,6 @@ public interface GenMessagingClient extends Closeable {
      * block and returns immediately without checking the ACK for the
      * message to be sent. However, you could await the ACK when waiting for
      * the completable future that is returned.
-     *
      * @param topic The topic to send the message to
      * @param message The message
      * @return A completable future to (optionally) wait for the broker ACK that
@@ -54,15 +54,17 @@ public interface GenMessagingClient extends Closeable {
 
     /**
      * Subscribes to a topic for receiving a stream of messages.
-     *
      * @param topic The topic to subscribe to
      * @param messageFilterHandler An optional filter to filter messages received on the {@code topic}
-     * @param callback The callback method that handles the incoming messages.
+     * @param callback The callback method that handles the incoming messages
+     * @throws GenDriverException when an error occurred
      */
     void subscribe(String topic, MessageFilterHandler messageFilterHandler, Consumer<Either<Throwable, Message>> callback) throws GenDriverException;
 
     /**
+     * Unsubscribes message handlers from a topic.
      * @param topic The topic to unsubscribe from
+     * @throws GenDriverException when an error occurred
      */
     void unsubscribe(String topic) throws GenDriverException;
 }
