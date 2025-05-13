@@ -1,6 +1,7 @@
 package com.smartgridready.communicator.common.api.dto;
 
 import com.smartgridready.communicator.common.api.values.StringValue;
+import com.smartgridready.ns.v0.DataDirectionProduct;
 import com.smartgridready.ns.v0.FunctionalProfileCategory;
 import io.vavr.control.Try;
 
@@ -52,11 +53,17 @@ public class FunctionalProfile {
 
         final List<DataPointValue> valueRecords = new ArrayList<>();
 
-        dataPoints.forEach(dataPoint ->
+        dataPoints.forEach(dataPoint -> {
+            // include readable data points
+            final String perm = dataPoint.getPermissions().value();
+            if (perm.contains("R") || perm.contains("C")) {
                 valueRecords.add(DataPointValue.of(
-                        name,
-                        dataPoint.getName(),
-                        Try.of(dataPoint::getVal).getOrElseGet(e -> StringValue.of(e.getMessage())))));
+                    name,
+                    dataPoint.getName(),
+                    Try.of(dataPoint::getVal).getOrElseGet(e -> StringValue.of(e.getMessage()))
+                ));
+            }
+        });
 
         return valueRecords;
     }
