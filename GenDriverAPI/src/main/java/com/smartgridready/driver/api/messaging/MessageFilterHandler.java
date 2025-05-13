@@ -3,7 +3,7 @@ package com.smartgridready.driver.api.messaging;
 import javax.naming.OperationNotSupportedException;
 
 /**
- * A handler for message filters. Optionally sent by communicator.
+ * Defines the interface of a message filter handler. Optionally sent by communicator.
  */
 public interface MessageFilterHandler {
     
@@ -16,6 +16,7 @@ public interface MessageFilterHandler {
 
     /**
      * Checks if the filter is valid.
+     * @throws OperationNotSupportedException if the filter is invalid
      */
     public void validate() throws OperationNotSupportedException;
 }
