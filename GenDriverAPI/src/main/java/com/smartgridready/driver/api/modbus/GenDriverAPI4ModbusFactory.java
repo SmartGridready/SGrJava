@@ -8,7 +8,7 @@ public interface GenDriverAPI4ModbusFactory {
     /**
      * Creates a serial Modbus RTU transport.
      * @param comPort the serial port name
-     * @return a new instance of {@code GenDriverAPI4Modbus}
+     * @return a new instance of {@link GenDriverAPI4Modbus}
      */
     public GenDriverAPI4Modbus createRtuTransport(String comPort);
 
@@ -16,7 +16,7 @@ public interface GenDriverAPI4ModbusFactory {
      * Creates a serial Modbus RTU transport.
      * @param comPort the serial port name
      * @param baudRate the serial port baud rate
-     * @return a new instance of {@code GenDriverAPI4Modbus}
+     * @return a new instance of {@link GenDriverAPI4Modbus}
      */
     public GenDriverAPI4Modbus createRtuTransport(String comPort, int baudRate);
 
@@ -25,7 +25,7 @@ public interface GenDriverAPI4ModbusFactory {
      * @param comPort the serial port name
      * @param baudRate the serial port baud rate
      * @param parity the serial port parity
-     * @return a new instance of {@code GenDriverAPI4Modbus}
+     * @return a new instance of {@link GenDriverAPI4Modbus}
      */
     public GenDriverAPI4Modbus createRtuTransport(String comPort, int baudRate, Parity parity);
 
@@ -35,7 +35,7 @@ public interface GenDriverAPI4ModbusFactory {
      * @param baudRate the serial port baud rate
      * @param parity the serial port parity
      * @param dataBits the serial port data bits
-     * @return a new instance of {@code GenDriverAPI4Modbus}
+     * @return a new instance of {@link GenDriverAPI4Modbus}
      */
     public GenDriverAPI4Modbus createRtuTransport(String comPort, int baudRate, Parity parity, DataBits dataBits);
 
@@ -46,7 +46,7 @@ public interface GenDriverAPI4ModbusFactory {
      * @param parity the serial port parity
      * @param dataBits the serial port data bits
      * @param stopBits the serial port stop bits
-     * @return a new instance of {@code GenDriverAPI4Modbus}
+     * @return a new instance of {@link GenDriverAPI4Modbus}
      */
     public GenDriverAPI4Modbus createRtuTransport(String comPort, int baudRate, Parity parity, DataBits dataBits, StopBits stopBits);
 
@@ -58,7 +58,7 @@ public interface GenDriverAPI4ModbusFactory {
      * @param dataBits the serial port data bits
      * @param stopBits the serial port stop bits
      * @param asciiEncoding use ASCII encoding if true, otherwise RTU encoding
-     * @return a new instance of {@code GenDriverAPI4Modbus}
+     * @return a new instance of {@link GenDriverAPI4Modbus}
      */
     default GenDriverAPI4Modbus createRtuTransport(String comPort, int baudRate, Parity parity, DataBits dataBits, StopBits stopBits, boolean asciiEncoding) {
         return createRtuTransport(comPort, baudRate, parity, dataBits, stopBits);
@@ -67,7 +67,7 @@ public interface GenDriverAPI4ModbusFactory {
     /**
      * Creates a Modbus TCP transport. Uses the default port 502.
      * @param ipAddress the IP address or host name
-     * @return a new instance of {@code GenDriverAPI4Modbus}
+     * @return a new instance of {@link GenDriverAPI4Modbus}
      */
     public GenDriverAPI4Modbus createTcpTransport(String ipAddress);
 
@@ -75,14 +75,14 @@ public interface GenDriverAPI4ModbusFactory {
      * Creates a Modbus TCP transport.
      * @param ipAddress the IP address or host name
      * @param port the TCP port
-     * @return a new instance of {@code GenDriverAPI4Modbus}
+     * @return a new instance of {@link GenDriverAPI4Modbus}
      */
     public GenDriverAPI4Modbus createTcpTransport(String ipAddress, int port);
 
     /**
      * Creates a Modbus UDP transport. Uses the default port 502.
      * @param ipAddress the IP address or host name
-     * @return a new instance of {@code GenDriverAPI4Modbus}
+     * @return a new instance of {@link GenDriverAPI4Modbus}
      */
     public GenDriverAPI4Modbus createUdpTransport(String ipAddress);
 
@@ -90,7 +90,7 @@ public interface GenDriverAPI4ModbusFactory {
      * Creates a Modbus UDP transport.
      * @param ipAddress the IP address or host name
      * @param port the UDP port
-     * @return a new instance of {@code GenDriverAPI4Modbus}
+     * @return a new instance of {@link GenDriverAPI4Modbus}
      */
     public GenDriverAPI4Modbus createUdpTransport(String ipAddress, int port);
 }

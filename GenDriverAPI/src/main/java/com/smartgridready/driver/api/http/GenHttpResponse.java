@@ -57,7 +57,7 @@ public class GenHttpResponse {
     /**
      * Creates a new instance.
      * @param response the response body
-     * @return a new instance of {@code GenHttpResponse}
+     * @return a new instance of {@link GenHttpResponse}
      */
     public static GenHttpResponse of(String response) {
         return new GenHttpResponse(response, HttpStatus.OK, "");
@@ -68,7 +68,7 @@ public class GenHttpResponse {
      * @param response the response body
      * @param responseCode the HTTP status code
      * @param reason an optional status message
-     * @return a new instance of {@code GenHttpResponse}
+     * @return a new instance of {@link GenHttpResponse}
      */
     public static GenHttpResponse of(String response, int responseCode, String reason) {
         return new GenHttpResponse(response, responseCode, reason);

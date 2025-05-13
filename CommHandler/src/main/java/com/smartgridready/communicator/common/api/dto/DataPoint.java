@@ -122,7 +122,7 @@ public class DataPoint {
     }
 
     /**
-     * @return A list of the request parameters that need to be provided as {@code Properties}
+     * @return A list of the request parameters that need to be provided as {@link Properties}
      *         when calling the method
      *         {@link com.smartgridready.communicator.common.api.GenDeviceApi#getVal(String, String, Properties)}
      */

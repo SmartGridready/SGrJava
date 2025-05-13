@@ -10,7 +10,7 @@ public interface GenHttpRequest {
 
     /**
      * Executes the request and delivers the response.
-     * @return a new instance of {@code GenHttpResponse}
+     * @return a new instance of {@link GenHttpResponse}
      * @throws IOException when the request failed
      */
     GenHttpResponse execute() throws IOException;
@@ -18,7 +18,7 @@ public interface GenHttpRequest {
     /**
      * Sets the request URI.
      * @param uri the URI
-     * @return the same instance of {@code GenHttpRequest}
+     * @return the same instance of {@link GenHttpRequest}
      */
     GenHttpRequest setUri(URI uri);
 

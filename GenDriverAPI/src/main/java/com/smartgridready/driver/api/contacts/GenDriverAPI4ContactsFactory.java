@@ -8,7 +8,7 @@ public interface GenDriverAPI4ContactsFactory {
     /**
      * Creates a driver instance.
      * @param nrOfContacts the number of contacts
-     * @return a new instance of {@code GenDriverAPI4Contacts}
+     * @return a new instance of {@link GenDriverAPI4Contacts}
      */
     public GenDriverAPI4Contacts create(int nrOfContacts);
     
@@ -16,7 +16,7 @@ public interface GenDriverAPI4ContactsFactory {
      * Creates a driver instance.
      * @param nrOfContacts the number of contacts
      * @param stabilizationTimeMs the time contacts need to get to a stable state, in ms
-     * @return a new instance of {@code GenDriverAPI4Contacts}
+     * @return a new instance of {@link GenDriverAPI4Contacts}
      */
     public GenDriverAPI4Contacts create(int nrOfContacts, long stabilizationTimeMs);
 }

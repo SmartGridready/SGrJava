@@ -14,13 +14,13 @@ public interface GenMessagingClientFactory {
     /**
      * Factory method to create a new instance of the messaging client.
      * @param interfaceDescription Describes the messaging interface and it's parameters
-     * @return A new instance of {@code GenMessagingClient}
+     * @return A new instance of {@link GenMessagingClient}
      */
     GenMessagingClient create(MessagingInterfaceDescription interfaceDescription);
 
     /**
      * Gets the messaging platforms supported by the implementation.
-     * @return a set of {@code MessagingPlatformType}
+     * @return a set of {@link MessagingPlatformType}
      */
     Set<MessagingPlatformType> getSupportedPlatforms();
 }

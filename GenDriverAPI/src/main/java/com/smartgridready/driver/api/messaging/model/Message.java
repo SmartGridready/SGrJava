@@ -43,7 +43,7 @@ public class Message {
     /**
      * Factory method for a message that has a payload only.
      * @param payload The payload
-     * @return A new instance of {@code Message}
+     * @return A new instance of {@link Message}
      */
     public static Message of(String payload) {
         return new Message(payload);
@@ -53,7 +53,7 @@ public class Message {
      * Factory method for a message with payload and an additional message key.
      * @param key The optional message key
      * @param payload The message payload
-     * @return A new instance of {@code Message}
+     * @return A new instance of {@link Message}
      */
     public static Message of(String key, String payload) {
         return new Message(key, payload);

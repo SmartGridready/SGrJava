@@ -22,7 +22,7 @@ public class MessageBrokerAuthentication {
 
     /**
      * Gets the basic authentication configuration.
-     * @return an instance of {@code MessageBrokerAuthenticationBasic}
+     * @return an instance of {@link MessageBrokerAuthenticationBasic}
      */
     public MessageBrokerAuthenticationBasic getBasicAuthentication() {
         return basicAuthentication;
@@ -30,7 +30,7 @@ public class MessageBrokerAuthentication {
 
     /**
      * Gets the client-certificate-based configuration.
-     * @return an instance of {@code MessageBrokerAuthenticationClientCertificate}
+     * @return an instance of {@link MessageBrokerAuthenticationClientCertificate}
      */
     public MessageBrokerAuthenticationClientCertificate getClientCertificateAuthentication() {
         return clientCertificateAuthentication;
