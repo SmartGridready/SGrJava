@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - ignores all non-readable data points when reading all device values
+- fixed conversion issues between JSON value and boolean, bitmap or array
 
 
 ## [2.4.0] - 2025-04-15
