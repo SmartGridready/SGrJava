@@ -20,7 +20,7 @@ class JsonMapperTest extends JsonMapperTestBase {
     @Test
     void mapSwisspower() throws Exception {
 
-        Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_Swisspower_V0.1.xml");
+        Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_Swisspower_V1.0.xml");
         DeviceFrame deviceFrame = device._1;
 
         String jmesQuery = getJmesQuery(deviceFrame);
@@ -37,7 +37,7 @@ class JsonMapperTest extends JsonMapperTestBase {
     @Test
     void mapGroupeE() throws Exception {
 
-        Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_GroupeE_V0.1.xml");
+        Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_GroupeE_V1.0.xml");
         DeviceFrame deviceFrame = device._1;
 
         JMESPathMapping jmesPathMapping = getJmesPathMapping(deviceFrame);
