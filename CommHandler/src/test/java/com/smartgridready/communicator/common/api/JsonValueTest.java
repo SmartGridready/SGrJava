@@ -2,7 +2,6 @@ package com.smartgridready.communicator.common.api;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.Instant;
 import java.util.Map;
@@ -32,9 +31,11 @@ class JsonValueTest {
     private static final ModbusDataType modbusDataTypeBoolean = new ModbusDataType();
     private static final ModbusDataType modbusDataTypeInt32 = new ModbusDataType();
     private static final ModbusDataType modbusDataTypeString = new ModbusDataType();
+    private static final ModbusDataType modbusDataTypeFloat32 = new ModbusDataType();
     static {
         modbusDataTypeString.setString(new EmptyType());
         modbusDataTypeInt32.setInt32(new EmptyType());
+        modbusDataTypeFloat32.setFloat32(new EmptyType());
         modbusDataTypeBoolean.setBoolean(new ModbusBoolean());
     }
 
@@ -146,14 +147,20 @@ class JsonValueTest {
         // boolean
         value = JsonValue.of(BooleanNode.valueOf(true));
         assertArrayEquals(new byte[]{(byte)0x01}, value.toModbusDiscreteVal(modbusDataTypeBoolean));
+        assertArrayEquals(new int[]{0x0000, 0x0001}, value.toModbusRegister(modbusDataTypeInt32));
+        assertArrayEquals(new int[]{0x3f80, 0x0000}, value.toModbusRegister(modbusDataTypeFloat32));
 
         // int32
         value = JsonValue.of(IntNode.valueOf(1));
         assertArrayEquals(new int[]{0x0,0x1}, value.toModbusRegister(modbusDataTypeInt32));
+        assertArrayEquals(new int[]{0x3f80, 0x0000}, value.toModbusRegister(modbusDataTypeFloat32));
 
         // string
         value = JsonValue.of(TextNode.valueOf("abc"));
         assertArrayEquals(new int[]{0x6162,0x6300}, value.toModbusRegister(modbusDataTypeString));
+        value = JsonValue.of(TextNode.valueOf("1.0"));
+        assertArrayEquals(new int[]{0x0000, 0x0001}, value.toModbusRegister(modbusDataTypeInt32));
+        assertArrayEquals(new int[]{0x3f80, 0x0000}, value.toModbusRegister(modbusDataTypeFloat32));
     }
 
     @Test
