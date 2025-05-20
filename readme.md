@@ -20,9 +20,18 @@ The external interface description XML (EI-XML) describes for every functionalpr
 ## Description
 
 The SGrJava repository contains of three projects:
-- **CommHandler:** Code that interprets the EI-XML and adapts the communication interface to the device communication.
-- **SGrSpecification:** Provides JAXB generated classes based on the XML schema definitions within the SGrSpecifications GitHub repository.
-- **GenDriverAPI:** API used to integrate different device drivers for Modbus, REST and MQTT. 
+
+### CommHandler 
+Code that interprets the EI-XML and adapts the communication interface to the device communication. 
+[JavaDoc](https://smartgridready.github.io/SGrJava/docs/commhandler/)
+ 
+### SGrSpecification
+Provides JAXB generated classes based on the XML schema definitions within the SGrSpecifications GitHub repository.
+
+
+### GenDriverAPI
+API used to integrate different device drivers for Modbus, REST and MQTT. 
+[JavaDoc](https://smartgridready.github.io/SGrJava/docs/gen-driver-api/)
 
 
 ## Build and publish for development
