@@ -5,12 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [unreleased]
+## [2.4.1] - 2025-05-20
 
 ### Fixed
 
 - ignores all non-readable data points when reading all device values
 - fixed conversion issues between JSON value and boolean, bitmap or array
+- fixed HTTP status code in driver API
+
+### Changed
+
+- updated driver API
+- updated Apache driver
 
 
 ## [2.4.0] - 2025-04-15
