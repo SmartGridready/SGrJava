@@ -5,14 +5,19 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.DoubleNode;
+import com.fasterxml.jackson.databind.node.LongNode;
 
 import java.math.BigInteger;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JsonValue extends Value {
 
-    private final JsonNode value;
+    private JsonNode value;
 
     private JsonValue(JsonNode value) {
         this.value = value;
@@ -20,102 +25,143 @@ public class JsonValue extends Value {
 
     @Override
     public byte getInt8() {
+        long val;
         if (value.isNumber()) {
-            long val = value.longValue();
-            checkInt8(val);
-            return (byte) val;
+            val = value.longValue();
+        } else if (value.isBoolean() || value.isTextual()) {
+            val = value.asLong();
+        } else {
+            throw new UnsupportedOperationException(String.format("Cannot convert from JSON to int8, node type is '%s'.", value.getNodeType()));
         }
-        throw new UnsupportedOperationException("Cannot convert from JSON to int8.");
+        checkInt8(val);
+        return (byte) val;
     }
 
     @Override
     public short getInt8U() {
+        long val;
         if (value.isNumber()) {
-            long val = value.longValue();
-            checkInt8U(val);
-            return (short) val;
+            val = value.longValue();
+        } else if (value.isBoolean() || value.isTextual()) {
+            val = value.asLong();
+        } else {
+            throw new UnsupportedOperationException(String.format("Cannot convert from JSON to int8U, node type is '%s'.", value.getNodeType()));
         }
-        throw new UnsupportedOperationException("Cannot convert from JSON to int8U.");
+        checkInt8U(val);
+        return (short) val;
     }
 
     @Override
     public short getInt16() {
+        long val;
         if (value.isNumber()) {
-            long val = value.longValue();
-            checkInt16(val);
-            return (short) val;
+            val = value.longValue();
+        } else if (value.isBoolean() || value.isTextual()) {
+            val = value.asLong();
+        } else {
+            throw new UnsupportedOperationException(String.format("Cannot convert from JSON to int16, node type is '%s'.", value.getNodeType()));
         }
-        throw new UnsupportedOperationException("Cannot convert from JSON to int16.");
+        checkInt16(val);
+        return (short) val;
     }
 
     @Override
     public int getInt16U() {
+        long val;
         if (value.isNumber()) {
-            long val = value.longValue();
-            checkInt16U(val);
-            return (int) val;
+            val = value.longValue();
+        } else if (value.isBoolean() || value.isTextual()) {
+            val = value.asLong();
+        } else {
+            throw new UnsupportedOperationException(String.format("Cannot convert from JSON to int16U, node type is '%s'.", value.getNodeType()));
         }
-        throw new UnsupportedOperationException("Cannot convert from JSON to int16U.");
+        checkInt16U(val);
+        return (int) val;
     }
 
     @Override
     public int getInt32() {
+        long val;
         if (value.isNumber()) {
-            long val = value.longValue();
-            checkInt32(val);
-            return (int) val;
+            val = value.longValue();
+        } else if (value.isBoolean() || value.isTextual()) {
+            val = value.asLong();
+        } else {
+            throw new UnsupportedOperationException(String.format("Cannot convert from JSON to int32, node type is '%s'.", value.getNodeType()));
         }
-        throw new UnsupportedOperationException("Cannot convert from JSON to int32.");
+        checkInt32(val);
+        return (int) val;
     }
 
     @Override
     public long getInt32U() {
+        long val;
         if (value.isNumber()) {
-            long val = value.longValue();
-            checkInt32U(val);
-            return val;
+            val = value.longValue();
+        } else if (value.isBoolean() || value.isTextual()) {
+            val = value.asLong();
+        } else {
+            throw new UnsupportedOperationException(String.format("Cannot convert from JSON to int32U, node type is '%s'.", value.getNodeType()));
         }
-        throw new UnsupportedOperationException("Cannot convert from JSON to int32U.");
+        checkInt32U(val);
+        return val;
     }
 
     @Override
     public long getInt64() {
+        BigInteger val;
         if (value.isNumber()) {
-            BigInteger val = value.bigIntegerValue();
-            checkInt64(val);
-            return val.longValue();
+            val = value.bigIntegerValue();
+        } else if (value.isBoolean() || value.isTextual()) {
+            val = BigInteger.valueOf(value.asLong());
+        } else {
+            throw new UnsupportedOperationException(String.format("Cannot convert from JSON to int64, node type is '%s'.", value.getNodeType()));
         }
-        throw new UnsupportedOperationException("Cannot convert from JSON to int64.");
+        checkInt64(val);
+        return val.longValue();
     }
 
     @Override
     public BigInteger getInt64U() {
+        BigInteger val;
         if (value.isNumber()) {
-            BigInteger val = value.bigIntegerValue();
-            checkInt64U(val);
-            return val;
-        } 
-        throw new UnsupportedOperationException("Cannot convert from JSON to int64U.");
+            val = value.bigIntegerValue();
+        } else if (value.isBoolean()) {
+            val = BigInteger.valueOf(value.asLong());
+        } else if (value.isTextual()) {
+            val = new BigInteger(value.textValue());
+        } else {
+            throw new UnsupportedOperationException(String.format("Cannot convert from JSON to int64U, node type is '%s'.", value.getNodeType()));
+        }
+        checkInt64U(val);
+        return val;
     }
 
     @Override
     public float getFloat32() {
+        double val;
         if (value.isNumber()) {
-            double val = value.doubleValue();
-            checkFloat32(val);
-            return (float) val;
+            val = value.doubleValue();
+        } else if (value.isBoolean() || value.isTextual()) {
+            val = value.asDouble();
+        } else {
+            throw new UnsupportedOperationException(String.format("Cannot convert from JSON to float32, node type is '%s'.", value.getNodeType()));
         }
-        throw new UnsupportedOperationException("Cannot convert from JSON to float32.");
+        checkFloat32(val);
+        return (float)val;
     }
 
     @Override
     public double getFloat64() {
+        double val;
         if (value.isNumber()) {
-            double val = value.doubleValue();
-            checkFloat32(val);
-            return val;
+            val = value.doubleValue();
+        } else if (value.isBoolean() || value.isTextual()) {
+            val = value.asDouble();
+        } else {
+            throw new UnsupportedOperationException(String.format("Cannot convert from JSON to float64, node type is '%s'.", value.getNodeType()));
         }
-        throw new UnsupportedOperationException("Cannot convert from JSON to float64.");
+        return val;
     }
 
     @Override
@@ -130,25 +176,38 @@ public class JsonValue extends Value {
 
     @Override
     public boolean getBoolean() {
+        boolean val;
         if (value.isBoolean()) {
-            return value.booleanValue();
-        } else if (value.isNumber()) {
-            return value.longValue() != 0;
+            val = value.booleanValue();
+        } else if (value.isNumber() || value.isTextual()) {
+            val = value.asBoolean();
+        } else {
+            throw new UnsupportedOperationException(String.format("Cannot convert from JSON to boolean, node type is '%s'.", value.getNodeType()));
         }
-        throw new UnsupportedOperationException("Cannot convert from JSON to boolean.");
+        return val;
     }
 
     @Override
     public EnumRecord getEnum() {
-        if (value.isTextual()) {
-            return new EnumRecord(value.textValue(), null, null);
+        if (value.isValueNode()) {
+            return new EnumRecord(value.asText(), null, null);
         }
-        throw new UnsupportedOperationException("Cannot convert from JSON object to enum.");
+        throw new UnsupportedOperationException(String.format("Cannot convert from JSON object to enum, node type is '%s'.", value.getNodeType()));
     }
 
     @Override
     public Map<String, Boolean> getBitmap() {
-        throw new UnsupportedOperationException("Cannot convert from JSON to bitmap.");
+        if (value.isObject()) {
+            Map<String, Boolean> bm = new HashMap<>();
+            // iterate through children and convert to boolean
+            value.fields().forEachRemaining(e -> {
+                if (e.getValue().isValueNode()) {
+                    bm.put(e.getKey(), e.getValue().asBoolean());
+                }
+            });
+            return bm;
+        }
+        throw new UnsupportedOperationException(String.format("Cannot convert from JSON to bitmap, node type is '%s'.", value.getNodeType()));
     }
 
     @Override
@@ -158,7 +217,7 @@ public class JsonValue extends Value {
         } else if (value.isNumber()) {
             return Instant.ofEpochMilli(value.longValue());
         }
-        throw new UnsupportedOperationException("Cannot convert from JSON object to datetime.");
+        throw new UnsupportedOperationException(String.format("Cannot convert from JSON object to datetime, node type is '%s'.", value.getNodeType()));
     }
 
     @Override
@@ -168,18 +227,29 @@ public class JsonValue extends Value {
 
     @Override
     public JsonValue[] asArray() {
-        // cannot create actual JSON array here
+        if (value.isArray()) {
+            // make array of JsonValue from each element
+            final List<JsonValue> arr = new ArrayList<>();
+            value.elements().forEachRemaining(e -> arr.add(JsonValue.of(e)));
+            return arr.toArray(new JsonValue[0]);
+        }
         return new JsonValue[]{this};
     }
 
     @Override
     public void absValue() {
-        // not required
+        if (value.isFloatingPointNumber()) {
+            value = DoubleNode.valueOf(Math.abs(value.doubleValue()));
+        } else if (value.isIntegralNumber()) {
+            value = LongNode.valueOf(Math.abs(value.longValue()));
+        }
     }
 
     @Override
     public void roundToInt() {
-        // not required
+        if (value.isFloatingPointNumber()) {
+            value = LongNode.valueOf(Math.round(value.doubleValue()));
+        }
     }
 
     @Override

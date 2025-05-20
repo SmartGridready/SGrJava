@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.Instant;
+import java.util.Map;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -30,9 +31,11 @@ class JsonValueTest {
     private static final ModbusDataType modbusDataTypeBoolean = new ModbusDataType();
     private static final ModbusDataType modbusDataTypeInt32 = new ModbusDataType();
     private static final ModbusDataType modbusDataTypeString = new ModbusDataType();
+    private static final ModbusDataType modbusDataTypeFloat32 = new ModbusDataType();
     static {
         modbusDataTypeString.setString(new EmptyType());
         modbusDataTypeInt32.setInt32(new EmptyType());
+        modbusDataTypeFloat32.setFloat32(new EmptyType());
         modbusDataTypeBoolean.setBoolean(new ModbusBoolean());
     }
 
@@ -144,14 +147,20 @@ class JsonValueTest {
         // boolean
         value = JsonValue.of(BooleanNode.valueOf(true));
         assertArrayEquals(new byte[]{(byte)0x01}, value.toModbusDiscreteVal(modbusDataTypeBoolean));
+        assertArrayEquals(new int[]{0x0000, 0x0001}, value.toModbusRegister(modbusDataTypeInt32));
+        assertArrayEquals(new int[]{0x3f80, 0x0000}, value.toModbusRegister(modbusDataTypeFloat32));
 
         // int32
         value = JsonValue.of(IntNode.valueOf(1));
         assertArrayEquals(new int[]{0x0,0x1}, value.toModbusRegister(modbusDataTypeInt32));
+        assertArrayEquals(new int[]{0x3f80, 0x0000}, value.toModbusRegister(modbusDataTypeFloat32));
 
         // string
         value = JsonValue.of(TextNode.valueOf("abc"));
         assertArrayEquals(new int[]{0x6162,0x6300}, value.toModbusRegister(modbusDataTypeString));
+        value = JsonValue.of(TextNode.valueOf("1.0"));
+        assertArrayEquals(new int[]{0x0000, 0x0001}, value.toModbusRegister(modbusDataTypeInt32));
+        assertArrayEquals(new int[]{0x3f80, 0x0000}, value.toModbusRegister(modbusDataTypeFloat32));
     }
 
     @Test
@@ -167,6 +176,54 @@ class JsonValueTest {
         value = JsonValue.of(jstr);
         jobj = value.getJson(TestObject.class);
         assertEquals(obj, jobj);
+    }
+
+    @Test
+    void roundToInt() {
+        JsonValue value = JsonValue.of(FloatNode.valueOf(1.2345f));
+        value.roundToInt();
+        assertEquals(1L, value.getInt64());
+
+        value = JsonValue.of(TextNode.valueOf("test"));
+        value.roundToInt();
+        assertEquals("test", value.getString());
+    }
+
+    @Test
+    void absValue() {
+        JsonValue value = JsonValue.of(FloatNode.valueOf(-1.2345f));
+        value.absValue();
+        assertEquals(1.2345f, value.getFloat32());
+
+        value = JsonValue.of(LongNode.valueOf(-12345L));
+        value.absValue();
+        assertEquals(12345L, value.getInt64());
+
+        value = JsonValue.of(TextNode.valueOf("test"));
+        value.absValue();
+        assertEquals("test", value.getString());
+    }
+
+    @Test
+    void asArray() {
+        final float[] floats = new float[] { 1.0f, 2.0f, 3.0f };
+        JsonValue value = JsonValue.of("[1.0,2.0,3.0]");
+        JsonValue[] arr = value.asArray();
+        assertEquals(floats.length, arr.length);
+        for (int i = 0; i < arr.length; i++) {
+            assertEquals(floats[i], arr[i].getFloat32());
+        }
+    }
+
+    @Test
+    void asBitmap() {
+        JsonValue value = JsonValue.of("{\"a\":true,\"b\":1,\"c\":false,\"d\":\"test\"}");
+        Map<String, Boolean> bm = value.getBitmap();
+        assertEquals(4, bm.size());
+        assertEquals(true, bm.get("a"));
+        assertEquals(true, bm.get("b"));
+        assertEquals(false, bm.get("c"));
+        assertEquals(false, bm.get("d"));
     }
 
     private static class TestObject {

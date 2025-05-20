@@ -95,7 +95,7 @@
                   <topic>stations/1/safecurrent/limit</topic>
                   <!-- This template is not realistic, however since we write and read from the same topic
                        for testing, and we want to test the inMessage filter we send the expected response message  -->
-                  <template>{ "stationId": 1, "value": "12 Amperes" }</template>
+                  <template>{ "stationId": 1, "value": "0.01234" }</template>
                 </readCmdMessage>
                 <writeCmdMessage>
                   <topic>stations/1/safecurrent/limit</topic>

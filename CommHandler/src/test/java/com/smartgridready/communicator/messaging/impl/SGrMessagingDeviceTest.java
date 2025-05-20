@@ -51,13 +51,13 @@ class SGrMessagingDeviceTest {
             // use device to read
             Value safeCurrent = msgDevice.getVal(FUNCIONAL_PROFILE, "SafeCurrent");
             LOG.info("Safe current read: {}", safeCurrent.getString());
-            assertEquals("12 Amperes", safeCurrent.getString());
+            assertEquals(12.34f, safeCurrent.getFloat32());
 
             // use data point to read
             var msgDataPoint = msgDevice.getDataPoint(FUNCIONAL_PROFILE, "SafeCurrent");
             safeCurrent = msgDataPoint.getVal();
             LOG.info("Safe current read: {}", safeCurrent.getString());
-            assertEquals("12 Amperes", safeCurrent.getString());
+            assertEquals(12.34f, safeCurrent.getFloat32());
 
             msgDevice.disconnect();
         }
@@ -284,7 +284,7 @@ class SGrMessagingDeviceTest {
                     LOG.info("Read dataPoint: {}", dataPointValue)
             );
             assertEquals(4, readValues.size());
-            assertEquals("profile: EVSE_Station1, dataPoint: SafeCurrent, value: 12 Amperes", readValues.get(0).toString());
+            assertEquals("profile: EVSE_Station1, dataPoint: SafeCurrent, value: 12.34", readValues.get(0).toString());
             assertEquals("profile: EVSE_Station1, dataPoint: MaxReceiveTimeSec, value: read", readValues.get(1).toString());
             assertEquals("profile: EVSE_Station1, dataPoint: ChargingCurrentMin, value: No value available for functionalProfile=EVSE_Station1, dataPoint=ChargingCurrentMin. Try calling subscribe()", readValues.get(2).toString());
             assertEquals("profile: EVSE_Station1, dataPoint: ChargingCurrentMax, value: No value available for functionalProfile=EVSE_Station1, dataPoint=ChargingCurrentMax. Try calling subscribe()", readValues.get(3).toString());
