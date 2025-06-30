@@ -162,7 +162,7 @@ public class AsyncClemapWagoTest {
         props.put("sensor_id", "63343431ecf2cf013a1e5a9f");
 
         DeviceFrame deviceDesc = new DeviceDescriptionLoader()
-                .load(XML_BASE_DIR, "SGr_02_0018_CLEMAP_EIcloudEnergyMonitor_V1.0.0.xml", props);
+                .load(XML_BASE_DIR, "SGr_00_0018_CLEMAP_EnergyMonitor_RestAPICloud_V1.1.xml", props);
 
         GenHttpClientFactory factory = DriverFactoryLoader.getRestApiDriver();
         SGrRestApiDevice clemapDevice = new SGrRestApiDevice(deviceDesc, factory);

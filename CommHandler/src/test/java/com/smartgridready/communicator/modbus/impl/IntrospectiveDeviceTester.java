@@ -157,7 +157,7 @@ public class IntrospectiveDeviceTester {
 
         DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
         DeviceFrame devDesc = loader.load( XML_BASE_DIR,
-                "SGr_02_0018_CLEMAP_EIcloudEnergyMonitor_V1.0.0.xml",
+                "SGr_00_0018_CLEMAP_EnergyMonitor_RestAPICloud_V1.1.xml",
                 properties);
 
         GenHttpClientFactory factory = DriverFactoryLoader.getRestApiDriver();
