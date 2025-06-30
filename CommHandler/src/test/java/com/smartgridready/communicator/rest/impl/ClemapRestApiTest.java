@@ -49,7 +49,7 @@ class ClemapRestApiTest {
 	
 		DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
 		
-		DeviceFrame clemapDeviceDesc = loader.load(XML_BASE_DIR, "SGr_02_0018_CLEMAP_EIcloudEnergyMonitor_V1.0.0.xml", props);
+		DeviceFrame clemapDeviceDesc = loader.load(XML_BASE_DIR, "SGr_00_0018_CLEMAP_EnergyMonitor_RestAPICloud_V1.1.xml", props);
  
 		try {
 			GenHttpClientFactory factory = DriverFactoryLoader.getRestApiDriver();
