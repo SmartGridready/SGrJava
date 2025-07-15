@@ -65,10 +65,10 @@ public enum DataType {
         // Handle ENUM and BITMAP datatypes, since their range is not static and defined within the device
         // specific EI-XML.
         if (dataTypeOpt.isPresent() && dataTypeOpt.get().getType() == ENUM) {
-            // Clone the ENUM datatype and enhance it with the range given by the datapoint read from the EI-XML
+            // Clone the ENUM datatype and enhance it with the range given by the data point read from the EI-XML
             dataTypeOpt = Optional.of(cloneUsingRange(dataTypeOpt.get(), getEnumRange(dataTypeProduct)));
         } else if (dataTypeOpt.isPresent() && dataTypeOpt.get().getType() == BITMAP) {
-            // Clone the BITMAP datatype and enhance it with the range given by datapoint read from the EI-XML
+            // Clone the BITMAP datatype and enhance it with the range given by data point read from the EI-XML
             dataTypeOpt = Optional.of(cloneUsingRange(dataTypeOpt.get(), getBitmapRange(dataTypeProduct)));
         }
         return dataTypeOpt;

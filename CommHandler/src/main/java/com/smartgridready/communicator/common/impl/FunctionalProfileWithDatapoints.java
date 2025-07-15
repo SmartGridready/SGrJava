@@ -11,11 +11,11 @@ import com.smartgridready.ns.v0.MessagingFunctionalProfile;
 import com.smartgridready.ns.v0.ModbusFunctionalProfile;
 import com.smartgridready.ns.v0.RestApiFunctionalProfile;
 
-class FunctionalProfileWithDatapoints {
+class FunctionalProfileWithDataPoints {
 
     private final List<? extends DataPointBase> dataPoints;
 
-    private FunctionalProfileWithDatapoints(FunctionalProfileBase functionalProfile) {
+    private FunctionalProfileWithDataPoints(FunctionalProfileBase functionalProfile) {
 
         if (functionalProfile instanceof ModbusFunctionalProfile) {
             dataPoints = ((ModbusFunctionalProfile)functionalProfile).getDataPointList().getDataPointListElement();
@@ -37,8 +37,8 @@ class FunctionalProfileWithDatapoints {
         }
     }
 
-    public static FunctionalProfileWithDatapoints of (FunctionalProfileBase functionalProfile) {
-        return new FunctionalProfileWithDatapoints(functionalProfile);
+    public static FunctionalProfileWithDataPoints of (FunctionalProfileBase functionalProfile) {
+        return new FunctionalProfileWithDataPoints(functionalProfile);
     }
 
     @SuppressWarnings("unchecked")

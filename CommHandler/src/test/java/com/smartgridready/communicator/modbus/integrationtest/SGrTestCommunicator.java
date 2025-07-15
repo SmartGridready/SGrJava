@@ -143,14 +143,14 @@ public class SGrTestCommunicator extends JFrame {
 
         detailsPanel.removeAll();
 
-        addComponent(detailsPanel, createDatapointInfoPanel(selectedNode), 0, 0);
+        addComponent(detailsPanel, createDataPointInfoPanel(selectedNode), 0, 0);
         addComponent(detailsPanel, createActionPanel(selectedNode), 0, 1 );
 
         detailsPanel.revalidate();
         detailsPanel.repaint();
     }
 
-    private JPanel createDatapointInfoPanel(DefaultMutableTreeNode selectedNode) {
+    private JPanel createDataPointInfoPanel(DefaultMutableTreeNode selectedNode) {
 
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new GridBagLayout());
@@ -344,7 +344,7 @@ public class SGrTestCommunicator extends JFrame {
             if (value instanceof BitmapValue) {
                 return Optional.of((BitmapValue)testDevice.getTestSystem().getVal(functionalProfile, dataPoint));
             } else {
-                showMessageDialog("Read bitmap value failed", new GenDriverException("Read datapoint is not a bitmap."));
+                showMessageDialog("Read bitmap value failed", new GenDriverException("Read data point is not a bitmap."));
             }
         } catch (Exception e) {
             showMessageDialog("Read bitmap value failed.", e);
@@ -428,7 +428,7 @@ public class SGrTestCommunicator extends JFrame {
             if (enumValue instanceof EnumValue) {
                 return Optional.of((EnumValue) enumValue);
             } else {
-                showMessageDialog("Read enum value failed.", new GenDriverException("Read datapoint is not an enum."));
+                showMessageDialog("Read enum value failed.", new GenDriverException("Read data point is not an enum."));
             }
         } catch (Exception e) {
             showMessageDialog("Read enum value failed.", e);
@@ -485,7 +485,7 @@ public class SGrTestCommunicator extends JFrame {
                     dpDescriptor.dataPoint,
                     BooleanValue.of(event.getStateChange() == ItemEvent.SELECTED));
         } catch (Exception e) {
-            showMessageDialog("Write digital datapoint failed.", e);
+            showMessageDialog("Write digital data point failed.", e);
         }
     }
 

@@ -78,14 +78,14 @@ public abstract class SGrDeviceBase<
 
     protected abstract Optional<F> findProfile(String profileName);
 
-    protected abstract Optional<P> findDataPointForProfile(F functionalProfile, String datapointName);
+    protected abstract Optional<P> findDataPointForProfile(F functionalProfile, String dataPointName);
 
-    protected P findDatapoint(String profileName, String datapointName) throws GenDriverException {
+    protected P findDataPoint(String profileName, String dataPointName) throws GenDriverException {
         Optional<F> functionalProfile = findProfile(profileName);
         if (functionalProfile.isPresent()) {
-            Optional<P> dataPoint = findDataPointForProfile(functionalProfile.get(), datapointName);
+            Optional<P> dataPoint = findDataPointForProfile(functionalProfile.get(), dataPointName);
             return dataPoint.orElseThrow(() ->
-                    new GenDriverException("Data-point with name " + datapointName + " not found"));
+                    new GenDriverException("Data-point with name " + dataPointName + " not found"));
         } else {
             throw new GenDriverException("Functional profile with name " + profileName + " not found");
         }
@@ -110,7 +110,7 @@ public abstract class SGrDeviceBase<
         DataDirectionProduct dRWPType = dataPoint.getDataPoint().getDataDirection();
         if (!direction.opAllowedTypes.contains(dRWPType)) {
             throw new GenDriverException(String.format(
-                    "Operation %s not allowed on datapoint %s",
+                    "Operation %s not allowed on data point %s",
                     direction.name(),
                     dataPoint.getDataPoint().getDataPointName()));
         }
@@ -229,7 +229,7 @@ public abstract class SGrDeviceBase<
         List<DataPoint
                 > result = new ArrayList<>();
 
-        var dataPoints = FunctionalProfileWithDatapoints.of(functionalProfile).getDataPoints();
+        var dataPoints = FunctionalProfileWithDataPoints.of(functionalProfile).getDataPoints();
         if (dataPoints != null) {
             for (var dataPoint : dataPoints) {
                 result.add(getDataPoint(functionalProfileName, dataPoint.getDataPoint().getDataPointName()));
@@ -241,7 +241,7 @@ public abstract class SGrDeviceBase<
     @Override
     public DataPoint getDataPoint(String functionalProfileName, String dataPointName) throws GenDriverException {
 
-        var dataPointElem =  findDatapoint(functionalProfileName, dataPointName);
+        var dataPointElem =  findDataPoint(functionalProfileName, dataPointName);
         var dataPoint = dataPointElem.getDataPoint();
 
         var genericAttributes = Optional.ofNullable(dataPointElem.getGenericAttributeList())

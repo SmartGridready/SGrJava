@@ -21,7 +21,10 @@ descriptions:
     parameters:
       - name: tcp_address
         value: '0.0.0.0'
-  - file: SGr_04_0014_0000_WAGO_SmartMeterV0.2.3.xml
+  - file: SGr_00_0014_0000_WAGO_SmartMeter_V0.3.xml
+    parameters:
+      - name: serial_port
+        value: COM3
   - file: SGr_04_0015_xxxx_StiebelEltron_HeatPump_V1.0.0.xml
     parameters:
       - name: tcp_address
@@ -83,4 +86,8 @@ descriptions:
   - file: mvpEi4Modbus_0000_0036_0030_4_0.1_SGCP_BiDirFlexMgmt.xml
     parameters:
       - name: tcp_address
+        value: '0.0.0.0'
+  - file: SGr_04_0014_0000_WAGO_Testsystem_ModbusTCP_V1.0.xml
+    parameters:
+      - name: ipaddress
         value: '0.0.0.0'

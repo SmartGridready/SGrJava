@@ -269,7 +269,7 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 				return dataPoint.get();
 			}
 		}
-		throw new GenDriverException(String.format("Datapoint profile=%s name=%s not found", profileName, dataPointName));
+		throw new GenDriverException(String.format("DataPoint profile=%s name=%s not found", profileName, dataPointName));
 	}
 	
 	protected Optional<RestApiFunctionalProfile> findProfile(String profileName) {
@@ -281,7 +281,7 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 	protected Optional<RestApiDataPoint> findDataPointForProfile(RestApiFunctionalProfile aProfile,
 			String aDataPointName) {
 		return aProfile.getDataPointList().getDataPointListElement().stream()
-				.filter(datapoint -> datapoint.getDataPoint().getDataPointName().equals(aDataPointName))
+				.filter(dataPoint -> dataPoint.getDataPoint().getDataPointName().equals(aDataPointName))
 				.findFirst();				
 	}
 

@@ -1,6 +1,7 @@
 package com.smartgridready.communicator.common.impl;
 
 import com.smartgridready.communicator.common.api.values.ArrayValue;
+import com.smartgridready.communicator.common.api.values.BooleanValue;
 import com.smartgridready.communicator.common.api.values.DataType;
 import com.smartgridready.communicator.common.api.values.DataTypeInfo;
 import com.smartgridready.communicator.common.api.values.Float32Value;
@@ -72,7 +73,7 @@ class SGrDeviceBaseTest {
     private static final Value INTEGER_VALUE_20482048 = Int64Value.of(20482048L);
     private static final Value DOUBLE_VALUE_4096_00009999 = Float64Value.of(4096.00009999d);
 
-    private static final String CLEMAP_METER_RESP = "[{\"sensor_id\":\"63343431ecf2cf013a1e5a9f\",\"opm\":{\"value\":1,\"last_updt\":\"2022-11-07T15:19:54.560Z\"},\"ten_sec\":{\"p_l1\":1.5,\"p_l2\":2,\"p_l3\":4.0,\"q_l1\":2.3,\"q_l2\":0,\"q_l3\":4,\"last_upd\":\"2022-11-07T15:21:50.000Z\"},\"one_min\":{\"p_l1\":0.003,\"p_l2\":0,\"p_l3\":0,\"q_l1\":-0.002,\"q_l2\":0,\"q_l3\":0,\"avg_energy_l1\":0,\"avg_energy_l2\":0,\"avg_energy_l3\":0,\"v_l1\":227.869,\"v_l2\":0,\"v_l3\":0,\"i_l1\":0.001,\"i_l2\":0,\"i_l3\":0,\"s_l1\":0.173,\"s_l2\":0,\"s_l3\":0,\"pf_l1\":0.085,\"pf_l2\":1,\"pf_l3\":1,\"last_update\":\"2022-11-07T15:19:47.579Z\"}}]";
+    private static final String CLEMAP_METER_RESP = "[{\"sensor_id\":\"63343431ecf2cf013a1e5a9f\",\"opm\":{\"value\":1,\"last_updt\":\"2022-11-07T15:19:54.560Z\"},\"ten_sec\":{\"p_l1\":0.0015,\"p_l2\":0.002,\"p_l3\":0.004,\"q_l1\":0.0023,\"q_l2\":0,\"q_l3\":0.004,\"last_upd\":\"2022-11-07T15:21:50.000Z\"},\"one_min\":{\"p_l1\":0.003,\"p_l2\":0,\"p_l3\":0,\"q_l1\":-0.002,\"q_l2\":0,\"q_l3\":0,\"avg_energy_l1\":0,\"avg_energy_l2\":0,\"avg_energy_l3\":0,\"v_l1\":227.869,\"v_l2\":0,\"v_l3\":0,\"i_l1\":0.001,\"i_l2\":0,\"i_l3\":0,\"s_l1\":0.173,\"s_l2\":0,\"s_l3\":0,\"pf_l1\":0.085,\"pf_l2\":1,\"pf_l3\":1,\"last_update\":\"2022-11-07T15:19:47.579Z\"}}]";
 
     private static final String CLEMAP_AUTH_RESP = "{\r\n"
             + "    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJ1c2VySWQiOiI2MzM0MzI5MWVjZjJjZjAxM2ExZTVhOWQiLCJpYXQiOjE2NjgwOTI1NzMsImV4cCI6MTY2ODE3ODk3MywiYXVkIjoiaHR0cHM6Ly95b3VyZG9tYWluLmNvbSIsImlzcyI6ImZlYXRoZXJzIiwic3ViIjoiNjMzNDMyOTFlY2YyY2YwMTNhMWU1YTlkIiwianRpIjoiNTU2NmU2M2QtNTVmOC00MDEyLWJlYTUtOTJjYWE0NDIwYzQ3In0.xVOrspfi1E61Jb0BXBt37wgqGcnkPueMcHh1_zI-xXM\",\r\n"
@@ -291,7 +292,7 @@ class SGrDeviceBaseTest {
 
     @Test
     void getEnumDataPoint() throws Exception {
-        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_Testsystem_V1.0.xml", null);
+        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_Testsystem_ModbusTCP_V1.0.xml", null);
         var dataPoint = device.getDataPoint("DigitalRegister_M2_OUT_Enum", "Register");
 
         List<EnumValue> expected = new ArrayList<>();
@@ -314,10 +315,10 @@ class SGrDeviceBaseTest {
 
         var sgReadyStateAndOpModeCmds = new String[] {"HP_LOCKED", "HP_NORMAL", "HP_INTENSIFIED", "HP_FORCED" };
 
-        var expectedDatapointEnumsMap = new HashMap<String, String[]>();
-        expectedDatapointEnumsMap.put("HPOpModeCmd", hpOpModeCmdEnums);
-        expectedDatapointEnumsMap.put("SGReadyOpModeCmd", sgReadyStateAndOpModeCmds);
-        expectedDatapointEnumsMap.put("SGReadyState", sgReadyStateAndOpModeCmds);
+        var expectedDataPointEnumsMap = new HashMap<String, String[]>();
+        expectedDataPointEnumsMap.put("HPOpModeCmd", hpOpModeCmdEnums);
+        expectedDataPointEnumsMap.put("SGReadyOpModeCmd", sgReadyStateAndOpModeCmds);
+        expectedDataPointEnumsMap.put("SGReadyState", sgReadyStateAndOpModeCmds);
 
         var device = createSGrModbusDevice("SGr_04_0015_xxxx_StiebelEltron_HeatPump_V1.0.0.xml", null);
 
@@ -331,15 +332,15 @@ class SGrDeviceBaseTest {
                         }
                     }));
 
-        assertArrayEquals(expectedDatapointEnumsMap.get("HPOpModeCmd"), enumResults.get("HPOpModeCmd"));
-        assertArrayEquals(expectedDatapointEnumsMap.get("SGReadyOpModeCmd"), enumResults.get("SGReadyOpModeCmd"));
-        assertArrayEquals(expectedDatapointEnumsMap.get("SGReadyState"), enumResults.get("SGReadyState"));
+        assertArrayEquals(expectedDataPointEnumsMap.get("HPOpModeCmd"), enumResults.get("HPOpModeCmd"));
+        assertArrayEquals(expectedDataPointEnumsMap.get("SGReadyOpModeCmd"), enumResults.get("SGReadyOpModeCmd"));
+        assertArrayEquals(expectedDataPointEnumsMap.get("SGReadyState"), enumResults.get("SGReadyState"));
     }
 
     @Test
     void getBitmapDataPoint() throws Exception {
 
-        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_Testsystem_V1.0.xml", null);
+        var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_Testsystem_ModbusTCP_V1.0.xml", null);
         var dataPoint = device.getDataPoint("DigitalRegister_M1_IN_1", "Register");
 
         List<Value> expected = new ArrayList<>();
@@ -380,7 +381,7 @@ class SGrDeviceBaseTest {
         var device = createSGrModbusDevice("SGr_04_0014_0000_WAGO_SmartMeterV0.2.1-Arrays.xml", properties);
         var dataPoint = device.getDataPoint("VoltageAC", "Voltage-L1-L2-L3");
 
-        // Check the datapoint's array length
+        // Check the data point's array length
         assertEquals(3, dataPoint.getArrayLen());
 
         // Check read value
@@ -407,7 +408,7 @@ class SGrDeviceBaseTest {
         Mockito.lenient().when(uriBuilder.setQueryString(any())).thenReturn(uriBuilder);
         when(uriBuilder.build()).thenReturn(TEST_URI);
 
-        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml", null);
+        var device = createSGrRestApiDevice("SGr_00_0018_CLEMAP_EnergyMonitor_RestAPICloud_V1.1.xml", null);
         var dataPoint = device.getDataPoint("ActivePowerAC", "ActivePowerACtot");
 
         when(httpRequest.execute()).thenReturn(GenHttpResponse.of(CLEMAP_AUTH_RESP));
@@ -419,7 +420,7 @@ class SGrDeviceBaseTest {
 
         when(httpRequest.execute()).thenReturn(GenHttpResponse.of(CLEMAP_METER_RESP));
         var value = dataPoint.getVal();
-        assertEquals(0.0075000003f, value.getFloat32());
+        assertEquals(0.0075, value.getFloat64());
     }
 
     @Test
@@ -432,8 +433,8 @@ class SGrDeviceBaseTest {
         Mockito.lenient().when(uriBuilder.setQueryString(any())).thenReturn(uriBuilder);
         when(uriBuilder.build()).thenReturn(TEST_URI);
 
-        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml", null);
-        var dataPoint = device.getDataPoint("ActivePowerAC", "ActivePowerACtot");
+        var device = createSGrRestApiDevice("SGr_00_0018_CLEMAP_EnergyMonitor_RestAPICloud_V1.1.xml", null);
+        var dataPoint = device.getDataPoint("GPIO", "ContactRW");
 
         when(httpRequest.execute()).thenReturn(GenHttpResponse.of(CLEMAP_AUTH_RESP));
         device.connect();
@@ -442,23 +443,23 @@ class SGrDeviceBaseTest {
         Mockito.reset(httpRequest);
 
         when(httpRequest.execute()).thenReturn(GenHttpResponse.of(""));
-        dataPoint.setVal(Float32Value.of(0.05f));
+        dataPoint.setVal(BooleanValue.of(false));
         verify(httpRequest).setUri(any(URI.class));
         verify(httpRequest).setHttpMethod(HttpMethod.POST);
-        verify(httpRequest).setBody("{ \"value\": 49.99999837018557 }");
+        verify(httpRequest).setBody("{ \"pin\": 2, \"value\": false }");
         verify(httpRequest).execute();
     }
 
     @Test
     void getConfiguration() throws Exception {
-        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml", null);
+        var device = createSGrRestApiDevice("SGr_00_0018_CLEMAP_EnergyMonitor_RestAPICloud_V1.1.xml", null);
         var configuration = device.getDeviceConfigurationInfo();
         checkBaseUriConfigList(configuration);
     }
 
     @Test
     void getDeviceInfoWithConfiguration() throws Exception {
-        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml", null);
+        var device = createSGrRestApiDevice("SGr_00_0018_CLEMAP_EnergyMonitor_RestAPICloud_V1.1.xml", null);
         var deviceInfo = device.getDeviceInfo();
         var configurationInfo = deviceInfo.getConfigurationInfo();
         checkBaseUriConfigList(configurationInfo);
@@ -467,7 +468,7 @@ class SGrDeviceBaseTest {
     @Test
     void getDataPointInfoWithDynamicRequestParameters() throws Exception {
 
-        var device = createSGrRestApiDevice("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml", null);
+        var device = createSGrRestApiDevice("SGr_00_0018_CLEMAP_EnergyMonitor_RestAPICloud_V1.1.xml", null);
         var dataPoint = device.getDataPoint("GPIO", "ContactRW");
         var dynamicRequestParameters = dataPoint.getDynamicRequestParameters();
 
@@ -509,15 +510,15 @@ class SGrDeviceBaseTest {
 
     private void checkVoltageACProfileGenericAttributes(FunctionalProfile profile) {
 
-       var genericAttributes = profile.getGenericAttributes();
+        var genericAttributes = profile.getGenericAttributes();
 
-       assertEquals(1, genericAttributes.size());
+        assertEquals(1, genericAttributes.size());
 
-       var genAttr = genericAttributes.stream().findFirst().orElseGet(() -> fail("Functional Profile's GenericAttribute is missing"));
-       assertEquals("LoadReduction", genAttr.getName());
-       assertEquals(DataType.FLOAT32, genAttr.getDataType().getType());
-       assertEquals(Units.PERCENT, genAttr.getUnit());
-       assertEquals(20.5, genAttr.getValue().getFloat32());
+        var genAttr = genericAttributes.stream().findFirst().orElseGet(() -> fail("Functional Profile's GenericAttribute is missing"));
+        assertEquals("LoadReduction", genAttr.getName());
+        assertEquals(DataType.FLOAT32, genAttr.getDataType().getType());
+        assertEquals(Units.PERCENT, genAttr.getUnit());
+        assertEquals(20.5, genAttr.getValue().getFloat32());
     }
 
     private void checkFunctionalProfiles(List<FunctionalProfile> functionalProfiles) {
@@ -574,13 +575,13 @@ class SGrDeviceBaseTest {
 
     private void checkBaseUriConfigList(List<ConfigurationValue> configurationValues) {
 
-        var configRecord = configurationValues.stream().findFirst();
+        var configRecord = configurationValues.stream().filter(r -> r.getName().equals("baseUri")).findFirst();
         assertTrue(configRecord.isPresent());
         assertEquals("baseUri", configRecord.get().getName());
         assertEquals(DataType.STRING, configRecord.get().getDataType().getType());
 
-        assertEquals("The base URI to connect to the service", configRecord.get().getDescriptions().get(Language.EN));
-        assertEquals("Die Basis-URI des service", configRecord.get().getDescriptions().get(Language.DE));
+        assertEquals("Base address for accessing the resource.", configRecord.get().getDescriptions().get(Language.EN));
+        assertEquals("Basis-Adresse für Zugriffe auf die Ressource.", configRecord.get().getDescriptions().get(Language.DE));
     }
 
     @SuppressWarnings("SameParameterValue")

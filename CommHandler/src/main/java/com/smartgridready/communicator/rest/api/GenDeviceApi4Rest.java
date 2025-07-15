@@ -54,7 +54,7 @@ public interface GenDeviceApi4Rest extends GenDeviceApi {
      * Reads a value in its string representation from the REST API device.
      *
      * @param profileName The name of the functional profile.
-     * @param dataPointName The name of the datapoint within the functional profile.
+     * @param dataPointName The name of the data point within the functional profile.
      * @return The value read from the device.
      * @throws IOException If the communication with the server failed.
      * @throws RestApiServiceCallException If the service call could not be executed on the remote side.
@@ -68,7 +68,7 @@ public interface GenDeviceApi4Rest extends GenDeviceApi {
      * Reads a value in its string representation from the REST API device.
      *
      * @param profileName The name of the functional profile.
-     * @param dataPointName The name of the datapoint within the functional profile.
+     * @param dataPointName The name of the data point within the functional profile.
      * @param parameters Key value pairs with request parameters
      * @return The value read from the device.
      * @throws IOException If the communication with the server failed.
@@ -90,9 +90,9 @@ public interface GenDeviceApi4Rest extends GenDeviceApi {
      * depending on the value parameter defined in the external interface XML.
      *
      * @param profileName The name of the functional profile.
-     * @param dataPointName The name of the datapoint within the functional profile.
+     * @param dataPointName The name of the data point within the functional profile.
      * @param value The value to be written. Will replace the value tagged with {@code [[value]]} within the
-     *              external interface {@link com.smartgridready.ns.v0.RestApiServiceCall} element for the given datapoint.
+     *              external interface {@link com.smartgridready.ns.v0.RestApiServiceCall} element for the given data point.
      * @throws IOException If the communication with the server failed.
      * @throws RestApiServiceCallException If the service call could not be executed on the remote side.
      * @throws RestApiResponseParseException If parsing of the service response failed.

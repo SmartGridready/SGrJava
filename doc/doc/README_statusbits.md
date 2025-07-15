@@ -4,7 +4,7 @@
 Some devices such as heat pumps hold their status within bit-registers. To get access to a specific status bit-value 
 the related status register must be read from the device. Then the bit-value can be determined by applying a bit mask.
 
-## Definition of a status-bit register datapoint
+## Definition of a status-bit register data point
 The status-bit register is defined within the "sgr:basicDataTypeElement" as "sgr:enum2bitmapIndex" datatype.
 (as a sibling of the other datatypes like int8, float32...)
 It contains an enumeration type for a specific enumeration-value to bit-index mapping, in our case "sgr:sgrHPOpstateStiebel"

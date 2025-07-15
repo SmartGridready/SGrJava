@@ -35,7 +35,7 @@ public class SGrContactsDevice extends SGrDeviceBase<
 
     @Override
     public Value getVal(String profileName, String dataPointName) throws GenDriverException {
-        DataPointBase dataPoint = findDatapoint(profileName, dataPointName);
+        DataPointBase dataPoint = findDataPoint(profileName, dataPointName);
         checkReadWritePermission(dataPoint, RwpDirections.READ);
 
         boolean[] contactStates = aDriver.readContacts(profileName, dataPointName);
@@ -67,7 +67,7 @@ public class SGrContactsDevice extends SGrDeviceBase<
     @Override
     public void setVal(String profileName, String dataPointName, Value value)
             throws GenDriverException {
-        DataPointBase dataPoint = findDatapoint(profileName, dataPointName);
+        DataPointBase dataPoint = findDataPoint(profileName, dataPointName);
         checkReadWritePermission(dataPoint, RwpDirections.WRITE);
 
         boolean[] contactStates;
@@ -110,9 +110,9 @@ public class SGrContactsDevice extends SGrDeviceBase<
 
     @Override
     protected Optional<DataPointBase> findDataPointForProfile(ContactFunctionalProfile functionalProfile,
-            String datapointName) {
+            String dataPointName) {
         return functionalProfile.getDataPointList().getDataPointListElement().stream()
-            .filter(dataPoint -> dataPoint.getDataPoint().getDataPointName().equals(datapointName))
+            .filter(dataPoint -> dataPoint.getDataPoint().getDataPointName().equals(dataPointName))
             .findFirst();
     }
 

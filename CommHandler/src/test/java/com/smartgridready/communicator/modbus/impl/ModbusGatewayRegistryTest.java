@@ -117,7 +117,7 @@ class ModbusGatewayRegistryTest {
         properties.put("ipaddress", "127.0.0.1");
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        URL deviceDescUrl = classloader.getResource("SGr_04_0014_0000_WAGO_Testsystem_V1.0.xml");
+        URL deviceDescUrl = classloader.getResource("SGr_04_0014_0000_WAGO_Testsystem_ModbusTCP_V1.0.xml");
         DeviceFrame deviceDesc = new DeviceDescriptionLoader()
                 .load("", Optional.ofNullable(deviceDescUrl != null ? deviceDescUrl.getPath() : null).orElse(""), properties);
 

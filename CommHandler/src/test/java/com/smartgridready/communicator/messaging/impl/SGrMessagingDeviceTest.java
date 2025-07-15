@@ -212,7 +212,7 @@ class SGrMessagingDeviceTest {
             }
         });
 
-        // Test with datapoint API
+        // Test with data point API
         doUnsubscribeTest(msgDevice -> {
             try {
                 var dataPoint = msgDevice.getDataPoint(FUNCIONAL_PROFILE, CHARGING_CURRENT_MAX);
@@ -303,7 +303,7 @@ class SGrMessagingDeviceTest {
             final SynchronousQueue<Value> resultsMin = new SynchronousQueue<>();
             final SynchronousQueue<Value> resultsMax = new SynchronousQueue<>();
 
-            // subscribe() to two datapoints that use the same topic but different filters.
+            // subscribe() to two data pointss that use the same topic but different filters.
             // They will have different records within the cache.
             msgDevice.subscribe(FUNCIONAL_PROFILE, CHARGING_CURRENT_MIN, result -> pushToResultsQueue(resultsMin, result));
             msgDevice.subscribe(FUNCIONAL_PROFILE, CHARGING_CURRENT_MAX, result -> pushToResultsQueue(resultsMax, result));

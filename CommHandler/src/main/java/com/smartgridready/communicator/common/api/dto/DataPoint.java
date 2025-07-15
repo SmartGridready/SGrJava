@@ -80,7 +80,7 @@ public class DataPoint {
     }
 
     /**
-     * @return The units of the datapoint value
+     * @return The units of the data point value
      */
     public Units getUnit() {
         return unit;
@@ -108,14 +108,14 @@ public class DataPoint {
     }
 
     /**
-     * @return The array length if the datapoint represents an array of values.
+     * @return The array length if the data point represents an array of values.
      */
     public Integer getArrayLen() {
         return arrayLen;
     }
 
     /**
-     * @return A list of generic attributes for this datapoint.
+     * @return A list of generic attributes for this data point.
      */
     public List<GenericAttribute> getGenericAttributes() {
         return genericAttributes;
@@ -131,7 +131,7 @@ public class DataPoint {
     }
 
     /**
-     * Read the value from this datapoint
+     * Read the value from this data point
      * @return The value read.
      * @throws GenDriverException On a generic error
      * @throws RestApiResponseParseException If the web service response could not be parsed
@@ -145,7 +145,7 @@ public class DataPoint {
     }
 
     /**
-     * Read the value from this datapoint, with request-specific parameters
+     * Read the value from this data point, with request-specific parameters
      * @param parameters Key value pairs with request parameters 
      * @return The value read.
      * @throws GenDriverException On a generic error
@@ -224,7 +224,7 @@ public class DataPoint {
     }
 
     /**
-     * Subscribes to messages that are related to the given datapoint
+     * Subscribes to messages that are related to the given data point
      * This operation is supported for messaging devices only
      * @param callbackFunction A callback function that provides the received value
      * @throws GenDriverException if an error occurs
@@ -238,7 +238,7 @@ public class DataPoint {
     }
 
     /**
-     * Unsubscribes from messages that are related to a given datapoint
+     * Unsubscribes from messages that are related to a given data point
      * This operation is supported for messaging devices only
      * @throws GenDriverException if an error occurs
      */

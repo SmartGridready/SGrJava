@@ -203,7 +203,7 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
 				return getVal(dataPoint.get());
 			}
 		}
-		throw new GenDriverException(String.format("Functional profile '%s' / datapoint '%s' not found.", sProfileName, sDataPointName));
+		throw new GenDriverException(String.format("Functional profile '%s' / data point '%s' not found.", sProfileName, sDataPointName));
 	}
 
 	@Override
@@ -246,7 +246,7 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
 			BigInteger mbRegRef = aDataPoint.getModbusDataPointConfiguration().getAddress();
 			BigInteger addrDiff = mbRegRef.subtract(blockAddress);
 			if (addrDiff.signum() < 0) {
-				throw new GenDriverException("Error in EI-XML, datapoint address must be >= timeSyncBlock address");
+				throw new GenDriverException("Error in EI-XML, data point address must be >= timeSyncBlock address");
 			}
 			
 			ModbusInterfaceDescription modbusInterfaceDesc = myDeviceDescription.getInterfaceList().getModbusInterface().getModbusInterfaceDescription();
@@ -476,7 +476,7 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
 	public void setVal(String sProfileName, String sDataPointName, Value value)
 			throws GenDriverException, GenDriverSocketException, GenDriverModbusException {
 
-		ModbusDataPoint dataPoint = findDatapoint(sProfileName, sDataPointName);
+		ModbusDataPoint dataPoint = findDataPoint(sProfileName, sDataPointName);
 
 		if (value instanceof ArrayValue) {
 			validateArrayLength(dataPoint, value);
@@ -669,7 +669,7 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
 	protected Optional<ModbusDataPoint> findDataPointForProfile(ModbusFunctionalProfile aProfile,
 																	 String aDataPointName) {
 		return aProfile.getDataPointList().getDataPointListElement().stream()
-				.filter(datapoint -> datapoint.getDataPoint().getDataPointName().equals(aDataPointName))
+				.filter(dataPoint -> dataPoint.getDataPoint().getDataPointName().equals(aDataPointName))
 				.findFirst();
 	}
 

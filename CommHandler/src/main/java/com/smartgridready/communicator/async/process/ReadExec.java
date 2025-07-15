@@ -22,13 +22,13 @@ public class ReadExec<R> extends Processor implements Executable {
     private Object finishedNotificationReceiver;
 
     private Disposable disposable;
-    public ReadExec(String functionalProfileName, String datapointName, ReadFunction<R> readFunction) {
-        this(functionalProfileName, datapointName, readFunction, Schedulers.io());
+    public ReadExec(String functionalProfileName, String dataPointName, ReadFunction<R> readFunction) {
+        this(functionalProfileName, dataPointName, readFunction, Schedulers.io());
     }
 
-    public ReadExec(String functionalProfileName, String datapointName, ReadFunction<R> readFunction, Scheduler scheduler) {
+    public ReadExec(String functionalProfileName, String dataPointName, ReadFunction<R> readFunction, Scheduler scheduler) {
         this.scheduler = scheduler;
-        this.deviceCallable = new DeviceReadCallable<>(readFunction, functionalProfileName, datapointName);
+        this.deviceCallable = new DeviceReadCallable<>(readFunction, functionalProfileName, dataPointName);
     }
 
     @Override
@@ -51,13 +51,13 @@ public class ReadExec<R> extends Processor implements Executable {
     public void handleSuccess(AsyncResult<R> result) {
         switch (result.getExecStatus()) {
             case SUCCESS:
-                LOG.info("ReadExec RESULT {} - {} SUCCESS, value={}", result.getProfileName(), result.getDatapointName(), result.getValue());
+                LOG.info("ReadExec RESULT {} - {} SUCCESS, value={}", result.getProfileName(), result.getDataPointName(), result.getValue());
                 break;
             case ERROR:
-                LOG.error("ReadExec RESULT {} - {} ERROR, error={}", result.getProfileName(), result.getDatapointName(), getExecThrowable().getMessage());
+                LOG.error("ReadExec RESULT {} - {} ERROR, error={}", result.getProfileName(), result.getDataPointName(), getExecThrowable().getMessage());
                 break;
             case PROCESSING:
-                LOG.warn("ReadExec RESULT {} - {} PROCESSING. Handle success called while still processing. This is unexpected behavior.", result.getProfileName(), result.getDatapointName());
+                LOG.warn("ReadExec RESULT {} - {} PROCESSING. Handle success called while still processing. This is unexpected behavior.", result.getProfileName(), result.getDataPointName());
                 break;
             default:
                 LOG.error("Unhandled execution status.");
@@ -66,7 +66,7 @@ public class ReadExec<R> extends Processor implements Executable {
     }
     
     public void handleError(Throwable t) {
-        LOG.error("ReadExec RESULT {} - {} ERROR", deviceCallable.getResult().getProfileName(), deviceCallable.getResult().getDatapointName());
+        LOG.error("ReadExec RESULT {} - {} ERROR", deviceCallable.getResult().getProfileName(), deviceCallable.getResult().getDataPointName());
         notifyFinished();
     }
 

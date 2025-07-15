@@ -438,7 +438,7 @@ class SetGetValConversionTest {
                         mapping.expectedModbusVal,
                         deviceFrame(true, BitOrder.BIG_ENDIAN, DataType.BOOLEAN, DataType.BOOLEAN));
 
-        // Add a boolean mapping to the modbus datapoint.
+        // Add a boolean mapping to the modbus data point.
         ModbusDataPoint modbusDataPoint = fixture.getDeviceFrame()
                 .getInterfaceList()
                 .getModbusInterface()
@@ -854,7 +854,7 @@ class SetGetValConversionTest {
         functionalProfile.getDataPointList().getDataPointListElement().add(modbDp(genericType, modbusType, "ActivePowerACL1", 1));
 
         if ((genericType != DataType.ENUM) && (genericType != DataType.BITMAP)) {
-            // This does not work with enums. The genericValue and modbusValue of the previous datapoint will be set to <null>
+            // This does not work with enums. The genericValue and modbusValue of the previous data point will be set to <null>
             functionalProfile.getDataPointList().getDataPointListElement().add(modbDp(genericType, modbusType, "ActivePowerAC-ARRAY", 3));
             functionalProfile.getDataPointList().getDataPointListElement().add(blockDp(genericType, modbusType));
             deviceFrame.getInterfaceList().getModbusInterface().getTimeSyncBlockNotification().add(timeSyncBlock());

@@ -30,21 +30,21 @@ external interface XML of the device.
 The block transfer is configured as follows:
 <table>
     <tr><th>Element</th><th>Description</th><th>Example value</th></tr>
-    <tr><td>sgr:blockCashName</td><td>The name of the block. This name will be referenced from the datapoints.</td><td>block4Current</td></tr>
+    <tr><td>sgr:blockCashName</td><td>The name of the block. This name will be referenced from the data points.</td><td>block4Current</td></tr>
     <tr><td>sgr:timeToLive</td><td>Time in ms, for how long the values are kept in the cache before a new modbus read is done</td><td>2000</td></tr>
     <tr><td>sgr:firstAddr</td><td>Address of the first register/value within the block.</td><td>212</td></tr>
     <tr><td>sgr:size</td><td>The number of (16bit) blocks to be read. The number of blocks being read must be consistent
-            with the datapoints read from the device. Example: If the current values for L1/L2/L3 are 32bit floats in 3
+            with the data points read from the device. Example: If the current values for L1/L2/L3 are 32bit floats in 3
             subsequent 16bit registers we need to read 6 blocks.</td><td>6</td></tr>
     <tr><td>sgr:registerType</td><td>The type of the registers.</td><td>HoldRegister</td></tr>
 </table>
 
-<b>Step 2:</b> Add datapoint members to the block.
-Adding the datapoints by adding a <b>sgr:blockCashName</b> element to the <b>sgr:dpListElement</b> of the respective datapoint.
+<b>Step 2:</b> Add data point members to the block.
+Adding the data points by adding a <b>sgr:blockCashName</b> element to the <b>sgr:dpListElement</b> of the respective data point.
 (marked with a big black X)
 
 ![img.png](images/Blocktransfer-2.png)
-<i>Figure 2: Adding datapoints a transfer block.</i>
+<i>Figure 2: Adding data points a transfer block.</i>
 
 ## Using within the Communicator
 The blocktransfer feature is completely transparent to the commhandler client. The client calls
@@ -66,7 +66,7 @@ Log output:
 ## SGrModbusDevice code
 The following code snippet shows the cache implementation for the block transfer.
 ```
-// Search the block related to the datapoint withing the cache 
+// Search the block related to the data point withing the cache 
 CacheRecord<ModbusReaderResponse> mbCacheRecord = myTimeSyncBlockReadCache.get(blockNotificationType);
 
 ModbusReaderResponse mbResponse;

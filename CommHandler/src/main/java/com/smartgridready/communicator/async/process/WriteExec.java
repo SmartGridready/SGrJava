@@ -25,13 +25,13 @@ public class WriteExec<V> extends Processor implements Executable {
     private Disposable disposable;
 
 
-    public WriteExec(String functionalProfileName, String datapointName, WriteFunction<V> writeFunction) {
-       this(functionalProfileName, datapointName, writeFunction, Schedulers.io());
+    public WriteExec(String functionalProfileName, String dataPointName, WriteFunction<V> writeFunction) {
+       this(functionalProfileName, dataPointName, writeFunction, Schedulers.io());
     }
 
-    public WriteExec(String functionalProfileName, String datapointName, WriteFunction<V> writeFunction, Scheduler scheduler) {
+    public WriteExec(String functionalProfileName, String dataPointName, WriteFunction<V> writeFunction, Scheduler scheduler) {
         this.scheduler = scheduler;
-        this.writeCallable = new DeviceWriteCallable<>(writeFunction, functionalProfileName, datapointName);
+        this.writeCallable = new DeviceWriteCallable<>(writeFunction, functionalProfileName, dataPointName);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class WriteExec<V> extends Processor implements Executable {
                   LOG.info("WriteExec PARALLEL: {} - {}", writeCallable.getProfileName(), writeCallable.getProfileName());
                   disposable = observable.subscribeOn(scheduler).subscribe(this::handleSuccess, this::handleError);
               } else {
-                  LOG.info("WriteExec SEQUENTIAL: {} - {}", writeCallable.getProfileName(), writeCallable.getDatapointName());
+                  LOG.info("WriteExec SEQUENTIAL: {} - {}", writeCallable.getProfileName(), writeCallable.getDataPointName());
                   disposable = observable.subscribe(this::handleSuccess, this::handleError);
               }
           } catch (Throwable e) {
@@ -56,13 +56,13 @@ public class WriteExec<V> extends Processor implements Executable {
     private void handleSuccess(AsyncResult<V> result) {
         switch (result.getExecStatus()) {
             case SUCCESS:
-                LOG.info("WriteExec RESULT {} - {} SUCCESS, value={}", result.getProfileName(), result.getDatapointName(), result.getValue());
+                LOG.info("WriteExec RESULT {} - {} SUCCESS, value={}", result.getProfileName(), result.getDataPointName(), result.getValue());
                 break;
             case ERROR:
-                LOG.error("WriteExec RESULT {} - {} ERROR, error={}", result.getProfileName(), result.getDatapointName(), getExecThrowable().getMessage());
+                LOG.error("WriteExec RESULT {} - {} ERROR, error={}", result.getProfileName(), result.getDataPointName(), getExecThrowable().getMessage());
                 break;
             case PROCESSING:
-                LOG.warn("WriteExec RESULT {} - {} PROCESSING. Handle success called while still processing. This is unexpected behavior.", result.getProfileName(), result.getDatapointName());
+                LOG.warn("WriteExec RESULT {} - {} PROCESSING. Handle success called while still processing. This is unexpected behavior.", result.getProfileName(), result.getDataPointName());
                 break;
             default:
                 LOG.error("Unhandled execution status.");
@@ -75,7 +75,7 @@ public class WriteExec<V> extends Processor implements Executable {
         result.setResponseTime(Instant.now());
         result.setExecStatus(ExecStatus.ERROR);
         result.setThrowable(t);
-        LOG.error("WriteExec RESULT - {} - {} - {}", result.getProfileName(), result.getDatapointName(), result.getThrowable());
+        LOG.error("WriteExec RESULT - {} - {} - {}", result.getProfileName(), result.getDataPointName(), result.getThrowable());
         notifyFinished();
     }
 

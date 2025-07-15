@@ -60,7 +60,7 @@ public class IntrospectiveDeviceTester {
             // List containing data points to be read.
             final List<Tuple3<String, String, Properties>> datapPoints = new ArrayList<>();
 
-            // Fill REST interface datapoints if any
+            // Fill REST interface data pointss if any
             Optional.ofNullable(devDesc.getInterfaceList().getRestApiInterface()).ifPresent(restApiIf ->
                     restApiIf.getFunctionalProfileList().getFunctionalProfileListElement().forEach(fp-> {
                         String fpName = fp.getFunctionalProfile().getFunctionalProfileName();
@@ -69,7 +69,7 @@ public class IntrospectiveDeviceTester {
 
             }));
 
-            // Fill modbus interface datapoints if any
+            // Fill modbus interface data pointss if any
             Optional.ofNullable(devDesc.getInterfaceList().getModbusInterface()).ifPresent(modbusIf ->
                     modbusIf.getFunctionalProfileList().getFunctionalProfileListElement().forEach(fp -> {
                         String fpName = fp.getFunctionalProfile().getFunctionalProfileName();
