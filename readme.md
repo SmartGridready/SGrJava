@@ -15,7 +15,7 @@ Current list of interfaces supported by the communication handler:
 
 A communication handler maps the SmartgridReady generic interface to a device/product specific interface. The interface mapping is defined within an external interface description in XML. (see https://github.com/SmartgridReady/SGrSpecifications/tree/master/XMLInstances/ExtInterfaces)
 
-The external interface description XML (EI-XML) describes for every functionalprofile-datapoint tuple the properties needed to read/write date from/to the datapoint.
+The external interface description XML (EI-XML) describes for every functionalprofile-data-point tuple the properties needed to read/write date from/to the data-point.
 
 ## Description
 

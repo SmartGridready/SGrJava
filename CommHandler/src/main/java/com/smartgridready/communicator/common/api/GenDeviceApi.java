@@ -142,7 +142,7 @@ public interface GenDeviceApi {
     boolean isConnected();
 
     /**
-     * Subscribes to messages that are related to the given datapoint
+     * Subscribes to messages that are related to the given data point
      * @param profileName The functional profile name
      * @param dataPointName The data point name
      * @param callbackFunction A callback function that provides the received value
@@ -151,9 +151,9 @@ public interface GenDeviceApi {
     void subscribe(String profileName, String dataPointName, Consumer<Either<Throwable, Value>> callbackFunction) throws GenDriverException;
 
     /**
-     * Unsubscribes from messages that are related to a given datapoint
+     * Unsubscribes from messages that are related to a given data point
      * @param profileName The functional profile name
-     * @param dataPointName The datapoint name
+     * @param dataPointName The data point name
      * @throws GenDriverException if an error occurs
      */
     void unsubscribe(String profileName, String dataPointName) throws GenDriverException;

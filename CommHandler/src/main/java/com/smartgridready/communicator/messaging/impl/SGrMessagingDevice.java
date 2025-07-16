@@ -104,9 +104,9 @@ public class SGrMessagingDevice extends SGrDeviceBase<
     }
 
     @Override
-    protected Optional<MessagingDataPoint> findDataPointForProfile(MessagingFunctionalProfile functionalProfile, String datapointName) {
+    protected Optional<MessagingDataPoint> findDataPointForProfile(MessagingFunctionalProfile functionalProfile, String dataPointName) {
         return functionalProfile.getDataPointList().getDataPointListElement().stream()
-                .filter(dataPoint -> dataPoint.getDataPoint().getDataPointName().equals(datapointName))
+                .filter(dataPoint -> dataPoint.getDataPoint().getDataPointName().equals(dataPointName))
                 .findFirst();
     }
 
@@ -129,7 +129,7 @@ public class SGrMessagingDevice extends SGrDeviceBase<
     public Value getVal(String profileName, String dataPointName, Properties parameters, long timeoutMs)
             throws GenDriverException {
 
-        MessagingDataPoint dataPoint = findDatapoint(profileName, dataPointName);
+        MessagingDataPoint dataPoint = findDataPoint(profileName, dataPointName);
 
         checkReadWritePermission(dataPoint, RwpDirections.READ);
 
@@ -138,7 +138,7 @@ public class SGrMessagingDevice extends SGrDeviceBase<
 
         String inMessageTopic = Optional.ofNullable(dataPoint.getMessagingDataPointConfiguration())
                 .map(MessagingDataPointConfiguration::getInMessage)
-                .map(InMessage::getTopic).orElseThrow(() -> new IllegalArgumentException("R and RW datapoints need an inMessageTopic in EI-XML"));
+                .map(InMessage::getTopic).orElseThrow(() -> new IllegalArgumentException("R and RW data points need an inMessageTopic in EI-XML"));
 
         MessageFilter inMessageFilter = Optional.ofNullable(dataPoint.getMessagingDataPointConfiguration())
                 .map(MessagingDataPointConfiguration::getInMessage)
@@ -227,7 +227,7 @@ public class SGrMessagingDevice extends SGrDeviceBase<
             throw new GenDriverException(NOT_CONNECTED);
         }
 
-        MessagingDataPoint dataPoint = findDatapoint(profileName, dataPointName);
+        MessagingDataPoint dataPoint = findDataPoint(profileName, dataPointName);
         checkReadWritePermission(dataPoint, RwpDirections.WRITE);
 
         String outMessageTopic = Optional.ofNullable(dataPoint.getMessagingDataPointConfiguration())
@@ -258,12 +258,12 @@ public class SGrMessagingDevice extends SGrDeviceBase<
             throw new GenDriverException(NOT_CONNECTED);
         }
 
-        MessagingDataPoint dataPoint = findDatapoint(profileName, dataPointName);
+        MessagingDataPoint dataPoint = findDataPoint(profileName, dataPointName);
         checkReadWritePermission(dataPoint, RwpDirections.READ);
 
         String inMessageTopic = Optional.ofNullable(dataPoint.getMessagingDataPointConfiguration())
                 .map(MessagingDataPointConfiguration::getInMessage)
-                .map(InMessage::getTopic).orElseThrow(() -> new IllegalArgumentException("R and RW datapoints need an inMessageTopic in EI-XMK."));
+                .map(InMessage::getTopic).orElseThrow(() -> new IllegalArgumentException("R and RW data points need an inMessageTopic in EI-XMK."));
 
         MessageFilter messageFilter = Optional.ofNullable(dataPoint.getMessagingDataPointConfiguration())
                 .map(MessagingDataPointConfiguration::getInMessage)
@@ -328,11 +328,11 @@ public class SGrMessagingDevice extends SGrDeviceBase<
             throw new GenDriverException(NOT_CONNECTED);
         }
 
-        MessagingDataPoint dataPoint = findDatapoint(profileName, dataPointName);
+        MessagingDataPoint dataPoint = findDataPoint(profileName, dataPointName);
 
         String inMessageTopic = Optional.ofNullable(dataPoint.getMessagingDataPointConfiguration())
                 .map(MessagingDataPointConfiguration::getInMessage)
-                .map(InMessage::getTopic).orElseThrow(() -> new IllegalArgumentException("R and RW datapoints need an inMessageTopic in EI-XMK."));
+                .map(InMessage::getTopic).orElseThrow(() -> new IllegalArgumentException("R and RW data points need an inMessageTopic in EI-XMK."));
 
         MessageFilter messageFilter = Optional.ofNullable(dataPoint.getMessagingDataPointConfiguration())
                 .map(MessagingDataPointConfiguration::getInMessage)

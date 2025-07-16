@@ -16,8 +16,8 @@ import java.io.IOException;
 public class DeviceReadCallable<T> extends BaseCallable<T> {
     private final ReadFunction<T> readFunction;
 
-    public DeviceReadCallable(ReadFunction<T> readFunction, String profileName, String datapointName) {
-        super(profileName, datapointName);
+    public DeviceReadCallable(ReadFunction<T> readFunction, String profileName, String dataPointName) {
+        super(profileName, dataPointName);
         this.readFunction = readFunction;
     }
     @Override
@@ -29,10 +29,10 @@ public class DeviceReadCallable<T> extends BaseCallable<T> {
             RestApiAuthenticationException,
             GenDriverSocketException,
             IOException {
-            result.setValue(readFunction.apply(profileName, datapointName));
+            result.setValue(readFunction.apply(profileName, dataPointName));
     }
     @Override
     public String toString() {
-        return String.format("Device READ: Profile=%s Datapoint=%s", profileName, datapointName);
+        return String.format("Device READ: Profile=%s Data Point=%s", profileName, dataPointName);
     }
 }

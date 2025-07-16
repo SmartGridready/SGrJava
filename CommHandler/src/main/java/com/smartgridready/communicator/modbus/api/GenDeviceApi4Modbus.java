@@ -32,10 +32,10 @@ import com.smartgridready.driver.api.modbus.GenDriverSocketException;
 public interface GenDeviceApi4Modbus extends GenDeviceApi {
 
     /**
-     * Read a value from the modbus device in its generic datapoint representation (see {@link Value}).
+     * Read a value from the modbus device in its generic data point representation (see {@link Value}).
      *
      * @param profileName The name of the functional profile.
-     * @param dataPointName The name of the datapoint.
+     * @param dataPointName The name of the data point.
      * @return The value converted to {@link java.lang.String}
      * @throws GenDriverException If a general exception occurred.
      * @throws GenDriverSocketException In case of communication errors with the modbus device.
@@ -47,12 +47,12 @@ public interface GenDeviceApi4Modbus extends GenDeviceApi {
             throws GenDriverException, GenDriverSocketException, GenDriverModbusException;
 
     /**
-     * Write a value to the modbus device using the generic datapoint representation (see {@link Value}).
+     * Write a value to the modbus device using the generic data point representation (see {@link Value}).
      * The value is converted from the format given within the {@code value} parameter to the value required
      * by the modbus device (as defined within the external interface XML of the device).
      *
      * @param profileName The name of the functional profile.
-     * @param dataPointName The name of the datapoint.
+     * @param dataPointName The name of the data point.
      * @param value The value as {@link Value}
      * @throws GenDriverException If a general exception occurred.
      * @throws GenDriverSocketException In case of communication errors with the modbus device.

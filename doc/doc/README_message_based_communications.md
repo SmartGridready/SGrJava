@@ -85,14 +85,14 @@ Send message:<br>[Communicator] => [Commhandler] => [MessageBroker] => [SGrDevic
 
 Receive message:<br> [SGrDevice] => [MessageBroker] => [Commhandler] => [Communicator]
 
-## SGr Datapoints
+## SGr Data Points
 
-Each SGr device/datapoint is related to a topic from its character. It appears that in the MQTT world there might 
+Each SGr device/data point is related to a topic from its character. It appears that in the MQTT world there might 
 be thousands of topics within an environment. In MQTT a topic is usually a path like 
 sensors/living_room/temperature, sensors/kitchen/humidity 
 or more generic {{sensors}}/{{sensor_id}}/{{value}}, {{actuator}}/{{actuator_id}}/{{value}}
 
-The datapoint can support publishing, subscribe or both. This is called "bi-directional-communication" or "round-trip messaging". 
+The data point can support publishing, subscribe or both. This is called "bi-directional-communication" or "round-trip messaging". 
 
 Kafka uses a key to determine the partition where the message is stored. Messages are published and consumed by the same client only if the group-id and the key do match.
 
@@ -129,7 +129,7 @@ The element `<messagingInterfaceDescription>` designates a message based communi
   - MQTT: Basic|ClientCertificate|OAuth2|Custom
   - Kafka: SSL/TLS|Bearer|Kerberos|SASL
 
-#### messagingDatapointConfiguration:
+#### messagingDataPointConfiguration:
 - topic
   - MQTT: path, example `openWB/lp/2/kWhChargedSincePlugged`
   - Kafka: topic name: example `heatpump-sensors`

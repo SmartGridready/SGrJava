@@ -23,8 +23,8 @@ public class DeviceWriteCallable<T> extends BaseCallable<T> {
 
     private T writeValue;
 
-    public DeviceWriteCallable(WriteFunction<T> writeFunction, String profileName, String datapointName) {
-        super(profileName, datapointName);
+    public DeviceWriteCallable(WriteFunction<T> writeFunction, String profileName, String dataPointName) {
+        super(profileName, dataPointName);
         this.writeFunction = writeFunction;
         this.writeValue = null;
     }
@@ -38,7 +38,7 @@ public class DeviceWriteCallable<T> extends BaseCallable<T> {
             GenDriverSocketException,
             IOException {
         if (writeValue != null) {
-            writeFunction.apply(profileName, datapointName, writeValue);
+            writeFunction.apply(profileName, dataPointName, writeValue);
         } else {
             LOG.warn("No value provided for DEVICE WRITE. Write was not executed.");
         }
@@ -49,6 +49,6 @@ public class DeviceWriteCallable<T> extends BaseCallable<T> {
     }
     @Override
     public String toString() {
-        return String.format("Device WRITE: Profile=%s Datapoint=%s", profileName, datapointName);
+        return String.format("Device WRITE: Profile=%s Data Point=%s", profileName, dataPointName);
     }
 }

@@ -51,11 +51,11 @@ class SetGetValValidationTest {
         // VoltageL1 = R, VoltageL2 = W, VoltageL3 = RW
         return Stream.of(
                 Arguments.of("write on RW DP", "VoltageL1", true,  null),
-                Arguments.of("write on R  DP", "VoltageL2", true,  "Operation WRITE not allowed on datapoint VoltageL2"),
+                Arguments.of("write on R  DP", "VoltageL2", true,  "Operation WRITE not allowed on data point VoltageL2"),
                 Arguments.of("write on W  DP", "VoltageL3", true,  null),
                 Arguments.of("read  on RW DP", "VoltageL1", false, null),
                 Arguments.of("read  on R  DP", "VoltageL2", false, null),
-                Arguments.of("read  on W  DP", "VoltageL3", false, "Operation READ not allowed on datapoint VoltageL3")
+                Arguments.of("read  on W  DP", "VoltageL3", false, "Operation READ not allowed on data point VoltageL3")
         );
     }
 

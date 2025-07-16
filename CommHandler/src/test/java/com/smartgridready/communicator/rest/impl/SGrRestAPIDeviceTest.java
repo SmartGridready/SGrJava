@@ -7,7 +7,7 @@ import com.smartgridready.driver.api.http.GenUriBuilder;
 import com.smartgridready.ns.v0.DeviceFrame;
 import com.smartgridready.ns.v0.ResponseQuery;
 import com.smartgridready.ns.v0.RestApiServiceCall;
-import com.smartgridready.communicator.common.api.values.Float32Value;
+import com.smartgridready.communicator.common.api.values.BooleanValue;
 import com.smartgridready.communicator.common.api.values.Float64Value;
 import com.smartgridready.communicator.common.api.values.Int32UValue;
 import com.smartgridready.communicator.common.api.values.StringValue;
@@ -85,7 +85,7 @@ class SGrRestAPIDeviceTest {
 			+ "    }\r\n"
 			+ "}";
 	
-	private static final String CLEMAP_METER_RESP = "[{\"sensor_id\":\"63343431ecf2cf013a1e5a9f\",\"opm\":{\"value\":1,\"last_updt\":\"2022-11-07T15:19:54.560Z\"},\"ten_sec\":{\"p_l1\":1.5,\"p_l2\":2,\"p_l3\":4.0,\"q_l1\":2.3,\"q_l2\":0,\"q_l3\":4,\"last_upd\":\"2022-11-07T15:21:50.000Z\"},\"one_min\":{\"p_l1\":0.003,\"p_l2\":0,\"p_l3\":0,\"q_l1\":-0.002,\"q_l2\":0,\"q_l3\":0,\"avg_energy_l1\":0,\"avg_energy_l2\":0,\"avg_energy_l3\":0,\"v_l1\":227.869,\"v_l2\":0,\"v_l3\":0,\"i_l1\":0.001,\"i_l2\":0,\"i_l3\":0,\"s_l1\":0.173,\"s_l2\":0,\"s_l3\":0,\"pf_l1\":0.085,\"pf_l2\":1,\"pf_l3\":1,\"last_update\":\"2022-11-07T15:19:47.579Z\"}}]";
+	private static final String CLEMAP_METER_RESP = "[{\"sensor_id\":\"63343431ecf2cf013a1e5a9f\",\"opm\":{\"value\":1,\"last_updt\":\"2022-11-07T15:19:54.560Z\"},\"ten_sec\":{\"p_l1\":0.0015,\"p_l2\":0.002,\"p_l3\":0.004,\"q_l1\":0.0023,\"q_l2\":0,\"q_l3\":0.004,\"last_upd\":\"2022-11-07T15:21:50.000Z\"},\"one_min\":{\"p_l1\":0.003,\"p_l2\":0,\"p_l3\":0,\"q_l1\":-0.002,\"q_l2\":0,\"q_l3\":0,\"avg_energy_l1\":0,\"avg_energy_l2\":0,\"avg_energy_l3\":0,\"v_l1\":227.869,\"v_l2\":0,\"v_l3\":0,\"i_l1\":0.001,\"i_l2\":0,\"i_l3\":0,\"s_l1\":0.173,\"s_l2\":0,\"s_l3\":0,\"pf_l1\":0.085,\"pf_l2\":1,\"pf_l3\":1,\"last_update\":\"2022-11-07T15:19:47.579Z\"}}]";
 
 	private static final URI TEST_URI = URI.create("");
 	
@@ -116,7 +116,7 @@ class SGrRestAPIDeviceTest {
 		Value res = device.getVal("ActivePowerAC", "ActivePowerACtot");
 		
 		// then		
-		assertEquals("0.0075", String.format("%.4f",res.getFloat32()));
+		assertEquals("0.0075", String.format("%.4f",res.getFloat64()));
 	}
 
 	@Test
@@ -131,8 +131,8 @@ class SGrRestAPIDeviceTest {
         when(uriBuilder.build()).thenReturn(TEST_URI);
 		when(httpRequest.execute()).thenReturn(
 				GenHttpResponse.of(CLEMAP_AUTH_RESP),	// authentication response on connect()
-				GenHttpResponse.of("", 401, "Needs token renewal."), // webservice coll to query datapoint
-				GenHttpResponse.of(CLEMAP_METER_RESP)); // response of read datapoint result
+				GenHttpResponse.of("", 401, "Needs token renewal."), // webservice coll to query data point
+				GenHttpResponse.of(CLEMAP_METER_RESP)); // response of read data point result
 		
 		// when
 		SGrRestApiDevice device = new SGrRestApiDevice(deviceFrame, httpClientFactory);
@@ -140,7 +140,7 @@ class SGrRestAPIDeviceTest {
 		Value res = device.getVal("ActivePowerAC", "ActivePowerACtot");
 		
 		// then		
-		assertEquals("0.0075", String.format("%.4f", res.getFloat32()));
+		assertEquals("0.0075", String.format("%.4f", res.getFloat64()));
 		
 	}
 
@@ -156,7 +156,7 @@ class SGrRestAPIDeviceTest {
         when(uriBuilder.build()).thenReturn(URI.create("https://clemap.io/authentication"));
 		when(httpRequest.execute()).thenReturn(
 				GenHttpResponse.of(CLEMAP_AUTH_RESP),
-				GenHttpResponse.of("{ \"value\" : \"on\" }"));
+				GenHttpResponse.of("{ \"value\": true }"));
 
 		// when
 		GenDeviceApi4Rest device = new SGrRestApiDevice(deviceFrame, httpClientFactory);
@@ -164,23 +164,23 @@ class SGrRestAPIDeviceTest {
 
 		when(uriBuilder.build()).thenReturn(
 			URI.create("https://clemap.io/authentication"),
-			URI.create("https://clemap.io/digitaltwins?sensor_id=1234&pin=2")
+			URI.create("https://clemap.io/digitaltwins")
 		);
 
 		var parameters = new Properties();
 		parameters.put("sensor_id", "1234");
 		var res = device.getVal("GPIO", "ContactRW", parameters);
-		assertEquals("on", res.getString());
+		assertEquals(true, res.getBoolean());
 
 		when(uriBuilder.build()).thenReturn(
 			URI.create("https://clemap.io/authentication"),
-			URI.create("https://clemap.io/digitaltwins?sensor_id=5678&pin=2")
+			URI.create("https://clemap.io/digitaltwins")
 		);
 
 		// modify the parameters
 		parameters.put("sensor_id", "5678");
 		res = device.getVal("GPIO", "ContactRW", parameters);
-		assertEquals("on", res.getString());
+		assertEquals(true, res.getBoolean());
 	}
 
 	@ParameterizedTest
@@ -196,7 +196,7 @@ class SGrRestAPIDeviceTest {
         when(uriBuilder.build()).thenReturn(TEST_URI);
 		when(httpRequest.execute()).thenReturn(
 			GenHttpResponse.of(CLEMAP_AUTH_RESP),
-			GenHttpResponse.of("{ \"value\" : \"on\" }")
+			GenHttpResponse.of("{ \"value\" : true }")
 		);
 
 		// when
@@ -205,7 +205,7 @@ class SGrRestAPIDeviceTest {
 		Value res = device.getVal("GPIO", dataPointName);
 
 		// then
-		assertEquals("on", res.getString());
+		assertEquals(true, res.getBoolean());
 	}
 
 	@ParameterizedTest
@@ -228,7 +228,7 @@ class SGrRestAPIDeviceTest {
 		SGrRestApiDevice device = new SGrRestApiDevice(deviceFrame, httpClientFactory);
 		device.connect();
 
-		assertDoesNotThrow(() -> device.setVal("GPIO", dataPointName, StringValue.of("on")));
+		assertDoesNotThrow(() -> device.setVal("GPIO", dataPointName, BooleanValue.of(true)));
 
 		verify(httpRequest, times(5)).addHeader(headerNameCaptor.capture(), headerValueCaptor.capture());
 		var headerKeys = headerNameCaptor.getAllValues();
@@ -251,7 +251,7 @@ class SGrRestAPIDeviceTest {
 				assertEquals("application/x-www-form-urlencoded", headerValues.get(3));
 				break;
 			default:
-				fail("Unhandled dataPoint: " + dataPointName);
+				fail("Unhandled data point: " + dataPointName);
 		}
 		assertTrue(headerValues.get(4).startsWith("Bearer "));
 
@@ -264,23 +264,23 @@ class SGrRestAPIDeviceTest {
 				verify(httpRequest, times(1)).addFormParam(paramNameCaptor.capture(), paramValueCaptor.capture());
 				break;
 			default:
-				fail("Unhandled dataPoint: " + dataPointName);
+				fail("Unhandled data point: " + dataPointName);
 		}
 		
 		// verify request body
 		String expectedBody = null;
 		switch (dataPointName) {
 			case "ContactW":
-				expectedBody = "{ \"pin\" : 1, \"value\" : \"on\" }"; // Json body
+				expectedBody = "{ \"pin\": 1, \"value\": true }"; // Json body
 				break;
 			case "ContactRW":
-				expectedBody = "{ \"pin\" : 2, \"value\" : \"on\" }"; // Json body
+				expectedBody = "{ \"pin\": 2, \"value\": true }"; // Json body
 				break;
 			case "IORegister":
 				// form parameters, not body
 				break;
 			default:
-				fail("Unhandled dataPoint: " + dataPointName);
+				fail("Unhandled data point: " + dataPointName);
 		}
 		if (expectedBody != null) {
 			assertEquals(expectedBody, httpBodyCaptor.getValue());
@@ -299,7 +299,7 @@ class SGrRestAPIDeviceTest {
 				assertEquals("124", paramValues.get(0));
 				break;
 			default:
-				fail("Unhandled dataPoint: " + dataPointName);
+				fail("Unhandled data point: " + dataPointName);
 		}
 	}
 
@@ -323,7 +323,7 @@ class SGrRestAPIDeviceTest {
 		SGrRestApiDevice device = new SGrRestApiDevice(deviceFrame, httpClientFactory);
 		device.connect();
 
-		assertDoesNotThrow(() -> device.setVal("ActivePowerAC", "ActivePowerACtot", Int32UValue.of(100)));
+		assertDoesNotThrow(() -> device.setVal("TestPowerInOut", "TestPowerReadWrite", Int32UValue.of(100)));
 	}
 
 
@@ -344,21 +344,21 @@ class SGrRestAPIDeviceTest {
 		SGrRestApiDevice device = new SGrRestApiDevice(deviceFrame, httpClientFactory);
 		device.connect();
 
-		Exception exception = assertThrows(GenDriverException.class, () -> device.setVal("ActivePowerAC", "ActivePowerACtot", StringValue.of(value)));
+		Exception exception = assertThrows(GenDriverException.class, () -> device.setVal("TestPowerInOut", "TestPowerReadWrite", StringValue.of(value)));
 		assertEquals(expectedResponse, exception.getMessage());
 	}
 
 
 	private static Stream<Arguments> rwPermissionChecks() {
 
-		// VoltageL1 = R, VoltageL2 = W, VoltageL3 = RW
+		// TestPowerRead = R, TestPowerWrite = W, TestPowerReadWrite = RW
 		return Stream.of(
-				Arguments.of("write on RW DP", "ActivePowerACL1", true,  null),
-				Arguments.of("write on R  DP", "ActivePowerACL2", true,  "Operation WRITE not allowed on datapoint ActivePowerACL2"),
-				Arguments.of("write on W  DP", "ActivePowerACL3", true,  null),
-				Arguments.of("read  on RW DP", "ActivePowerACL1", false, null),
-				Arguments.of("read  on R  DP", "ActivePowerACL2", false, null),
-				Arguments.of("read  on W  DP", "ActivePowerACL3", false, "Operation READ not allowed on datapoint ActivePowerACL3")
+				Arguments.of("write on RW DP", "TestPowerReadWrite", true,  null),
+				Arguments.of("write on R  DP", "TestPowerRead", true,  "Operation WRITE not allowed on data point TestPowerRead"),
+				Arguments.of("write on W  DP", "TestPowerWrite", true,  null),
+				Arguments.of("read  on RW DP", "TestPowerReadWrite", false, null),
+				Arguments.of("read  on R  DP", "TestPowerRead", false, null),
+				Arguments.of("read  on W  DP", "TestPowerWrite", false, "Operation READ not allowed on data point TestPowerWrite")
 		);
 	}
 
@@ -385,14 +385,14 @@ class SGrRestAPIDeviceTest {
 
 		if (expectedErrorMsg == null) {
 			if(isWrite) {
-				assertDoesNotThrow(() -> restApiDevice.setVal("ActivePowerAC", dataPointName, Float32Value.of(380)));
+				assertDoesNotThrow(() -> restApiDevice.setVal("TestPowerInOut", dataPointName, Float64Value.of(0.380)));
 			} else {
-				assertDoesNotThrow(() -> restApiDevice.getVal("ActivePowerAC", dataPointName));
+				assertDoesNotThrow(() -> restApiDevice.getVal("TestPowerInOut", dataPointName));
 			}
 		} else {
 			GenDriverException e = isWrite ?
-					assertThrows(GenDriverException.class, () -> restApiDevice.setVal("ActivePowerAC", dataPointName, Float64Value.of(380)))
-					: assertThrows(GenDriverException.class, () -> restApiDevice.getVal("ActivePowerAC", dataPointName));
+					assertThrows(GenDriverException.class, () -> restApiDevice.setVal("TestPowerInOut", dataPointName, Float64Value.of(0.380)))
+					: assertThrows(GenDriverException.class, () -> restApiDevice.getVal("TestPowerInOut", dataPointName));
 			assertEquals(expectedErrorMsg, e.getMessage());
 		}
 	}
@@ -414,13 +414,13 @@ class SGrRestAPIDeviceTest {
 
 		SGrRestApiDevice restApiDevice = new SGrRestApiDevice(deviceFrame, httpClientFactory);
 
-		restApiDevice.setVal("ActivePowerAC", "ActivePowerACtot", Float32Value.of(0.099f));
+		restApiDevice.setVal("TestPowerInOut", "TestPowerReadWrite", Float64Value.of(0.099));
 		verify(httpRequest, times(2)).setBody(httpBodyCaptor.capture());
 
 		var objectMapper = new ObjectMapper();
 		var jsonBody = objectMapper.readTree(httpBodyCaptor.getValue());
-		var convertedValue = Math.round(jsonBody.get("value").asDouble());
-		assertEquals(99, convertedValue );
+		var convertedValue = jsonBody.get("value").asDouble();
+		assertEquals(0.099, convertedValue );
 
 	}
 
@@ -439,15 +439,15 @@ class SGrRestAPIDeviceTest {
 		);
 
 		SGrRestApiDevice restApiDevice = new SGrRestApiDevice(deviceFrame, httpClientFactory);
-		var result = restApiDevice.getVal("ActivePowerAC", "ActivePowerACtot");
+		var result = restApiDevice.getVal("TestPowerInOut", "TestPowerRead");
 
-		assertEquals("0.0075", String.format("%.4f", result.getFloat32()));
+		assertEquals("0.0015", String.format("%.4f", result.getFloat64()));
 	}
 
 
 	private static DeviceFrame createSGrRestAPIDeviceFrame() {
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-		URL devDescUrl = classloader.getResource("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml");
+		URL devDescUrl = classloader.getResource("SGr_00_0018_CLEMAP_EnergyMonitor_RestAPICloud_V1.1.xml");
 
 		var properties = new Properties();
 		properties.put("baseUri", "https://clemap.io");

@@ -6,7 +6,7 @@ import java.time.Instant;
 
 public class AsyncResult<T> {
     private String profileName;
-    private String datapointName;
+    private String dataPointName;
     private Throwable throwable;
     private T value;
     private Instant requestTime;
@@ -21,12 +21,12 @@ public class AsyncResult<T> {
         this.profileName = profileName;
     }
 
-    public String getDatapointName() {
-        return datapointName;
+    public String getDataPointName() {
+        return dataPointName;
     }
 
-    public void setDatapointName(String datapointName) {
-        this.datapointName = datapointName;
+    public void setDataPointName(String dataPointName) {
+        this.dataPointName = dataPointName;
     }
 
     public Throwable getThrowable() {
@@ -72,7 +72,7 @@ public class AsyncResult<T> {
     @Override
     public String toString() {
         return String.format("%s - %s = %s : status=%s - error=%s, requestTime=%s, responseTime=%s",
-                profileName, datapointName, value, execStatus.name(), throwable, requestTime, responseTime);
+                profileName, dataPointName, value, execStatus.name(), throwable, requestTime, responseTime);
 
     }
 }

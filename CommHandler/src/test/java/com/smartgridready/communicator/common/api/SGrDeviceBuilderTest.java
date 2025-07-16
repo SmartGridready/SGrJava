@@ -96,7 +96,7 @@ public class SGrDeviceBuilderTest {
 
         var device = new SGrDeviceBuilder()
                 .useRestServiceClientFactory(restServiceClientFactory)
-                .eid(loadResourceAsString("SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml"))
+                .eid(loadResourceAsString("SGr_00_0018_CLEMAP_EnergyMonitor_RestAPICloud_V1.1.xml"))
                 .properties(properties)
                 .build();
 
@@ -117,7 +117,7 @@ public class SGrDeviceBuilderTest {
         GenDeviceApi device = new SGrDeviceBuilder()
                 .useModbusClientFactory(modbusClientFactory)
                 .properties(properties)
-                .eid(loadResourceAsString("SGr_04_0014_0000_WAGO_Testsystem_V1.0.xml"))
+                .eid(loadResourceAsString("SGr_04_0014_0000_WAGO_Testsystem_ModbusTCP_V1.0.xml"))
                 .build();
 
         assertInstanceOf(GenDeviceApi4Modbus.class, device);
@@ -147,7 +147,7 @@ public class SGrDeviceBuilderTest {
                 .useSharedModbusRtu(true)
                 .useSharedModbusGatewayRegistry(modbusGatewayRegistry)
                 .properties(properties)
-                .eid(loadResourceAsString("SGr_04_0014_0000_WAGO_Testsystem_V1.0.xml"))
+                .eid(loadResourceAsString("SGr_04_0014_0000_WAGO_Testsystem_ModbusTCP_V1.0.xml"))
                 .build();
 
         assertInstanceOf(GenDeviceApi4Modbus.class, device);

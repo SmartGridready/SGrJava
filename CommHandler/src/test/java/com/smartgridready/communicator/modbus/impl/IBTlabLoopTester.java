@@ -129,7 +129,7 @@ public class IBTlabLoopTester {
 			}
 			if (devWagoMeterTestIsOn) {
 				LOG.info(" -init TestBox: devWagoMeterTest @: " + dtf.format(LocalDateTime.now())+ " ");
-				initWagoMeter(XML_BASE_DIR, "SGr_04_0014_0000_WAGO_SmartMeterV0.2.3.xml", (short) 7);
+				initWagoMeter(XML_BASE_DIR, "SGr_00_0014_0000_WAGO_SmartMeter_V0.3.xml", (short) 7);
 			}
 			if (devOMCCIWallboxTestIsOn) {
 				//TODO: complete and use OMCCI EI.xml

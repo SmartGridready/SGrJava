@@ -40,7 +40,7 @@ class WagoTestsystemAutomaticTests extends TestDevice {
 
         // Check Connector2 - Connector8
         for (int i=1; i<=AD_DATAPOINT_MAX_INDEX; i++) {
-            checkAnalogDatapoint(i, WagoTestsystemAutomaticTests::assertFloatValues);
+            checkAnalogDataPoint(i, WagoTestsystemAutomaticTests::assertFloatValues);
         }
     }
 
@@ -98,7 +98,7 @@ class WagoTestsystemAutomaticTests extends TestDevice {
         dps.forEach(System.out::println);
     }
 
-    void checkAnalogDatapoint(int dataPointIndex, TriConsumer<String, Value, Value> assertFunction)
+    void checkAnalogDataPoint(int dataPointIndex, TriConsumer<String, Value, Value> assertFunction)
             throws Exception {
 
         for (int i = 0; i <= 48; i++) {

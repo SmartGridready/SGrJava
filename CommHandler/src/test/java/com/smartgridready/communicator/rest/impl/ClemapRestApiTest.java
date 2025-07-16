@@ -78,7 +78,7 @@ class ClemapRestApiTest {
 		props.put("baseUri", "https://b1.cloud.clemap.com:3032");
 
 		DeviceDescriptionLoader loader = new DeviceDescriptionLoader();
-		DeviceFrame clemapDeviceDesc = loader.load(XML_BASE_DIR, "SGr_04_0018_CLEMAP_EIcloudEnergyMonitorV0.2.1.xml", props);
+		DeviceFrame clemapDeviceDesc = loader.load(XML_BASE_DIR, "SGr_00_0018_CLEMAP_EnergyMonitor_RestAPICloud_V1.1.xml", props);
 		GenHttpClientFactory factory = DriverFactoryLoader.getRestApiDriver();
 		SGrRestApiDevice clemapConfigurator =  new SGrRestApiDevice(clemapDeviceDesc, factory);
 		

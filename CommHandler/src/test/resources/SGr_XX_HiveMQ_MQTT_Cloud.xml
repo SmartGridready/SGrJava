@@ -11,8 +11,8 @@
   </releaseNotes>
   <deviceInformation>
     <alternativeNames>
-      <workName>WAGO Testsystem</workName>
-      <manufName>WAGO</manufName>
+      <workName>HiveMQ Testsystem</workName>
+      <manufName>HiveMQ</manufName>
     </alternativeNames>
     <legibleDescription>
       <textElement>
@@ -22,13 +22,18 @@
         It uses basic authentication: Username: smartgrid, Password: 1SmartGrid!
       </textElement>
       <language>en</language>
-      <uri>https://www.wago.com/</uri>
+      <uri>https://www.hivemq.com/</uri>
     </legibleDescription>
     <deviceCategory>Generic</deviceCategory>
     <isLocalControl>true</isLocalControl>
     <softwareRevision>0.1.0</softwareRevision>
     <hardwareRevision>0.1.0</hardwareRevision>
     <levelOfOperation>4</levelOfOperation>
+    <versionNumber>
+      <primaryVersionNumber>0</primaryVersionNumber>
+      <secondaryVersionNumber>1</secondaryVersionNumber>
+      <subReleaseVersionNumber>0</subReleaseVersionNumber>
+    </versionNumber>
   </deviceInformation>
   <interfaceList>
     <messagingInterface>
@@ -156,7 +161,7 @@
                   <number/>
                 </messagingDataType>
                 <writeCmdMessage>
-                  <!-- The datapoint needs to be writable for tests -->
+                  <!-- The data point needs to be writable for tests -->
                   <topic>stations/1/charging_current</topic>
                   <template>[[value]]</template>
                 </writeCmdMessage>
@@ -189,7 +194,7 @@
                   <number/>
                 </messagingDataType>
                 <writeCmdMessage>
-                  <!-- The datapoint needs to be writable for tests -->
+                  <!-- The data point needs to be writable for tests -->
                   <topic>stations/1/charging_current</topic>
                   <template>[[value]]</template>
                 </writeCmdMessage>

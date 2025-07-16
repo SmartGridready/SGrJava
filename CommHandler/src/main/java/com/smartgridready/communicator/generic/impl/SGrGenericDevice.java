@@ -23,7 +23,7 @@ public class SGrGenericDevice extends SGrDeviceBase<
 
     @Override
     public Value getVal(String profileName, String dataPointName) throws GenDriverException {
-        DataPointBase dataPoint = findDatapoint(profileName, dataPointName);
+        DataPointBase dataPoint = findDataPoint(profileName, dataPointName);
         // only constants supported in concrete case
         checkReadWritePermission(dataPoint, RwpDirections.READ);
         return StringValue.of(dataPoint.getDataPoint().getValue());
@@ -38,7 +38,7 @@ public class SGrGenericDevice extends SGrDeviceBase<
     @Override
     public void setVal(String profileName, String dataPointName, Value value)
             throws GenDriverException {
-        DataPointBase dataPoint = findDatapoint(profileName, dataPointName);
+        DataPointBase dataPoint = findDataPoint(profileName, dataPointName);
         checkReadWritePermission(dataPoint, RwpDirections.WRITE);
         throw new UnsupportedOperationException("generic device setVal not supported");
     }
@@ -68,9 +68,9 @@ public class SGrGenericDevice extends SGrDeviceBase<
 
     @Override
     protected Optional<DataPointBase> findDataPointForProfile(GenericFunctionalProfile functionalProfile,
-            String datapointName) {
+            String dataPointName) {
         return functionalProfile.getDataPointList().getDataPointListElement().stream()
-            .filter(dataPoint -> dataPoint.getDataPoint().getDataPointName().equals(datapointName))
+            .filter(dataPoint -> dataPoint.getDataPoint().getDataPointName().equals(dataPointName))
             .findFirst();
     }
 

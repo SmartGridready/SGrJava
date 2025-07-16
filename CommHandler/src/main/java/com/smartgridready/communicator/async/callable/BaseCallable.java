@@ -15,7 +15,7 @@ import java.util.concurrent.Callable;
 public abstract class BaseCallable<T> implements Callable<AsyncResult<T>> {
 
     protected final String profileName;
-    protected final String datapointName;
+    protected final String dataPointName;
     protected final AsyncResult<T> result = new AsyncResult<>();
 
     abstract void doFunctionCall()
@@ -23,16 +23,16 @@ public abstract class BaseCallable<T> implements Callable<AsyncResult<T>> {
             RestApiServiceCallException, RestApiAuthenticationException, GenDriverSocketException,
             IOException;
 
-    public BaseCallable(String profileName, String datapointName) {
+    public BaseCallable(String profileName, String dataPointName) {
         this.profileName = profileName;
-        this.datapointName = datapointName;
+        this.dataPointName = dataPointName;
         this.result.setExecStatus(ExecStatus.IDLE);
     }
 
     @Override
     public AsyncResult<T> call() {
         result.setProfileName(profileName);
-        result.setDatapointName(datapointName);
+        result.setDataPointName(dataPointName);
         result.setExecStatus(ExecStatus.PROCESSING);
         try {
             result.setRequestTime(Instant.now());
@@ -50,8 +50,8 @@ public abstract class BaseCallable<T> implements Callable<AsyncResult<T>> {
     public String getProfileName() {
         return profileName;
     }
-    public String getDatapointName() {
-        return datapointName;
+    public String getDataPointName() {
+        return dataPointName;
     }
     public AsyncResult<T> getResult() {
         return result;
