@@ -253,7 +253,7 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>protected java.util.Optional&lt;com.smartgridready.ns.v0.MessagingDataPoint&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findDataPointForProfile(com.smartgridready.ns.v0.MessagingFunctionalProfile,java.lang.String)">findDataPointForProfile</a></span>&#8203;(com.smartgridready.ns.v0.MessagingFunctionalProfile&nbsp;functionalProfile,
-                       java.lang.String&nbsp;datapointName)</code></th>
+                       java.lang.String&nbsp;dataPointName)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
@@ -319,7 +319,7 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
          java.lang.String&nbsp;dataPointName,
          java.util.function.Consumer&lt;io.vavr.control.Either&lt;java.lang.Throwable,&#8203;<a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&gt;&gt;&nbsp;callbackFunction)</code></th>
 <td class="colLast">
-<div class="block">Subscribes to messages that are related to the given datapoint</div>
+<div class="block">Subscribes to messages that are related to the given data point</div>
 </td>
 </tr>
 <tr id="i13" class="rowColor">
@@ -327,7 +327,7 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unsubscribe(java.lang.String,java.lang.String)">unsubscribe</a></span>&#8203;(java.lang.String&nbsp;profileName,
            java.lang.String&nbsp;dataPointName)</code></th>
 <td class="colLast">
-<div class="block">Unsubscribes from messages that are related to a given datapoint</div>
+<div class="block">Unsubscribes from messages that are related to a given data point</div>
 </td>
 </tr>
 </table>
@@ -336,7 +336,7 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;com.smartgridready.communicator.common.impl.<a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a></h3>
-<code><a href="../../common/impl/SGrDeviceBase.html#applyUnitConversion(P,com.smartgridready.communicator.common.api.values.Value,java.util.function.DoubleBinaryOperator)">applyUnitConversion</a>, <a href="../../common/impl/SGrDeviceBase.html#checkOutOfRange(com.smartgridready.communicator.common.api.values.Value%5B%5D,double,com.smartgridready.communicator.common.impl.SGrDeviceBase.Comparator)">checkOutOfRange</a>, <a href="../../common/impl/SGrDeviceBase.html#checkOutOfRange(com.smartgridready.communicator.common.api.values.Value%5B%5D,com.smartgridready.ns.v0.DataPointBase)">checkOutOfRange</a>, <a href="../../common/impl/SGrDeviceBase.html#checkReadWritePermission(com.smartgridready.ns.v0.DataPointBase,com.smartgridready.communicator.common.impl.SGrDeviceBase.RwpDirections)">checkReadWritePermission</a>, <a href="../../common/impl/SGrDeviceBase.html#divide(double,double)">divide</a>, <a href="../../common/impl/SGrDeviceBase.html#findDatapoint(java.lang.String,java.lang.String)">findDatapoint</a>, <a href="../../common/impl/SGrDeviceBase.html#getDataPoint(java.lang.String,java.lang.String)">getDataPoint</a>, <a href="../../common/impl/SGrDeviceBase.html#getDataPoints(java.lang.String)">getDataPoints</a>, <a href="../../common/impl/SGrDeviceBase.html#getDeviceConfigurationInfo()">getDeviceConfigurationInfo</a>, <a href="../../common/impl/SGrDeviceBase.html#getDeviceInfo()">getDeviceInfo</a>, <a href="../../common/impl/SGrDeviceBase.html#getFunctionalProfile(java.lang.String)">getFunctionalProfile</a>, <a href="../../common/impl/SGrDeviceBase.html#getFunctionalProfiles()">getFunctionalProfiles</a>, <a href="../../common/impl/SGrDeviceBase.html#getValues()">getValues</a>, <a href="../../common/impl/SGrDeviceBase.html#isNumeric(com.smartgridready.communicator.common.api.values.Value)">isNumeric</a>, <a href="../../common/impl/SGrDeviceBase.html#multiply(double,double)">multiply</a></code></li>
+<code><a href="../../common/impl/SGrDeviceBase.html#applyUnitConversion(P,com.smartgridready.communicator.common.api.values.Value,java.util.function.DoubleBinaryOperator)">applyUnitConversion</a>, <a href="../../common/impl/SGrDeviceBase.html#checkOutOfRange(com.smartgridready.communicator.common.api.values.Value%5B%5D,double,com.smartgridready.communicator.common.impl.SGrDeviceBase.Comparator)">checkOutOfRange</a>, <a href="../../common/impl/SGrDeviceBase.html#checkOutOfRange(com.smartgridready.communicator.common.api.values.Value%5B%5D,com.smartgridready.ns.v0.DataPointBase)">checkOutOfRange</a>, <a href="../../common/impl/SGrDeviceBase.html#checkReadWritePermission(com.smartgridready.ns.v0.DataPointBase,com.smartgridready.communicator.common.impl.SGrDeviceBase.RwpDirections)">checkReadWritePermission</a>, <a href="../../common/impl/SGrDeviceBase.html#divide(double,double)">divide</a>, <a href="../../common/impl/SGrDeviceBase.html#findDataPoint(java.lang.String,java.lang.String)">findDataPoint</a>, <a href="../../common/impl/SGrDeviceBase.html#getDataPoint(java.lang.String,java.lang.String)">getDataPoint</a>, <a href="../../common/impl/SGrDeviceBase.html#getDataPoints(java.lang.String)">getDataPoints</a>, <a href="../../common/impl/SGrDeviceBase.html#getDeviceConfigurationInfo()">getDeviceConfigurationInfo</a>, <a href="../../common/impl/SGrDeviceBase.html#getDeviceInfo()">getDeviceInfo</a>, <a href="../../common/impl/SGrDeviceBase.html#getFunctionalProfile(java.lang.String)">getFunctionalProfile</a>, <a href="../../common/impl/SGrDeviceBase.html#getFunctionalProfiles()">getFunctionalProfiles</a>, <a href="../../common/impl/SGrDeviceBase.html#getValues()">getValues</a>, <a href="../../common/impl/SGrDeviceBase.html#isNumeric(com.smartgridready.communicator.common.api.values.Value)">isNumeric</a>, <a href="../../common/impl/SGrDeviceBase.html#multiply(double,double)">multiply</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -428,7 +428,7 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
 <li class="blockList">
 <h4>findDataPointForProfile</h4>
 <pre class="methodSignature">protected&nbsp;java.util.Optional&lt;com.smartgridready.ns.v0.MessagingDataPoint&gt;&nbsp;findDataPointForProfile&#8203;(com.smartgridready.ns.v0.MessagingFunctionalProfile&nbsp;functionalProfile,
-                                                                                                  java.lang.String&nbsp;datapointName)</pre>
+                                                                                                  java.lang.String&nbsp;dataPointName)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../common/impl/SGrDeviceBase.html#findDataPointForProfile(F,java.lang.String)">findDataPointForProfile</a></code>&nbsp;in class&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.MessagingFunctionalProfile,&#8203;com.smartgridready.ns.v0.MessagingDataPoint&gt;</code></dd>
@@ -574,7 +574,7 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
                       java.util.function.Consumer&lt;io.vavr.control.Either&lt;java.lang.Throwable,&#8203;<a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&gt;&gt;&nbsp;callbackFunction)
                throws com.smartgridready.driver.api.common.GenDriverException</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../common/api/GenDeviceApi.html#subscribe(java.lang.String,java.lang.String,java.util.function.Consumer)">GenDeviceApi</a></code></span></div>
-<div class="block">Subscribes to messages that are related to the given datapoint</div>
+<div class="block">Subscribes to messages that are related to the given data point</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../common/api/GenDeviceApi.html#subscribe(java.lang.String,java.lang.String,java.util.function.Consumer)">subscribe</a></code>&nbsp;in interface&nbsp;<code><a href="../../common/api/GenDeviceApi.html" title="interface in com.smartgridready.communicator.common.api">GenDeviceApi</a></code></dd>
@@ -599,7 +599,7 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
                         java.lang.String&nbsp;dataPointName)
                  throws com.smartgridready.driver.api.common.GenDriverException</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../common/api/GenDeviceApi.html#unsubscribe(java.lang.String,java.lang.String)">GenDeviceApi</a></code></span></div>
-<div class="block">Unsubscribes from messages that are related to a given datapoint</div>
+<div class="block">Unsubscribes from messages that are related to a given data point</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../common/api/GenDeviceApi.html#unsubscribe(java.lang.String,java.lang.String)">unsubscribe</a></code>&nbsp;in interface&nbsp;<code><a href="../../common/api/GenDeviceApi.html" title="interface in com.smartgridready.communicator.common.api">GenDeviceApi</a></code></dd>
@@ -607,7 +607,7 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
 <dd><code><a href="../../common/impl/SGrDeviceBase.html#unsubscribe(java.lang.String,java.lang.String)">unsubscribe</a></code>&nbsp;in class&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.MessagingFunctionalProfile,&#8203;com.smartgridready.ns.v0.MessagingDataPoint&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>profileName</code> - The functional profile name</dd>
-<dd><code>dataPointName</code> - The datapoint name</dd>
+<dd><code>dataPointName</code> - The data point name</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - if an error occurs</dd>
 </dl>

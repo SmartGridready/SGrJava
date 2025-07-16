@@ -277,14 +277,14 @@ implements <a href="../api/GenDeviceApi.html" title="interface in com.smartgridr
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>protected <a href="SGrDeviceBase.html" title="type parameter in SGrDeviceBase">P</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findDatapoint(java.lang.String,java.lang.String)">findDatapoint</a></span>&#8203;(java.lang.String&nbsp;profileName,
-             java.lang.String&nbsp;datapointName)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findDataPoint(java.lang.String,java.lang.String)">findDataPoint</a></span>&#8203;(java.lang.String&nbsp;profileName,
+             java.lang.String&nbsp;dataPointName)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>protected abstract java.util.Optional&lt;<a href="SGrDeviceBase.html" title="type parameter in SGrDeviceBase">P</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findDataPointForProfile(F,java.lang.String)">findDataPointForProfile</a></span>&#8203;(<a href="SGrDeviceBase.html" title="type parameter in SGrDeviceBase">F</a>&nbsp;functionalProfile,
-                       java.lang.String&nbsp;datapointName)</code></th>
+                       java.lang.String&nbsp;dataPointName)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
@@ -359,7 +359,7 @@ implements <a href="../api/GenDeviceApi.html" title="interface in com.smartgridr
          java.lang.String&nbsp;dataPointName,
          java.util.function.Consumer&lt;io.vavr.control.Either&lt;java.lang.Throwable,&#8203;<a href="../api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&gt;&gt;&nbsp;callbackFunction)</code></th>
 <td class="colLast">
-<div class="block">Subscribes to messages that are related to the given datapoint</div>
+<div class="block">Subscribes to messages that are related to the given data point</div>
 </td>
 </tr>
 <tr id="i19" class="rowColor">
@@ -367,7 +367,7 @@ implements <a href="../api/GenDeviceApi.html" title="interface in com.smartgridr
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unsubscribe(java.lang.String,java.lang.String)">unsubscribe</a></span>&#8203;(java.lang.String&nbsp;profileName,
            java.lang.String&nbsp;dataPointName)</code></th>
 <td class="colLast">
-<div class="block">Unsubscribes from messages that are related to a given datapoint</div>
+<div class="block">Unsubscribes from messages that are related to a given data point</div>
 </td>
 </tr>
 </table>
@@ -459,17 +459,17 @@ implements <a href="../api/GenDeviceApi.html" title="interface in com.smartgridr
 <li class="blockList">
 <h4>findDataPointForProfile</h4>
 <pre class="methodSignature">protected abstract&nbsp;java.util.Optional&lt;<a href="SGrDeviceBase.html" title="type parameter in SGrDeviceBase">P</a>&gt;&nbsp;findDataPointForProfile&#8203;(<a href="SGrDeviceBase.html" title="type parameter in SGrDeviceBase">F</a>&nbsp;functionalProfile,
-                                                                 java.lang.String&nbsp;datapointName)</pre>
+                                                                 java.lang.String&nbsp;dataPointName)</pre>
 </li>
 </ul>
-<a id="findDatapoint(java.lang.String,java.lang.String)">
+<a id="findDataPoint(java.lang.String,java.lang.String)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>findDatapoint</h4>
-<pre class="methodSignature">protected&nbsp;<a href="SGrDeviceBase.html" title="type parameter in SGrDeviceBase">P</a>&nbsp;findDatapoint&#8203;(java.lang.String&nbsp;profileName,
-                          java.lang.String&nbsp;datapointName)
+<h4>findDataPoint</h4>
+<pre class="methodSignature">protected&nbsp;<a href="SGrDeviceBase.html" title="type parameter in SGrDeviceBase">P</a>&nbsp;findDataPoint&#8203;(java.lang.String&nbsp;profileName,
+                          java.lang.String&nbsp;dataPointName)
                    throws com.smartgridready.driver.api.common.GenDriverException</pre>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -696,7 +696,7 @@ implements <a href="../api/GenDeviceApi.html" title="interface in com.smartgridr
                       java.util.function.Consumer&lt;io.vavr.control.Either&lt;java.lang.Throwable,&#8203;<a href="../api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&gt;&gt;&nbsp;callbackFunction)
                throws com.smartgridready.driver.api.common.GenDriverException</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../api/GenDeviceApi.html#subscribe(java.lang.String,java.lang.String,java.util.function.Consumer)">GenDeviceApi</a></code></span></div>
-<div class="block">Subscribes to messages that are related to the given datapoint</div>
+<div class="block">Subscribes to messages that are related to the given data point</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../api/GenDeviceApi.html#subscribe(java.lang.String,java.lang.String,java.util.function.Consumer)">subscribe</a></code>&nbsp;in interface&nbsp;<code><a href="../api/GenDeviceApi.html" title="interface in com.smartgridready.communicator.common.api">GenDeviceApi</a></code></dd>
@@ -719,13 +719,13 @@ implements <a href="../api/GenDeviceApi.html" title="interface in com.smartgridr
                         java.lang.String&nbsp;dataPointName)
                  throws com.smartgridready.driver.api.common.GenDriverException</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../api/GenDeviceApi.html#unsubscribe(java.lang.String,java.lang.String)">GenDeviceApi</a></code></span></div>
-<div class="block">Unsubscribes from messages that are related to a given datapoint</div>
+<div class="block">Unsubscribes from messages that are related to a given data point</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../api/GenDeviceApi.html#unsubscribe(java.lang.String,java.lang.String)">unsubscribe</a></code>&nbsp;in interface&nbsp;<code><a href="../api/GenDeviceApi.html" title="interface in com.smartgridready.communicator.common.api">GenDeviceApi</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>profileName</code> - The functional profile name</dd>
-<dd><code>dataPointName</code> - The datapoint name</dd>
+<dd><code>dataPointName</code> - The data point name</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - if an error occurs</dd>
 </dl>

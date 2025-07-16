@@ -161,7 +161,7 @@ extends <a href="../../common/api/GenDeviceApi.html" title="interface in com.sma
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVal(java.lang.String,java.lang.String)">getVal</a></span>&#8203;(java.lang.String&nbsp;profileName,
       java.lang.String&nbsp;dataPointName)</code></th>
 <td class="colLast">
-<div class="block">Read a value from the modbus device in its generic datapoint representation (see <a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a>).</div>
+<div class="block">Read a value from the modbus device in its generic data point representation (see <a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a>).</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -170,7 +170,7 @@ extends <a href="../../common/api/GenDeviceApi.html" title="interface in com.sma
       java.lang.String&nbsp;dataPointName,
       <a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&nbsp;value)</code></th>
 <td class="colLast">
-<div class="block">Write a value to the modbus device using the generic datapoint representation (see <a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a>).</div>
+<div class="block">Write a value to the modbus device using the generic data point representation (see <a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a>).</div>
 </td>
 </tr>
 </table>
@@ -208,13 +208,13 @@ extends <a href="../../common/api/GenDeviceApi.html" title="interface in com.sma
       throws com.smartgridready.driver.api.common.GenDriverException,
              com.smartgridready.driver.api.modbus.GenDriverSocketException,
              com.smartgridready.driver.api.modbus.GenDriverModbusException</pre>
-<div class="block">Read a value from the modbus device in its generic datapoint representation (see <a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a>).</div>
+<div class="block">Read a value from the modbus device in its generic data point representation (see <a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a>).</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../common/api/GenDeviceApi.html#getVal(java.lang.String,java.lang.String)">getVal</a></code>&nbsp;in interface&nbsp;<code><a href="../../common/api/GenDeviceApi.html" title="interface in com.smartgridready.communicator.common.api">GenDeviceApi</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>profileName</code> - The name of the functional profile.</dd>
-<dd><code>dataPointName</code> - The name of the datapoint.</dd>
+<dd><code>dataPointName</code> - The name of the data point.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The value converted to <code>String</code></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -238,7 +238,7 @@ extends <a href="../../common/api/GenDeviceApi.html" title="interface in com.sma
      throws com.smartgridready.driver.api.common.GenDriverException,
             com.smartgridready.driver.api.modbus.GenDriverSocketException,
             com.smartgridready.driver.api.modbus.GenDriverModbusException</pre>
-<div class="block">Write a value to the modbus device using the generic datapoint representation (see <a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a>).
+<div class="block">Write a value to the modbus device using the generic data point representation (see <a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a>).
  The value is converted from the format given within the <code>value</code> parameter to the value required
  by the modbus device (as defined within the external interface XML of the device).</div>
 <dl>
@@ -246,7 +246,7 @@ extends <a href="../../common/api/GenDeviceApi.html" title="interface in com.sma
 <dd><code><a href="../../common/api/GenDeviceApi.html#setVal(java.lang.String,java.lang.String,com.smartgridready.communicator.common.api.values.Value)">setVal</a></code>&nbsp;in interface&nbsp;<code><a href="../../common/api/GenDeviceApi.html" title="interface in com.smartgridready.communicator.common.api">GenDeviceApi</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>profileName</code> - The name of the functional profile.</dd>
-<dd><code>dataPointName</code> - The name of the datapoint.</dd>
+<dd><code>dataPointName</code> - The name of the data point.</dd>
 <dd><code>value</code> - The value as <a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - If a general exception occurred.</dd>

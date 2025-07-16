@@ -258,7 +258,7 @@ void&nbsp;authenticate()
 <dd><code><a href="../../common/api/GenDeviceApi.html#getVal(java.lang.String,java.lang.String)">getVal</a></code>&nbsp;in interface&nbsp;<code><a href="../../common/api/GenDeviceApi.html" title="interface in com.smartgridready.communicator.common.api">GenDeviceApi</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>profileName</code> - The name of the functional profile.</dd>
-<dd><code>dataPointName</code> - The name of the datapoint within the functional profile.</dd>
+<dd><code>dataPointName</code> - The name of the data point within the functional profile.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The value read from the device.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -288,7 +288,7 @@ void&nbsp;authenticate()
 <dd><code><a href="../../common/api/GenDeviceApi.html#getVal(java.lang.String,java.lang.String,java.util.Properties)">getVal</a></code>&nbsp;in interface&nbsp;<code><a href="../../common/api/GenDeviceApi.html" title="interface in com.smartgridready.communicator.common.api">GenDeviceApi</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>profileName</code> - The name of the functional profile.</dd>
-<dd><code>dataPointName</code> - The name of the datapoint within the functional profile.</dd>
+<dd><code>dataPointName</code> - The name of the data point within the functional profile.</dd>
 <dd><code>parameters</code> - Key value pairs with request parameters</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The value read from the device.</dd>
@@ -325,9 +325,9 @@ void&nbsp;authenticate()
 <dd><code><a href="../../common/api/GenDeviceApi.html#setVal(java.lang.String,java.lang.String,com.smartgridready.communicator.common.api.values.Value)">setVal</a></code>&nbsp;in interface&nbsp;<code><a href="../../common/api/GenDeviceApi.html" title="interface in com.smartgridready.communicator.common.api">GenDeviceApi</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>profileName</code> - The name of the functional profile.</dd>
-<dd><code>dataPointName</code> - The name of the datapoint within the functional profile.</dd>
+<dd><code>dataPointName</code> - The name of the data point within the functional profile.</dd>
 <dd><code>value</code> - The value to be written. Will replace the value tagged with <code>[[value]]</code> within the
-              external interface <code>RestApiServiceCall</code> element for the given datapoint.</dd>
+              external interface <code>RestApiServiceCall</code> element for the given data point.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.io.IOException</code> - If the communication with the server failed.</dd>
 <dd><code><a href="../exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></code> - If the service call could not be executed on the remote side.</dd>

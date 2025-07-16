@@ -275,7 +275,7 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code><a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVal()">getVal</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Read the value from this datapoint</div>
+<div class="block">Read the value from this data point</div>
 </td>
 </tr>
 <tr id="i13" class="rowColor">
@@ -290,7 +290,7 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code><a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVal(java.util.Properties)">getVal</a></span>&#8203;(java.util.Properties&nbsp;parameters)</code></th>
 <td class="colLast">
-<div class="block">Read the value from this datapoint, with request-specific parameters</div>
+<div class="block">Read the value from this data point, with request-specific parameters</div>
 </td>
 </tr>
 <tr id="i15" class="rowColor">
@@ -313,7 +313,7 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#subscribe(java.util.function.Consumer)">subscribe</a></span>&#8203;(java.util.function.Consumer&lt;io.vavr.control.Either&lt;java.lang.Throwable,&#8203;<a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&gt;&gt;&nbsp;callbackFunction)</code></th>
 <td class="colLast">
-<div class="block">Subscribes to messages that are related to the given datapoint
+<div class="block">Subscribes to messages that are related to the given data point
  This operation is supported for messaging devices only</div>
 </td>
 </tr>
@@ -321,7 +321,7 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unsubscribe()">unsubscribe</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Unsubscribes from messages that are related to a given datapoint
+<div class="block">Unsubscribes from messages that are related to a given data point
  This operation is supported for messaging devices only</div>
 </td>
 </tr>
@@ -445,7 +445,7 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">public&nbsp;com.smartgridready.ns.v0.Units&nbsp;getUnit()</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The units of the datapoint value</dd>
+<dd>The units of the data point value</dd>
 </dl>
 </li>
 </ul>
@@ -497,7 +497,7 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">public&nbsp;java.lang.Integer&nbsp;getArrayLen()</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The array length if the datapoint represents an array of values.</dd>
+<dd>The array length if the data point represents an array of values.</dd>
 </dl>
 </li>
 </ul>
@@ -510,7 +510,7 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">public&nbsp;java.util.List&lt;<a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a>&gt;&nbsp;getGenericAttributes()</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>A list of generic attributes for this datapoint.</dd>
+<dd>A list of generic attributes for this data point.</dd>
 </dl>
 </li>
 </ul>
@@ -542,7 +542,7 @@ extends java.lang.Object</pre>
                     <a href="../../../rest/exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a>,
                     com.smartgridready.driver.api.modbus.GenDriverSocketException,
                     java.io.IOException</pre>
-<div class="block">Read the value from this datapoint</div>
+<div class="block">Read the value from this data point</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The value read.</dd>
@@ -569,7 +569,7 @@ extends java.lang.Object</pre>
                     <a href="../../../rest/exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a>,
                     com.smartgridready.driver.api.modbus.GenDriverSocketException,
                     java.io.IOException</pre>
-<div class="block">Read the value from this datapoint, with request-specific parameters</div>
+<div class="block">Read the value from this data point, with request-specific parameters</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>parameters</code> - Key value pairs with request parameters</dd>
@@ -688,7 +688,7 @@ public&nbsp;void&nbsp;authenticate()
 <h4>subscribe</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;subscribe&#8203;(java.util.function.Consumer&lt;io.vavr.control.Either&lt;java.lang.Throwable,&#8203;<a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&gt;&gt;&nbsp;callbackFunction)
                throws com.smartgridready.driver.api.common.GenDriverException</pre>
-<div class="block">Subscribes to messages that are related to the given datapoint
+<div class="block">Subscribes to messages that are related to the given data point
  This operation is supported for messaging devices only</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -706,7 +706,7 @@ public&nbsp;void&nbsp;authenticate()
 <h4>unsubscribe</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;unsubscribe()
                  throws com.smartgridready.driver.api.common.GenDriverException</pre>
-<div class="block">Unsubscribes from messages that are related to a given datapoint
+<div class="block">Unsubscribes from messages that are related to a given data point
  This operation is supported for messaging devices only</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
