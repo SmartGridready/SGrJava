@@ -8,6 +8,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id 'checkstyle'
 }
 
 repositories {
@@ -40,6 +41,19 @@ java {
 
 dependencies {
     api group: 'io.vavr', name: 'vavr', version: '0.10.5'
+}
+
+checkstyle {
+    toolVersion "11.0.0"
+    configFile file("../config/checkstyle/checkstyle.xml")
+    checkstyleMain.enabled = true
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.required = false
+        html.required = true
+    }
 }
 
 publishing {
