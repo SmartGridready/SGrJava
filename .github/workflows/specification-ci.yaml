@@ -55,3 +55,18 @@ jobs:
         run: |
           chmod +x ./gradlew
           ./gradlew publishMavenJavaPublicationToNexusRepository -Pnexus.username=smartgrid -Pnexus.password=${{ secrets.NEXUS_PASSWORD }} -Pversion="${{inputs.tag}}" --no-daemon
+
+      - name: Build Javadoc
+        id: javadoc
+        working-directory: SGrJava/Specification
+        run: |
+          chmod +x ./gradlew
+          ./gradlew javadoc --no-daemon
+
+      - name: Publish Javadoc on Github Pages
+        if: (steps.javadoc.outcome == 'success')
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages  # Change this if using a different branch
+          folder: SGrJava/Specification/build/docs/javadoc  # Path where Javadoc is generated
+          target-folder: docs/specification
