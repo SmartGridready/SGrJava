@@ -37,6 +37,9 @@ import com.smartgridready.ns.v0.ParameterList;
 import com.smartgridready.ns.v0.RestApiServiceCall;
 import com.smartgridready.ns.v0.HeaderEntry;
 
+/**
+ * Implements an HTTP / REST client.
+ */
 public class RestServiceClient {
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -67,6 +70,11 @@ public class RestServiceClient {
 		this.httpClientFactory = httpClientFactory;
 	}
 
+	/**
+	 * Adds a new request header.
+	 * @param key the header name
+	 * @param value the header value
+	 */
 	public void addHeader(String key, String value) {
 		if (value != null) {
 			HeaderEntry headerEntry = new HeaderEntry();
@@ -76,14 +84,26 @@ public class RestServiceClient {
 		}
 	}
 
+	/**
+	 * Gets the request's base URI.
+	 * @return a string
+	 */
 	public String getBaseUri() {
 		return baseUri;
 	}
 
+	/**
+	 * Tells if SSL certificates are to be verified.
+	 * @return a boolean
+	 */
 	public boolean isVerifyCertificate() {
 		return verifyCertificate;
 	}
 
+	/**
+	 * Gets the SGr specification of the service call.
+	 * @return an instance of {@link RestApiServiceCall}
+	 */
 	public RestApiServiceCall getRestServiceCall() {
 		return restServiceCall;
 	}
@@ -120,6 +140,11 @@ public class RestServiceClient {
 		return serviceCall;
 	}
 
+	/**
+	 * Executes the HTTP request.
+	 * @return an instance of {@link GenHttpResponse}
+	 * @throws IOException when an error occurred
+	 */
 	public GenHttpResponse callService() throws IOException {
 
 		if (httpClientFactory == null) {
@@ -194,10 +219,29 @@ public class RestServiceClient {
 		return convertedTemplate;
 	}
 
+	/**
+	 * Creates a new instance.
+	 * @param baseUri the base URI
+	 * @param verifyCertificate SSL certificate will be verified when true
+	 * @param serviceCall the SGr specification of the service call
+	 * @param httpClientFactory the SGr HTTP client factory
+	 * @return a new instance of {@link RestServiceClient}
+	 * @throws IOException when an error occurred
+	 */
 	public static RestServiceClient of(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory) throws IOException {
 		return new RestServiceClient(baseUri, verifyCertificate, serviceCall, httpClientFactory);
 	}
 
+	/**
+	 * Creates a new instance.
+	 * @param baseUri the base URI
+	 * @param verifyCertificate SSL certificate will be verified when true
+	 * @param serviceCall the SGr specification of the service call
+	 * @param httpClientFactory the SGr HTTP client factory
+	 * @param substitutions substitutions of dynamic request parameters
+	 * @return a new instance of {@link RestServiceClient}
+	 * @throws IOException when an error occurred
+	 */
 	public static RestServiceClient of(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory, Properties substitutions) throws IOException {
 		return new RestServiceClient(baseUri, verifyCertificate, serviceCall, httpClientFactory, substitutions);
 	}

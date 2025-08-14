@@ -20,14 +20,20 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-// Maps a received Json value into the required SmartGridready Json output value.
-// The timestamps are converted to a canonical format first and afterwards
+/**
+ * Maps a received JSON value into the required SmartGridready JSON output value.
+ * The timestamps are converted to a canonical format first and afterwards.
+ */
 public class JsonReader
 {
     private static final JmesPath<JsonNode> jmespath = new JacksonRuntime();
 
     private final Map<String, String> keywordMapInput;
 
+    /**
+     * Constructs a new instance.
+     * @param keywordMapInput key/value mappings of keywords
+     */
     public JsonReader(Map<String, String> keywordMapInput) {
         this.keywordMapInput = keywordMapInput;
     }

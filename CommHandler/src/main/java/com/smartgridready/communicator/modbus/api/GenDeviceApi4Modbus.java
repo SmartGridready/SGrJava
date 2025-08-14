@@ -27,7 +27,6 @@ import com.smartgridready.driver.api.modbus.GenDriverSocketException;
  * The API defines read and write operations for SmartGridReady devices.
  * The values can be provided as {@link String} or {@link NumberValue}
  * The implementing device will convert the data to their modbus format.
- *
  */
 public interface GenDeviceApi4Modbus extends GenDeviceApi {
 

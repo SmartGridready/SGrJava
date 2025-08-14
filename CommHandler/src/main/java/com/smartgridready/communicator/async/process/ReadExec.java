@@ -12,6 +12,10 @@ import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 
+/**
+ * Implements an asynchronous read method.
+ * @param <R> The type of result.
+ */
 public class ReadExec<R> extends Processor implements Executable {
 
     private static final Logger LOG = LoggerFactory.getLogger(ReadExec.class);
@@ -22,10 +26,24 @@ public class ReadExec<R> extends Processor implements Executable {
     private Object finishedNotificationReceiver;
 
     private Disposable disposable;
+
+    /**
+     * Constructs a new instance.
+     * @param functionalProfileName the functional profile name
+     * @param dataPointName the data point name
+     * @param readFunction a reference to the actual method to be called
+     */
     public ReadExec(String functionalProfileName, String dataPointName, ReadFunction<R> readFunction) {
         this(functionalProfileName, dataPointName, readFunction, Schedulers.io());
     }
 
+    /**
+     * Constructs a new instance with a custom scheduler.
+     * @param functionalProfileName the functional profile name
+     * @param dataPointName the data point name
+     * @param readFunction a reference to the actual method to be called
+     * @param scheduler a task scheduler
+     */
     public ReadExec(String functionalProfileName, String dataPointName, ReadFunction<R> readFunction, Scheduler scheduler) {
         this.scheduler = scheduler;
         this.deviceCallable = new DeviceReadCallable<>(readFunction, functionalProfileName, dataPointName);
@@ -44,10 +62,14 @@ public class ReadExec<R> extends Processor implements Executable {
                 disposable = observable.subscribe(this::handleSuccess, this::handleError);
             }
         } catch (Exception e) {
-           handleError(e);
+            handleError(e);
         }
     }
 
+    /**
+     * Handles a finished process.
+     * @param result the process result
+     */
     public void handleSuccess(AsyncResult<R> result) {
         switch (result.getExecStatus()) {
             case SUCCESS:
@@ -64,7 +86,11 @@ public class ReadExec<R> extends Processor implements Executable {
         }
         notifyFinished();
     }
-    
+
+    /**
+     * Handles an error.
+     * @param t the exception that was thrown
+     */
     public void handleError(Throwable t) {
         LOG.error("ReadExec RESULT {} - {} ERROR", deviceCallable.getResult().getProfileName(), deviceCallable.getResult().getDataPointName());
         notifyFinished();
@@ -75,30 +101,55 @@ public class ReadExec<R> extends Processor implements Executable {
         return deviceCallable.getResult();
     }
 
+    /**
+     * Gets the value of the read result.
+     * @return a value
+     */
     public R getReadValue() {
         return getResult().getValue();
     }
 
+    /**
+     * Gets the execution status.
+     * @return an instance of {@link ExecStatus}
+     */
     public ExecStatus getExecStatus() {
         return getResult().getExecStatus();
     }
-    
+
+    /**
+     * Gets the exception that was thrown.
+     * @return an instance of {@link Throwable}
+     */
     public Throwable getExecThrowable() {
-    	return getResult().getThrowable();
+        return getResult().getThrowable();
     }
 
+    /**
+     * Cleans up disposable resources.
+     */
     public void cleanup() {
         if (disposable != null) {
             disposable.dispose();
         }
     }
+
+    /**
+     * Gets the time stamp of sending the request.
+     * @return an instance of {@link Instant}
+     */
     public Instant getRequestTime() {
         return getResult().getRequestTime();
     }
 
+    /**
+     * Gets the time stamp of receiving the response.
+     * @return an instance of {@link Instant}
+     */
     public Instant getResponseTime() {
         return getResult().getResponseTime();
     }
+
     @Override
     public String toString() {
         return getResult().toString();

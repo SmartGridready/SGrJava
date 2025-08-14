@@ -23,6 +23,12 @@ public class DeviceWriteCallable<T> extends BaseCallable<T> {
 
     private T writeValue;
 
+    /**
+     * Constructs a new instance.
+     * @param writeFunction the write function to execute
+     * @param profileName the functional profile name
+     * @param dataPointName the data point name
+     */
     public DeviceWriteCallable(WriteFunction<T> writeFunction, String profileName, String dataPointName) {
         super(profileName, dataPointName);
         this.writeFunction = writeFunction;

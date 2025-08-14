@@ -56,6 +56,9 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Properties;
 
+/**
+ * Implements a device interface for HTTP / REST APIs.
+ */
 public class SGrRestApiDevice extends SGrDeviceBase<
 		DeviceFrame,
 		RestApiFunctionalProfile,

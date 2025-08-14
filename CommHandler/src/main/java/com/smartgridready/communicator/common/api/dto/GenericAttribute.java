@@ -16,13 +16,25 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Implements a generic attribute facade.
+ */
 public class GenericAttribute {
+
     private final String name;
     private final Value value;
     private final DataTypeInfo dataType;
     private final Units unit;
     private final List<GenericAttribute> children;
 
+    /**
+     * Construct a new instance.
+     * @param name the attribute name
+     * @param value the attribute value
+     * @param dataType the attribute value's data type
+     * @param unit the attribute value's unit of measurement
+     * @param children a list of child attributes
+     */
     public GenericAttribute(
             String name,
             Value value,
@@ -52,7 +64,6 @@ public class GenericAttribute {
         return unit;
     }
 
-    @SuppressWarnings("unused")
     public List<GenericAttribute> getChildren() {
         return children;
     }

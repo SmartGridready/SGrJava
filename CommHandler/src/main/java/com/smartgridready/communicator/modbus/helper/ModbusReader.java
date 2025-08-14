@@ -24,20 +24,34 @@ import com.smartgridready.driver.api.common.GenDriverException;
 import com.smartgridready.driver.api.modbus.GenDriverModbusException;
 import com.smartgridready.driver.api.modbus.GenDriverSocketException;
 
-
-
+/**
+ * Implements Modbus read commands.
+ */
 public class ModbusReader {
-   
+
+    /**
+     * Reads from Modbus transport.
+     * @param drv4Modbus the Modbus driver instance
+     * @param unitIdentifier the slave identifier
+     * @param regType the type of Modbus register
+     * @param regAddr the starting address
+     * @param isFirstRegAddrOne address offset of one when true
+     * @param length the number of elements to read
+     * @return an instance of {@link ModbusReaderResponse}
+     * @throws GenDriverException when any other error occurred
+     * @throws GenDriverModbusException when a protocol error occurred
+     * @throws GenDriverSocketException when a network error occurred
+     */
     public static ModbusReaderResponse read(GenDriverAPI4Modbus drv4Modbus,
                                             short unitIdentifier,
                                             RegisterType regType,
-    										int regAddr,
+                                            int regAddr,
                                             boolean isFirstRegAddrOne,
                                             int length)
             throws GenDriverException, GenDriverModbusException, GenDriverSocketException {
 
-        ModbusReaderResponse response= new ModbusReaderResponse();
-  
+        ModbusReaderResponse response = new ModbusReaderResponse();
+
         if (isFirstRegAddrOne) {
             regAddr = regAddr - 1;
         }
@@ -52,8 +66,7 @@ public class ModbusReader {
         } else {
             throw new GenDriverException("ModbusReader, unhandled register type requested.");
         }
-	    
+
         return response;
     }
-
 }

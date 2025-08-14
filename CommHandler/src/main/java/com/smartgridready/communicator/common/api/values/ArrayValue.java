@@ -9,12 +9,20 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 
+/**
+ * Implements an array wrapper around other kinds of SGr value.
+ * @param <T> The type of SGr value to wrap.
+ */
 public class ArrayValue<T extends Value> extends Value {
 
     private final T[] values;
 
+    /**
+     * Constructs a new instance.
+     * @param values the SGr values
+     */
     public ArrayValue(T[] values) {
-       this.values = values;
+        this.values = values;
     }
 
     @Override
@@ -114,10 +122,16 @@ public class ArrayValue<T extends Value> extends Value {
         Arrays.stream(values).forEach(Value::roundToInt);
     }
 
+    @Override
     public T[] asArray() {
         return values;
     }
 
+    /**
+     * Creates a new instance.
+     * @param values the values to wrap
+     * @return an instance of {@link ArrayValue}
+     */
     public static ArrayValue<Value> of(Value ... values) {
         return new ArrayValue<>(values);
     }

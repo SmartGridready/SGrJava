@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Provides helper methods for JSON.
+ */
 public class JsonHelper {
 
     public static final Logger LOG = LoggerFactory.getLogger(JsonHelper.class);
@@ -28,6 +31,13 @@ public class JsonHelper {
         throw new IllegalStateException("Helper class");
     }
 
+    /**
+     * Evaluates a JMESPath expression on a JSON string and returns as SGr value.
+     * @param jmesPath the JMESPath expression
+     * @param jsonResp the JSON string
+     * @return an instance of {@link JsonValue}
+     * @throws GenDriverException when an error occurred during parsing
+     */
     public static Value parseJsonResponse(String jmesPath, String jsonResp) throws GenDriverException {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -47,6 +57,13 @@ public class JsonHelper {
         }
     }
 
+    /**
+     * Evaluates a JMESPath mapping on a JSON string and returns as SGr value.
+     * @param jmesPathMapping the JMESPath mapping
+     * @param response the JSON string
+     * @return an instance of {@link JsonValue}
+     * @throws GenDriverException when an error occurred during parsing and mapping
+     */
     public static Value mapJsonResponse(JMESPathMapping jmesPathMapping, String response) throws GenDriverException {
 
         // Build mapping tables from EI-XML mappings

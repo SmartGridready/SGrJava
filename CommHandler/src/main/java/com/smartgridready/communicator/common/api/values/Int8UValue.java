@@ -1,5 +1,8 @@
 package com.smartgridready.communicator.common.api.values;
 
+/**
+ * Implements an SGr value containing a 8-bit unsigned integer value.
+ */
 public class Int8UValue extends NumberValue<Short> {
 
     private Int8UValue(short value) {
@@ -27,6 +30,11 @@ public class Int8UValue extends NumberValue<Short> {
         // is already an int
     }
 
+    /**
+     * Creates a new instance from short.
+     * @param value the short value
+     * @return an instance of {@link Int8UValue}
+     */
     public static Int8UValue of(short value) {
         return new Int8UValue(value);
     }

@@ -11,6 +11,10 @@ import com.smartgridready.ns.v0.MessagingFunctionalProfile;
 import com.smartgridready.ns.v0.ModbusFunctionalProfile;
 import com.smartgridready.ns.v0.RestApiFunctionalProfile;
 
+/**
+ * Implements a helper class which evaluates the functional profiles and data points
+ * according to the interface-specific specification. 
+ */
 class FunctionalProfileWithDataPoints {
 
     private final List<? extends DataPointBase> dataPoints;
@@ -37,7 +41,7 @@ class FunctionalProfileWithDataPoints {
         }
     }
 
-    public static FunctionalProfileWithDataPoints of (FunctionalProfileBase functionalProfile) {
+    public static FunctionalProfileWithDataPoints of(FunctionalProfileBase functionalProfile) {
         return new FunctionalProfileWithDataPoints(functionalProfile);
     }
 

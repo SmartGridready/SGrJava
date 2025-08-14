@@ -6,6 +6,9 @@ import com.smartgridready.ns.v0.Language;
 
 import java.util.Map;
 
+/**
+ * Implements an EID configuration parameters.
+ */
 public class ConfigurationValue {
 
     private final String name;
@@ -14,6 +17,13 @@ public class ConfigurationValue {
 
     private final Map<Language, String> descriptions;
 
+    /**
+     * Constructs a new instance.
+     * @param name the parameter name
+     * @param defaultValue the parameter's default value
+     * @param dataType the parameter's data type
+     * @param descriptions parameter descriptions
+     */
     public ConfigurationValue(String name, Value defaultValue, DataTypeInfo dataType, Map<Language, String> descriptions) {
         this.name = name;
         this.defaultValue = defaultValue;

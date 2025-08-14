@@ -1,5 +1,8 @@
 package com.smartgridready.communicator.common.api.values;
 
+/**
+ * Implements an SGr value containing a 32-bit floating point value.
+ */
 public class Float32Value extends NumberValue<Float> {
 
     private Float32Value(float value) {
@@ -22,6 +25,11 @@ public class Float32Value extends NumberValue<Float> {
         value = (float)Math.round(value);
     }
 
+    /**
+     * Creates a new instance.
+     * @param value the float value
+     * @return an instance of {@link Float32Value}
+     */
     public static Float32Value of(float value) {
         return new Float32Value(value);
     }

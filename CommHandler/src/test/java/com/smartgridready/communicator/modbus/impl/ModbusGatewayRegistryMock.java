@@ -10,10 +10,17 @@ import com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory;
 import com.smartgridready.communicator.modbus.api.ModbusGatewayRegistry;
 import com.smartgridready.communicator.modbus.api.ModbusGateway;
 
+/**
+ * Implements a mock of a Modbus gateway registry.
+ * Only for testing purposes.
+ */
 public class ModbusGatewayRegistryMock implements ModbusGatewayRegistry {
 
     private final ModbusGateway mock;
 
+    /**
+     * Constructs a new instance.
+     */
     public ModbusGatewayRegistryMock() {
         mock = new ModbusGateway(null, null, new GenDriverAPI4ModbusRTUMock());
     }

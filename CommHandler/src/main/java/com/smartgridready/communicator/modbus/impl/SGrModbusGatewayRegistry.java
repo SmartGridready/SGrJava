@@ -22,6 +22,10 @@ import com.smartgridready.communicator.modbus.api.ModbusGateway;
 import com.smartgridready.communicator.modbus.helper.ModbusTransportUtil;
 import com.smartgridready.communicator.modbus.helper.ModbusUtil;
 
+/**
+ * Default implementation of a shared Modbus gateway registry.
+ * Keeps track of multiple devices attached to the same transport.
+ */
 public class SGrModbusGatewayRegistry implements ModbusGatewayRegistry {
 
     private static final Logger LOG = LoggerFactory.getLogger(SGrModbusGatewayRegistry.class);
@@ -31,6 +35,9 @@ public class SGrModbusGatewayRegistry implements ModbusGatewayRegistry {
     private final Map<String, ModbusGateway> gateways;
     private final Map<ModbusGateway, Set<String>> gatewayAttachedKeys;
 
+    /**
+     * Constructs a new instance.
+     */
     public SGrModbusGatewayRegistry() {
         gateways = new HashMap<>();
         gatewayAttachedKeys = new HashMap<>();
@@ -41,6 +48,10 @@ public class SGrModbusGatewayRegistry implements ModbusGatewayRegistry {
         detachAllGateways();
     }
 
+    /**
+     * Gets the default singleton instance of the Modbus gateway registry.
+     * @return an instance of {@link SGrModbusGatewayRegistry}
+     */
     public static synchronized ModbusGatewayRegistry defaultInstance() {
         if (defaultInstance == null) defaultInstance = new SGrModbusGatewayRegistry();
         return defaultInstance;

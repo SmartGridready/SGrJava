@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Implements an SGr value containing a bit map value.
+ */
 public class BitmapValue extends Value {
 
     private final List<BitmapRecord> value;

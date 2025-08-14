@@ -18,6 +18,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * Converts data to JSON.
+ */
 public class JsonWriter {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -87,7 +90,6 @@ public class JsonWriter {
 
         return rootNode;
     }
-
 
     private void addSecondLevelNodes(ObjectNode firstLevelNode, List<Map<String, Object>> flatRecordsBelongingToGroup) {
 

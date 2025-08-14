@@ -10,10 +10,20 @@ import com.smartgridready.ns.v0.ModbusInterfaceDescription;
 import com.smartgridready.ns.v0.ModbusRtu;
 import com.smartgridready.ns.v0.ModbusTcp;
 
+/**
+ * A helper class to create instances of Modbus transport connections.
+ */
 public class ModbusTransportUtil {
-    
+
+    /**
+     * Creates a new tranport.
+     * @param interfaceDescription the interface specification
+     * @param factory the driver factory
+     * @return an instance of {@link GenDriverAPI4Modbus}
+     * @throws GenDriverException
+     */
     public static GenDriverAPI4Modbus createTransport(ModbusInterfaceDescription interfaceDescription, GenDriverAPI4ModbusFactory factory) throws GenDriverException {
-		if (factory == null) {
+        if (factory == null) {
             throw new GenDriverException("No Modbus factory implementation found on classpath");
         }
 
@@ -22,54 +32,54 @@ public class ModbusTransportUtil {
         switch (modbusType) {
             case RTU:
                 return createRtuTransport(interfaceDescription.getModbusRtu(), false, factory);
-			
-			case RTU_ASCII:
+            
+            case RTU_ASCII:
                 return createRtuTransport(interfaceDescription.getModbusRtu(), true, factory);
- 
+
             case TCP:
                 return createTcpTransport(interfaceDescription.getModbusTcp(), factory);
-			
-			case UDP:
+            
+            case UDP:
                 return createUdpTransport(interfaceDescription.getModbusTcp(), factory);
 
             default:
                 throw new GenDriverException(String.format("Unsupported Modbus type %s", modbusType));
         }
-	}
+    }
 
-	private static GenDriverAPI4Modbus createRtuTransport(ModbusRtu rtu, boolean asciiEncoding, GenDriverAPI4ModbusFactory factory) throws GenDriverException {
-		if (rtu == null) {
-			throw new GenDriverException("No Modbus RTU configuration found");
-		}
+    private static GenDriverAPI4Modbus createRtuTransport(ModbusRtu rtu, boolean asciiEncoding, GenDriverAPI4ModbusFactory factory) throws GenDriverException {
+        if (rtu == null) {
+            throw new GenDriverException("No Modbus RTU configuration found");
+        }
 
-		String serialPort = rtu.getPortName();
-		int baudrate = ModbusUtil.getSerialBaudrate(rtu.getBaudRateSelected());
-		Parity parity = ModbusUtil.getSerialParity(rtu.getParitySelected());
-		DataBits dataBits = ModbusUtil.getSerialDataBits(rtu.getByteLenSelected());
-		StopBits stopBits = ModbusUtil.getSerialStopBits(rtu.getStopBitLenSelected());
+        String serialPort = rtu.getPortName();
+        int baudrate = ModbusUtil.getSerialBaudrate(rtu.getBaudRateSelected());
+        Parity parity = ModbusUtil.getSerialParity(rtu.getParitySelected());
+        DataBits dataBits = ModbusUtil.getSerialDataBits(rtu.getByteLenSelected());
+        StopBits stopBits = ModbusUtil.getSerialStopBits(rtu.getStopBitLenSelected());
 
-		return factory.createRtuTransport(serialPort, baudrate, parity, dataBits, stopBits, asciiEncoding);
-	}
+        return factory.createRtuTransport(serialPort, baudrate, parity, dataBits, stopBits, asciiEncoding);
+    }
 
-	private static GenDriverAPI4Modbus createTcpTransport(ModbusTcp tcp, GenDriverAPI4ModbusFactory factory) throws GenDriverException {
-		if (tcp == null) {
-			throw new GenDriverException("No Modbus TCP configuration found");
-		}
+    private static GenDriverAPI4Modbus createTcpTransport(ModbusTcp tcp, GenDriverAPI4ModbusFactory factory) throws GenDriverException {
+        if (tcp == null) {
+            throw new GenDriverException("No Modbus TCP configuration found");
+        }
 
-		String tcpAddress = tcp.getAddress();
+        String tcpAddress = tcp.getAddress();
         int tcpPort = ModbusUtil.isNonEmptyString(tcp.getPort()) ? Integer.valueOf(tcp.getPort()) : ModbusUtil.DEFAULT_MODBUS_TCP_PORT;
 
-		return factory.createTcpTransport(tcpAddress, tcpPort);
-	}
+        return factory.createTcpTransport(tcpAddress, tcpPort);
+    }
 
-	private static GenDriverAPI4Modbus createUdpTransport(ModbusTcp udp, GenDriverAPI4ModbusFactory factory) throws GenDriverException {
-		if (udp == null) {
-			throw new GenDriverException("No Modbus UDP configuration found");
-		}
+    private static GenDriverAPI4Modbus createUdpTransport(ModbusTcp udp, GenDriverAPI4ModbusFactory factory) throws GenDriverException {
+        if (udp == null) {
+            throw new GenDriverException("No Modbus UDP configuration found");
+        }
 
-		String udpAddress = udp.getAddress();
+        String udpAddress = udp.getAddress();
         int udpPort = ModbusUtil.isNonEmptyString(udp.getPort()) ? Integer.valueOf(udp.getPort()) : ModbusUtil.DEFAULT_MODBUS_TCP_PORT;
 
-		return factory.createUdpTransport(udpAddress, udpPort);
-	}
+        return factory.createUdpTransport(udpAddress, udpPort);
+    }
 }

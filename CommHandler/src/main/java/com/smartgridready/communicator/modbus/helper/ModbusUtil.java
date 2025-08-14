@@ -13,15 +13,24 @@ import com.smartgridready.driver.api.common.GenDriverException;
 import com.smartgridready.driver.api.modbus.StopBits;
 import com.smartgridready.driver.api.modbus.Parity;
 
+/**
+ * Utility methods for Modbus.
+ */
 public class ModbusUtil {
 
+    /** Default TCP port. */
     public static final int DEFAULT_MODBUS_TCP_PORT = 502;
-    
+
+    /** Default baud rate. */
     public static final int DEFAULT_BAUDRATE = 9600;
+    /** Default parity. */
     public static final Parity DEFAULT_PARITY = Parity.NONE;
+    /** Default data bits. */
     public static final DataBits DEFAULT_DATABITS = DataBits.EIGHT;
+    /** Default stop bits. */
     public static final StopBits DEFAULT_STOPBITS = StopBits.ONE;
 
+    /** Default slave ID. */
     public static final short DEFAULT_SLAVE_ID = 0xff;
     
     private static final Map<String, DataBits> dataBitMap = Map.of(
@@ -41,6 +50,11 @@ public class ModbusUtil {
         com.smartgridready.ns.v0.Parity.ODD.value(), Parity.ODD
     );
 
+    /**
+     * Tells if the interface uses a serial connection.
+     * @param interfaceDescription the interface specification
+     * @return a boolean
+     */
     public static boolean isSerial(ModbusInterfaceDescription interfaceDescription) {
         ModbusRtu rtu = interfaceDescription.getModbusRtu();
         return (
@@ -49,6 +63,11 @@ public class ModbusUtil {
         );
     }
 
+    /**
+     * Tells if the interface uses a TCP/IP connection.
+     * @param interfaceDescription the interface specification
+     * @return a boolean
+     */
     public static boolean isTcp(ModbusInterfaceDescription interfaceDescription) {
         ModbusTcp tcp = interfaceDescription.getModbusTcp();
         return (
@@ -57,6 +76,11 @@ public class ModbusUtil {
         );
     }
 
+    /**
+     * Gets the Modbus device slave ID.
+     * @param interfaceDescription the interface specification
+     * @return a short
+     */
     public static short getModbusSlaveId(ModbusInterfaceDescription interfaceDescription) {
         // distinguish between Serial and TCP
         short slaveId = DEFAULT_SLAVE_ID;
@@ -74,6 +98,12 @@ public class ModbusUtil {
         return slaveId;
     }
 
+    /**
+     * Gets the unique gateway identifier of a Modbus device.
+     * Is the serial port name or a combination of IP address and port.
+     * @param interfaceDescription the interface specification
+     * @return a string
+     */
     public static String getModbusGatewayIdentifier(ModbusInterfaceDescription interfaceDescription) throws GenDriverException {
         // distinguish between Serial and TCP
         boolean isSerial = isSerial(interfaceDescription);
@@ -94,22 +124,47 @@ public class ModbusUtil {
         throw new GenDriverException("Could not get Modbus gateway identifier");
     }
 
+    /**
+     * Gets the data bits configuration.
+     * @param dataBits the data bits as string
+     * @return an instance of {@link DataBits}
+     */
     public static DataBits getSerialDataBits(String dataBits) {
         return dataBitMap.getOrDefault(dataBits, DEFAULT_DATABITS);
     }
 
+    /**
+     * Gets the stop bits configuration.
+     * @param stopBits the stop bits as string
+     * @return an instance of {@link StopBits}
+     */
     public static StopBits getSerialStopBits(String stopBits) {
         return stopBitMap.getOrDefault(stopBits, DEFAULT_STOPBITS);
     }
 
+    /**
+     * Gets the parity configuration.
+     * @param parity the parity as string
+     * @return an instance of {@link Parity}
+     */
     public static Parity getSerialParity(String parity) {
         return parityMap.getOrDefault(parity, DEFAULT_PARITY);
     }
 
+    /**
+     * Gets the serial baud rate.
+     * @param baudRate the baud rate as string
+     * @return an int
+     */
     public static int getSerialBaudrate(String baudRate) {
         return isNonEmptyString(baudRate) ? Integer.valueOf(baudRate) : DEFAULT_BAUDRATE;
     }
 
+    /**
+     * Tells if a string value is not null and not empty.
+     * @param value the string value
+     * @return a boolean
+     */
     public static boolean isNonEmptyString(String value) {
         return (
             (value != null) &&
@@ -117,6 +172,12 @@ public class ModbusUtil {
         );
     }
 
+    /**
+     * Tells if interface specifications of two devices match.
+     * @param interface1 the interface specification of device 1
+     * @param interface2 the interface specification of device 2
+     * @return a boolean
+     */
     public static boolean interfaceParametersMatch(ModbusInterfaceDescription interface1, ModbusInterfaceDescription interface2) {
         if (
             (null == interface1.getModbusRtu() && null != interface2.getModbusRtu()) ||
@@ -160,6 +221,11 @@ public class ModbusUtil {
         return true;
     }
 
+    /**
+     * Gets the Modbus interface type.
+     * @param interfaceDescription the interface specification
+     * @return an instance of {@link ModbusType}
+     */
     public static ModbusType getModbusType(ModbusInterfaceDescription interfaceDescription) {
         ModbusInterfaceSelection modbusType = interfaceDescription.getModbusInterfaceSelection();
 

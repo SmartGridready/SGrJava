@@ -5,6 +5,9 @@ import com.smartgridready.ns.v0.DeviceCategory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implements a generic device information facade.
+ */
 public class DeviceInfo {
 
     private final String name;
@@ -24,7 +27,20 @@ public class DeviceInfo {
 
     private final List<FunctionalProfile> functionalProfiles;
 
-    @SuppressWarnings("java:S107")
+    /**
+     * Constructs a new instance.
+     * @param name the device name
+     * @param manufacturer the device manufacturer
+     * @param versionNumber the EID version number
+     * @param softwareVersion the software version supported by the EID
+     * @param hardwareVersion the hardware version supported by the EID
+     * @param deviceCategory the device category
+     * @param interfaceType the type of communication interface
+     * @param operationEnvironment the environment the device operates in
+     * @param genericAttributes the generic attributes of the device
+     * @param configurationInfo the list of EID configuration parameters
+     * @param functionalProfiles the list of functional profiles
+     */
     public DeviceInfo(String name,
                       String manufacturer,
                       String versionNumber,
@@ -58,7 +74,9 @@ public class DeviceInfo {
         return manufacturer;
     }
 
-    public String getVersionNumber() { return versionNumber; }
+    public String getVersionNumber() {
+        return versionNumber;
+    }
 
     public String getSoftwareVersion() {
         return softwareVersion;
@@ -92,13 +110,22 @@ public class DeviceInfo {
         return functionalProfiles;
     }
 
+    /**
+     * Reads all data point values from device.
+     * @return a list of {@link DataPointValue}
+     */
     public List<DataPointValue> getValues() {
         List<DataPointValue> dataPointValues = new ArrayList<>();
         functionalProfiles.forEach(functionalProfile -> dataPointValues.addAll(functionalProfile.getValues()));
         return dataPointValues;
     }
 
-    @Deprecated
+    /**
+     * Reads all data point values from device.
+     * @return a list of {@link DataPointValue}
+     * @deprecated Since version 2.1.0
+     */
+    @Deprecated(since = "2.1.0", forRemoval = true)
     public List<DataPointValue> readData() {
         return getValues();
     }

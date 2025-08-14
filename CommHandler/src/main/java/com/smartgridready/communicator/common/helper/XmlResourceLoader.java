@@ -15,14 +15,30 @@ import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
 
+/**
+ * Implements a generic XML deserializer that loads resources.
+ * @param <T> The type to deserialize into.
+ */
 public class XmlResourceLoader<T> {
 
     private final Class<T> clazz;
 
+    /**
+     * Constructs a new instance.
+     * @param clazz type to deserialize into 
+     */
     public XmlResourceLoader(Class<T> clazz) {
         this.clazz = clazz;
     }
 
+    /**
+     * Deserializes XML into an object.
+     * @param resourcePath the path of the loaded resource
+     * @param xmlContent the XML content loaded from the resource
+     * @param validate validates schema if true
+     * @return an instance of the desired type
+     * @throws IOException when deserialization failed
+     */
     public T load(String resourcePath, String xmlContent, boolean validate) throws IOException {
 
         T result;

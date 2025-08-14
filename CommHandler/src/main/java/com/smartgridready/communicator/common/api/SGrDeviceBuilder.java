@@ -29,7 +29,8 @@ import com.smartgridready.driver.api.http.GenHttpClientFactory;
 import com.smartgridready.communicator.rest.impl.SGrRestApiDevice;
 
 /**
- * Generic SGr device builder.
+ * Implements a generic SGr device builder.
+ * Provides a fluent interface to build device instances from EI-XML and parameters.
  */
 public class SGrDeviceBuilder {
     

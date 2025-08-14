@@ -10,6 +10,10 @@ import java.math.BigInteger;
 import java.time.Instant;
 import java.util.Map;
 
+/**
+ * Implements an SGr value containing a date/time value.
+ * Note that this implementation only supports string formats that can be converted to {@link Instant}.
+ */
 public class DateTimeValue extends Value {
 
     private Instant value;
@@ -120,14 +124,29 @@ public class DateTimeValue extends Value {
         // is already an int
     }
 
+    /**
+     * Creates a new instance from {@link Instant}.
+     * @param value the value
+     * @return an instance of {@link DateTimeValue}
+     */
     public static DateTimeValue of(Instant value) {
         return new DateTimeValue(value);
     }
 
+    /**
+     * Creates a new instance from a string.
+     * @param dateTimeStr the date/time string
+     * @return an instance of {@link DateTimeValue}
+     */
     public static DateTimeValue of(String dateTimeStr) {
         return new DateTimeValue(Instant.parse(dateTimeStr));
     }
 
+    /**
+     * Creates a new instance from UNIX milliseconds since epoch.
+     * @param epochMillis the milliseconds since epoch
+     * @return an instance of {@link DateTimeValue}
+     */
     public static DateTimeValue of(long epochMillis) {
         return new DateTimeValue(Instant.ofEpochMilli(epochMillis));
     }

@@ -39,11 +39,16 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Implements an HTTP authenticator using JWT bearer tokens.
+ */
 public class BearerTokenAuthenticator implements Authenticator {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(BearerTokenAuthenticator.class);
 
 	private String bearerToken;
+
+	BearerTokenAuthenticator() {}
 	
 	@Override
 	public String getAuthorizationHeaderValue(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory)

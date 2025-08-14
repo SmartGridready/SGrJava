@@ -30,10 +30,11 @@ public interface GenDriverAPI4Modbus {
      * Sets the Modbus unit identifier / slave ID for future commands.
      * This method is deprecated, as the current implementation prefers sending the unit ID with each command.
      * @param unitId the new unit ID
+     * @deprecated Since version 2.2.0
      */
-    @Deprecated
-	void setUnitIdentifier(short unitId);
-	
+    @Deprecated(since = "2.2.0", forRemoval = true)
+    void setUnitIdentifier(short unitId);
+
     /**
      * Reads one or multiple input registers.
      * This method is deprecated, as the current implementation prefers sending the unit ID with each command. Use {@code readInputRegisters} instead.
@@ -43,10 +44,11 @@ public interface GenDriverAPI4Modbus {
      * @throws GenDriverException when a general error occurred
      * @throws GenDriverSocketException when a network error occurred
      * @throws GenDriverModbusException when a Modbus protocol error occurred
+     * @deprecated Since version 2.2.0
      */
-    @Deprecated
+    @Deprecated(since = "2.2.0", forRemoval = true)
     int[] ReadInputRegisters(int startingAddress, int quantity) throws GenDriverException, GenDriverSocketException, GenDriverModbusException;
-    
+
     /**
      * Reads one or multiple holding registers.
      * This method is deprecated, as the current implementation prefers sending the unit ID with each command. Use {@code readHoldingRegisters} instead.
@@ -56,8 +58,9 @@ public interface GenDriverAPI4Modbus {
      * @throws GenDriverException when a general error occurred
      * @throws GenDriverSocketException when a network error occurred
      * @throws GenDriverModbusException when a Modbus protocol error occurred
+     * @deprecated Since version 2.2.0
      */
-    @Deprecated
+    @Deprecated(since = "2.2.0", forRemoval = true)
     int[] ReadHoldingRegisters(int startingAddress, int quantity) throws GenDriverException, GenDriverSocketException, GenDriverModbusException;
 
     /**
@@ -69,8 +72,9 @@ public interface GenDriverAPI4Modbus {
      * @throws GenDriverException when a general error occurred
      * @throws GenDriverSocketException when a network error occurred
      * @throws GenDriverModbusException when a Modbus protocol error occurred
+     * @deprecated Since version 2.2.0
      */
-    @Deprecated
+    @Deprecated(since = "2.2.0", forRemoval = true)
     boolean[] ReadDiscreteInputs(int startingAddress, int quantity) throws GenDriverException, GenDriverSocketException, GenDriverModbusException;
 
     /**
@@ -82,8 +86,9 @@ public interface GenDriverAPI4Modbus {
      * @throws GenDriverException when a general error occurred
      * @throws GenDriverSocketException when a network error occurred
      * @throws GenDriverModbusException when a Modbus protocol error occurred
+     * @deprecated Since version 2.2.0
      */
-    @Deprecated
+    @Deprecated(since = "2.2.0", forRemoval = true)
     boolean[] ReadCoils(int startingAddress, int quantity) throws GenDriverException, GenDriverSocketException, GenDriverModbusException;
 
     /**
@@ -94,8 +99,9 @@ public interface GenDriverAPI4Modbus {
      * @throws GenDriverException when a general error occurred
      * @throws GenDriverSocketException when a network error occurred
      * @throws GenDriverModbusException when a Modbus protocol error occurred
+     * @deprecated Since version 2.2.0
      */
-    @Deprecated
+    @Deprecated(since = "2.2.0", forRemoval = true)
     void WriteMultipleCoils(int startingAdress, boolean[] values) throws GenDriverException, GenDriverSocketException, GenDriverModbusException;
 
     /**
@@ -106,8 +112,9 @@ public interface GenDriverAPI4Modbus {
      * @throws GenDriverException when a general error occurred
      * @throws GenDriverSocketException when a network error occurred
      * @throws GenDriverModbusException when a Modbus protocol error occurred
+     * @deprecated Since version 2.2.0
      */
-    @Deprecated
+    @Deprecated(since = "2.2.0", forRemoval = true)
     void WriteSingleCoil(int startingAdress, boolean value) throws GenDriverException, GenDriverSocketException, GenDriverModbusException;
 
     /**
@@ -118,8 +125,9 @@ public interface GenDriverAPI4Modbus {
      * @throws GenDriverException when a general error occurred
      * @throws GenDriverSocketException when a network error occurred
      * @throws GenDriverModbusException when a Modbus protocol error occurred
+     * @deprecated Since version 2.2.0
      */
-    @Deprecated
+    @Deprecated(since = "2.2.0", forRemoval = true)
     void WriteMultipleRegisters(int startingAdress, int[] values) throws GenDriverException, GenDriverSocketException, GenDriverModbusException; 
 
     /**
@@ -130,8 +138,9 @@ public interface GenDriverAPI4Modbus {
      * @throws GenDriverException when a general error occurred
      * @throws GenDriverSocketException when a network error occurred
      * @throws GenDriverModbusException when a Modbus protocol error occurred
+     * @deprecated Since version 2.2.0
      */
-    @Deprecated
+    @Deprecated(since = "2.2.0", forRemoval = true)
     void WriteSingleRegister(int startingAdress, int value) throws GenDriverException, GenDriverSocketException, GenDriverModbusException;
 
     /**

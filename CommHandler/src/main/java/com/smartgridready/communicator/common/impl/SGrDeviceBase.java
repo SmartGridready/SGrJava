@@ -38,7 +38,12 @@ import java.util.stream.Stream;
 import java.util.function.Consumer;
 import java.util.function.DoubleBinaryOperator;
 
-
+/**
+ * Base class for all kinds of device communication interfaces.
+ * @param <D> The type of device specification.
+ * @param <F> The type of functional profile.
+ * @param <P> The type of data point.
+ */
 public abstract class SGrDeviceBase<
         D extends DeviceFrame,
         F extends FunctionalProfileBase,
@@ -46,25 +51,37 @@ public abstract class SGrDeviceBase<
 
     protected final D device;
 
+    /**
+     * Collection of access permissions.
+     */
     public enum RwpDirections {
+        /** Readable. */
         READ(Stream.of(DataDirectionProduct.R, DataDirectionProduct.RW, DataDirectionProduct.RWP, DataDirectionProduct.C).collect(Collectors.toSet())),
+        /** Writable. */
         WRITE(Stream.of(DataDirectionProduct.W, DataDirectionProduct.RW, DataDirectionProduct.RWP).collect(Collectors.toSet())),
+        /** Constant. */
         CONST(Collections.singleton(DataDirectionProduct.C));
 
         private final Set<DataDirectionProduct> opAllowedTypes;
+
         RwpDirections(Set<DataDirectionProduct> opAllowedTypes) {
             this.opAllowedTypes = opAllowedTypes;
         }
     }
 
+    /**
+     * Comparators.
+     */
     public enum Comparator {
+        /** Minimum. */
         MIN(((val, lim) -> val.compareTo(lim) < 0)),
+        /** Maximum. */
         MAX(((val, lim) -> val.compareTo(lim) > 0));
 
         private final BiPredicate<Double, Double> cmpFunc;
 
         Comparator(BiPredicate<Double,Double> cmpFunc) {
-           this.cmpFunc = cmpFunc;
+            this.cmpFunc = cmpFunc;
         }
 
         BiPredicate<Double,Double> getCmpFunc() {
@@ -132,7 +149,7 @@ public abstract class SGrDeviceBase<
     @Override
     public DeviceInfo getDeviceInfo() throws GenDriverException {
 
-       var deviceWithInterface = DeviceWithInterface.of(device);
+        var deviceWithInterface = DeviceWithInterface.of(device);
 
         var genericAttributes = Optional.ofNullable(device.getGenericAttributeList())
                 .map(GenericAttributeListProduct::getGenericAttributeListElement)

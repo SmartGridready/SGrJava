@@ -12,6 +12,9 @@ import java.math.BigInteger;
 import java.time.Instant;
 import java.util.Map;
 
+/**
+ * Implements an SGr value containing a string value.
+ */
 public class StringValue extends Value {
 
     private String value;
@@ -145,6 +148,11 @@ public class StringValue extends Value {
         }
     }
 
+    /**
+     * Scales down by powers of 10.
+     * @param mul the multiplicator
+     * @param powOf10 the exponent of the power of 10
+     */
     public void scaleDown(int mul, int powOf10) {
         if (mul != 1 || powOf10 !=0) {
             double dVal = toDouble() / mul;
@@ -152,6 +160,11 @@ public class StringValue extends Value {
         }
     }
 
+    /**
+     * Scales up by powers of 10.
+     * @param mul the multiplicator
+     * @param powOf10 the exponent of the power of 10
+     */
     public void scaleUp(int mul, int powOf10) {
         if (mul != 1 || powOf10 !=0) {
             double dVal = toDouble() * mul;
@@ -181,6 +194,11 @@ public class StringValue extends Value {
         return value;
     }
 
+    /**
+     * Creates a new instance.
+     * @param value the string value
+     * @return an instance of {@link StringValue}
+     */
     public static StringValue of(String value) {
         return new StringValue(value);
     }

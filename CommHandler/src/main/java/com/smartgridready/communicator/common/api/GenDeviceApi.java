@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.Properties;
 
+/**
+ * Defines the generic API supported by all SGr device types.
+ */
 public interface GenDeviceApi {
 
     /**

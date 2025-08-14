@@ -14,6 +14,10 @@ import java.math.BigInteger;
 import java.time.Instant;
 import java.util.Map;
 
+/**
+ * Base class for numeric SGr value types.
+ * @param <T> The type of numeric value.
+ */
 public abstract class NumberValue<T extends Number> extends Value {
 
     protected T value;
@@ -120,10 +124,17 @@ public abstract class NumberValue<T extends Number> extends Value {
         }
     }
 
+    @Override
     public String toString() {
-       return value.toString();
+        return value.toString();
     }
 
+    /**
+     * Scales down by powers of 10.
+     * @param mul the multiplicator
+     * @param powOf10 the exponent of the power of 10
+     * @return a numeric value
+     */
     @SuppressWarnings("java:S1452")
     public NumberValue<? extends Number> scaleDown(int mul, int powOf10) {
 
@@ -134,6 +145,12 @@ public abstract class NumberValue<T extends Number> extends Value {
         return this;
     }
 
+    /**
+     * Scales up by powers of 10.
+     * @param mul the multiplicator
+     * @param powOf10 the exponent of the power of 10
+     * @return a numeric value
+     */
     @SuppressWarnings("java:S1452")
     public NumberValue<? extends Number> scaleUp(int mul, int powOf10) {
         if(mul != 1 || powOf10 != 0) {

@@ -24,6 +24,9 @@ import com.smartgridready.communicator.rest.exception.RestApiAuthenticationExcep
 import java.lang.reflect.Constructor;
 import java.util.EnumMap;
 
+/**
+ * Implements a factory that creates HTTP authenticators.
+ */
 public class AuthenticatorFactory {
 	
 	private AuthenticatorFactory() { /* Utility class */ }
@@ -34,7 +37,13 @@ public class AuthenticatorFactory {
 		AUTHENTICATOR_REGISTRY.put(RestApiAuthenticationMethod.BASIC_SECURITY_SCHEME, BasicAuthenticator.class);
 		AUTHENTICATOR_REGISTRY.put(RestApiAuthenticationMethod.NO_SECURITY_SCHEME, DummyHttpAuthenticator.class);
 	}
-	
+
+	/**
+	 * Creates a new HTTP authenticator using reflection.
+	 * @param authMethodType the desired authentication method
+	 * @return an instance of {@link Authenticator}
+	 * @throws RestApiAuthenticationException when creating the instance failed
+	 */
 	public static Authenticator getAuthenticator(RestApiAuthenticationMethod authMethodType)
 		throws RestApiAuthenticationException {
 		Class<? extends Authenticator> authClass = AUTHENTICATOR_REGISTRY.get(authMethodType);

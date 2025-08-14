@@ -10,6 +10,9 @@ import java.math.BigInteger;
 import java.time.Instant;
 import java.util.Map;
 
+/**
+ * Implements an SGr value containing a boolean value.
+ */
 public class BooleanValue extends Value {
 
     private final boolean value;

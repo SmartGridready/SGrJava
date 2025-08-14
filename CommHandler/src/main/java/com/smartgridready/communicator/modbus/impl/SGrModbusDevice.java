@@ -37,7 +37,6 @@ import com.smartgridready.ns.v0.ScalingFactor;
 import com.smartgridready.ns.v0.TimeSyncBlockNotification;
 import com.smartgridready.communicator.common.api.values.BitmapValue;
 import com.smartgridready.communicator.common.api.values.EnumValue;
-import com.smartgridready.communicator.common.api.values.Float64Value;
 import com.smartgridready.communicator.common.api.values.Int64UValue;
 import com.smartgridready.communicator.common.api.values.NumberValue;
 import com.smartgridready.communicator.common.api.values.StringValue;
@@ -81,9 +80,9 @@ import jakarta.annotation.PreDestroy;
 import static com.smartgridready.communicator.common.impl.SGrDeviceBase.RwpDirections.READ;
 
 /**
+ * Implements a Modbus device communication interface.
  * 
  * @author furrer / IBT,cb
- *
  */
 public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctionalProfile, ModbusDataPoint>
 		implements GenDeviceApi4Modbus {

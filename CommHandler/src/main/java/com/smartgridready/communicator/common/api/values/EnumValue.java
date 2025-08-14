@@ -12,8 +12,10 @@ import java.nio.ByteBuffer;
 import java.time.Instant;
 import java.util.Map;
 
+/**
+ * Implements a SGr enumeration value.
+ */
 public class EnumValue extends Value {
-
 
     private final EnumRecord enumRecord;
 
@@ -25,7 +27,6 @@ public class EnumValue extends Value {
     public EnumValue[] asArray() {
         return new EnumValue[]{this};
     }
-
 
     @Override
     public Int64Value enumToOrdinalValue(EnumMapProduct enumMapProduct) {
@@ -59,8 +60,8 @@ public class EnumValue extends Value {
         byte[] hexMask = enumMapProduct.getHexMask();
 
         if (hexMask == null) {
-            hexMask = new byte[]{
-                    (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF
+            hexMask = new byte[] {
+                (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF
             };
         } else if (hexMask.length < 8) {
             byte[] int64Mask = new byte[8];
@@ -207,18 +208,41 @@ public class EnumValue extends Value {
         // not available
     }
 
+    /**
+     * Creates a new instance with only a literal.
+     * @param literal the text literal
+     * @return an instance of {@link EnumValue}
+     */
     public static EnumValue of(String literal) {
         return of(literal, null, null);
     }
 
+    /**
+     * Creates a new instance with only an ordinal.
+     * @param ordinal the numeric ordinal
+     * @return an instance of {@link EnumValue}
+     */
     public static EnumValue of(long ordinal) {
         return of(null, ordinal, null);
     }
 
+    /**
+     * Creates a new instance.
+     * @param literal the text literal
+     * @param ordinal the numeric ordinal
+     * @param description the description of the value
+     * @return an instance of {@link EnumValue}
+     */
     public static EnumValue of(String literal, Long ordinal, String description) {
         return new EnumValue(new EnumRecord(literal, ordinal, description));
     }
 
+    /**
+     * Creates a new instance from an ordinal and enumeration specification.
+     * @param ordinal the numeric ordinal
+     * @param enumMapProduct the enumeration specification
+     * @return an instance of {@link EnumValue}
+     */
     public static EnumValue of(Long ordinal, EnumMapProduct enumMapProduct) {
         return enumFromOrdinalValue(ordinal, enumMapProduct);
     }

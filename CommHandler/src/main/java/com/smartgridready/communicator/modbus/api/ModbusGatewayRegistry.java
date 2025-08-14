@@ -38,11 +38,19 @@ public interface ModbusGatewayRegistry {
     /**
      * Disconnects the Modbus transport gateway of a given device.
      * @param identifier the transport identifier
+     * @param key the unique device object key
      * @throws GenDriverException
      */
     public void detachGateway(String identifier, String key) throws GenDriverException;
 
+    /**
+     * Disconnects all Modbus transport gateways.
+     */
     public void detachAllGateways();
 
+    /**
+     * Gets all transport identifiers.
+     * @return a list of strings
+     */
     public List<String> getAllGatewayIdentifiers();
 }
