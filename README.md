@@ -25,7 +25,7 @@ The SGrJava repository contains of three projects:
 
 ### Specification
 
-Provides JAXB generated classes based on the XML schema definitions within the SGrSpecifications GitHub repository.
+Provides JAXB generated classes based on the XML schema definitions within the SGrSpecifications GitHub repository.  
 [JavaDoc](https://smartgridready.github.io/SGrJava/docs/specification/)
 
 ### GenDriverAPI
