@@ -55,11 +55,11 @@ public abstract class SGrDeviceBase<
      * Collection of access permissions.
      */
     public enum RwpDirections {
-        /** Readable. */
+        /** Data point is readable. */
         READ(Stream.of(DataDirectionProduct.R, DataDirectionProduct.RW, DataDirectionProduct.RWP, DataDirectionProduct.C).collect(Collectors.toSet())),
-        /** Writable. */
+        /** Data point is writable. */
         WRITE(Stream.of(DataDirectionProduct.W, DataDirectionProduct.RW, DataDirectionProduct.RWP).collect(Collectors.toSet())),
-        /** Constant. */
+        /** Data point is constant. */
         CONST(Collections.singleton(DataDirectionProduct.C));
 
         private final Set<DataDirectionProduct> opAllowedTypes;
@@ -93,8 +93,19 @@ public abstract class SGrDeviceBase<
         this.device = device;
     }
 
+    /**
+     * Finds a functional profile by name.
+     * @param profileName the name of the functional profile
+     * @return an optional functional profile
+     */
     protected abstract Optional<F> findProfile(String profileName);
 
+    /**
+     * Finds a data point of a given functional profile by name.
+     * @param functionalProfile the functional profile
+     * @param dataPointName the name of the data point to find
+     * @return an optional data point
+     */
     protected abstract Optional<P> findDataPointForProfile(F functionalProfile, String dataPointName);
 
     protected P findDataPoint(String profileName, String dataPointName) throws GenDriverException {
@@ -108,6 +119,12 @@ public abstract class SGrDeviceBase<
         }
     }
 
+    /**
+     * Tests an array of SGr values against upper and lower bounds of a given data point. 
+     * @param values the values to test
+     * @param dataPoint the data point to test against
+     * @throws GenDriverException when one or more values are out of bounds
+     */
     public void checkOutOfRange(Value[] values, DataPointBase dataPoint)
         throws GenDriverException {
 
@@ -122,6 +139,12 @@ public abstract class SGrDeviceBase<
         }
     }
 
+    /**
+     * Tests a given data point's read or write permissions.
+     * @param dataPoint the data point to test
+     * @param direction the permission to test against
+     * @throws GenDriverException
+     */
     public void checkReadWritePermission(DataPointBase dataPoint, RwpDirections direction) throws GenDriverException {
 
         DataDirectionProduct dRWPType = dataPoint.getDataPoint().getDataDirection();

@@ -13,7 +13,14 @@ public class Sequence extends Processor {
 
     private static final Logger LOG = LoggerFactory.getLogger(Sequence.class);
 
-    private final List<Processor> processorList = new ArrayList<>();
+    private final List<Processor> processorList;
+
+    /**
+     * Constructs a new instance.
+     */
+    public Sequence() {
+        processorList = new ArrayList<>();
+    }
 
     @Override
     public void process(ProcessingType processingType) {

@@ -18,14 +18,26 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package com.smartgridready.communicator.rest.exception;
 
+/**
+ * Implements an exception for errors in HTTP responses.
+ */
 public class RestApiResponseParseException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructs a new instance.
+	 * @param message the error message
+	 * @param cause the internal exception
+	 */
 	public RestApiResponseParseException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
+	/**
+	 * Constructs a new instance.
+	 * @param message the error message
+	 */
 	public RestApiResponseParseException(String message) {
 		super(message);
 	}

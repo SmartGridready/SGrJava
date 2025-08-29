@@ -20,10 +20,17 @@ package com.smartgridready.communicator.rest.exception;
 
 import com.smartgridready.driver.api.http.GenHttpResponse;
 
+/**
+ * Implements an exception of failed HTTP calls.
+ */
 public class RestApiServiceCallException extends Exception {
 
 	private static final long serialVersionUID = 1L;
-	
+
+	/**
+	 * Constructs a new instance.
+	 * @param httpResponse the HTTP call's response
+	 */
 	public RestApiServiceCallException(GenHttpResponse httpResponse) {
 		
 		super(	"REST service call failed. HttpStatus: " 

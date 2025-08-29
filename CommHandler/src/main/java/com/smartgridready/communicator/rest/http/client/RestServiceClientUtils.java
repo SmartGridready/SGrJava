@@ -24,12 +24,20 @@ import java.util.stream.Collectors;
 import com.smartgridready.ns.v0.HeaderEntry;
 import com.smartgridready.ns.v0.RestApiServiceCall;
 
+/**
+ * Implements utility functions for HTTP / REST APIs.
+ */
 public class RestServiceClientUtils {
-	
+
 	private RestServiceClientUtils() { throw new IllegalAccessError("Utility class"); }
-	
+
+	/**
+	 * Prints info about an HTTP call specification. 
+	 * @param restServiceCall the HTTP call specification
+	 * @return a string
+	 */
 	public static String printServiceCall(RestApiServiceCall restServiceCall) {
-		
+
 		StringBuilder sb = new StringBuilder();
 
 		if (restServiceCall != null) {
@@ -39,17 +47,16 @@ public class RestServiceClientUtils {
 			sb.append(String.format("Request parameters %s%n", printUrlParameters(restServiceCall)));
 			sb.append(String.format("Request body:   %s%n", restServiceCall.getRequestBody()));
 		}
-		return sb.toString();		
+		return sb.toString();
 	}
-	
+
 	private static String printHeaders(List<HeaderEntry> headers) {
 		StringBuilder sb = new StringBuilder();
 		headers.forEach( headerEntry -> sb.append(String.format("\t%s : %s%n", headerEntry.getHeaderName(), headerEntry.getValue())));
 		return sb.toString();
 	}
 
-	private static String printUrlParameters(RestApiServiceCall restApiServiceCall)
-	{
+	private static String printUrlParameters(RestApiServiceCall restApiServiceCall)	{
 		if (restApiServiceCall.getRequestQuery() != null && restApiServiceCall.getRequestQuery().getParameter() != null) {
 			return restApiServiceCall.getRequestQuery().getParameter().stream()
 					.map(param -> param.getName() + "=" + param.getValue())

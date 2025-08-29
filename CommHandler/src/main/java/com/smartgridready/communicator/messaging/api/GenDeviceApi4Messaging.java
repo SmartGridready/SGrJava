@@ -7,6 +7,9 @@ import com.smartgridready.driver.api.common.GenDriverException;
 import java.io.Closeable;
 import java.util.Properties;
 
+/**
+ * Defines the interface of a message-based device communication interface.
+ */
 public interface GenDeviceApi4Messaging extends GenDeviceApi, Closeable {
 
     /**

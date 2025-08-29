@@ -41,10 +41,19 @@ class FunctionalProfileWithDataPoints {
         }
     }
 
+    /**
+     * Creates a new instance.
+     * @param functionalProfile the functional profile
+     * @return a new instance of {@link FunctionalProfileWithDataPoints}
+     */
     public static FunctionalProfileWithDataPoints of(FunctionalProfileBase functionalProfile) {
         return new FunctionalProfileWithDataPoints(functionalProfile);
     }
 
+    /**
+     * Gets the list of data points.
+     * @return a list of subclasses of {@link DataPointBase}
+     */
     @SuppressWarnings("unchecked")
     public List<DataPointBase> getDataPoints() {
         return (List<DataPointBase>) dataPoints;
