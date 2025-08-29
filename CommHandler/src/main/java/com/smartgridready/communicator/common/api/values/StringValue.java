@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 
 import java.math.BigInteger;
@@ -64,6 +65,9 @@ public class StringValue extends Value {
 
     @Override
     public long getInt64() {
+        if (value == null) {
+            throw new NullPointerException("string value is null");
+        }
         BigInteger val = new BigInteger(value);
         checkInt64(val);
         return val.longValue();
@@ -71,6 +75,9 @@ public class StringValue extends Value {
 
     @Override
     public BigInteger getInt64U() {
+        if (value == null) {
+            throw new NullPointerException("string value is null");
+        }
         BigInteger val = new BigInteger(value);
         checkInt64U(val);
         return val;
@@ -122,6 +129,10 @@ public class StringValue extends Value {
 
     @Override
     public JsonNode getJson() {
+        if (value == null) {
+            return NullNode.getInstance();
+        }
+
         if (!value.isBlank()) {
             // avoid MissingNode type when reading blank string
             try {
