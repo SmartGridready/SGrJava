@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Javadoc for all public interfaces and methods
 
+### Changed
+
+- Updated specification to `2.1_2025-09-02`, adds W/m2
 
 ## [2.4.1] - 2025-05-20
 
