@@ -58,6 +58,8 @@ jobs:
 
       - name: Build Javadoc
         id: javadoc
+        # disabled, because publishing does not work from sub-directory :(
+        if: false
         working-directory: SGrJava/Specification
         run: |
           chmod +x ./gradlew
