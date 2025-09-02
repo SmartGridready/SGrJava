@@ -33,6 +33,10 @@ xjc {
     generateEpisode = true
 }
 
+javadoc {
+    failOnError = false
+}
+
 processResources {
     from xsdPath
     exclude '.gitkeep', 'ressources'
