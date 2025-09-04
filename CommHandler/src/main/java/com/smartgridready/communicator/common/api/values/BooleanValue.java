@@ -111,6 +111,11 @@ public class BooleanValue extends Value {
         // no rounding for int
     }
 
+    /**
+     * Creates a new instance from a boolean.
+     * @param value the boolean value
+     * @return a new instance of {@link BooleanValue}
+     */
     public static BooleanValue of(boolean value) {
         return new BooleanValue(value);
     }

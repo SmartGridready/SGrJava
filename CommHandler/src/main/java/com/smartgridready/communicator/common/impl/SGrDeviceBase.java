@@ -49,6 +49,7 @@ public abstract class SGrDeviceBase<
         F extends FunctionalProfileBase,
         P extends DataPointBase> implements GenDeviceApi {
 
+    /** The interface-specific device specification. */
     protected final D device;
 
     /**
@@ -89,6 +90,10 @@ public abstract class SGrDeviceBase<
         }
     }
 
+    /**
+     * Constructs a new instance.
+     * @param device the generic device specification
+     */
     protected SGrDeviceBase(D device) {
         this.device = device;
     }
@@ -108,6 +113,13 @@ public abstract class SGrDeviceBase<
      */
     protected abstract Optional<P> findDataPointForProfile(F functionalProfile, String dataPointName);
 
+    /**
+     * Finds a data point by functional profile and data point name.
+     * @param profileName the functional profile name
+     * @param dataPointName the data point name
+     * @return a generic data point
+     * @throws GenDriverException if the device specification contains errors
+     */
     protected P findDataPoint(String profileName, String dataPointName) throws GenDriverException {
         Optional<F> functionalProfile = findProfile(profileName);
         if (functionalProfile.isPresent()) {
@@ -143,7 +155,7 @@ public abstract class SGrDeviceBase<
      * Tests a given data point's read or write permissions.
      * @param dataPoint the data point to test
      * @param direction the permission to test against
-     * @throws GenDriverException
+     * @throws GenDriverException on generic error
      */
     public void checkReadWritePermission(DataPointBase dataPoint, RwpDirections direction) throws GenDriverException {
 
@@ -156,6 +168,14 @@ public abstract class SGrDeviceBase<
         }
     }
 
+    /**
+     * Checks if a value is beyond its valid range.
+     * @param values the values to test
+     * @param limit the bounds
+     * @param comparator the comparator function
+     * @return an empty instance
+     * @throws GenDriverException if at least one value is out of range
+     */
     protected Optional<String> checkOutOfRange(Value[] values, double limit, Comparator comparator) throws GenDriverException {
 
         List<Value> outOfRangeValues = Arrays.stream(values)
@@ -330,6 +350,14 @@ public abstract class SGrDeviceBase<
         throw new GenDriverException("Unsubscribe not allowed");
     }
 
+    /**
+     * Performs conversion of units of measurements on a data point.
+     * @param <P> the generic type of data point
+     * @param dataPoint the data point instance
+     * @param value the value to convert
+     * @param conversionFunction the converter function
+     * @return the converted value
+     */
     protected static <P extends DataPointBase> Value applyUnitConversion(P dataPoint, Value value, DoubleBinaryOperator conversionFunction) {
 
 		if (dataPoint.getDataPoint().getUnitConversionMultiplicator() != null
@@ -340,6 +368,11 @@ public abstract class SGrDeviceBase<
 		return value;
 	}
 
+    /**
+     * Tells if a value contains a number.
+     * @param value the SGr value to test
+     * @return a boolean
+     */
 	protected static boolean isNumeric(Value value) {
 		if (value == null) {
 			return false;
@@ -353,10 +386,22 @@ public abstract class SGrDeviceBase<
 		}
 	}
 
+    /**
+     * Divides two numbers.
+     * @param dividend the dividend
+     * @param divisor the divisor
+     * @return the division result
+     */
 	protected static double divide(double dividend, double divisor) {
 		return  dividend / divisor;
 	}
 
+    /**
+     * Multiplies two numbers.
+     * @param factor1 the first factor
+     * @param factor2 the second factor
+     * @return the multiplication result
+     */
 	protected static double multiply(double factor1, double factor2) {
 		return  factor1 * factor2;
 	}

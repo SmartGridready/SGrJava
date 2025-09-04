@@ -34,6 +34,7 @@ public class DeviceWriteCallable<T> extends BaseCallable<T> {
         this.writeFunction = writeFunction;
         this.writeValue = null;
     }
+
     @Override
     protected void doFunctionCall() throws
             GenDriverException,
@@ -50,9 +51,14 @@ public class DeviceWriteCallable<T> extends BaseCallable<T> {
         }
     }
 
+    /**
+     * Updates the value to write.
+     * @param writeValue the value to write
+     */
     public void setWriteValue(T writeValue) {
         this.writeValue = writeValue;
     }
+
     @Override
     public String toString() {
         return String.format("Device WRITE: Profile=%s Data Point=%s", profileName, dataPointName);

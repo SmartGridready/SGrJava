@@ -66,46 +66,90 @@ public class DeviceInfo {
         this.functionalProfiles = functionalProfiles;
     }
 
+    /**
+     * Gets the device name.
+     * @return a string
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the device manufacturer name.
+     * @return a string
+     */
     public String getManufacturer() {
         return manufacturer;
     }
 
+    /**
+     * Gets the EID version number.
+     * @return a string
+     */
     public String getVersionNumber() {
         return versionNumber;
     }
 
+    /**
+     * Gets the device software version compatible with the EID.
+     * @return a string
+     */
     public String getSoftwareVersion() {
         return softwareVersion;
     }
 
+    /**
+     * Gets the device hardware version compatible with the EID.
+     * @return a string
+     */
     public String getHardwareVersion() {
         return hardwareVersion;
     }
 
+    /**
+     * Gets the device category, defined by XML schema.
+     * @return an instance of {@link DeviceCategory}
+     */
     public DeviceCategory getDeviceCategory() {
         return deviceCategory;
     }
 
+    /**
+     * Gets the type of communication interface.
+     * @return an instance of {@link InterfaceType}
+     */
     public InterfaceType getInterfaceType() {
         return interfaceType;
     }
 
+    /**
+     * Gets the device's operation environment.
+     * @return an instance of {@link OperationEnvironment}
+     */
     public OperationEnvironment getOperationEnvironment() {
         return operationEnvironment;
     }
 
+    /**
+     * Gets the generic attributes at device-level.
+     * @return a list of {@link GenericAttribute}
+     */
     public List<GenericAttribute> getGenericAttributes() {
         return genericAttributes;
     }
 
+    /**
+     * Gets the configuration parameters.
+     * @return a list of {@link ConfigurationValue}
+     */
     public List<ConfigurationValue> getConfigurationInfo() {
         return configurationInfo;
     }
 
+    /**
+     * Gets the functional profiles.
+     * @return a list of {@link FunctionalProfile}
+     */
     public List<FunctionalProfile> getFunctionalProfiles() {
         return functionalProfiles;
     }

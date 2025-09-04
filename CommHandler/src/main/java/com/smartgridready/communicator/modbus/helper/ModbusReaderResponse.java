@@ -30,6 +30,9 @@ public class ModbusReaderResponse {
     private boolean bGotRegisters = false;
     private boolean bGotDiscrete = false;
 
+    /** Constructs a new instance. */
+    ModbusReaderResponse() {}
+
     /**
      * Gets all register values as array of int.
      * @return an array of int

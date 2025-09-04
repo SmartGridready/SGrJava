@@ -30,6 +30,9 @@ import com.smartgridready.communicator.rest.impl.SGrRestApiDevice;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * Defines the communication interface API for HTTP/REST devices.
+ */
 public interface GenDeviceApi4Rest extends GenDeviceApi {
 
     /**

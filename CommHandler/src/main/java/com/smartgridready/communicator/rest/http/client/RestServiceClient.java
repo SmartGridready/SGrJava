@@ -59,10 +59,27 @@ public class RestServiceClient {
 		HTTP_METHOD_MAP.put(HttpMethod.DELETE, com.smartgridready.driver.api.http.HttpMethod.DELETE);
 	}
 
+	/**
+	 * Constructs a new instance with empty substitution properties.
+	 * @param baseUri the base URI for all service calls
+	 * @param verifyCertificate enables or disables SSL certificate validation
+	 * @param serviceCall the service call specification
+	 * @param httpClientFactory the HTTP client factory implementation
+	 * @throws IOException when the specification contains errors
+	 */
 	protected RestServiceClient(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory) throws IOException {
 		this(baseUri, verifyCertificate, serviceCall, httpClientFactory, new Properties());
 	}
 
+	/**
+	 * Constructs a new instance.
+	 * @param baseUri the base URI for all service calls
+	 * @param verifyCertificate enables or disables SSL certificate validation
+	 * @param serviceCall the service call specification
+	 * @param httpClientFactory the HTTP client factory implementation
+	 * @param substitutions the parameter substitutions
+	 * @throws IOException when the specification contains errors
+	 */
 	protected RestServiceClient(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory, Properties substitutions) throws IOException {
 		this.baseUri = baseUri;
 		this.verifyCertificate = verifyCertificate;

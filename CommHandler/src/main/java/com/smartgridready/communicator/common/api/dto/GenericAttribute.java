@@ -48,26 +48,51 @@ public class GenericAttribute {
         this.children = children;
     }
 
+    /**
+     * Gets the attribute name.
+     * @return a string
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the attribute value.
+     * @return a value
+     */
     public Value getValue() {
         return value;
     }
 
+    /**
+     * Gets the value's data type.
+     * @return a data type info
+     */
     public DataTypeInfo getDataType() {
         return dataType;
     }
 
+    /**
+     * Gets the value's unit of measurement.
+     * @return an instance of {@link Units}
+     */
     public Units getUnit() {
         return unit;
     }
 
+    /**
+     * Gets the attribute's sub-attributes.
+     * @return a list of {@link GenericAttribute}
+     */
     public List<GenericAttribute> getChildren() {
         return children;
     }
 
+    /**
+     * Creates a new instance.
+     * @param genAttribute the attribute specification
+     * @return a new instance of {@link GenericAttribute}
+     */
     public static GenericAttribute of(GenericAttributeProduct genAttribute) {
 
         List<GenericAttribute> children = Optional.ofNullable(genAttribute.getGenericAttributeList())
@@ -91,6 +116,11 @@ public class GenericAttribute {
         );
     }
 
+    /**
+     * Creates a new instance.
+     * @param genAttributeChild the attribute specification
+     * @return a new instance of {@link GenericAttribute}
+     */
     public static GenericAttribute of(GenericAttributeProductEnd genAttributeChild) {
 
         DataTypeInfo dt = DataType.getDataTypeInfo(genAttributeChild.getDataType()).orElse(null);
@@ -123,6 +153,11 @@ public class GenericAttribute {
                         (unit!=null ?     " | unit : " + unit.name():"");
     }
 
+    /**
+     * Maps a list of generic attributes.
+     * @param genericAttributeProducts the attribute specifications
+     * @return a list of {@link GenericAttribute}
+     */
     public static List<GenericAttribute> mapGenericAttributes(List<GenericAttributeProductEnd> genericAttributeProducts) {
         ArrayList<GenericAttribute> genericAttributes = new ArrayList<>();
         genericAttributeProducts.forEach(genericAttributeProduct ->

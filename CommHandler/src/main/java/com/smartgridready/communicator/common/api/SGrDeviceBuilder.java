@@ -31,6 +31,7 @@ import com.smartgridready.communicator.rest.impl.SGrRestApiDevice;
 /**
  * Implements a generic SGr device builder.
  * Provides a fluent interface to build device instances from EI-XML and parameters.
+ * Uses the {@code ServiceLoader} mechanism to load interface driver factories from the classpath.
  */
 public class SGrDeviceBuilder {
     
@@ -45,7 +46,8 @@ public class SGrDeviceBuilder {
     private GenDriverAPI4ContactsFactory contactsDriverFactory;
 
     /**
-     * Construct new instance with defaults.
+     * Constructs new instance with defaults.
+     * Interface driver factories are loaded using the {@code ServiceLoader} mechanism, if present in the classpath.
      */
     public SGrDeviceBuilder() {
         this.eidSource = null;
@@ -69,7 +71,7 @@ public class SGrDeviceBuilder {
     /**
      * Sets the EID source to a file system path.
      * @param path the file system path
-     * @return the same instance of the builder object
+     * @return the same instance of {@link SGrDeviceBuilder}
      */
     public SGrDeviceBuilder eid(Path path) {
         this.eidSource = new PathEidSource(path);
@@ -79,7 +81,7 @@ public class SGrDeviceBuilder {
     /**
      * Sets the EID source to an input stream.
      * @param inputStream the input stream
-     * @return the same instance of the builder object
+     * @return the same instance of {@link SGrDeviceBuilder}
      */
     public SGrDeviceBuilder eid(InputStream inputStream) {
         this.eidSource = new StreamEidSource(inputStream);
@@ -89,7 +91,7 @@ public class SGrDeviceBuilder {
     /**
      * Sets the EID source to XML content.
      * @param content the XML content
-     * @return the same instance of the builder object
+     * @return the same instance of {@link SGrDeviceBuilder}
      */
     public SGrDeviceBuilder eid(String content) {
         this.eidSource = new TextEidSource(content);
@@ -99,7 +101,7 @@ public class SGrDeviceBuilder {
     /**
      * Sets the REST API service client factory.
      * @param httpClientFactory an instance of a REST API service client factory
-     * @return the same instance of the builder object
+     * @return the same instance of {@link SGrDeviceBuilder}
      */
     public SGrDeviceBuilder useRestServiceClientFactory(GenHttpClientFactory httpClientFactory) {
         this.httpClientFactory = httpClientFactory;
@@ -108,9 +110,9 @@ public class SGrDeviceBuilder {
 
     /**
      * Sets the Modbus client factory explicitly.
-     * If not set explicitly, the Java ServiceLoader mechanism tries to find an implementation.
+     * If not set explicitly, the Java ServiceLoader mechanism tries to find an implementation on the classpath.
      * @param modbusClientFactory an instance of a Modbus client factory
-     * @return the same instance of the builder object
+     * @return the same instance of {@link SGrDeviceBuilder}
      */
     public SGrDeviceBuilder useModbusClientFactory(GenDriverAPI4ModbusFactory modbusClientFactory) {
         this.modbusClientFactory = modbusClientFactory;
@@ -119,9 +121,10 @@ public class SGrDeviceBuilder {
 
     /**
      * Sets the messaging client factory to be used explicitly.
-     * If not set explicitly, the Java ServiceLoader mechanism tries to find an implementation.
+     * If not set explicitly, the Java ServiceLoader mechanism tries to find an implementation on the classpath.
      * @param messagingClientFactory the messaging client factory to be used
      * @param platform the messaging platform type
+     * @return the same instance of {@link SGrDeviceBuilder}
      */
     public SGrDeviceBuilder useMessagingClientFactory(GenMessagingClientFactory messagingClientFactory, MessagingPlatformType platform) {
         this.messagingClientFactories.put(platform, messagingClientFactory);
@@ -130,9 +133,9 @@ public class SGrDeviceBuilder {
 
     /**
      * Sets the contacts driver factory explicitly.
-     * If not set explicitly, the Java ServiceLoader mechanism tries to find an implementation.
+     * If not set explicitly, the Java {@code ServiceLoader} mechanism tries to find an implementation on the classpath.
      * @param contactsDriverFactory an instance of a contacts driver factory
-     * @return the same instance of the builder object
+     * @return the same instance of {@link SGrDeviceBuilder}
      */
     public SGrDeviceBuilder useContactsDriverFactory(GenDriverAPI4ContactsFactory contactsDriverFactory) {
         this.contactsDriverFactory = contactsDriverFactory;
@@ -140,10 +143,12 @@ public class SGrDeviceBuilder {
     }
 
     /**
-     * Enable or disable shared instances of Modbus RTU driver.
-     * Is false by default, if not set.
-     * @param useSharedModbusRtu true if shared, false otherwise
-     * @return the same instance of the builder object
+     * Enables or disables shared instances of Modbus RTU drivers.
+     * When enabled, multiple device instances can use the same RS-485 serial port.
+     * Otherwise a serial port can only be used by a single device.
+     * Is {@code false} by default, if not set.
+     * @param useSharedModbusRtu the updated setting
+     * @return the same instance of {@link SGrDeviceBuilder}
      */
     public SGrDeviceBuilder useSharedModbusRtu(boolean useSharedModbusRtu) {
         this.useSharedModbusRtu = useSharedModbusRtu;
@@ -152,10 +157,10 @@ public class SGrDeviceBuilder {
 
     /**
      * Sets a custom shared Modbus RTU driver registry.
-     * Uses a singleton instance by default, if not set.
-     * Also depends on useSharedModbusRtu().
+     * Uses a global singleton instance by default, if not set.
+     * Also depends on {@link useSharedModbusRtu}.
      * @param sharedModbusGatewayRegistry the custom registry
-     * @return the same instance of the builder object
+     * @return the same instance of {@link SGrDeviceBuilder}
      */
     public SGrDeviceBuilder useSharedModbusGatewayRegistry(ModbusGatewayRegistry sharedModbusGatewayRegistry) {
         this.sharedModbusGatewayRegistry = sharedModbusGatewayRegistry;
@@ -165,7 +170,7 @@ public class SGrDeviceBuilder {
     /**
      * Sets the EID configuration parameters.
      * @param properties the properties
-     * @return the same instance of the builder object
+     * @return the same instance of {@link SGrDeviceBuilder}
      */
     public SGrDeviceBuilder properties(Properties properties) {
         this.properties = properties;
@@ -174,9 +179,9 @@ public class SGrDeviceBuilder {
 
     /**
      * Builds the SGr device using the previously set builder parameters.
-     * @return an SGr device object
+     * @return an SGr device object implementing {@code GenDeviceApi}
      * @throws GenDriverException on generic error
-     * @throws RestApiAuthenticationException on authentication error
+     * @throws RestApiAuthenticationException on HTTP authentication error
      */
     public GenDeviceApi build() throws GenDriverException, RestApiAuthenticationException {
         if (eidSource == null) {

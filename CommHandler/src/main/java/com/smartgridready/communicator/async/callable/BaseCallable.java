@@ -14,11 +14,15 @@ import java.util.concurrent.Callable;
 
 /**
  * Base class for callable methods on SGr devices.
+ * @param <T> the result type
  */
 public abstract class BaseCallable<T> implements Callable<AsyncResult<T>> {
 
+    /** The functional profile name. */
     protected final String profileName;
+    /** The data point name. */
     protected final String dataPointName;
+    /** The execution result. */
     protected final AsyncResult<T> result = new AsyncResult<>();
 
     abstract void doFunctionCall()

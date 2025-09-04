@@ -18,10 +18,18 @@ public class InfoText {
         this.description = description;
     }
 
+    /**
+     * Gets the label text.
+     * @return a string
+     */
     public String getLabel() {
         return label;
     }
 
+    /**
+     * Gets the descriptive text.
+     * @return a string
+     */
     public String getDescription() {
         return description;
     }

@@ -41,6 +41,9 @@ import java.util.function.Consumer;
 
 import java.util.Properties;
 
+/**
+ * Implements a messaging-based device communication interface.
+ */
 public class SGrMessagingDevice extends SGrDeviceBase<
         DeviceFrame,
         MessagingFunctionalProfile,
@@ -60,6 +63,12 @@ public class SGrMessagingDevice extends SGrDeviceBase<
 
     private final Map<MessageCacheKey, MessageCacheRecord> messageCache = new HashMap<>();
 
+    /**
+     * Constructs a new instance.
+     * @param deviceDescription the EID description
+     * @param messagingClientFactories a list of messaging client factory implementations, can support multiple protocols
+     * @throws GenDriverException on generic error
+     */
     public SGrMessagingDevice(DeviceFrame deviceDescription,
                               Map<MessagingPlatformType, GenMessagingClientFactory> messagingClientFactories) throws GenDriverException {
         super(deviceDescription);
@@ -74,6 +83,12 @@ public class SGrMessagingDevice extends SGrDeviceBase<
         messagingClient = null;
     }
 
+    /**
+     * Constructs a new instance.
+     * @param deviceDescription the EID description
+     * @param messagingClientFactory the protocol-specific messaging client factory implementation
+     * @throws GenDriverException on generic error
+     */
     public SGrMessagingDevice(DeviceFrame deviceDescription,
                               GenMessagingClientFactory messagingClientFactory) throws GenDriverException {
         super(deviceDescription);

@@ -38,20 +38,42 @@ public class JsonReader
         this.keywordMapInput = keywordMapInput;
     }
 
+    /**
+     * Implements a map key.
+     * Contains a list of indices.
+     */
     public static class Key implements Comparable<Key>, Serializable {
 
-        private final List<Integer> indices = new ArrayList<>();
+        /** The indices forming the key. */
+        private final List<Integer> indices;
 
+        private Key() {
+            indices = new ArrayList<>();
+        }
+
+        /**
+         * Adds an index to the key.
+         * @param index the index position
+         */
         public void add(int index) {
             indices.add(index);
         }
 
+        /**
+         * Gets the key as string.
+         * @return a string containing all indices.
+         */
         public String key() {
             StringBuilder sb = new StringBuilder();
             indices.forEach(sb::append);
             return sb.toString();
         }
 
+        /**
+         * Gets the element at a given position.
+         * @param iteration the position
+         * @return an integer
+         */
         public int indexAt(int iteration) {
             return indices.get(iteration);
         }
@@ -71,11 +93,23 @@ public class JsonReader
             return key().hashCode();
         }
 
+        /**
+         * Clones the instance.
+         * @param srcKey the source instance
+         * @return a new instance
+         */
         public static Key copy(Key srcKey) {
             return SerializationUtils.clone(srcKey);
         }
     }
 
+    /**
+     * Converts a JSON string to a data structure of key-value pairs, using a keyword map.
+     * @param jsonFile the JSON input
+     * @param keywordMapInput the keyword map
+     * @return a map of key-value pairs
+     * @throws JsonProcessingException if parsing failed
+     */
     public static Map<Key, Map<String, Object>> mapToFlatList(String jsonFile, Map<String, String> keywordMapInput)
             throws JsonProcessingException {
 

@@ -20,7 +20,13 @@ import java.util.Map;
  */
 public abstract class NumberValue<T extends Number> extends Value {
 
+    /** The internal value. */
     protected T value;
+
+    /**
+     * Constructs a new instance.
+     */
+    protected NumberValue() {}
 
     @Override
     public byte getInt8() {
@@ -160,6 +166,10 @@ public abstract class NumberValue<T extends Number> extends Value {
         return this;
     }
 
+    /**
+     * Updates the numeric value.
+     * @param value a double value
+     */
     protected abstract void setValue(double value);
 
     @Override

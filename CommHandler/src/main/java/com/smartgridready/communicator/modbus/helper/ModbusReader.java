@@ -29,6 +29,8 @@ import com.smartgridready.driver.api.modbus.GenDriverSocketException;
  */
 public class ModbusReader {
 
+    private ModbusReader() {}
+
     /**
      * Reads from Modbus transport.
      * @param drv4Modbus the Modbus driver instance

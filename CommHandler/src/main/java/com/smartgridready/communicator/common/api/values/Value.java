@@ -19,7 +19,14 @@ import java.util.Map;
  * The base class for all SGr value types.
  */
 public abstract class Value  {
+
+    /** A bit mask to convert to unsigned 64-bit integers, which are not natively supported by Java. */
     public static final BigInteger UNSIGNED_LONG_MASK = BigInteger.ONE.shiftLeft(Long.SIZE).subtract(BigInteger.ONE);
+
+    /**
+     * Constructs a new instance.
+     */
+    protected Value() {}
 
     /**
      * Gets the value as 8-bit integer.

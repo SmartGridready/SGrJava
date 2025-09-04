@@ -31,18 +31,34 @@ public class ConfigurationValue {
         this.descriptions = descriptions;
     }
 
+    /**
+     * Gets the parameter name.
+     * @return a string
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the parameter's default value.
+     * @return a string
+     */
     public Value getDefaultValue() {
         return defaultValue;
     }
 
+    /**
+     * Gets the parameter's data type.
+     * @return a data type info
+     */
     public DataTypeInfo getDataType() {
         return dataType;
     }
 
+    /**
+     * Gets the text descriptions.
+     * @return a map of language to description
+     */
     public Map<Language, String> getDescriptions() {
         return descriptions;
     }

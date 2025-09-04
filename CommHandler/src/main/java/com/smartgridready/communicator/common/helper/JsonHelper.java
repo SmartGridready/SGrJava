@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class JsonHelper {
 
-    public static final Logger LOG = LoggerFactory.getLogger(JsonHelper.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JsonHelper.class);
 
     private JsonHelper() {
         throw new IllegalStateException("Helper class");

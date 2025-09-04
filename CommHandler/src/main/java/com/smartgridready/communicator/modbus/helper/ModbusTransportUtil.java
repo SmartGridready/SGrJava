@@ -15,12 +15,14 @@ import com.smartgridready.ns.v0.ModbusTcp;
  */
 public class ModbusTransportUtil {
 
+    private ModbusTransportUtil() {}
+
     /**
      * Creates a new tranport.
      * @param interfaceDescription the interface specification
      * @param factory the driver factory
      * @return an instance of {@link GenDriverAPI4Modbus}
-     * @throws GenDriverException
+     * @throws GenDriverException when the interface type is not supported
      */
     public static GenDriverAPI4Modbus createTransport(ModbusInterfaceDescription interfaceDescription, GenDriverAPI4ModbusFactory factory) throws GenDriverException {
         if (factory == null) {

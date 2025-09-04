@@ -18,6 +18,7 @@ import com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory;
 /**
  * Implements a driver factory loader.
  * Provides registered factories of communication interface drivers.
+ * Uses the {@code ServiceLoader} mechanism to load interface driver factories from the classpath.
  */
 public class DriverFactoryLoader {
 

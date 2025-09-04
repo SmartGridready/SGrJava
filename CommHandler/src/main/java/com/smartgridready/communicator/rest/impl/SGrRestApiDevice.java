@@ -71,7 +71,13 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 	private final GenHttpClientFactory httpClientFactory;
 
 	private boolean isConnected;
-	
+
+	/**
+	 * Constructs a new instance.
+	 * @param deviceDescription the EID description
+	 * @param httpClientFactory the HTTP client factory implementation
+	 * @throws RestApiAuthenticationException on HTTP authentication error
+	 */
 	public SGrRestApiDevice(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) throws RestApiAuthenticationException {
 		super(deviceDescription);
 		this.deviceDescription = deviceDescription;
@@ -85,10 +91,10 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 	@Override
 	public void connect() throws GenDriverException {
 		try {
-		    authenticate();
-        } catch (Exception e) {
-            throw new GenDriverException("Error authenticating", e);
-        }
+			authenticate();
+		} catch (Exception e) {
+			throw new GenDriverException("Error authenticating", e);
+		}
 	}
 
 	@Override
@@ -274,13 +280,24 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 		}
 		throw new GenDriverException(String.format("DataPoint profile=%s name=%s not found", profileName, dataPointName));
 	}
-	
+
+	/**
+	 * Finds a functional profile.
+	 * @param profileName the functional profile name
+	 * @return an optional {@link RestApiFunctionalProfile}
+	 */
 	protected Optional<RestApiFunctionalProfile> findProfile(String profileName) {
 		return getRestApiInterface().getFunctionalProfileList().getFunctionalProfileListElement().stream().filter(
 				restApiProfileFrame -> restApiProfileFrame.getFunctionalProfile().getFunctionalProfileName().equals(profileName))
 				.findFirst();
 	}
 
+	/**
+	 * Finds a data point.
+	 * @param aProfile the functional profile
+	 * @param aDataPointName the data point name
+	 * @return an optional {@link RestApiFunctionalProfile}
+	 */
 	protected Optional<RestApiDataPoint> findDataPointForProfile(RestApiFunctionalProfile aProfile,
 			String aDataPointName) {
 		return aProfile.getDataPointList().getDataPointListElement().stream()

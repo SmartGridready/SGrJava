@@ -50,6 +50,8 @@ public class ModbusUtil {
         com.smartgridready.ns.v0.Parity.ODD.value(), Parity.ODD
     );
 
+    private ModbusUtil() {}
+
     /**
      * Tells if the interface uses a serial connection.
      * @param interfaceDescription the interface specification
@@ -103,6 +105,7 @@ public class ModbusUtil {
      * Is the serial port name or a combination of IP address and port.
      * @param interfaceDescription the interface specification
      * @return a string
+     * @throws GenDriverException when the interface type could not be correctly detected
      */
     public static String getModbusGatewayIdentifier(ModbusInterfaceDescription interfaceDescription) throws GenDriverException {
         // distinguish between Serial and TCP
