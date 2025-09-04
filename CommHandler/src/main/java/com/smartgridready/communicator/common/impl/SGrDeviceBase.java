@@ -360,31 +360,31 @@ public abstract class SGrDeviceBase<
      */
     protected static <P extends DataPointBase> Value applyUnitConversion(P dataPoint, Value value, DoubleBinaryOperator conversionFunction) {
 
-		if (dataPoint.getDataPoint().getUnitConversionMultiplicator() != null
-				&& isNumeric(value)
-				&& dataPoint.getDataPoint().getUnitConversionMultiplicator() != 0.0) {
-			return Float64Value.of(conversionFunction.applyAsDouble(value.getFloat64(), dataPoint.getDataPoint().getUnitConversionMultiplicator()));
-		}
-		return value;
-	}
+        if (dataPoint.getDataPoint().getUnitConversionMultiplicator() != null
+                && isNumeric(value)
+                && dataPoint.getDataPoint().getUnitConversionMultiplicator() != 0.0) {
+            return Float64Value.of(conversionFunction.applyAsDouble(value.getFloat64(), dataPoint.getDataPoint().getUnitConversionMultiplicator()));
+        }
+        return value;
+    }
 
     /**
      * Tells if a value contains a number.
      * @param value the SGr value to test
      * @return a boolean
      */
-	protected static boolean isNumeric(Value value) {
-		if (value == null) {
-			return false;
-		}
+    protected static boolean isNumeric(Value value) {
+        if (value == null) {
+            return false;
+        }
 
-		try {
-			value.getFloat64();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+        try {
+            value.getFloat64();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     /**
      * Divides two numbers.
@@ -392,9 +392,9 @@ public abstract class SGrDeviceBase<
      * @param divisor the divisor
      * @return the division result
      */
-	protected static double divide(double dividend, double divisor) {
-		return  dividend / divisor;
-	}
+    protected static double divide(double dividend, double divisor) {
+        return  dividend / divisor;
+    }
 
     /**
      * Multiplies two numbers.
@@ -402,9 +402,9 @@ public abstract class SGrDeviceBase<
      * @param factor2 the second factor
      * @return the multiplication result
      */
-	protected static double multiply(double factor1, double factor2) {
-		return  factor1 * factor2;
-	}
+    protected static double multiply(double factor1, double factor2) {
+        return  factor1 * factor2;
+    }
 
     private List<DynamicRequestParameter> mapToDynamicRequestParameters(List<DynamicParameterDescriptionListElement> reqParamDescriptions ) {
 

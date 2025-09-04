@@ -109,17 +109,17 @@ public class WriteExec<V> extends Processor implements Executable {
      * Gets the execution status.
      * @return an instance of {@link ExecStatus}
      */
-	public ExecStatus getExecStatus() {
-		return getResult().getExecStatus();
-	}
+    public ExecStatus getExecStatus() {
+        return getResult().getExecStatus();
+    }
 
     /**
      * Gets the exception that was thrown.
      * @return an instance of {@link Throwable}
      */
-	public Throwable getExecThrowable() {
-		return getResult().getThrowable();
-	}
+    public Throwable getExecThrowable() {
+        return getResult().getThrowable();
+    }
 
     /**
      * Gets the time stamp of sending the request.

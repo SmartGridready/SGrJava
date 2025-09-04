@@ -75,8 +75,8 @@ public class ModbusReaderResponse {
      * @param len the number of values
      * @return an array of boolean
      */
-    public boolean[] getMbbitresp(int offset, int len) {    	
-        len = Math.min(mbregresp.length - offset, len); // will cut if offset + len > than array size    	
+    public boolean[] getMbbitresp(int offset, int len) {        
+        len = Math.min(mbregresp.length - offset, len); // will cut if offset + len > than array size        
         return Arrays.copyOfRange(mbbitresp, offset, offset + len);
     }    
 

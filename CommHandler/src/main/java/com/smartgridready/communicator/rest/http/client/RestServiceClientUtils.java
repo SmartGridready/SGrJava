@@ -29,39 +29,39 @@ import com.smartgridready.ns.v0.RestApiServiceCall;
  */
 public class RestServiceClientUtils {
 
-	private RestServiceClientUtils() { throw new IllegalAccessError("Utility class"); }
+    private RestServiceClientUtils() { throw new IllegalAccessError("Utility class"); }
 
-	/**
-	 * Prints info about an HTTP call specification. 
-	 * @param restServiceCall the HTTP call specification
-	 * @return a string
-	 */
-	public static String printServiceCall(RestApiServiceCall restServiceCall) {
+    /**
+     * Prints info about an HTTP call specification. 
+     * @param restServiceCall the HTTP call specification
+     * @return a string
+     */
+    public static String printServiceCall(RestApiServiceCall restServiceCall) {
 
-		StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
-		if (restServiceCall != null) {
-			sb.append(String.format("%nRequest method: %s%n", restServiceCall.getRequestMethod() != null ? restServiceCall.getRequestMethod().name() : "n.a"));
-			sb.append(String.format("Headers: %s%n", restServiceCall.getRequestHeader() != null ? printHeaders( restServiceCall.getRequestHeader().getHeader()) : "n.a"));
-			sb.append(String.format("Request path:   %s%n", restServiceCall.getRequestPath()));
-			sb.append(String.format("Request parameters %s%n", printUrlParameters(restServiceCall)));
-			sb.append(String.format("Request body:   %s%n", restServiceCall.getRequestBody()));
-		}
-		return sb.toString();
-	}
+        if (restServiceCall != null) {
+            sb.append(String.format("%nRequest method: %s%n", restServiceCall.getRequestMethod() != null ? restServiceCall.getRequestMethod().name() : "n.a"));
+            sb.append(String.format("Headers: %s%n", restServiceCall.getRequestHeader() != null ? printHeaders( restServiceCall.getRequestHeader().getHeader()) : "n.a"));
+            sb.append(String.format("Request path:   %s%n", restServiceCall.getRequestPath()));
+            sb.append(String.format("Request parameters %s%n", printUrlParameters(restServiceCall)));
+            sb.append(String.format("Request body:   %s%n", restServiceCall.getRequestBody()));
+        }
+        return sb.toString();
+    }
 
-	private static String printHeaders(List<HeaderEntry> headers) {
-		StringBuilder sb = new StringBuilder();
-		headers.forEach( headerEntry -> sb.append(String.format("\t%s : %s%n", headerEntry.getHeaderName(), headerEntry.getValue())));
-		return sb.toString();
-	}
+    private static String printHeaders(List<HeaderEntry> headers) {
+        StringBuilder sb = new StringBuilder();
+        headers.forEach( headerEntry -> sb.append(String.format("\t%s : %s%n", headerEntry.getHeaderName(), headerEntry.getValue())));
+        return sb.toString();
+    }
 
-	private static String printUrlParameters(RestApiServiceCall restApiServiceCall)	{
-		if (restApiServiceCall.getRequestQuery() != null && restApiServiceCall.getRequestQuery().getParameter() != null) {
-			return restApiServiceCall.getRequestQuery().getParameter().stream()
-					.map(param -> param.getName() + "=" + param.getValue())
-					.collect(Collectors.toList()).toString();
-		}
-		return "";
-	}
+    private static String printUrlParameters(RestApiServiceCall restApiServiceCall)    {
+        if (restApiServiceCall.getRequestQuery() != null && restApiServiceCall.getRequestQuery().getParameter() != null) {
+            return restApiServiceCall.getRequestQuery().getParameter().stream()
+                    .map(param -> param.getName() + "=" + param.getValue())
+                    .collect(Collectors.toList()).toString();
+        }
+        return "";
+    }
 }

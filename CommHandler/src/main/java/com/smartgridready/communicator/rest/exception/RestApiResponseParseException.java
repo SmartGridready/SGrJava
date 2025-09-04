@@ -23,22 +23,22 @@ package com.smartgridready.communicator.rest.exception;
  */
 public class RestApiResponseParseException extends Exception {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Constructs a new instance.
-	 * @param message the error message
-	 * @param cause the internal exception
-	 */
-	public RestApiResponseParseException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    /**
+     * Constructs a new instance.
+     * @param message the error message
+     * @param cause the internal exception
+     */
+    public RestApiResponseParseException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	/**
-	 * Constructs a new instance.
-	 * @param message the error message
-	 */
-	public RestApiResponseParseException(String message) {
-		super(message);
-	}
+    /**
+     * Constructs a new instance.
+     * @param message the error message
+     */
+    public RestApiResponseParseException(String message) {
+        super(message);
+    }
 }

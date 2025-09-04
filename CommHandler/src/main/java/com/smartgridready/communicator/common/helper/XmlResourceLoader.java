@@ -42,17 +42,17 @@ public class XmlResourceLoader<T> {
     public T load(String resourcePath, String xmlContent, boolean validate) throws IOException {
 
         T result;
-		try {
-			result = unmarshal(xmlContent, validate);
-		} catch (Exception e) {
+        try {
+            result = unmarshal(xmlContent, validate);
+        } catch (Exception e) {
             throw new IOException(e.getCause() != null ? e.getCause() : e);
-		}
+        }
 
         if (result == null) {
-			throw new IOException(String.format("Resource '%s' could not be loaded", resourcePath));
-		}
+            throw new IOException(String.format("Resource '%s' could not be loaded", resourcePath));
+        }
 
-		return result;
+        return result;
     }
 
     @SuppressWarnings("unchecked")

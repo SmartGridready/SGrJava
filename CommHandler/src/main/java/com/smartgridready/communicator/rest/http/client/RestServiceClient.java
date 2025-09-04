@@ -42,236 +42,236 @@ import com.smartgridready.ns.v0.HeaderEntry;
  */
 public class RestServiceClient {
 
-	private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
-	private final String baseUri;
-	private final boolean verifyCertificate;
+    private final String baseUri;
+    private final boolean verifyCertificate;
 
-	private final RestApiServiceCall restServiceCall;
-	private final GenHttpClientFactory httpClientFactory;
+    private final RestApiServiceCall restServiceCall;
+    private final GenHttpClientFactory httpClientFactory;
 
-	private static final Map<HttpMethod, com.smartgridready.driver.api.http.HttpMethod> HTTP_METHOD_MAP = new EnumMap<>(HttpMethod.class);
-	static {
-		HTTP_METHOD_MAP.put(HttpMethod.GET, com.smartgridready.driver.api.http.HttpMethod.GET);
-		HTTP_METHOD_MAP.put(HttpMethod.POST, com.smartgridready.driver.api.http.HttpMethod.POST);
-		HTTP_METHOD_MAP.put(HttpMethod.PUT, com.smartgridready.driver.api.http.HttpMethod.PUT);
-		HTTP_METHOD_MAP.put(HttpMethod.PATCH, com.smartgridready.driver.api.http.HttpMethod.PATCH);
-		HTTP_METHOD_MAP.put(HttpMethod.DELETE, com.smartgridready.driver.api.http.HttpMethod.DELETE);
-	}
+    private static final Map<HttpMethod, com.smartgridready.driver.api.http.HttpMethod> HTTP_METHOD_MAP = new EnumMap<>(HttpMethod.class);
+    static {
+        HTTP_METHOD_MAP.put(HttpMethod.GET, com.smartgridready.driver.api.http.HttpMethod.GET);
+        HTTP_METHOD_MAP.put(HttpMethod.POST, com.smartgridready.driver.api.http.HttpMethod.POST);
+        HTTP_METHOD_MAP.put(HttpMethod.PUT, com.smartgridready.driver.api.http.HttpMethod.PUT);
+        HTTP_METHOD_MAP.put(HttpMethod.PATCH, com.smartgridready.driver.api.http.HttpMethod.PATCH);
+        HTTP_METHOD_MAP.put(HttpMethod.DELETE, com.smartgridready.driver.api.http.HttpMethod.DELETE);
+    }
 
-	/**
-	 * Constructs a new instance with empty substitution properties.
-	 * @param baseUri the base URI for all service calls
-	 * @param verifyCertificate enables or disables SSL certificate validation
-	 * @param serviceCall the service call specification
-	 * @param httpClientFactory the HTTP client factory implementation
-	 * @throws IOException when the specification contains errors
-	 */
-	protected RestServiceClient(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory) throws IOException {
-		this(baseUri, verifyCertificate, serviceCall, httpClientFactory, new Properties());
-	}
+    /**
+     * Constructs a new instance with empty substitution properties.
+     * @param baseUri the base URI for all service calls
+     * @param verifyCertificate enables or disables SSL certificate validation
+     * @param serviceCall the service call specification
+     * @param httpClientFactory the HTTP client factory implementation
+     * @throws IOException when the specification contains errors
+     */
+    protected RestServiceClient(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory) throws IOException {
+        this(baseUri, verifyCertificate, serviceCall, httpClientFactory, new Properties());
+    }
 
-	/**
-	 * Constructs a new instance.
-	 * @param baseUri the base URI for all service calls
-	 * @param verifyCertificate enables or disables SSL certificate validation
-	 * @param serviceCall the service call specification
-	 * @param httpClientFactory the HTTP client factory implementation
-	 * @param substitutions the parameter substitutions
-	 * @throws IOException when the specification contains errors
-	 */
-	protected RestServiceClient(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory, Properties substitutions) throws IOException {
-		this.baseUri = baseUri;
-		this.verifyCertificate = verifyCertificate;
-		this.restServiceCall = cloneRestServiceCallWithSubstitutions(serviceCall, substitutions);
-		this.httpClientFactory = httpClientFactory;
-	}
+    /**
+     * Constructs a new instance.
+     * @param baseUri the base URI for all service calls
+     * @param verifyCertificate enables or disables SSL certificate validation
+     * @param serviceCall the service call specification
+     * @param httpClientFactory the HTTP client factory implementation
+     * @param substitutions the parameter substitutions
+     * @throws IOException when the specification contains errors
+     */
+    protected RestServiceClient(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory, Properties substitutions) throws IOException {
+        this.baseUri = baseUri;
+        this.verifyCertificate = verifyCertificate;
+        this.restServiceCall = cloneRestServiceCallWithSubstitutions(serviceCall, substitutions);
+        this.httpClientFactory = httpClientFactory;
+    }
 
-	/**
-	 * Adds a new request header.
-	 * @param key the header name
-	 * @param value the header value
-	 */
-	public void addHeader(String key, String value) {
-		if (value != null) {
-			HeaderEntry headerEntry = new HeaderEntry();
-			headerEntry.setHeaderName(key);
-			headerEntry.setValue(value);
-			restServiceCall.getRequestHeader().getHeader().add(headerEntry);
-		}
-	}
+    /**
+     * Adds a new request header.
+     * @param key the header name
+     * @param value the header value
+     */
+    public void addHeader(String key, String value) {
+        if (value != null) {
+            HeaderEntry headerEntry = new HeaderEntry();
+            headerEntry.setHeaderName(key);
+            headerEntry.setValue(value);
+            restServiceCall.getRequestHeader().getHeader().add(headerEntry);
+        }
+    }
 
-	/**
-	 * Gets the request's base URI.
-	 * @return a string
-	 */
-	public String getBaseUri() {
-		return baseUri;
-	}
+    /**
+     * Gets the request's base URI.
+     * @return a string
+     */
+    public String getBaseUri() {
+        return baseUri;
+    }
 
-	/**
-	 * Tells if SSL certificates are to be verified.
-	 * @return a boolean
-	 */
-	public boolean isVerifyCertificate() {
-		return verifyCertificate;
-	}
+    /**
+     * Tells if SSL certificates are to be verified.
+     * @return a boolean
+     */
+    public boolean isVerifyCertificate() {
+        return verifyCertificate;
+    }
 
-	/**
-	 * Gets the SGr specification of the service call.
-	 * @return an instance of {@link RestApiServiceCall}
-	 */
-	public RestApiServiceCall getRestServiceCall() {
-		return restServiceCall;
-	}
+    /**
+     * Gets the SGr specification of the service call.
+     * @return an instance of {@link RestApiServiceCall}
+     */
+    public RestApiServiceCall getRestServiceCall() {
+        return restServiceCall;
+    }
 
-	private RestApiServiceCall cloneRestServiceCallWithSubstitutions(RestApiServiceCall restServiceCall, Properties substitutions) throws IOException {
+    private RestApiServiceCall cloneRestServiceCallWithSubstitutions(RestApiServiceCall restServiceCall, Properties substitutions) throws IOException {
 
-		var serviceCall = cloneRestApiServiceCall(restServiceCall);
+        var serviceCall = cloneRestApiServiceCall(restServiceCall);
 
-		// Substitutions can appear within the request path, request headers, request body or even the response query.
-		serviceCall.setRequestPath(replacePropertyPlaceholders(serviceCall.getRequestPath(), substitutions));
-		serviceCall.setRequestBody(replacePropertyPlaceholders(serviceCall.getRequestBody(), substitutions));
+        // Substitutions can appear within the request path, request headers, request body or even the response query.
+        serviceCall.setRequestPath(replacePropertyPlaceholders(serviceCall.getRequestPath(), substitutions));
+        serviceCall.setRequestBody(replacePropertyPlaceholders(serviceCall.getRequestBody(), substitutions));
 
-		if (serviceCall.getResponseQuery() != null) {
-			serviceCall.getResponseQuery().setQuery(replacePropertyPlaceholders(restServiceCall.getResponseQuery().getQuery(), substitutions));
-		}
+        if (serviceCall.getResponseQuery() != null) {
+            serviceCall.getResponseQuery().setQuery(replacePropertyPlaceholders(restServiceCall.getResponseQuery().getQuery(), substitutions));
+        }
 
-		ParameterList queryParams = serviceCall.getRequestQuery();
-		if (queryParams != null) {
-			queryParams.getParameter().forEach(param -> param.setValue(replacePropertyPlaceholders(param.getValue(), substitutions)));
-		}
+        ParameterList queryParams = serviceCall.getRequestQuery();
+        if (queryParams != null) {
+            queryParams.getParameter().forEach(param -> param.setValue(replacePropertyPlaceholders(param.getValue(), substitutions)));
+        }
 
-		ParameterList formParams = serviceCall.getRequestForm();
-		if (formParams != null) {
-			formParams.getParameter().forEach(param -> param.setValue(replacePropertyPlaceholders(param.getValue(), substitutions)));
-		}
+        ParameterList formParams = serviceCall.getRequestForm();
+        if (formParams != null) {
+            formParams.getParameter().forEach(param -> param.setValue(replacePropertyPlaceholders(param.getValue(), substitutions)));
+        }
 
-		HeaderList headers = serviceCall.getRequestHeader();
-		if (headers != null) {
-			headers.getHeader().forEach(header -> header.setValue(replacePropertyPlaceholders(header.getValue(), substitutions)));
-		} else {
-			serviceCall.setRequestHeader(new HeaderList());
-		}
+        HeaderList headers = serviceCall.getRequestHeader();
+        if (headers != null) {
+            headers.getHeader().forEach(header -> header.setValue(replacePropertyPlaceholders(header.getValue(), substitutions)));
+        } else {
+            serviceCall.setRequestHeader(new HeaderList());
+        }
 
-		return serviceCall;
-	}
+        return serviceCall;
+    }
 
-	/**
-	 * Executes the HTTP request.
-	 * @return an instance of {@link GenHttpResponse}
-	 * @throws IOException when an error occurred
-	 */
-	public GenHttpResponse callService() throws IOException {
+    /**
+     * Executes the HTTP request.
+     * @return an instance of {@link GenHttpResponse}
+     * @throws IOException when an error occurred
+     */
+    public GenHttpResponse callService() throws IOException {
 
-		if (httpClientFactory == null) {
-			throw new IOException("No implementation for HTTP client found");
-		}
+        if (httpClientFactory == null) {
+            throw new IOException("No implementation for HTTP client found");
+        }
 
-		RestApiServiceCall serviceCall = getRestServiceCall();
-		GenHttpRequest httpRequest = httpClientFactory.createHttpRequest(verifyCertificate);
+        RestApiServiceCall serviceCall = getRestServiceCall();
+        GenHttpRequest httpRequest = httpClientFactory.createHttpRequest(verifyCertificate);
 
-		httpRequest.setHttpMethod(mapHttpMethod(serviceCall.getRequestMethod()));
-		try {
-			httpRequest.setUri(buildUri(serviceCall));
-		} catch (URISyntaxException e) {
-			throw new IOException("Cannot build request URI", e);
-		}
+        httpRequest.setHttpMethod(mapHttpMethod(serviceCall.getRequestMethod()));
+        try {
+            httpRequest.setUri(buildUri(serviceCall));
+        } catch (URISyntaxException e) {
+            throw new IOException("Cannot build request URI", e);
+        }
 
-		if (restServiceCall.getRequestHeader() != null) {
-			restServiceCall.getRequestHeader().getHeader().forEach( headerEntry ->
-					httpRequest.addHeader(headerEntry.getHeaderName(), headerEntry.getValue())
-			);
-		}
+        if (restServiceCall.getRequestHeader() != null) {
+            restServiceCall.getRequestHeader().getHeader().forEach( headerEntry ->
+                    httpRequest.addHeader(headerEntry.getHeaderName(), headerEntry.getValue())
+            );
+        }
 
-		if (serviceCall.getRequestForm() != null) {
-			serviceCall.getRequestForm().getParameter().forEach(
-					p -> httpRequest.addFormParam(p.getName(), p.getValue())
-			);
+        if (serviceCall.getRequestForm() != null) {
+            serviceCall.getRequestForm().getParameter().forEach(
+                    p -> httpRequest.addFormParam(p.getName(), p.getValue())
+            );
 
-		} else if (serviceCall.getRequestBody() != null) {
-			String content = serviceCall.getRequestBody();
-			httpRequest.setBody(content);
-		}
+        } else if (serviceCall.getRequestBody() != null) {
+            String content = serviceCall.getRequestBody();
+            httpRequest.setBody(content);
+        }
 
-		return httpRequest.execute();
-	}
+        return httpRequest.execute();
+    }
 
-	private URI buildUri(RestApiServiceCall serviceCall) throws URISyntaxException {
-		final GenUriBuilder uriBuilder = httpClientFactory.createUriBuilder(getBaseUri());
+    private URI buildUri(RestApiServiceCall serviceCall) throws URISyntaxException {
+        final GenUriBuilder uriBuilder = httpClientFactory.createUriBuilder(getBaseUri());
 
-		// add request path
-		if (serviceCall.getRequestPath() != null) {
-			int startQueryPos = serviceCall.getRequestPath().indexOf('?');
-			if (startQueryPos >= 0) {
-				// split path and query (old style)
-				String path = serviceCall.getRequestPath().substring(0, startQueryPos);
-				String query = serviceCall.getRequestPath().substring(startQueryPos + 1);
-				uriBuilder.addPath(path);
-				uriBuilder.setQueryString(query);
-			} else {
-				// just set path (new style)
-				uriBuilder.addPath(serviceCall.getRequestPath());
-			}
-		}
+        // add request path
+        if (serviceCall.getRequestPath() != null) {
+            int startQueryPos = serviceCall.getRequestPath().indexOf('?');
+            if (startQueryPos >= 0) {
+                // split path and query (old style)
+                String path = serviceCall.getRequestPath().substring(0, startQueryPos);
+                String query = serviceCall.getRequestPath().substring(startQueryPos + 1);
+                uriBuilder.addPath(path);
+                uriBuilder.setQueryString(query);
+            } else {
+                // just set path (new style)
+                uriBuilder.addPath(serviceCall.getRequestPath());
+            }
+        }
 
-		// add query parameters
-		if (serviceCall.getRequestQuery() != null) {
-			serviceCall.getRequestQuery().getParameter().forEach(p ->
-				uriBuilder.addQueryParameter(p.getName(), p.getValue()));
-		}
+        // add query parameters
+        if (serviceCall.getRequestQuery() != null) {
+            serviceCall.getRequestQuery().getParameter().forEach(p ->
+                uriBuilder.addQueryParameter(p.getName(), p.getValue()));
+        }
 
-		return uriBuilder.build();
-	}
+        return uriBuilder.build();
+    }
 
-	private static String replacePropertyPlaceholders(String template, Properties properties) {
-		// this is for dynamic parameters
-		String convertedTemplate = template;
-		if (template != null && properties != null) {
-			for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-				// no regex here, string literal replacement is sufficient
-				convertedTemplate = convertedTemplate.replace("[[" + (String)entry.getKey() + "]]", (String)entry.getValue());
-			}
-		}
-		return convertedTemplate;
-	}
+    private static String replacePropertyPlaceholders(String template, Properties properties) {
+        // this is for dynamic parameters
+        String convertedTemplate = template;
+        if (template != null && properties != null) {
+            for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+                // no regex here, string literal replacement is sufficient
+                convertedTemplate = convertedTemplate.replace("[[" + (String)entry.getKey() + "]]", (String)entry.getValue());
+            }
+        }
+        return convertedTemplate;
+    }
 
-	/**
-	 * Creates a new instance.
-	 * @param baseUri the base URI
-	 * @param verifyCertificate SSL certificate will be verified when true
-	 * @param serviceCall the SGr specification of the service call
-	 * @param httpClientFactory the SGr HTTP client factory
-	 * @return a new instance of {@link RestServiceClient}
-	 * @throws IOException when an error occurred
-	 */
-	public static RestServiceClient of(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory) throws IOException {
-		return new RestServiceClient(baseUri, verifyCertificate, serviceCall, httpClientFactory);
-	}
+    /**
+     * Creates a new instance.
+     * @param baseUri the base URI
+     * @param verifyCertificate SSL certificate will be verified when true
+     * @param serviceCall the SGr specification of the service call
+     * @param httpClientFactory the SGr HTTP client factory
+     * @return a new instance of {@link RestServiceClient}
+     * @throws IOException when an error occurred
+     */
+    public static RestServiceClient of(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory) throws IOException {
+        return new RestServiceClient(baseUri, verifyCertificate, serviceCall, httpClientFactory);
+    }
 
-	/**
-	 * Creates a new instance.
-	 * @param baseUri the base URI
-	 * @param verifyCertificate SSL certificate will be verified when true
-	 * @param serviceCall the SGr specification of the service call
-	 * @param httpClientFactory the SGr HTTP client factory
-	 * @param substitutions substitutions of dynamic request parameters
-	 * @return a new instance of {@link RestServiceClient}
-	 * @throws IOException when an error occurred
-	 */
-	public static RestServiceClient of(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory, Properties substitutions) throws IOException {
-		return new RestServiceClient(baseUri, verifyCertificate, serviceCall, httpClientFactory, substitutions);
-	}
+    /**
+     * Creates a new instance.
+     * @param baseUri the base URI
+     * @param verifyCertificate SSL certificate will be verified when true
+     * @param serviceCall the SGr specification of the service call
+     * @param httpClientFactory the SGr HTTP client factory
+     * @param substitutions substitutions of dynamic request parameters
+     * @return a new instance of {@link RestServiceClient}
+     * @throws IOException when an error occurred
+     */
+    public static RestServiceClient of(String baseUri, boolean verifyCertificate, RestApiServiceCall serviceCall, GenHttpClientFactory httpClientFactory, Properties substitutions) throws IOException {
+        return new RestServiceClient(baseUri, verifyCertificate, serviceCall, httpClientFactory, substitutions);
+    }
 
-	private static com.smartgridready.driver.api.http.HttpMethod mapHttpMethod(HttpMethod httpMethod) throws IOException {
-		return Optional.ofNullable(HTTP_METHOD_MAP.get(httpMethod))
-				.orElseThrow(() -> new IOException("Unsupported HTTP method: " + httpMethod.name()));
-	}
+    private static com.smartgridready.driver.api.http.HttpMethod mapHttpMethod(HttpMethod httpMethod) throws IOException {
+        return Optional.ofNullable(HTTP_METHOD_MAP.get(httpMethod))
+                .orElseThrow(() -> new IOException("Unsupported HTTP method: " + httpMethod.name()));
+    }
 
-	private static RestApiServiceCall cloneRestApiServiceCall(RestApiServiceCall restApiServiceCall) throws IOException {
-		return objectMapper.readValue(
-			objectMapper.writeValueAsString(restApiServiceCall),
-			RestApiServiceCall.class
-		);
-	}
+    private static RestApiServiceCall cloneRestApiServiceCall(RestApiServiceCall restApiServiceCall) throws IOException {
+        return objectMapper.readValue(
+            objectMapper.writeValueAsString(restApiServiceCall),
+            RestApiServiceCall.class
+        );
+    }
 }

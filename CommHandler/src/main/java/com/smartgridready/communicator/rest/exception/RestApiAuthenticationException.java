@@ -22,23 +22,23 @@ package com.smartgridready.communicator.rest.exception;
  * Implments an exception for HTTP authentication failures.
  */
 public class RestApiAuthenticationException extends Exception {
-	
-	private static final long serialVersionUID = 1L;
+    
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Constructs a new instance.
-	 * @param message the error message
-	 * @param cause the internal exception
-	 */
-	public RestApiAuthenticationException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    /**
+     * Constructs a new instance.
+     * @param message the error message
+     * @param cause the internal exception
+     */
+    public RestApiAuthenticationException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	/**
-	 * Constructs a new instance.
-	 * @param message the error message
-	 */
-	public RestApiAuthenticationException(String message) {
-		super(message);
-	}
+    /**
+     * Constructs a new instance.
+     * @param message the error message
+     */
+    public RestApiAuthenticationException(String message) {
+        super(message);
+    }
 }

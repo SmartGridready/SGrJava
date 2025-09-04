@@ -26,43 +26,43 @@ import java.time.Instant;
  * 
  */
 public class CacheRecord<V> {
-	
-	private final V value;
-	private final Instant lastAccess;
+    
+    private final V value;
+    private final Instant lastAccess;
 
-	/**
-	 * Constructs a new instance.
-	 * @param value the value to cache
-	 * @param lastAccess the access time stamp
-	 */
-	public CacheRecord(V value, Instant lastAccess) {
-		this.value = value;
-		this.lastAccess = lastAccess;
-	}
+    /**
+     * Constructs a new instance.
+     * @param value the value to cache
+     * @param lastAccess the access time stamp
+     */
+    public CacheRecord(V value, Instant lastAccess) {
+        this.value = value;
+        this.lastAccess = lastAccess;
+    }
 
-	/**
-	 * Tells if the cache has expired.
-	 * @param timeToLiveMs milliseconds after last access
-	 * @return a boolean
-	 */
-	public boolean isExpired(Long timeToLiveMs) {
-		if (timeToLiveMs != null && lastAccess != null) {
-			return System.currentTimeMillis() >= lastAccess.toEpochMilli() + timeToLiveMs;
-		}
-		return true;
-	}
+    /**
+     * Tells if the cache has expired.
+     * @param timeToLiveMs milliseconds after last access
+     * @return a boolean
+     */
+    public boolean isExpired(Long timeToLiveMs) {
+        if (timeToLiveMs != null && lastAccess != null) {
+            return System.currentTimeMillis() >= lastAccess.toEpochMilli() + timeToLiveMs;
+        }
+        return true;
+    }
 
-	/**
-	 * Gets the cached value.
-	 * @return a value
-	 */
-	public V getValue() {
-		return value;
-	}
+    /**
+     * Gets the cached value.
+     * @return a value
+     */
+    public V getValue() {
+        return value;
+    }
 
-	@Override
-	public String toString() {
-		return "value=" + (value != null ? value.toString() : "<null>")
-			+ ", lastAccess=" + (lastAccess != null ? lastAccess.toString() : "<null>");
-	}
+    @Override
+    public String toString() {
+        return "value=" + (value != null ? value.toString() : "<null>")
+            + ", lastAccess=" + (lastAccess != null ? lastAccess.toString() : "<null>");
+    }
 }

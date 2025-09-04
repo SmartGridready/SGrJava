@@ -127,15 +127,15 @@ public class ModbusGateway {
 
     private void connectDriver() throws GenDriverException {
         if (!transport.connect()) {
-			var msg = "Connect to Modbus device failed";
-			if (interfaceDescription.getModbusRtu() != null) {
-				msg = String.format("Connect to Modbus device on port %s failed.", interfaceDescription.getModbusRtu().getPortName());
-			} else if (interfaceDescription.getModbusTcp() != null) {
-				msg = String.format("Connect to Modbus device on IP address=%s failed.", interfaceDescription.getModbusTcp().getAddress());
-			}
-			LOG.error(msg);
-			throw new GenDriverException(msg);
-		}
+            var msg = "Connect to Modbus device failed";
+            if (interfaceDescription.getModbusRtu() != null) {
+                msg = String.format("Connect to Modbus device on port %s failed.", interfaceDescription.getModbusRtu().getPortName());
+            } else if (interfaceDescription.getModbusTcp() != null) {
+                msg = String.format("Connect to Modbus device on IP address=%s failed.", interfaceDescription.getModbusTcp().getAddress());
+            }
+            LOG.error(msg);
+            throw new GenDriverException(msg);
+        }
     }
 
     /**

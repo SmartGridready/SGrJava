@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 public abstract class Processor {
 
     private static final Long WAIT_TIMEOUT_MS = 1000L;
-	
-	private static final Logger LOG  = LoggerFactory.getLogger(Processor.class); 
+
+    private static final Logger LOG  = LoggerFactory.getLogger(Processor.class); 
 
     private final List<Executable> awaitList;
 

@@ -163,15 +163,15 @@ public class SGrMessagingDevice extends SGrDeviceBase<
             Properties substitutions = new Properties();
             // substitute default values of dynamic parameters
             if (null != dataPoint.getDataPoint().getParameterList()) {
-				dataPoint.getDataPoint().getParameterList().getParameterListElement().forEach(p -> {
-					String pVal = (null != p.getDefaultValue()) ? p.getDefaultValue() : "";
-					substitutions.put(p.getName(), pVal);
-				});
-			}
+                dataPoint.getDataPoint().getParameterList().getParameterListElement().forEach(p -> {
+                    String pVal = (null != p.getDefaultValue()) ? p.getDefaultValue() : "";
+                    substitutions.put(p.getName(), pVal);
+                });
+            }
             // substitute actual request parameters
-			if (parameters != null) {
-				substitutions.putAll(parameters);
-			}
+            if (parameters != null) {
+                substitutions.putAll(parameters);
+            }
 
             // Read value from device
             OutMessage outMessage = outReadCmdTopicOpt.get();
@@ -369,7 +369,7 @@ public class SGrMessagingDevice extends SGrDeviceBase<
     }
 
     @Override
-	public synchronized void connect() throws GenDriverException {
+    public synchronized void connect() throws GenDriverException {
         if (messagingClient == null) {
             if (messagingClientFactory != null) {
                 messagingClient = messagingClientFactory.create(interfaceDescription);
@@ -377,18 +377,18 @@ public class SGrMessagingDevice extends SGrDeviceBase<
                 throw new GenDriverException(String.format("No implementation of platform %s found", interfaceDescription.getMessagingPlatformType()));
             }
         }
-	}
+    }
 
-	@Override
-	public void disconnect() throws GenDriverException {
+    @Override
+    public void disconnect() throws GenDriverException {
         try {
-		    close();
+            close();
         } catch (IOException e) {
             throw new GenDriverException("Error closing messaging client", e);
         } finally {
             messagingClient = null;
         }
-	}
+    }
 
     @Override
     public boolean isConnected() {
@@ -449,14 +449,14 @@ public class SGrMessagingDevice extends SGrDeviceBase<
     }
 
     private static String replacePropertyPlaceholders(String template, Properties properties) {
-		// this is for dynamic parameters
-		String convertedTemplate = template;
-		if (template != null && properties != null) {
-			for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-				// no regex here, string literal replacement is sufficient
-				convertedTemplate = convertedTemplate.replace("[[" + (String)entry.getKey() + "]]", (String)entry.getValue());
-			}
-		}
-		return convertedTemplate;
-	}
+        // this is for dynamic parameters
+        String convertedTemplate = template;
+        if (template != null && properties != null) {
+            for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+                // no regex here, string literal replacement is sufficient
+                convertedTemplate = convertedTemplate.replace("[[" + (String)entry.getKey() + "]]", (String)entry.getValue());
+            }
+        }
+        return convertedTemplate;
+    }
 }
