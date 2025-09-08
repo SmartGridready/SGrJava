@@ -58,8 +58,6 @@ jobs:
 
       - name: Build Javadoc
         id: javadoc
-        # disabled, because publishing does not work from sub-directory :(
-        if: false
         working-directory: SGrJava/Specification
         run: |
           chmod +x ./gradlew
@@ -71,4 +69,4 @@ jobs:
         with:
           branch: gh-pages  # Change this if using a different branch
           folder: SGrJava/Specification/build/docs/javadoc  # Path where Javadoc is generated
-          target-folder: docs/specification
+          target-folder: SGrJava/docs/specification
