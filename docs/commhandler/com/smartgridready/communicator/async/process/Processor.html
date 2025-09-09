@@ -90,13 +90,13 @@ loadScripts(document, 'script');</script>
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -137,33 +137,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public abstract class <span class="typeNameLabel">Processor</span>
 extends java.lang.Object</pre>
+<div class="block">Base class for task processors.</div>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<section>
-<ul class="blockList">
-<li class="blockList"><a id="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Constructor</th>
-<th class="colLast" scope="col">Description</th>
-</tr>
-<tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">Processor</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
-</section>
 <!-- ========== METHOD SUMMARY =========== -->
 <section>
 <ul class="blockList">
@@ -181,17 +161,23 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="Processor.html" title="class in com.smartgridready.communicator.async.process">Processor</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#await(com.smartgridready.communicator.async.process.Executable...)">await</a></span>&#8203;(<a href="Executable.html" title="interface in com.smartgridready.communicator.async.process">Executable</a>...&nbsp;executables)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Prepares awaiting processes to be finished.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#process()">process</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Executes the processes in parallel.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>abstract void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#process(com.smartgridready.communicator.async.process.ProcessingType)">process</a></span>&#8203;(<a href="ProcessingType.html" title="enum in com.smartgridready.communicator.async.process">ProcessingType</a>&nbsp;processingType)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Executes the processes.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -210,25 +196,6 @@ extends java.lang.Object</pre>
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<section>
-<ul class="blockList">
-<li class="blockList"><a id="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a id="&lt;init&gt;()">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>Processor</h4>
-<pre>public&nbsp;Processor()</pre>
-</li>
-</ul>
-</li>
-</ul>
-</section>
 <!-- ============ METHOD DETAIL ========== -->
 <section>
 <ul class="blockList">
@@ -243,6 +210,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>process</h4>
 <pre class="methodSignature">public abstract&nbsp;void&nbsp;process&#8203;(<a href="ProcessingType.html" title="enum in com.smartgridready.communicator.async.process">ProcessingType</a>&nbsp;processingType)</pre>
+<div class="block">Executes the processes.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>processingType</code> - the type of execution</dd>
+</dl>
 </li>
 </ul>
 <a id="process()">
@@ -252,6 +224,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>process</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;process()</pre>
+<div class="block">Executes the processes in parallel.</div>
 </li>
 </ul>
 <a id="await(com.smartgridready.communicator.async.process.Executable...)">
@@ -261,6 +234,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>await</h4>
 <pre class="methodSignature">public&nbsp;<a href="Processor.html" title="class in com.smartgridready.communicator.async.process">Processor</a>&nbsp;await&#8203;(<a href="Executable.html" title="interface in com.smartgridready.communicator.async.process">Executable</a>...&nbsp;executables)</pre>
+<div class="block">Prepares awaiting processes to be finished.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>executables</code> - the processes to await</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the same instance</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -316,13 +296,13 @@ extends java.lang.Object</pre>
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>

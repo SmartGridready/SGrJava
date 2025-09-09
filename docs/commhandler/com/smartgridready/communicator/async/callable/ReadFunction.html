@@ -122,8 +122,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>R</code> - The type of result.</dd>
+</dl>
 <hr>
 <pre>public interface <span class="typeNameLabel">ReadFunction&lt;R&gt;</span></pre>
+<div class="block">Defines the interface of a read function.</div>
 </li>
 </ul>
 </div>
@@ -148,7 +153,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <td class="colFirst"><code><a href="ReadFunction.html" title="type parameter in ReadFunction">R</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#apply(java.lang.String,java.lang.String)">apply</a></span>&#8203;(java.lang.String&nbsp;functionalProfile,
      java.lang.String&nbsp;dataPoint)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Executes the function.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -182,15 +189,21 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
         <a href="../../rest/exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a>,
         <a href="../../rest/exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a>,
         <a href="../../rest/exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></pre>
+<div class="block">Executes the function.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>functionalProfile</code> - the functional profile name</dd>
+<dd><code>dataPoint</code> - the data point name</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a result of the generic type</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>com.smartgridready.driver.api.common.GenDriverException</code></dd>
-<dd><code>com.smartgridready.driver.api.modbus.GenDriverModbusException</code></dd>
-<dd><code>com.smartgridready.driver.api.modbus.GenDriverSocketException</code></dd>
-<dd><code>java.io.IOException</code></dd>
-<dd><code><a href="../../rest/exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></code></dd>
-<dd><code><a href="../../rest/exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a></code></dd>
-<dd><code><a href="../../rest/exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></code></dd>
+<dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - when an unspecific error occurred</dd>
+<dd><code>com.smartgridready.driver.api.modbus.GenDriverModbusException</code> - when a Modbus error occurred</dd>
+<dd><code>com.smartgridready.driver.api.modbus.GenDriverSocketException</code> - when a network error occurred</dd>
+<dd><code>java.io.IOException</code> - when a communication error occurred</dd>
+<dd><code><a href="../../rest/exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></code> - when the HTTP request failed</dd>
+<dd><code><a href="../../rest/exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a></code> - when HTTP authentication failed</dd>
+<dd><code><a href="../../rest/exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></code> - when the HTTP response could not be parsed</dd>
 </dl>
 </li>
 </ul>

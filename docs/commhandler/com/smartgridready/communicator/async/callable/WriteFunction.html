@@ -123,12 +123,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>V</code> - The type of value to write.</dd>
+</dl>
+<dl>
 <dt>Functional Interface:</dt>
 <dd>This is a functional interface and can therefore be used as the assignment target for a lambda expression or method reference.</dd>
 </dl>
 <hr>
 <pre>@FunctionalInterface
 public interface <span class="typeNameLabel">WriteFunction&lt;V&gt;</span></pre>
+<div class="block">Defines the interface of a write function.</div>
 </li>
 </ul>
 </div>
@@ -154,7 +159,9 @@ public interface <span class="typeNameLabel">WriteFunction&lt;V&gt;</span></pre>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#apply(java.lang.String,java.lang.String,V)">apply</a></span>&#8203;(java.lang.String&nbsp;functionalProfile,
      java.lang.String&nbsp;dataPoint,
      <a href="WriteFunction.html" title="type parameter in WriteFunction">V</a>&nbsp;value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Executes the function.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -191,15 +198,20 @@ public interface <span class="typeNameLabel">WriteFunction&lt;V&gt;</span></pre>
            <a href="../../rest/exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a>,
            <a href="../../rest/exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a>,
            <a href="../../rest/exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></pre>
+<div class="block">Executes the function.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>functionalProfile</code> - the functional profile name</dd>
+<dd><code>dataPoint</code> - the data point name</dd>
+<dd><code>value</code> - the value to set</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>com.smartgridready.driver.api.common.GenDriverException</code></dd>
-<dd><code>com.smartgridready.driver.api.modbus.GenDriverModbusException</code></dd>
-<dd><code>com.smartgridready.driver.api.modbus.GenDriverSocketException</code></dd>
-<dd><code>java.io.IOException</code></dd>
-<dd><code><a href="../../rest/exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></code></dd>
-<dd><code><a href="../../rest/exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a></code></dd>
-<dd><code><a href="../../rest/exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></code></dd>
+<dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - when an unspecific error occurred</dd>
+<dd><code>com.smartgridready.driver.api.modbus.GenDriverModbusException</code> - when a Modbus error occurred</dd>
+<dd><code>com.smartgridready.driver.api.modbus.GenDriverSocketException</code> - when a network error occurred</dd>
+<dd><code>java.io.IOException</code> - when a communication error occurred</dd>
+<dd><code><a href="../../rest/exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></code> - when the HTTP request failed</dd>
+<dd><code><a href="../../rest/exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a></code> - when HTTP authentication failed</dd>
+<dd><code><a href="../../rest/exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></code> - when the HTTP response could not be parsed</dd>
 </dl>
 </li>
 </ul>

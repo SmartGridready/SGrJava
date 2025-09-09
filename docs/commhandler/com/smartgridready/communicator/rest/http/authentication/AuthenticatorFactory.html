@@ -133,6 +133,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">AuthenticatorFactory</span>
 extends java.lang.Object</pre>
+<div class="block">Implements a factory that creates HTTP authenticators.</div>
 </li>
 </ul>
 </div>
@@ -156,7 +157,9 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>static <a href="Authenticator.html" title="interface in com.smartgridready.communicator.rest.http.authentication">Authenticator</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAuthenticator(com.smartgridready.ns.v0.RestApiAuthenticationMethod)">getAuthenticator</a></span>&#8203;(com.smartgridready.ns.v0.RestApiAuthenticationMethod&nbsp;authMethodType)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Creates a new HTTP authenticator using reflection.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -190,9 +193,14 @@ extends java.lang.Object</pre>
 <h4>getAuthenticator</h4>
 <pre class="methodSignature">public static&nbsp;<a href="Authenticator.html" title="interface in com.smartgridready.communicator.rest.http.authentication">Authenticator</a>&nbsp;getAuthenticator&#8203;(com.smartgridready.ns.v0.RestApiAuthenticationMethod&nbsp;authMethodType)
                                       throws <a href="../../exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a></pre>
+<div class="block">Creates a new HTTP authenticator using reflection.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>authMethodType</code> - the desired authentication method</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <a href="Authenticator.html" title="interface in com.smartgridready.communicator.rest.http.authentication"><code>Authenticator</code></a></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a></code></dd>
+<dd><code><a href="../../exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a></code> - when creating the instance failed</dd>
 </dl>
 </li>
 </ul>

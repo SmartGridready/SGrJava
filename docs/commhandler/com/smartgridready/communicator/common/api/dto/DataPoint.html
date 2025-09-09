@@ -89,13 +89,13 @@ loadScripts(document, 'script');</script>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
@@ -133,35 +133,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">DataPoint</span>
 extends java.lang.Object</pre>
+<div class="block">Implements a generic data point facade.</div>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- =========== FIELD SUMMARY =========== -->
-<section>
-<ul class="blockList">
-<li class="blockList"><a id="field.summary">
-<!--   -->
-</a>
-<h3>Field Summary</h3>
-<table class="memberSummary">
-<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colSecond" scope="col">Field</th>
-<th class="colLast" scope="col">Description</th>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>protected <a href="../GenDeviceApi.html" title="interface in com.smartgridready.communicator.common.api">GenDeviceApi</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#genDeviceApi">genDeviceApi</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
-</section>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <section>
 <ul class="blockList">
@@ -187,7 +165,9 @@ extends java.lang.Object</pre>
          java.util.List&lt;<a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a>&gt;&nbsp;genericAttributes,
          java.util.List&lt;<a href="DynamicRequestParameter.html" title="class in com.smartgridready.communicator.common.api.dto">DynamicRequestParameter</a>&gt;&nbsp;dynamicRequestParameters,
          <a href="../GenDeviceApi.html" title="interface in com.smartgridready.communicator.common.api">GenDeviceApi</a>&nbsp;genDeviceApi)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a data point.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -219,78 +199,100 @@ extends java.lang.Object</pre>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#canSubscribe()">canSubscribe</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Tells if the device interface supports subscribe/unsubscribe.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.Integer</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getArrayLen()">getArrayLen</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the number of array elements of the data point value.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../values/DataTypeInfo.html" title="class in com.smartgridready.communicator.common.api.values">DataTypeInfo</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDataType()">getDataType</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the data type.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="DynamicRequestParameter.html" title="class in com.smartgridready.communicator.common.api.dto">DynamicRequestParameter</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDynamicRequestParameters()">getDynamicRequestParameters</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the available dynamic request parameters that need to be provided as <code>Properties</code>
+ when calling the method <a href="../GenDeviceApi.html#getVal(java.lang.String,java.lang.String,java.util.Properties)"><code>GenDeviceApi.getVal(String, String, Properties)</code></a>.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getFunctionalProfileName()">getFunctionalProfileName</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the functional profile name.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getGenericAttributes()">getGenericAttributes</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the generic attributes of the data point.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.lang.Double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMaximumValue()">getMaximumValue</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the maximal allowed data point value for <code>setVal()</code>.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.Double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMinimumValue()">getMinimumValue</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the maximal allowed data point value for <code>setVal()</code>.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getName()">getName</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the data point name.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>com.smartgridready.ns.v0.DataDirectionProduct</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPermissions()">getPermissions</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the read-write permissions of the data point.</div>
+</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>com.smartgridready.ns.v0.Units</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getUnit()">getUnit</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the unit of measurement.</div>
+</td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVal()">getVal</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Read the value from this data point</div>
+<div class="block">Read the value from this data point.</div>
 </td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVal(long)">getVal</a></span>&#8203;(long&nbsp;timeoutMs)</code></th>
 <td class="colLast">
-<div class="block">Gets a value from the device by reading
- This operation is supported for messaging devices only</div>
+<div class="block">Gets a value from the device by reading.</div>
 </td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVal(java.util.Properties)">getVal</a></span>&#8203;(java.util.Properties&nbsp;parameters)</code></th>
 <td class="colLast">
-<div class="block">Read the value from this data point, with request-specific parameters</div>
+<div class="block">Read the value from this data point, with request-specific parameters.</div>
 </td>
 </tr>
 <tr id="i15" class="rowColor">
@@ -298,31 +300,28 @@ extends java.lang.Object</pre>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVal(java.util.Properties,long)">getVal</a></span>&#8203;(java.util.Properties&nbsp;parameters,
       long&nbsp;timeoutMs)</code></th>
 <td class="colLast">
-<div class="block">Gets a value from the device by reading
- This operation is supported for messaging devices only</div>
+<div class="block">Gets a value from the device by reading.</div>
 </td>
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setVal(com.smartgridready.communicator.common.api.values.Value)">setVal</a></span>&#8203;(<a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&nbsp;value)</code></th>
 <td class="colLast">
-<div class="block">Write a value to the data point</div>
+<div class="block">Write a value to the data point.</div>
 </td>
 </tr>
 <tr id="i17" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#subscribe(java.util.function.Consumer)">subscribe</a></span>&#8203;(java.util.function.Consumer&lt;io.vavr.control.Either&lt;java.lang.Throwable,&#8203;<a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&gt;&gt;&nbsp;callbackFunction)</code></th>
 <td class="colLast">
-<div class="block">Subscribes to messages that are related to the given data point
- This operation is supported for messaging devices only</div>
+<div class="block">Subscribes to messages that are related to the given data point.</div>
 </td>
 </tr>
 <tr id="i18" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unsubscribe()">unsubscribe</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Unsubscribes from messages that are related to a given data point
- This operation is supported for messaging devices only</div>
+<div class="block">Unsubscribes from messages that are related to a given data point.</div>
 </td>
 </tr>
 </table>
@@ -342,25 +341,6 @@ extends java.lang.Object</pre>
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ============ FIELD DETAIL =========== -->
-<section>
-<ul class="blockList">
-<li class="blockList"><a id="field.detail">
-<!--   -->
-</a>
-<h3>Field Detail</h3>
-<a id="genDeviceApi">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>genDeviceApi</h4>
-<pre>protected final&nbsp;<a href="../GenDeviceApi.html" title="interface in com.smartgridready.communicator.common.api">GenDeviceApi</a> genDeviceApi</pre>
-</li>
-</ul>
-</li>
-</ul>
-</section>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <section>
 <ul class="blockList">
@@ -385,6 +365,21 @@ extends java.lang.Object</pre>
                  java.util.List&lt;<a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a>&gt;&nbsp;genericAttributes,
                  java.util.List&lt;<a href="DynamicRequestParameter.html" title="class in com.smartgridready.communicator.common.api.dto">DynamicRequestParameter</a>&gt;&nbsp;dynamicRequestParameters,
                  <a href="../GenDeviceApi.html" title="interface in com.smartgridready.communicator.common.api">GenDeviceApi</a>&nbsp;genDeviceApi)</pre>
+<div class="block">Constructs a data point.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>name</code> - the data point name</dd>
+<dd><code>functionalProfileName</code> - the functional profile name</dd>
+<dd><code>dataType</code> - the data type and range</dd>
+<dd><code>unit</code> - the unit of measurement</dd>
+<dd><code>permissions</code> - the read-write permissions</dd>
+<dd><code>minimumValue</code> - the minimal allowed value</dd>
+<dd><code>maximumValue</code> - the maximal allowed value</dd>
+<dd><code>arrayLen</code> - the number of array elements, if the value is an array</dd>
+<dd><code>genericAttributes</code> - the generic attributes</dd>
+<dd><code>dynamicRequestParameters</code> - the dynamic request parameters</dd>
+<dd><code>genDeviceApi</code> - the device interface</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -404,6 +399,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getName</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getName()</pre>
+<div class="block">Gets the data point name.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The data point name</dd>
@@ -417,6 +413,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getFunctionalProfileName</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getFunctionalProfileName()</pre>
+<div class="block">Gets the functional profile name.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The functional profile name</dd>
@@ -430,6 +427,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getDataType</h4>
 <pre class="methodSignature">public&nbsp;<a href="../values/DataTypeInfo.html" title="class in com.smartgridready.communicator.common.api.values">DataTypeInfo</a>&nbsp;getDataType()</pre>
+<div class="block">Gets the data type.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The data type name and range</dd>
@@ -443,6 +441,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getUnit</h4>
 <pre class="methodSignature">public&nbsp;com.smartgridready.ns.v0.Units&nbsp;getUnit()</pre>
+<div class="block">Gets the unit of measurement.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The units of the data point value</dd>
@@ -456,6 +455,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getPermissions</h4>
 <pre class="methodSignature">public&nbsp;com.smartgridready.ns.v0.DataDirectionProduct&nbsp;getPermissions()</pre>
+<div class="block">Gets the read-write permissions of the data point.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The RW permissions</dd>
@@ -469,9 +469,10 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getMinimumValue</h4>
 <pre class="methodSignature">public&nbsp;java.lang.Double&nbsp;getMinimumValue()</pre>
+<div class="block">Gets the maximal allowed data point value for <code>setVal()</code>.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The minimum allowed value for <code>setVal()</code></dd>
+<dd>The minimal allowed value</dd>
 </dl>
 </li>
 </ul>
@@ -482,9 +483,10 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getMaximumValue</h4>
 <pre class="methodSignature">public&nbsp;java.lang.Double&nbsp;getMaximumValue()</pre>
+<div class="block">Gets the maximal allowed data point value for <code>setVal()</code>.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The maximum allowed value for <code>setVal()</code></dd>
+<dd>The maximal allowed value</dd>
 </dl>
 </li>
 </ul>
@@ -495,9 +497,10 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getArrayLen</h4>
 <pre class="methodSignature">public&nbsp;java.lang.Integer&nbsp;getArrayLen()</pre>
+<div class="block">Gets the number of array elements of the data point value.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The array length if the data point represents an array of values.</dd>
+<dd>The array length if the data point represents an array of values, otherwise null</dd>
 </dl>
 </li>
 </ul>
@@ -508,6 +511,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getGenericAttributes</h4>
 <pre class="methodSignature">public&nbsp;java.util.List&lt;<a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a>&gt;&nbsp;getGenericAttributes()</pre>
+<div class="block">Gets the generic attributes of the data point.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>A list of generic attributes for this data point.</dd>
@@ -521,11 +525,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getDynamicRequestParameters</h4>
 <pre class="methodSignature">public&nbsp;java.util.List&lt;<a href="DynamicRequestParameter.html" title="class in com.smartgridready.communicator.common.api.dto">DynamicRequestParameter</a>&gt;&nbsp;getDynamicRequestParameters()</pre>
+<div class="block">Gets the available dynamic request parameters that need to be provided as <code>Properties</code>
+ when calling the method <a href="../GenDeviceApi.html#getVal(java.lang.String,java.lang.String,java.util.Properties)"><code>GenDeviceApi.getVal(String, String, Properties)</code></a>.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>A list of the request parameters that need to be provided as <code>Properties</code>
-         when calling the method
-         <a href="../GenDeviceApi.html#getVal(java.lang.String,java.lang.String,java.util.Properties)"><code>GenDeviceApi.getVal(String, String, Properties)</code></a></dd>
+<dd>A list of the dynamic request parameters</dd>
 </dl>
 </li>
 </ul>
@@ -542,10 +546,10 @@ extends java.lang.Object</pre>
                     <a href="../../../rest/exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a>,
                     com.smartgridready.driver.api.modbus.GenDriverSocketException,
                     java.io.IOException</pre>
-<div class="block">Read the value from this data point</div>
+<div class="block">Read the value from this data point.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The value read.</dd>
+<dd>The value delivered by the device.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - On a generic error</dd>
 <dd><code><a href="../../../rest/exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></code> - If the web service response could not be parsed</dd>
@@ -569,12 +573,12 @@ extends java.lang.Object</pre>
                     <a href="../../../rest/exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a>,
                     com.smartgridready.driver.api.modbus.GenDriverSocketException,
                     java.io.IOException</pre>
-<div class="block">Read the value from this data point, with request-specific parameters</div>
+<div class="block">Read the value from this data point, with request-specific parameters.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>parameters</code> - Key value pairs with request parameters</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The value read.</dd>
+<dd>The value delivered by the device.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - On a generic error</dd>
 <dd><code><a href="../../../rest/exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></code> - If the web service response could not be parsed</dd>
@@ -598,10 +602,10 @@ extends java.lang.Object</pre>
                    <a href="../../../rest/exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a>,
                    com.smartgridready.driver.api.modbus.GenDriverSocketException,
                    java.io.IOException</pre>
-<div class="block">Write a value to the data point</div>
+<div class="block">Write a value to the data point.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - The value</dd>
+<dd><code>value</code> - The value to write</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - On a generic error</dd>
 <dd><code><a href="../../../rest/exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></code> - If the web service response could not be parsed</dd>
@@ -647,8 +651,8 @@ public&nbsp;void&nbsp;authenticate()
 <h4>getVal</h4>
 <pre class="methodSignature">public&nbsp;<a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&nbsp;getVal&#8203;(long&nbsp;timeoutMs)
              throws com.smartgridready.driver.api.common.GenDriverException</pre>
-<div class="block">Gets a value from the device by reading
- This operation is supported for messaging devices only</div>
+<div class="block">Gets a value from the device by reading.
+ This operation is supported for messaging devices only.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>timeoutMs</code> - The read timeout in milliseconds</dd>
@@ -668,10 +672,11 @@ public&nbsp;void&nbsp;authenticate()
 <pre class="methodSignature">public&nbsp;<a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&nbsp;getVal&#8203;(java.util.Properties&nbsp;parameters,
                     long&nbsp;timeoutMs)
              throws com.smartgridready.driver.api.common.GenDriverException</pre>
-<div class="block">Gets a value from the device by reading
- This operation is supported for messaging devices only</div>
+<div class="block">Gets a value from the device by reading.
+ This operation is supported for messaging devices only.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>parameters</code> - the dynamic request parameters</dd>
 <dd><code>timeoutMs</code> - The read timeout in milliseconds</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The value received from the device</dd>
@@ -688,8 +693,8 @@ public&nbsp;void&nbsp;authenticate()
 <h4>subscribe</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;subscribe&#8203;(java.util.function.Consumer&lt;io.vavr.control.Either&lt;java.lang.Throwable,&#8203;<a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&gt;&gt;&nbsp;callbackFunction)
                throws com.smartgridready.driver.api.common.GenDriverException</pre>
-<div class="block">Subscribes to messages that are related to the given data point
- This operation is supported for messaging devices only</div>
+<div class="block">Subscribes to messages that are related to the given data point.
+ This operation is supported for messaging devices only.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>callbackFunction</code> - A callback function that provides the received value</dd>
@@ -706,8 +711,8 @@ public&nbsp;void&nbsp;authenticate()
 <h4>unsubscribe</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;unsubscribe()
                  throws com.smartgridready.driver.api.common.GenDriverException</pre>
-<div class="block">Unsubscribes from messages that are related to a given data point
- This operation is supported for messaging devices only</div>
+<div class="block">Unsubscribes from messages that are related to a given data point.
+ This operation is supported for messaging devices only.</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - if an error occurs</dd>
@@ -721,6 +726,11 @@ public&nbsp;void&nbsp;authenticate()
 <li class="blockList">
 <h4>canSubscribe</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;canSubscribe()</pre>
+<div class="block">Tells if the device interface supports subscribe/unsubscribe.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -775,13 +785,13 @@ public&nbsp;void&nbsp;authenticate()
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>

@@ -133,7 +133,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">SGrDeviceBuilder</span>
 extends java.lang.Object</pre>
-<div class="block">Generic SGr device builder.</div>
+<div class="block">Implements a generic SGr device builder.
+ Provides a fluent interface to build device instances from EI-XML and parameters.
+ Uses the <code>ServiceLoader</code> mechanism to load interface driver factories from the classpath.</div>
 </li>
 </ul>
 </div>
@@ -156,7 +158,7 @@ extends java.lang.Object</pre>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">SGrDeviceBuilder</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Construct new instance with defaults.</div>
+<div class="block">Constructs new instance with defaults.</div>
 </td>
 </tr>
 </table>
@@ -252,7 +254,7 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code><a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api">SGrDeviceBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#useSharedModbusRtu(boolean)">useSharedModbusRtu</a></span>&#8203;(boolean&nbsp;useSharedModbusRtu)</code></th>
 <td class="colLast">
-<div class="block">Enable or disable shared instances of Modbus RTU driver.</div>
+<div class="block">Enables or disables shared instances of Modbus RTU drivers.</div>
 </td>
 </tr>
 </table>
@@ -286,7 +288,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>SGrDeviceBuilder</h4>
 <pre>public&nbsp;SGrDeviceBuilder()</pre>
-<div class="block">Construct new instance with defaults.</div>
+<div class="block">Constructs new instance with defaults.
+ Interface driver factories are loaded using the <code>ServiceLoader</code> mechanism, if present in the classpath.</div>
 </li>
 </ul>
 </li>
@@ -311,7 +314,7 @@ extends java.lang.Object</pre>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>path</code> - the file system path</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the same instance of the builder object</dd>
+<dd>the same instance of <a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api"><code>SGrDeviceBuilder</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -327,7 +330,7 @@ extends java.lang.Object</pre>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>inputStream</code> - the input stream</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the same instance of the builder object</dd>
+<dd>the same instance of <a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api"><code>SGrDeviceBuilder</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -343,7 +346,7 @@ extends java.lang.Object</pre>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>content</code> - the XML content</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the same instance of the builder object</dd>
+<dd>the same instance of <a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api"><code>SGrDeviceBuilder</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -359,7 +362,7 @@ extends java.lang.Object</pre>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>httpClientFactory</code> - an instance of a REST API service client factory</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the same instance of the builder object</dd>
+<dd>the same instance of <a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api"><code>SGrDeviceBuilder</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -371,12 +374,12 @@ extends java.lang.Object</pre>
 <h4>useModbusClientFactory</h4>
 <pre class="methodSignature">public&nbsp;<a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api">SGrDeviceBuilder</a>&nbsp;useModbusClientFactory&#8203;(com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory&nbsp;modbusClientFactory)</pre>
 <div class="block">Sets the Modbus client factory explicitly.
- If not set explicitly, the Java ServiceLoader mechanism tries to find an implementation.</div>
+ If not set explicitly, the Java ServiceLoader mechanism tries to find an implementation on the classpath.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>modbusClientFactory</code> - an instance of a Modbus client factory</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the same instance of the builder object</dd>
+<dd>the same instance of <a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api"><code>SGrDeviceBuilder</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -389,11 +392,13 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">public&nbsp;<a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api">SGrDeviceBuilder</a>&nbsp;useMessagingClientFactory&#8203;(com.smartgridready.driver.api.messaging.GenMessagingClientFactory&nbsp;messagingClientFactory,
                                                   com.smartgridready.driver.api.messaging.model.MessagingPlatformType&nbsp;platform)</pre>
 <div class="block">Sets the messaging client factory to be used explicitly.
- If not set explicitly, the Java ServiceLoader mechanism tries to find an implementation.</div>
+ If not set explicitly, the Java ServiceLoader mechanism tries to find an implementation on the classpath.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>messagingClientFactory</code> - the messaging client factory to be used</dd>
 <dd><code>platform</code> - the messaging platform type</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the same instance of <a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api"><code>SGrDeviceBuilder</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -405,12 +410,12 @@ extends java.lang.Object</pre>
 <h4>useContactsDriverFactory</h4>
 <pre class="methodSignature">public&nbsp;<a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api">SGrDeviceBuilder</a>&nbsp;useContactsDriverFactory&#8203;(com.smartgridready.driver.api.contacts.GenDriverAPI4ContactsFactory&nbsp;contactsDriverFactory)</pre>
 <div class="block">Sets the contacts driver factory explicitly.
- If not set explicitly, the Java ServiceLoader mechanism tries to find an implementation.</div>
+ If not set explicitly, the Java <code>ServiceLoader</code> mechanism tries to find an implementation on the classpath.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>contactsDriverFactory</code> - an instance of a contacts driver factory</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the same instance of the builder object</dd>
+<dd>the same instance of <a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api"><code>SGrDeviceBuilder</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -421,13 +426,15 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>useSharedModbusRtu</h4>
 <pre class="methodSignature">public&nbsp;<a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api">SGrDeviceBuilder</a>&nbsp;useSharedModbusRtu&#8203;(boolean&nbsp;useSharedModbusRtu)</pre>
-<div class="block">Enable or disable shared instances of Modbus RTU driver.
- Is false by default, if not set.</div>
+<div class="block">Enables or disables shared instances of Modbus RTU drivers.
+ When enabled, multiple device instances can use the same RS-485 serial port.
+ Otherwise a serial port can only be used by a single device.
+ Is <code>false</code> by default, if not set.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>useSharedModbusRtu</code> - true if shared, false otherwise</dd>
+<dd><code>useSharedModbusRtu</code> - the updated setting</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the same instance of the builder object</dd>
+<dd>the same instance of <a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api"><code>SGrDeviceBuilder</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -439,13 +446,13 @@ extends java.lang.Object</pre>
 <h4>useSharedModbusGatewayRegistry</h4>
 <pre class="methodSignature">public&nbsp;<a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api">SGrDeviceBuilder</a>&nbsp;useSharedModbusGatewayRegistry&#8203;(<a href="../../modbus/api/ModbusGatewayRegistry.html" title="interface in com.smartgridready.communicator.modbus.api">ModbusGatewayRegistry</a>&nbsp;sharedModbusGatewayRegistry)</pre>
 <div class="block">Sets a custom shared Modbus RTU driver registry.
- Uses a singleton instance by default, if not set.
- Also depends on useSharedModbusRtu().</div>
+ Uses a global singleton instance by default, if not set.
+ Also depends on <code>useSharedModbusRtu</code>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>sharedModbusGatewayRegistry</code> - the custom registry</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the same instance of the builder object</dd>
+<dd>the same instance of <a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api"><code>SGrDeviceBuilder</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -461,7 +468,7 @@ extends java.lang.Object</pre>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>properties</code> - the properties</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the same instance of the builder object</dd>
+<dd>the same instance of <a href="SGrDeviceBuilder.html" title="class in com.smartgridready.communicator.common.api"><code>SGrDeviceBuilder</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -477,10 +484,10 @@ extends java.lang.Object</pre>
 <div class="block">Builds the SGr device using the previously set builder parameters.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>an SGr device object</dd>
+<dd>an SGr device object implementing <code>GenDeviceApi</code></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - on generic error</dd>
-<dd><code><a href="../../rest/exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a></code> - on authentication error</dd>
+<dd><code><a href="../../rest/exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a></code> - on HTTP authentication error</dd>
 </dl>
 </li>
 </ul>

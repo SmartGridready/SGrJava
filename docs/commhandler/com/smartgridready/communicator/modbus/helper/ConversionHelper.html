@@ -133,6 +133,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">ConversionHelper</span>
 extends java.lang.Object</pre>
+<div class="block">A helper class for value conversion.</div>
 </li>
 </ul>
 </div>
@@ -156,17 +157,23 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>static boolean[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#byteArrToBooleanArr(byte%5B%5D)">byteArrToBooleanArr</a></span>&#8203;(byte[]&nbsp;bytes)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts a byte array to a boolean array.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static java.nio.ByteBuffer</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#byteBufFromRegisters(int%5B%5D)">byteBufFromRegisters</a></span>&#8203;(int[]&nbsp;intArr)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts Modbus registers to a byte buffer.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#bytesToRegisters(byte%5B%5D)">bytesToRegisters</a></span>&#8203;(byte[]&nbsp;bytes)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts a byte array to Modbus registers.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
@@ -187,42 +194,58 @@ extends java.lang.Object</pre>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#doubleToRegisters(double)">doubleToRegisters</a></span>&#8203;(double&nbsp;dVal)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts a double value to four Modbus registers.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>static int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#floatToRegisters(float)">floatToRegisters</a></span>&#8203;(float&nbsp;fVal)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts a float value to two Modbus registers.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>static int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#intToRegisters(int)">intToRegisters</a></span>&#8203;(int&nbsp;value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts an int value to two Modbus registers.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>static int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#longToRegisters(long)">longToRegisters</a></span>&#8203;(long&nbsp;lVal)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts a long value to four Modbus registers.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>static int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shortToRegister(short)">shortToRegister</a></span>&#8203;(short&nbsp;value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts a short value to a Modbus register.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>static byte[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toByteArray(int)">toByteArray</a></span>&#8203;(int&nbsp;value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts an int to a byte array.</div>
+</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>static int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#uintToRegisters(long)">uintToRegisters</a></span>&#8203;(long&nbsp;value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts an unsigned int value to two Modbus registers.</div>
+</td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>static int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unsignedLongToRegister(java.math.BigInteger)">unsignedLongToRegister</a></span>&#8203;(java.math.BigInteger&nbsp;value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts an unsigned long value to four Modbus registers.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -255,6 +278,14 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>bytesToRegisters</h4>
 <pre class="methodSignature">public static&nbsp;int[]&nbsp;bytesToRegisters&#8203;(byte[]&nbsp;bytes)</pre>
+<div class="block">Converts a byte array to Modbus registers.
+ Each two bytes become a register value.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>bytes</code> - the byte array to convert.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of int</dd>
+</dl>
 </li>
 </ul>
 <a id="byteBufFromRegisters(int[])">
@@ -264,6 +295,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>byteBufFromRegisters</h4>
 <pre class="methodSignature">public static&nbsp;java.nio.ByteBuffer&nbsp;byteBufFromRegisters&#8203;(int[]&nbsp;intArr)</pre>
+<div class="block">Converts Modbus registers to a byte buffer.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>intArr</code> - the Modbus register values</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>ByteBuffer</code></dd>
+</dl>
 </li>
 </ul>
 <a id="floatToRegisters(float)">
@@ -273,6 +311,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>floatToRegisters</h4>
 <pre class="methodSignature">public static&nbsp;int[]&nbsp;floatToRegisters&#8203;(float&nbsp;fVal)</pre>
+<div class="block">Converts a float value to two Modbus registers.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>fVal</code> - the value to convert</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of int</dd>
+</dl>
 </li>
 </ul>
 <a id="doubleToRegisters(double)">
@@ -282,6 +327,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>doubleToRegisters</h4>
 <pre class="methodSignature">public static&nbsp;int[]&nbsp;doubleToRegisters&#8203;(double&nbsp;dVal)</pre>
+<div class="block">Converts a double value to four Modbus registers.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dVal</code> - the value to convert</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of int</dd>
+</dl>
 </li>
 </ul>
 <a id="longToRegisters(long)">
@@ -291,6 +343,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>longToRegisters</h4>
 <pre class="methodSignature">public static&nbsp;int[]&nbsp;longToRegisters&#8203;(long&nbsp;lVal)</pre>
+<div class="block">Converts a long value to four Modbus registers.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>lVal</code> - the value to convert</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of int</dd>
+</dl>
 </li>
 </ul>
 <a id="unsignedLongToRegister(java.math.BigInteger)">
@@ -300,6 +359,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>unsignedLongToRegister</h4>
 <pre class="methodSignature">public static&nbsp;int[]&nbsp;unsignedLongToRegister&#8203;(java.math.BigInteger&nbsp;value)</pre>
+<div class="block">Converts an unsigned long value to four Modbus registers.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - the value to convert</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of int</dd>
+</dl>
 </li>
 </ul>
 <a id="intToRegisters(int)">
@@ -309,6 +375,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>intToRegisters</h4>
 <pre class="methodSignature">public static&nbsp;int[]&nbsp;intToRegisters&#8203;(int&nbsp;value)</pre>
+<div class="block">Converts an int value to two Modbus registers.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - the value to convert</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of int</dd>
+</dl>
 </li>
 </ul>
 <a id="uintToRegisters(long)">
@@ -318,6 +391,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>uintToRegisters</h4>
 <pre class="methodSignature">public static&nbsp;int[]&nbsp;uintToRegisters&#8203;(long&nbsp;value)</pre>
+<div class="block">Converts an unsigned int value to two Modbus registers.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - the value to convert</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of int</dd>
+</dl>
 </li>
 </ul>
 <a id="shortToRegister(short)">
@@ -327,6 +407,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>shortToRegister</h4>
 <pre class="methodSignature">public static&nbsp;int[]&nbsp;shortToRegister&#8203;(short&nbsp;value)</pre>
+<div class="block">Converts a short value to a Modbus register.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - the value to convert</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of int</dd>
+</dl>
 </li>
 </ul>
 <a id="convRegistersToString(int[],int,int)">
@@ -372,6 +459,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>toByteArray</h4>
 <pre class="methodSignature">public static&nbsp;byte[]&nbsp;toByteArray&#8203;(int&nbsp;value)</pre>
+<div class="block">Converts an int to a byte array.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - the value to convert</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a byte array</dd>
+</dl>
 </li>
 </ul>
 <a id="byteArrToBooleanArr(byte[])">
@@ -381,6 +475,14 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>byteArrToBooleanArr</h4>
 <pre class="methodSignature">public static&nbsp;boolean[]&nbsp;byteArrToBooleanArr&#8203;(byte[]&nbsp;bytes)</pre>
+<div class="block">Converts a byte array to a boolean array.
+ Each element is true if the byte value is not zero.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>bytes</code> - the byte array to convert</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of boolean</dd>
+</dl>
 </li>
 </ul>
 </li>

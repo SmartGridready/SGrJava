@@ -90,13 +90,13 @@ loadScripts(document, 'script');</script>
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -133,6 +133,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">ModbusUtil</span>
 extends java.lang.Object</pre>
+<div class="block">Utility methods for Modbus.</div>
 </li>
 </ul>
 </div>
@@ -156,53 +157,44 @@ extends java.lang.Object</pre>
 <tr class="altColor">
 <td class="colFirst"><code>static int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#DEFAULT_BAUDRATE">DEFAULT_BAUDRATE</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Default baud rate.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static com.smartgridready.driver.api.modbus.DataBits</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#DEFAULT_DATABITS">DEFAULT_DATABITS</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Default data bits.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#DEFAULT_MODBUS_TCP_PORT">DEFAULT_MODBUS_TCP_PORT</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Default TCP port.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static com.smartgridready.driver.api.modbus.Parity</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#DEFAULT_PARITY">DEFAULT_PARITY</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Default parity.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static short</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#DEFAULT_SLAVE_ID">DEFAULT_SLAVE_ID</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Default slave ID.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static com.smartgridready.driver.api.modbus.StopBits</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#DEFAULT_STOPBITS">DEFAULT_STOPBITS</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
-</section>
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<section>
-<ul class="blockList">
-<li class="blockList"><a id="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Constructor</th>
-<th class="colLast" scope="col">Description</th>
-</tr>
-<tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">ModbusUtil</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Default stop bits.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -225,58 +217,80 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getModbusGatewayIdentifier(com.smartgridready.ns.v0.ModbusInterfaceDescription)">getModbusGatewayIdentifier</a></span>&#8203;(com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the unique gateway identifier of a Modbus device.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static short</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getModbusSlaveId(com.smartgridready.ns.v0.ModbusInterfaceDescription)">getModbusSlaveId</a></span>&#8203;(com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the Modbus device slave ID.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="ModbusType.html" title="enum in com.smartgridready.communicator.modbus.helper">ModbusType</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getModbusType(com.smartgridready.ns.v0.ModbusInterfaceDescription)">getModbusType</a></span>&#8203;(com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the Modbus interface type.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSerialBaudrate(java.lang.String)">getSerialBaudrate</a></span>&#8203;(java.lang.String&nbsp;baudRate)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the serial baud rate.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static com.smartgridready.driver.api.modbus.DataBits</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSerialDataBits(java.lang.String)">getSerialDataBits</a></span>&#8203;(java.lang.String&nbsp;dataBits)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the data bits configuration.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static com.smartgridready.driver.api.modbus.Parity</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSerialParity(java.lang.String)">getSerialParity</a></span>&#8203;(java.lang.String&nbsp;parity)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the parity configuration.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>static com.smartgridready.driver.api.modbus.StopBits</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSerialStopBits(java.lang.String)">getSerialStopBits</a></span>&#8203;(java.lang.String&nbsp;stopBits)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the stop bits configuration.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#interfaceParametersMatch(com.smartgridready.ns.v0.ModbusInterfaceDescription,com.smartgridready.ns.v0.ModbusInterfaceDescription)">interfaceParametersMatch</a></span>&#8203;(com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interface1,
                         com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interface2)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Tells if interface specifications of two devices match.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isNonEmptyString(java.lang.String)">isNonEmptyString</a></span>&#8203;(java.lang.String&nbsp;value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Tells if a string value is not null and not empty.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isSerial(com.smartgridready.ns.v0.ModbusInterfaceDescription)">isSerial</a></span>&#8203;(com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Tells if the interface uses a serial connection.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isTcp(com.smartgridready.ns.v0.ModbusInterfaceDescription)">isTcp</a></span>&#8203;(com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Tells if the interface uses a TCP/IP connection.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -309,6 +323,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>DEFAULT_MODBUS_TCP_PORT</h4>
 <pre>public static final&nbsp;int DEFAULT_MODBUS_TCP_PORT</pre>
+<div class="block">Default TCP port.</div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../constant-values.html#com.smartgridready.communicator.modbus.helper.ModbusUtil.DEFAULT_MODBUS_TCP_PORT">Constant Field Values</a></dd>
@@ -322,6 +337,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>DEFAULT_BAUDRATE</h4>
 <pre>public static final&nbsp;int DEFAULT_BAUDRATE</pre>
+<div class="block">Default baud rate.</div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../constant-values.html#com.smartgridready.communicator.modbus.helper.ModbusUtil.DEFAULT_BAUDRATE">Constant Field Values</a></dd>
@@ -335,6 +351,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>DEFAULT_PARITY</h4>
 <pre>public static final&nbsp;com.smartgridready.driver.api.modbus.Parity DEFAULT_PARITY</pre>
+<div class="block">Default parity.</div>
 </li>
 </ul>
 <a id="DEFAULT_DATABITS">
@@ -344,6 +361,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>DEFAULT_DATABITS</h4>
 <pre>public static final&nbsp;com.smartgridready.driver.api.modbus.DataBits DEFAULT_DATABITS</pre>
+<div class="block">Default data bits.</div>
 </li>
 </ul>
 <a id="DEFAULT_STOPBITS">
@@ -353,6 +371,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>DEFAULT_STOPBITS</h4>
 <pre>public static final&nbsp;com.smartgridready.driver.api.modbus.StopBits DEFAULT_STOPBITS</pre>
+<div class="block">Default stop bits.</div>
 </li>
 </ul>
 <a id="DEFAULT_SLAVE_ID">
@@ -362,29 +381,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>DEFAULT_SLAVE_ID</h4>
 <pre>public static final&nbsp;short DEFAULT_SLAVE_ID</pre>
+<div class="block">Default slave ID.</div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../constant-values.html#com.smartgridready.communicator.modbus.helper.ModbusUtil.DEFAULT_SLAVE_ID">Constant Field Values</a></dd>
 </dl>
-</li>
-</ul>
-</li>
-</ul>
-</section>
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<section>
-<ul class="blockList">
-<li class="blockList"><a id="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a id="&lt;init&gt;()">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>ModbusUtil</h4>
-<pre>public&nbsp;ModbusUtil()</pre>
 </li>
 </ul>
 </li>
@@ -404,6 +405,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>isSerial</h4>
 <pre class="methodSignature">public static&nbsp;boolean&nbsp;isSerial&#8203;(com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription)</pre>
+<div class="block">Tells if the interface uses a serial connection.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>interfaceDescription</code> - the interface specification</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="isTcp(com.smartgridready.ns.v0.ModbusInterfaceDescription)">
@@ -413,6 +421,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>isTcp</h4>
 <pre class="methodSignature">public static&nbsp;boolean&nbsp;isTcp&#8203;(com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription)</pre>
+<div class="block">Tells if the interface uses a TCP/IP connection.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>interfaceDescription</code> - the interface specification</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="getModbusSlaveId(com.smartgridready.ns.v0.ModbusInterfaceDescription)">
@@ -422,6 +437,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getModbusSlaveId</h4>
 <pre class="methodSignature">public static&nbsp;short&nbsp;getModbusSlaveId&#8203;(com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription)</pre>
+<div class="block">Gets the Modbus device slave ID.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>interfaceDescription</code> - the interface specification</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a short</dd>
+</dl>
 </li>
 </ul>
 <a id="getModbusGatewayIdentifier(com.smartgridready.ns.v0.ModbusInterfaceDescription)">
@@ -432,9 +454,15 @@ extends java.lang.Object</pre>
 <h4>getModbusGatewayIdentifier</h4>
 <pre class="methodSignature">public static&nbsp;java.lang.String&nbsp;getModbusGatewayIdentifier&#8203;(com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription)
                                                    throws com.smartgridready.driver.api.common.GenDriverException</pre>
+<div class="block">Gets the unique gateway identifier of a Modbus device.
+ Is the serial port name or a combination of IP address and port.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>interfaceDescription</code> - the interface specification</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a string</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>com.smartgridready.driver.api.common.GenDriverException</code></dd>
+<dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - when the interface type could not be correctly detected</dd>
 </dl>
 </li>
 </ul>
@@ -445,6 +473,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getSerialDataBits</h4>
 <pre class="methodSignature">public static&nbsp;com.smartgridready.driver.api.modbus.DataBits&nbsp;getSerialDataBits&#8203;(java.lang.String&nbsp;dataBits)</pre>
+<div class="block">Gets the data bits configuration.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dataBits</code> - the data bits as string</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>DataBits</code></dd>
+</dl>
 </li>
 </ul>
 <a id="getSerialStopBits(java.lang.String)">
@@ -454,6 +489,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getSerialStopBits</h4>
 <pre class="methodSignature">public static&nbsp;com.smartgridready.driver.api.modbus.StopBits&nbsp;getSerialStopBits&#8203;(java.lang.String&nbsp;stopBits)</pre>
+<div class="block">Gets the stop bits configuration.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>stopBits</code> - the stop bits as string</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>StopBits</code></dd>
+</dl>
 </li>
 </ul>
 <a id="getSerialParity(java.lang.String)">
@@ -463,6 +505,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getSerialParity</h4>
 <pre class="methodSignature">public static&nbsp;com.smartgridready.driver.api.modbus.Parity&nbsp;getSerialParity&#8203;(java.lang.String&nbsp;parity)</pre>
+<div class="block">Gets the parity configuration.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>parity</code> - the parity as string</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>Parity</code></dd>
+</dl>
 </li>
 </ul>
 <a id="getSerialBaudrate(java.lang.String)">
@@ -472,6 +521,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getSerialBaudrate</h4>
 <pre class="methodSignature">public static&nbsp;int&nbsp;getSerialBaudrate&#8203;(java.lang.String&nbsp;baudRate)</pre>
+<div class="block">Gets the serial baud rate.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>baudRate</code> - the baud rate as string</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an int</dd>
+</dl>
 </li>
 </ul>
 <a id="isNonEmptyString(java.lang.String)">
@@ -481,6 +537,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>isNonEmptyString</h4>
 <pre class="methodSignature">public static&nbsp;boolean&nbsp;isNonEmptyString&#8203;(java.lang.String&nbsp;value)</pre>
+<div class="block">Tells if a string value is not null and not empty.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - the string value</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="interfaceParametersMatch(com.smartgridready.ns.v0.ModbusInterfaceDescription,com.smartgridready.ns.v0.ModbusInterfaceDescription)">
@@ -491,6 +554,14 @@ extends java.lang.Object</pre>
 <h4>interfaceParametersMatch</h4>
 <pre class="methodSignature">public static&nbsp;boolean&nbsp;interfaceParametersMatch&#8203;(com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interface1,
                                                com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interface2)</pre>
+<div class="block">Tells if interface specifications of two devices match.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>interface1</code> - the interface specification of device 1</dd>
+<dd><code>interface2</code> - the interface specification of device 2</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="getModbusType(com.smartgridready.ns.v0.ModbusInterfaceDescription)">
@@ -500,6 +571,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getModbusType</h4>
 <pre class="methodSignature">public static&nbsp;<a href="ModbusType.html" title="enum in com.smartgridready.communicator.modbus.helper">ModbusType</a>&nbsp;getModbusType&#8203;(com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription)</pre>
+<div class="block">Gets the Modbus interface type.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>interfaceDescription</code> - the interface specification</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <a href="ModbusType.html" title="enum in com.smartgridready.communicator.modbus.helper"><code>ModbusType</code></a></dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -555,13 +633,13 @@ extends java.lang.Object</pre>
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>

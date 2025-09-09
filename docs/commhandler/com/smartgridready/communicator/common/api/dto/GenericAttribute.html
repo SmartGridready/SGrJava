@@ -133,6 +133,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">GenericAttribute</span>
 extends java.lang.Object</pre>
+<div class="block">Implements a generic attribute facade.</div>
 </li>
 </ul>
 </div>
@@ -158,7 +159,9 @@ extends java.lang.Object</pre>
                 <a href="../values/DataTypeInfo.html" title="class in com.smartgridready.communicator.common.api.values">DataTypeInfo</a>&nbsp;dataType,
                 com.smartgridready.ns.v0.Units&nbsp;unit,
                 java.util.List&lt;<a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a>&gt;&nbsp;children)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Construct a new instance.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -186,27 +189,37 @@ extends java.lang.Object</pre>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getChildren()">getChildren</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the attribute's sub-attributes.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../values/DataTypeInfo.html" title="class in com.smartgridready.communicator.common.api.values">DataTypeInfo</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDataType()">getDataType</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value's data type.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getName()">getName</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the attribute name.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>com.smartgridready.ns.v0.Units</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getUnit()">getUnit</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value's unit of measurement.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getValue()">getValue</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the attribute value.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>int</code></td>
@@ -216,17 +229,23 @@ extends java.lang.Object</pre>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>static java.util.List&lt;<a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#mapGenericAttributes(java.util.List)">mapGenericAttributes</a></span>&#8203;(java.util.List&lt;com.smartgridready.ns.v0.GenericAttributeProductEnd&gt;&nbsp;genericAttributeProducts)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Maps a list of generic attributes.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>static <a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#of(com.smartgridready.ns.v0.GenericAttributeProduct)">of</a></span>&#8203;(com.smartgridready.ns.v0.GenericAttributeProduct&nbsp;genAttribute)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Creates a new instance.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>static <a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#of(com.smartgridready.ns.v0.GenericAttributeProductEnd)">of</a></span>&#8203;(com.smartgridready.ns.v0.GenericAttributeProductEnd&nbsp;genAttributeChild)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Creates a new instance.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
@@ -268,6 +287,15 @@ extends java.lang.Object</pre>
                         <a href="../values/DataTypeInfo.html" title="class in com.smartgridready.communicator.common.api.values">DataTypeInfo</a>&nbsp;dataType,
                         com.smartgridready.ns.v0.Units&nbsp;unit,
                         java.util.List&lt;<a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a>&gt;&nbsp;children)</pre>
+<div class="block">Construct a new instance.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>name</code> - the attribute name</dd>
+<dd><code>value</code> - the attribute value</dd>
+<dd><code>dataType</code> - the attribute value's data type</dd>
+<dd><code>unit</code> - the attribute value's unit of measurement</dd>
+<dd><code>children</code> - a list of child attributes</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -287,6 +315,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getName</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getName()</pre>
+<div class="block">Gets the attribute name.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a string</dd>
+</dl>
 </li>
 </ul>
 <a id="getValue()">
@@ -296,6 +329,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getValue</h4>
 <pre class="methodSignature">public&nbsp;<a href="../values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&nbsp;getValue()</pre>
+<div class="block">Gets the attribute value.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a value</dd>
+</dl>
 </li>
 </ul>
 <a id="getDataType()">
@@ -305,6 +343,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getDataType</h4>
 <pre class="methodSignature">public&nbsp;<a href="../values/DataTypeInfo.html" title="class in com.smartgridready.communicator.common.api.values">DataTypeInfo</a>&nbsp;getDataType()</pre>
+<div class="block">Gets the value's data type.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a data type info</dd>
+</dl>
 </li>
 </ul>
 <a id="getUnit()">
@@ -314,6 +357,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getUnit</h4>
 <pre class="methodSignature">public&nbsp;com.smartgridready.ns.v0.Units&nbsp;getUnit()</pre>
+<div class="block">Gets the value's unit of measurement.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>Units</code></dd>
+</dl>
 </li>
 </ul>
 <a id="getChildren()">
@@ -323,6 +371,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getChildren</h4>
 <pre class="methodSignature">public&nbsp;java.util.List&lt;<a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a>&gt;&nbsp;getChildren()</pre>
+<div class="block">Gets the attribute's sub-attributes.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a list of <a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto"><code>GenericAttribute</code></a></dd>
+</dl>
 </li>
 </ul>
 <a id="of(com.smartgridready.ns.v0.GenericAttributeProduct)">
@@ -332,6 +385,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>of</h4>
 <pre class="methodSignature">public static&nbsp;<a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a>&nbsp;of&#8203;(com.smartgridready.ns.v0.GenericAttributeProduct&nbsp;genAttribute)</pre>
+<div class="block">Creates a new instance.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>genAttribute</code> - the attribute specification</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new instance of <a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto"><code>GenericAttribute</code></a></dd>
+</dl>
 </li>
 </ul>
 <a id="of(com.smartgridready.ns.v0.GenericAttributeProductEnd)">
@@ -341,6 +401,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>of</h4>
 <pre class="methodSignature">public static&nbsp;<a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a>&nbsp;of&#8203;(com.smartgridready.ns.v0.GenericAttributeProductEnd&nbsp;genAttributeChild)</pre>
+<div class="block">Creates a new instance.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>genAttributeChild</code> - the attribute specification</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new instance of <a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto"><code>GenericAttribute</code></a></dd>
+</dl>
 </li>
 </ul>
 <a id="toString()">
@@ -363,6 +430,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>mapGenericAttributes</h4>
 <pre class="methodSignature">public static&nbsp;java.util.List&lt;<a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto">GenericAttribute</a>&gt;&nbsp;mapGenericAttributes&#8203;(java.util.List&lt;com.smartgridready.ns.v0.GenericAttributeProductEnd&gt;&nbsp;genericAttributeProducts)</pre>
+<div class="block">Maps a list of generic attributes.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>genericAttributeProducts</code> - the attribute specifications</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a list of <a href="GenericAttribute.html" title="class in com.smartgridready.communicator.common.api.dto"><code>GenericAttribute</code></a></dd>
+</dl>
 </li>
 </ul>
 <a id="equals(java.lang.Object)">

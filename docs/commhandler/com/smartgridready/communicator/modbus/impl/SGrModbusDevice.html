@@ -143,6 +143,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public class <span class="typeNameLabel">SGrModbusDevice</span>
 extends <a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.ModbusFunctionalProfile,&#8203;com.smartgridready.ns.v0.ModbusDataPoint&gt;
 implements <a href="../api/GenDeviceApi4Modbus.html" title="interface in com.smartgridready.communicator.modbus.api">GenDeviceApi4Modbus</a></pre>
+<div class="block">Implements a Modbus device communication interface.</div>
 </li>
 </ul>
 </div>
@@ -254,12 +255,16 @@ implements <a href="../api/GenDeviceApi4Modbus.html" title="interface in com.sma
 <td class="colFirst"><code>protected java.util.Optional&lt;com.smartgridready.ns.v0.ModbusDataPoint&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findDataPointForProfile(com.smartgridready.ns.v0.ModbusFunctionalProfile,java.lang.String)">findDataPointForProfile</a></span>&#8203;(com.smartgridready.ns.v0.ModbusFunctionalProfile&nbsp;aProfile,
                        java.lang.String&nbsp;aDataPointName)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Finds a data point of a given functional profile by name.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>protected java.util.Optional&lt;com.smartgridready.ns.v0.ModbusFunctionalProfile&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findProfile(java.lang.String)">findProfile</a></span>&#8203;(java.lang.String&nbsp;aProfileName)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Finds a functional profile by name.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
@@ -555,9 +560,15 @@ implements <a href="../api/GenDeviceApi4Modbus.html" title="interface in com.sma
 <li class="blockList">
 <h4>findProfile</h4>
 <pre class="methodSignature">protected&nbsp;java.util.Optional&lt;com.smartgridready.ns.v0.ModbusFunctionalProfile&gt;&nbsp;findProfile&#8203;(java.lang.String&nbsp;aProfileName)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html#findProfile(java.lang.String)">SGrDeviceBase</a></code></span></div>
+<div class="block">Finds a functional profile by name.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../common/impl/SGrDeviceBase.html#findProfile(java.lang.String)">findProfile</a></code>&nbsp;in class&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.ModbusFunctionalProfile,&#8203;com.smartgridready.ns.v0.ModbusDataPoint&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>aProfileName</code> - the name of the functional profile</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an optional functional profile</dd>
 </dl>
 </li>
 </ul>
@@ -569,9 +580,16 @@ implements <a href="../api/GenDeviceApi4Modbus.html" title="interface in com.sma
 <h4>findDataPointForProfile</h4>
 <pre class="methodSignature">protected&nbsp;java.util.Optional&lt;com.smartgridready.ns.v0.ModbusDataPoint&gt;&nbsp;findDataPointForProfile&#8203;(com.smartgridready.ns.v0.ModbusFunctionalProfile&nbsp;aProfile,
                                                                                                java.lang.String&nbsp;aDataPointName)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html#findDataPointForProfile(F,java.lang.String)">SGrDeviceBase</a></code></span></div>
+<div class="block">Finds a data point of a given functional profile by name.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../common/impl/SGrDeviceBase.html#findDataPointForProfile(F,java.lang.String)">findDataPointForProfile</a></code>&nbsp;in class&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.ModbusFunctionalProfile,&#8203;com.smartgridready.ns.v0.ModbusDataPoint&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>aProfile</code> - the functional profile</dd>
+<dd><code>aDataPointName</code> - the name of the data point to find</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an optional data point</dd>
 </dl>
 </li>
 </ul>

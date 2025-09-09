@@ -90,13 +90,13 @@ loadScripts(document, 'script');</script>
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -133,33 +133,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">ModbusReaderResponse</span>
 extends java.lang.Object</pre>
+<div class="block">Implements a Modbus read command response.</div>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<section>
-<ul class="blockList">
-<li class="blockList"><a id="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Constructor</th>
-<th class="colLast" scope="col">Description</th>
-</tr>
-<tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">ModbusReaderResponse</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
-</section>
 <!-- ========== METHOD SUMMARY =========== -->
 <section>
 <ul class="blockList">
@@ -177,44 +157,60 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>boolean[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMbbitresp()">getMbbitresp</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets all discrete inputs a boolean array.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>boolean[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMbbitresp(int,int)">getMbbitresp</a></span>&#8203;(int&nbsp;offset,
             int&nbsp;len)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets some discrete inputs a boolean array.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMbregresp()">getMbregresp</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets all register values as array of int.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMbregresp(int,int)">getMbregresp</a></span>&#8203;(int&nbsp;offset,
             int&nbsp;len)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets some register values as array of int.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isbGotDiscrete()">isbGotDiscrete</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Tells if the reponse contains discrete inputs.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isbGotRegisters()">isbGotRegisters</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Tells if the reponse contains register values.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMbbitresp(boolean%5B%5D)">setMbbitresp</a></span>&#8203;(boolean[]&nbsp;mbbitresp)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the discrete inputs.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMbregresp(int%5B%5D)">setMbregresp</a></span>&#8203;(int[]&nbsp;mbregresp)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the register values.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
@@ -238,25 +234,6 @@ extends java.lang.Object</pre>
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<section>
-<ul class="blockList">
-<li class="blockList"><a id="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a id="&lt;init&gt;()">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>ModbusReaderResponse</h4>
-<pre>public&nbsp;ModbusReaderResponse()</pre>
-</li>
-</ul>
-</li>
-</ul>
-</section>
 <!-- ============ METHOD DETAIL ========== -->
 <section>
 <ul class="blockList">
@@ -271,6 +248,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getMbregresp</h4>
 <pre class="methodSignature">public&nbsp;int[]&nbsp;getMbregresp()</pre>
+<div class="block">Gets all register values as array of int.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of int</dd>
+</dl>
 </li>
 </ul>
 <a id="getMbregresp(int,int)">
@@ -281,6 +263,14 @@ extends java.lang.Object</pre>
 <h4>getMbregresp</h4>
 <pre class="methodSignature">public&nbsp;int[]&nbsp;getMbregresp&#8203;(int&nbsp;offset,
                           int&nbsp;len)</pre>
+<div class="block">Gets some register values as array of int.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>offset</code> - the start offset</dd>
+<dd><code>len</code> - the number of registers</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of int</dd>
+</dl>
 </li>
 </ul>
 <a id="setMbregresp(int[])">
@@ -290,6 +280,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>setMbregresp</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setMbregresp&#8203;(int[]&nbsp;mbregresp)</pre>
+<div class="block">Sets the register values.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>mbregresp</code> - the register values to set</dd>
+</dl>
 </li>
 </ul>
 <a id="getMbbitresp()">
@@ -299,6 +294,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getMbbitresp</h4>
 <pre class="methodSignature">public&nbsp;boolean[]&nbsp;getMbbitresp()</pre>
+<div class="block">Gets all discrete inputs a boolean array.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="getMbbitresp(int,int)">
@@ -309,6 +309,14 @@ extends java.lang.Object</pre>
 <h4>getMbbitresp</h4>
 <pre class="methodSignature">public&nbsp;boolean[]&nbsp;getMbbitresp&#8203;(int&nbsp;offset,
                               int&nbsp;len)</pre>
+<div class="block">Gets some discrete inputs a boolean array.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>offset</code> - the start offset</dd>
+<dd><code>len</code> - the number of values</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="setMbbitresp(boolean[])">
@@ -318,6 +326,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>setMbbitresp</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setMbbitresp&#8203;(boolean[]&nbsp;mbbitresp)</pre>
+<div class="block">Sets the discrete inputs.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>mbbitresp</code> - the boolean values to set</dd>
+</dl>
 </li>
 </ul>
 <a id="isbGotRegisters()">
@@ -327,6 +340,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>isbGotRegisters</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isbGotRegisters()</pre>
+<div class="block">Tells if the reponse contains register values.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="isbGotDiscrete()">
@@ -336,6 +354,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>isbGotDiscrete</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isbGotDiscrete()</pre>
+<div class="block">Tells if the reponse contains discrete inputs.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="toString()">
@@ -404,13 +427,13 @@ extends java.lang.Object</pre>
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>

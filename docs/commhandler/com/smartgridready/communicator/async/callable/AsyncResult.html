@@ -130,9 +130,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - The type of result.</dd>
+</dl>
 <hr>
 <pre>public class <span class="typeNameLabel">AsyncResult&lt;T&gt;</span>
 extends java.lang.Object</pre>
+<div class="block">Implements an asynchronous process result.</div>
 </li>
 </ul>
 </div>
@@ -154,7 +159,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">AsyncResult</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new instance.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -177,72 +184,100 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDataPointName()">getDataPointName</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the data point name.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../process/ExecStatus.html" title="enum in com.smartgridready.communicator.async.process">ExecStatus</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getExecStatus()">getExecStatus</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the process status.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getProfileName()">getProfileName</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the functional profile name.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.time.Instant</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRequestTime()">getRequestTime</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the time stamp of sending the request.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.time.Instant</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getResponseTime()">getResponseTime</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the time stamp of getting the response.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.Throwable</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getThrowable()">getThrowable</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the exception that was thrown.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="AsyncResult.html" title="type parameter in AsyncResult">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getValue()">getValue</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the result value.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDataPointName(java.lang.String)">setDataPointName</a></span>&#8203;(java.lang.String&nbsp;dataPointName)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the data point name.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setExecStatus(com.smartgridready.communicator.async.process.ExecStatus)">setExecStatus</a></span>&#8203;(<a href="../process/ExecStatus.html" title="enum in com.smartgridready.communicator.async.process">ExecStatus</a>&nbsp;execStatus)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the process status.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setProfileName(java.lang.String)">setProfileName</a></span>&#8203;(java.lang.String&nbsp;profileName)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the functional profile name.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setRequestTime(java.time.Instant)">setRequestTime</a></span>&#8203;(java.time.Instant&nbsp;requestTime)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the time stamp of sending the request.</div>
+</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setResponseTime(java.time.Instant)">setResponseTime</a></span>&#8203;(java.time.Instant&nbsp;responseTime)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the time stamp of getting the response.</div>
+</td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setThrowable(java.lang.Throwable)">setThrowable</a></span>&#8203;(java.lang.Throwable&nbsp;throwable)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the exception that was thrown.</div>
+</td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setValue(T)">setValue</a></span>&#8203;(<a href="AsyncResult.html" title="type parameter in AsyncResult">T</a>&nbsp;value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the result value.</div>
+</td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
@@ -280,6 +315,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>AsyncResult</h4>
 <pre>public&nbsp;AsyncResult()</pre>
+<div class="block">Constructs a new instance.</div>
 </li>
 </ul>
 </li>
@@ -299,6 +335,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getProfileName</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getProfileName()</pre>
+<div class="block">Gets the functional profile name.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a string</dd>
+</dl>
 </li>
 </ul>
 <a id="setProfileName(java.lang.String)">
@@ -308,6 +349,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>setProfileName</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setProfileName&#8203;(java.lang.String&nbsp;profileName)</pre>
+<div class="block">Sets the functional profile name.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>profileName</code> - he functional profile name</dd>
+</dl>
 </li>
 </ul>
 <a id="getDataPointName()">
@@ -317,6 +363,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getDataPointName</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getDataPointName()</pre>
+<div class="block">Gets the data point name.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a string</dd>
+</dl>
 </li>
 </ul>
 <a id="setDataPointName(java.lang.String)">
@@ -326,6 +377,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>setDataPointName</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setDataPointName&#8203;(java.lang.String&nbsp;dataPointName)</pre>
+<div class="block">Sets the data point name.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dataPointName</code> - the data point name</dd>
+</dl>
 </li>
 </ul>
 <a id="getThrowable()">
@@ -335,6 +391,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getThrowable</h4>
 <pre class="methodSignature">public&nbsp;java.lang.Throwable&nbsp;getThrowable()</pre>
+<div class="block">Gets the exception that was thrown.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>Throwable</code></dd>
+</dl>
 </li>
 </ul>
 <a id="setThrowable(java.lang.Throwable)">
@@ -344,6 +405,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>setThrowable</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setThrowable&#8203;(java.lang.Throwable&nbsp;throwable)</pre>
+<div class="block">Sets the exception that was thrown.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>throwable</code> - the exception</dd>
+</dl>
 </li>
 </ul>
 <a id="getValue()">
@@ -353,6 +419,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getValue</h4>
 <pre class="methodSignature">public&nbsp;<a href="AsyncResult.html" title="type parameter in AsyncResult">T</a>&nbsp;getValue()</pre>
+<div class="block">Gets the result value.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of the value type</dd>
+</dl>
 </li>
 </ul>
 <a id="setValue(java.lang.Object)">
@@ -364,6 +435,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>setValue</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setValue&#8203;(<a href="AsyncResult.html" title="type parameter in AsyncResult">T</a>&nbsp;value)</pre>
+<div class="block">Sets the result value.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - the value</dd>
+</dl>
 </li>
 </ul>
 <a id="getRequestTime()">
@@ -373,6 +449,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getRequestTime</h4>
 <pre class="methodSignature">public&nbsp;java.time.Instant&nbsp;getRequestTime()</pre>
+<div class="block">Gets the time stamp of sending the request.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>Instant</code></dd>
+</dl>
 </li>
 </ul>
 <a id="setRequestTime(java.time.Instant)">
@@ -382,6 +463,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>setRequestTime</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setRequestTime&#8203;(java.time.Instant&nbsp;requestTime)</pre>
+<div class="block">Sets the time stamp of sending the request.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>requestTime</code> - the time stamp</dd>
+</dl>
 </li>
 </ul>
 <a id="getResponseTime()">
@@ -391,6 +477,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getResponseTime</h4>
 <pre class="methodSignature">public&nbsp;java.time.Instant&nbsp;getResponseTime()</pre>
+<div class="block">Gets the time stamp of getting the response.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>Instant</code></dd>
+</dl>
 </li>
 </ul>
 <a id="setResponseTime(java.time.Instant)">
@@ -400,6 +491,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>setResponseTime</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setResponseTime&#8203;(java.time.Instant&nbsp;responseTime)</pre>
+<div class="block">Sets the time stamp of getting the response.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>responseTime</code> - the time stamp</dd>
+</dl>
 </li>
 </ul>
 <a id="getExecStatus()">
@@ -409,6 +505,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getExecStatus</h4>
 <pre class="methodSignature">public&nbsp;<a href="../process/ExecStatus.html" title="enum in com.smartgridready.communicator.async.process">ExecStatus</a>&nbsp;getExecStatus()</pre>
+<div class="block">Gets the process status.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <a href="../process/ExecStatus.html" title="enum in com.smartgridready.communicator.async.process"><code>ExecStatus</code></a></dd>
+</dl>
 </li>
 </ul>
 <a id="setExecStatus(com.smartgridready.communicator.async.process.ExecStatus)">
@@ -418,6 +519,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>setExecStatus</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setExecStatus&#8203;(<a href="../process/ExecStatus.html" title="enum in com.smartgridready.communicator.async.process">ExecStatus</a>&nbsp;execStatus)</pre>
+<div class="block">Sets the process status.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>execStatus</code> - the process status</dd>
+</dl>
 </li>
 </ul>
 <a id="toString()">

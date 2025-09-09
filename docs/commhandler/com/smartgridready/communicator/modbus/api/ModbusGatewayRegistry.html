@@ -161,7 +161,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#detachAllGateways()">detachAllGateways</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Disconnects all Modbus transport gateways.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
@@ -182,7 +184,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAllGatewayIdentifiers()">getAllGatewayIdentifiers</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets all transport identifiers.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -220,7 +224,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>a Modbus gateway instance</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>com.smartgridready.driver.api.common.GenDriverException</code></dd>
+<dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - when the gateway could not be attached</dd>
 </dl>
 </li>
 </ul>
@@ -239,7 +243,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd><code>interfaceDescription</code> - the device's Modbus interface description</dd>
 <dd><code>key</code> - the unique device object key</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>com.smartgridready.driver.api.common.GenDriverException</code></dd>
+<dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - when no gateway could be detached</dd>
 </dl>
 </li>
 </ul>
@@ -256,8 +260,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>identifier</code> - the transport identifier</dd>
+<dd><code>key</code> - the unique device object key</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>com.smartgridready.driver.api.common.GenDriverException</code></dd>
+<dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - when no gateway could be detached</dd>
 </dl>
 </li>
 </ul>
@@ -268,6 +273,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>detachAllGateways</h4>
 <pre class="methodSignature">void&nbsp;detachAllGateways()</pre>
+<div class="block">Disconnects all Modbus transport gateways.</div>
 </li>
 </ul>
 <a id="getAllGatewayIdentifiers()">
@@ -277,6 +283,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getAllGatewayIdentifiers</h4>
 <pre class="methodSignature">java.util.List&lt;java.lang.String&gt;&nbsp;getAllGatewayIdentifiers()</pre>
+<div class="block">Gets all transport identifiers.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a list of strings</dd>
+</dl>
 </li>
 </ul>
 </li>

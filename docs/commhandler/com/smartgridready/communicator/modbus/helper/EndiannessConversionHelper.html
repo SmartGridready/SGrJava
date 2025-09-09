@@ -133,6 +133,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">EndiannessConversionHelper</span>
 extends java.lang.Object</pre>
+<div class="block">A helper class for conversion of endianness.</div>
 </li>
 </ul>
 </div>
@@ -157,19 +158,25 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code>static int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#changeByteOrder(int%5B%5D,int)">changeByteOrder</a></span>&#8203;(int[]&nbsp;mbregresp,
                int&nbsp;size)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Changes the byte order in registers.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#changeDWordOrder(int%5B%5D,int)">changeDWordOrder</a></span>&#8203;(int[]&nbsp;mbregresp,
                 int&nbsp;size)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Changes double-word order.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#changeWordOrder(int%5B%5D,int)">changeWordOrder</a></span>&#8203;(int[]&nbsp;mbregresp,
                int&nbsp;size)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Changes word order.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -203,6 +210,14 @@ extends java.lang.Object</pre>
 <h4>changeDWordOrder</h4>
 <pre class="methodSignature">public static&nbsp;int[]&nbsp;changeDWordOrder&#8203;(int[]&nbsp;mbregresp,
                                      int&nbsp;size)</pre>
+<div class="block">Changes double-word order.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>mbregresp</code> - the array of register values to convert</dd>
+<dd><code>size</code> - the number of double-words</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of int</dd>
+</dl>
 </li>
 </ul>
 <a id="changeWordOrder(int[],int)">
@@ -213,6 +228,14 @@ extends java.lang.Object</pre>
 <h4>changeWordOrder</h4>
 <pre class="methodSignature">public static&nbsp;int[]&nbsp;changeWordOrder&#8203;(int[]&nbsp;mbregresp,
                                     int&nbsp;size)</pre>
+<div class="block">Changes word order.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>mbregresp</code> - the array of register values to convert</dd>
+<dd><code>size</code> - the number of words</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of int</dd>
+</dl>
 </li>
 </ul>
 <a id="changeByteOrder(int[],int)">
@@ -223,6 +246,14 @@ extends java.lang.Object</pre>
 <h4>changeByteOrder</h4>
 <pre class="methodSignature">public static&nbsp;int[]&nbsp;changeByteOrder&#8203;(int[]&nbsp;mbregresp,
                                     int&nbsp;size)</pre>
+<div class="block">Changes the byte order in registers.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>mbregresp</code> - the array of register values to convert</dd>
+<dd><code>size</code> - the number of registers</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of int</dd>
+</dl>
 </li>
 </ul>
 </li>

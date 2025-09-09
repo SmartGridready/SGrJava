@@ -133,6 +133,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">ModbusGateway</span>
 extends java.lang.Object</pre>
+<div class="block">Implements a Modbus "gateway" wrapper, allowing shared use of Modbus RTU serial connections.</div>
 </li>
 </ul>
 </div>
@@ -156,14 +157,18 @@ extends java.lang.Object</pre>
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,com.smartgridready.ns.v0.ModbusInterfaceDescription,com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus)">ModbusGateway</a></span>&#8203;(java.lang.String&nbsp;identifier,
              com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription,
              com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus&nbsp;transport)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new instance with no shared access.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,com.smartgridready.ns.v0.ModbusInterfaceDescription,com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus,boolean)">ModbusGateway</a></span>&#8203;(java.lang.String&nbsp;identifier,
              com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription,
              com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus&nbsp;transport,
              boolean&nbsp;shared)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new instance.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -186,17 +191,23 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#connect(java.lang.String)">connect</a></span>&#8203;(java.lang.String&nbsp;key)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Connects a specific device.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#disconnect(java.lang.String)">disconnect</a></span>&#8203;(java.lang.String&nbsp;key)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Disconnects a specific device.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#disconnectAll()">disconnectAll</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Disconnect all devices.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
@@ -206,17 +217,23 @@ extends java.lang.Object</pre>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getIdentifier()">getIdentifier</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the unique identifier.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>com.smartgridready.ns.v0.ModbusInterfaceDescription</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInterfaceDescription()">getInterfaceDescription</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the interface specification.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTransport()">getTransport</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the wrapped driver instance.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>int</code></td>
@@ -226,12 +243,16 @@ extends java.lang.Object</pre>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isConnected(java.lang.String)">isConnected</a></span>&#8203;(java.lang.String&nbsp;key)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Tells if a specific device is connected.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isShared()">isShared</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Tells if shared access is possible.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -267,6 +288,14 @@ extends java.lang.Object</pre>
                      com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription,
                      com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus&nbsp;transport,
                      boolean&nbsp;shared)</pre>
+<div class="block">Constructs a new instance.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>identifier</code> - the unique identifier</dd>
+<dd><code>interfaceDescription</code> - the Modbus interface specification</dd>
+<dd><code>transport</code> - the wrapped driver instance</dd>
+<dd><code>shared</code> - shared access allowed when true</dd>
+</dl>
 </li>
 </ul>
 <a id="&lt;init&gt;(java.lang.String,com.smartgridready.ns.v0.ModbusInterfaceDescription,com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus)">
@@ -278,6 +307,13 @@ extends java.lang.Object</pre>
 <pre>public&nbsp;ModbusGateway&#8203;(java.lang.String&nbsp;identifier,
                      com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;interfaceDescription,
                      com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus&nbsp;transport)</pre>
+<div class="block">Constructs a new instance with no shared access.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>identifier</code> - the unique identifier</dd>
+<dd><code>interfaceDescription</code> - the Modbus interface specification</dd>
+<dd><code>transport</code> - the wrapped driver instance</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -297,6 +333,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getInterfaceDescription</h4>
 <pre class="methodSignature">public&nbsp;com.smartgridready.ns.v0.ModbusInterfaceDescription&nbsp;getInterfaceDescription()</pre>
+<div class="block">Gets the interface specification.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>ModbusInterfaceDescription</code></dd>
+</dl>
 </li>
 </ul>
 <a id="getTransport()">
@@ -306,6 +347,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getTransport</h4>
 <pre class="methodSignature">public&nbsp;com.smartgridready.driver.api.modbus.GenDriverAPI4Modbus&nbsp;getTransport()</pre>
+<div class="block">Gets the wrapped driver instance.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>GenDriverAPI4Modbus</code></dd>
+</dl>
 </li>
 </ul>
 <a id="getIdentifier()">
@@ -315,6 +361,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getIdentifier</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getIdentifier()</pre>
+<div class="block">Gets the unique identifier.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a string</dd>
+</dl>
 </li>
 </ul>
 <a id="isShared()">
@@ -324,6 +375,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>isShared</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isShared()</pre>
+<div class="block">Tells if shared access is possible.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="isConnected(java.lang.String)">
@@ -333,6 +389,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>isConnected</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isConnected&#8203;(java.lang.String&nbsp;key)</pre>
+<div class="block">Tells if a specific device is connected.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>key</code> - the unique identifier</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="connect(java.lang.String)">
@@ -343,9 +406,12 @@ extends java.lang.Object</pre>
 <h4>connect</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;connect&#8203;(java.lang.String&nbsp;key)
              throws com.smartgridready.driver.api.common.GenDriverException</pre>
+<div class="block">Connects a specific device.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>key</code> - the unique identifier</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>com.smartgridready.driver.api.common.GenDriverException</code></dd>
+<dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - when connecting failed</dd>
 </dl>
 </li>
 </ul>
@@ -357,9 +423,12 @@ extends java.lang.Object</pre>
 <h4>disconnect</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;disconnect&#8203;(java.lang.String&nbsp;key)
                 throws com.smartgridready.driver.api.common.GenDriverException</pre>
+<div class="block">Disconnects a specific device.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>key</code> - the unique identifier</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>com.smartgridready.driver.api.common.GenDriverException</code></dd>
+<dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - when disconnect failed</dd>
 </dl>
 </li>
 </ul>
@@ -370,6 +439,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>disconnectAll</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;disconnectAll()</pre>
+<div class="block">Disconnect all devices.</div>
 </li>
 </ul>
 <a id="hashCode()">

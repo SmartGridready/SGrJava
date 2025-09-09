@@ -143,6 +143,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public class <span class="typeNameLabel">SGrMessagingDevice</span>
 extends <a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.MessagingFunctionalProfile,&#8203;com.smartgridready.ns.v0.MessagingDataPoint&gt;
 implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.smartgridready.communicator.messaging.api">GenDeviceApi4Messaging</a></pre>
+<div class="block">Implements a messaging-based device communication interface.</div>
 </li>
 </ul>
 </div>
@@ -199,12 +200,16 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.smartgridready.ns.v0.DeviceFrame,com.smartgridready.driver.api.messaging.GenMessagingClientFactory)">SGrMessagingDevice</a></span>&#8203;(com.smartgridready.ns.v0.DeviceFrame&nbsp;deviceDescription,
                   com.smartgridready.driver.api.messaging.GenMessagingClientFactory&nbsp;messagingClientFactory)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new instance.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.smartgridready.ns.v0.DeviceFrame,java.util.Map)">SGrMessagingDevice</a></span>&#8203;(com.smartgridready.ns.v0.DeviceFrame&nbsp;deviceDescription,
                   java.util.Map&lt;com.smartgridready.driver.api.messaging.model.MessagingPlatformType,&#8203;com.smartgridready.driver.api.messaging.GenMessagingClientFactory&gt;&nbsp;messagingClientFactories)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new instance.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -254,12 +259,16 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
 <td class="colFirst"><code>protected java.util.Optional&lt;com.smartgridready.ns.v0.MessagingDataPoint&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findDataPointForProfile(com.smartgridready.ns.v0.MessagingFunctionalProfile,java.lang.String)">findDataPointForProfile</a></span>&#8203;(com.smartgridready.ns.v0.MessagingFunctionalProfile&nbsp;functionalProfile,
                        java.lang.String&nbsp;dataPointName)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Finds a data point of a given functional profile by name.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>protected java.util.Optional&lt;com.smartgridready.ns.v0.MessagingFunctionalProfile&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findProfile(java.lang.String)">findProfile</a></span>&#8203;(java.lang.String&nbsp;profileName)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Finds a functional profile by name.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
@@ -377,9 +386,13 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
 <pre>public&nbsp;SGrMessagingDevice&#8203;(com.smartgridready.ns.v0.DeviceFrame&nbsp;deviceDescription,
                           java.util.Map&lt;com.smartgridready.driver.api.messaging.model.MessagingPlatformType,&#8203;com.smartgridready.driver.api.messaging.GenMessagingClientFactory&gt;&nbsp;messagingClientFactories)
                    throws com.smartgridready.driver.api.common.GenDriverException</pre>
+<div class="block">Constructs a new instance.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>deviceDescription</code> - the EID description</dd>
+<dd><code>messagingClientFactories</code> - a list of messaging client factory implementations, can support multiple protocols</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>com.smartgridready.driver.api.common.GenDriverException</code></dd>
+<dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - on generic error</dd>
 </dl>
 </li>
 </ul>
@@ -392,9 +405,13 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
 <pre>public&nbsp;SGrMessagingDevice&#8203;(com.smartgridready.ns.v0.DeviceFrame&nbsp;deviceDescription,
                           com.smartgridready.driver.api.messaging.GenMessagingClientFactory&nbsp;messagingClientFactory)
                    throws com.smartgridready.driver.api.common.GenDriverException</pre>
+<div class="block">Constructs a new instance.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>deviceDescription</code> - the EID description</dd>
+<dd><code>messagingClientFactory</code> - the protocol-specific messaging client factory implementation</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>com.smartgridready.driver.api.common.GenDriverException</code></dd>
+<dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - on generic error</dd>
 </dl>
 </li>
 </ul>
@@ -415,9 +432,15 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
 <li class="blockList">
 <h4>findProfile</h4>
 <pre class="methodSignature">protected&nbsp;java.util.Optional&lt;com.smartgridready.ns.v0.MessagingFunctionalProfile&gt;&nbsp;findProfile&#8203;(java.lang.String&nbsp;profileName)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html#findProfile(java.lang.String)">SGrDeviceBase</a></code></span></div>
+<div class="block">Finds a functional profile by name.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../common/impl/SGrDeviceBase.html#findProfile(java.lang.String)">findProfile</a></code>&nbsp;in class&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.MessagingFunctionalProfile,&#8203;com.smartgridready.ns.v0.MessagingDataPoint&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>profileName</code> - the name of the functional profile</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an optional functional profile</dd>
 </dl>
 </li>
 </ul>
@@ -429,9 +452,16 @@ implements <a href="../api/GenDeviceApi4Messaging.html" title="interface in com.
 <h4>findDataPointForProfile</h4>
 <pre class="methodSignature">protected&nbsp;java.util.Optional&lt;com.smartgridready.ns.v0.MessagingDataPoint&gt;&nbsp;findDataPointForProfile&#8203;(com.smartgridready.ns.v0.MessagingFunctionalProfile&nbsp;functionalProfile,
                                                                                                   java.lang.String&nbsp;dataPointName)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html#findDataPointForProfile(F,java.lang.String)">SGrDeviceBase</a></code></span></div>
+<div class="block">Finds a data point of a given functional profile by name.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../common/impl/SGrDeviceBase.html#findDataPointForProfile(F,java.lang.String)">findDataPointForProfile</a></code>&nbsp;in class&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.MessagingFunctionalProfile,&#8203;com.smartgridready.ns.v0.MessagingDataPoint&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>functionalProfile</code> - the functional profile</dd>
+<dd><code>dataPointName</code> - the name of the data point to find</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an optional data point</dd>
 </dl>
 </li>
 </ul>

@@ -128,6 +128,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <hr>
 <pre>public interface <span class="typeNameLabel">Executable</span></pre>
+<div class="block">Defines the interface of an asynchronous process.</div>
 </li>
 </ul>
 </div>
@@ -151,17 +152,23 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="ExecStatus.html" title="enum in com.smartgridready.communicator.async.process">ExecStatus</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getExecStatus()">getExecStatus</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the execution status.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../callable/AsyncResult.html" title="class in com.smartgridready.communicator.async.callable">AsyncResult</a>&lt;?&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getResult()">getResult</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the process result.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setFinishedNotificationReceiver(java.lang.Object)">setFinishedNotificationReceiver</a></span>&#8203;(java.lang.Object&nbsp;aReceiver)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets an object which should receive notifications of status changes.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -187,6 +194,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getExecStatus</h4>
 <pre class="methodSignature"><a href="ExecStatus.html" title="enum in com.smartgridready.communicator.async.process">ExecStatus</a>&nbsp;getExecStatus()</pre>
+<div class="block">Gets the execution status.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <a href="ExecStatus.html" title="enum in com.smartgridready.communicator.async.process"><code>ExecStatus</code></a></dd>
+</dl>
 </li>
 </ul>
 <a id="setFinishedNotificationReceiver(java.lang.Object)">
@@ -196,6 +208,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>setFinishedNotificationReceiver</h4>
 <pre class="methodSignature">void&nbsp;setFinishedNotificationReceiver&#8203;(java.lang.Object&nbsp;aReceiver)</pre>
+<div class="block">Sets an object which should receive notifications of status changes.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>aReceiver</code> - the receiving object</dd>
+</dl>
 </li>
 </ul>
 <a id="getResult()">
@@ -205,6 +222,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getResult</h4>
 <pre class="methodSignature"><a href="../callable/AsyncResult.html" title="class in com.smartgridready.communicator.async.callable">AsyncResult</a>&lt;?&gt;&nbsp;getResult()</pre>
+<div class="block">Gets the process result.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <a href="../callable/AsyncResult.html" title="class in com.smartgridready.communicator.async.callable"><code>AsyncResult</code></a> with generic type</dd>
+</dl>
 </li>
 </ul>
 </li>

@@ -133,6 +133,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">JsonWriter</span>
 extends java.lang.Object</pre>
+<div class="block">Converts data to JSON.</div>
 </li>
 </ul>
 </div>
@@ -154,7 +155,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.util.Map)">JsonWriter</a></span>&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.String&gt;&nbsp;keywordMap)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new instance.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -177,12 +180,16 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>com.fasterxml.jackson.databind.JsonNode</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#buildJsonNode(java.util.Collection)">buildJsonNode</a></span>&#8203;(java.util.Collection&lt;java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&gt;&nbsp;flatDataRecords)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Builds a JSON node from a list of key-value pairs.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#buildJsonString(java.util.Collection)">buildJsonString</a></span>&#8203;(java.util.Collection&lt;java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&gt;&nbsp;flatDataRecords)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Builds a JSON string from a list of key-value pairs.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -215,6 +222,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>JsonWriter</h4>
 <pre>public&nbsp;JsonWriter&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.String&gt;&nbsp;keywordMap)</pre>
+<div class="block">Constructs a new instance.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>keywordMap</code> - the keyword map</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -235,9 +247,14 @@ extends java.lang.Object</pre>
 <h4>buildJsonString</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;buildJsonString&#8203;(java.util.Collection&lt;java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&gt;&nbsp;flatDataRecords)
                                  throws com.fasterxml.jackson.core.JsonProcessingException</pre>
+<div class="block">Builds a JSON string from a list of key-value pairs.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>flatDataRecords</code> - the key-value pairs</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a string</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>com.fasterxml.jackson.core.JsonProcessingException</code></dd>
+<dd><code>com.fasterxml.jackson.core.JsonProcessingException</code> - when a key-value pair cannot be encoded</dd>
 </dl>
 </li>
 </ul>
@@ -249,9 +266,14 @@ extends java.lang.Object</pre>
 <h4>buildJsonNode</h4>
 <pre class="methodSignature">public&nbsp;com.fasterxml.jackson.databind.JsonNode&nbsp;buildJsonNode&#8203;(java.util.Collection&lt;java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&gt;&nbsp;flatDataRecords)
                                                       throws com.fasterxml.jackson.core.JsonProcessingException</pre>
+<div class="block">Builds a JSON node from a list of key-value pairs.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>flatDataRecords</code> - the key-value pairs</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a JSON node</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>com.fasterxml.jackson.core.JsonProcessingException</code></dd>
+<dd><code>com.fasterxml.jackson.core.JsonProcessingException</code> - when a key-value pair cannot be encoded</dd>
 </dl>
 </li>
 </ul>

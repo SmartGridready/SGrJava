@@ -133,6 +133,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">DeviceDescriptionLoader</span>
 extends java.lang.Object</pre>
+<div class="block">Implements a loader that deserializes EI-XML into device descriptions.</div>
 </li>
 </ul>
 </div>
@@ -154,7 +155,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">DeviceDescriptionLoader</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new instance.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -257,6 +260,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>DeviceDescriptionLoader</h4>
 <pre>public&nbsp;DeviceDescriptionLoader()</pre>
+<div class="block">Constructs a new instance.</div>
 </li>
 </ul>
 </li>
@@ -334,13 +338,13 @@ extends java.lang.Object</pre>
  tags with the values given by the <code>properties</code> parameter.
  <p>
  Example properties:
- <p>
+ </p>
  <pre>
    Properties properties = new Properties();
    properties.put("ipAddress", "127.0.0.1");
    deviceDescriptionLoader.load("./EI-XML", "MySGr-Device.xml", properties);
  </pre>
- will replace <code>{{ipAddress}}</code> within the EI-XML with  the value 127.0.0.1</div>
+ will replace <code>{{ipAddress}}</code> within the EI-XML with the value <code>127.0.0.1</code></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>aBaseDir</code> - The path to the folder where the external interface file resides.</dd>
@@ -364,14 +368,14 @@ extends java.lang.Object</pre>
  tags with the values given by the <code>properties</code> parameter.
  <p>
  Example properties:
- <p>
+ </p>
  <pre>
    Properties properties = new Properties();
    properties.put("ipAddress", "127.0.0.1");
    InputStream input = FileUtils.openInputStream(new File("MySGr-Device.xml"));
    deviceDescriptionLoader.load("MySGr-Device.xml", input, properties);
  </pre>
- will replace <code>{{ipAddress}}</code> within the EI-XML with  the value 127.0.0.1</div>
+ will replace <code>{{ipAddress}}</code> within the EI-XML with  the value <code>127.0.0.1</code></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>aDescriptionFile</code> - The external interface file name.</dd>
@@ -394,7 +398,7 @@ extends java.lang.Object</pre>
  tags with the values given by the <code>properties</code> parameter.
  <p>
  Example properties:
- <p>
+ </p>
  <pre>
    Properties properties = new Properties();
    properties.put("ipAddress", "127.0.0.1");

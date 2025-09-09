@@ -143,6 +143,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public class <span class="typeNameLabel">SGrRestApiDevice</span>
 extends <a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.RestApiFunctionalProfile,&#8203;com.smartgridready.ns.v0.RestApiDataPoint&gt;
 implements <a href="../api/GenDeviceApi4Rest.html" title="interface in com.smartgridready.communicator.rest.api">GenDeviceApi4Rest</a></pre>
+<div class="block">Implements a device interface for HTTP / REST APIs.</div>
 </li>
 </ul>
 </div>
@@ -199,7 +200,9 @@ implements <a href="../api/GenDeviceApi4Rest.html" title="interface in com.smart
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.smartgridready.ns.v0.DeviceFrame,com.smartgridready.driver.api.http.GenHttpClientFactory)">SGrRestApiDevice</a></span>&#8203;(com.smartgridready.ns.v0.DeviceFrame&nbsp;deviceDescription,
                 com.smartgridready.driver.api.http.GenHttpClientFactory&nbsp;httpClientFactory)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new instance.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -244,12 +247,16 @@ implements <a href="../api/GenDeviceApi4Rest.html" title="interface in com.smart
 <td class="colFirst"><code>protected java.util.Optional&lt;com.smartgridready.ns.v0.RestApiDataPoint&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findDataPointForProfile(com.smartgridready.ns.v0.RestApiFunctionalProfile,java.lang.String)">findDataPointForProfile</a></span>&#8203;(com.smartgridready.ns.v0.RestApiFunctionalProfile&nbsp;aProfile,
                        java.lang.String&nbsp;aDataPointName)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Finds a data point.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>protected java.util.Optional&lt;com.smartgridready.ns.v0.RestApiFunctionalProfile&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findProfile(java.lang.String)">findProfile</a></span>&#8203;(java.lang.String&nbsp;profileName)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Finds a functional profile.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
@@ -331,9 +338,13 @@ implements <a href="../api/GenDeviceApi4Rest.html" title="interface in com.smart
 <pre>public&nbsp;SGrRestApiDevice&#8203;(com.smartgridready.ns.v0.DeviceFrame&nbsp;deviceDescription,
                         com.smartgridready.driver.api.http.GenHttpClientFactory&nbsp;httpClientFactory)
                  throws <a href="../exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a></pre>
+<div class="block">Constructs a new instance.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>deviceDescription</code> - the EID description</dd>
+<dd><code>httpClientFactory</code> - the HTTP client factory implementation</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a></code></dd>
+<dd><code><a href="../exception/RestApiAuthenticationException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiAuthenticationException</a></code> - on HTTP authentication error</dd>
 </dl>
 </li>
 </ul>
@@ -542,9 +553,14 @@ implements <a href="../api/GenDeviceApi4Rest.html" title="interface in com.smart
 <li class="blockList">
 <h4>findProfile</h4>
 <pre class="methodSignature">protected&nbsp;java.util.Optional&lt;com.smartgridready.ns.v0.RestApiFunctionalProfile&gt;&nbsp;findProfile&#8203;(java.lang.String&nbsp;profileName)</pre>
+<div class="block">Finds a functional profile.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../common/impl/SGrDeviceBase.html#findProfile(java.lang.String)">findProfile</a></code>&nbsp;in class&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.RestApiFunctionalProfile,&#8203;com.smartgridready.ns.v0.RestApiDataPoint&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>profileName</code> - the functional profile name</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an optional <code>RestApiFunctionalProfile</code></dd>
 </dl>
 </li>
 </ul>
@@ -556,9 +572,15 @@ implements <a href="../api/GenDeviceApi4Rest.html" title="interface in com.smart
 <h4>findDataPointForProfile</h4>
 <pre class="methodSignature">protected&nbsp;java.util.Optional&lt;com.smartgridready.ns.v0.RestApiDataPoint&gt;&nbsp;findDataPointForProfile&#8203;(com.smartgridready.ns.v0.RestApiFunctionalProfile&nbsp;aProfile,
                                                                                                 java.lang.String&nbsp;aDataPointName)</pre>
+<div class="block">Finds a data point.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../common/impl/SGrDeviceBase.html#findDataPointForProfile(F,java.lang.String)">findDataPointForProfile</a></code>&nbsp;in class&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.RestApiFunctionalProfile,&#8203;com.smartgridready.ns.v0.RestApiDataPoint&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>aProfile</code> - the functional profile</dd>
+<dd><code>aDataPointName</code> - the data point name</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an optional <code>RestApiFunctionalProfile</code></dd>
 </dl>
 </li>
 </ul>

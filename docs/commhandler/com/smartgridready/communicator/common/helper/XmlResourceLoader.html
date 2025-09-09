@@ -130,9 +130,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - The type to deserialize into.</dd>
+</dl>
 <hr>
 <pre>public class <span class="typeNameLabel">XmlResourceLoader&lt;T&gt;</span>
 extends java.lang.Object</pre>
+<div class="block">Implements a generic XML deserializer that loads resources.</div>
 </li>
 </ul>
 </div>
@@ -154,7 +159,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.Class)">XmlResourceLoader</a></span>&#8203;(java.lang.Class&lt;<a href="XmlResourceLoader.html" title="type parameter in XmlResourceLoader">T</a>&gt;&nbsp;clazz)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new instance.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -179,7 +186,9 @@ extends java.lang.Object</pre>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#load(java.lang.String,java.lang.String,boolean)">load</a></span>&#8203;(java.lang.String&nbsp;resourcePath,
     java.lang.String&nbsp;xmlContent,
     boolean&nbsp;validate)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Deserializes XML into an object.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -212,6 +221,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>XmlResourceLoader</h4>
 <pre>public&nbsp;XmlResourceLoader&#8203;(java.lang.Class&lt;<a href="XmlResourceLoader.html" title="type parameter in XmlResourceLoader">T</a>&gt;&nbsp;clazz)</pre>
+<div class="block">Constructs a new instance.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>clazz</code> - type to deserialize into</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -234,9 +248,16 @@ extends java.lang.Object</pre>
               java.lang.String&nbsp;xmlContent,
               boolean&nbsp;validate)
        throws java.io.IOException</pre>
+<div class="block">Deserializes XML into an object.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>resourcePath</code> - the path of the loaded resource</dd>
+<dd><code>xmlContent</code> - the XML content loaded from the resource</dd>
+<dd><code>validate</code> - validates schema if true</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of the desired type</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
+<dd><code>java.io.IOException</code> - when deserialization failed</dd>
 </dl>
 </li>
 </ul>

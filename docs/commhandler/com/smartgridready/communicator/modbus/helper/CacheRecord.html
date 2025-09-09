@@ -130,9 +130,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>V</code> - The type of value.</dd>
+</dl>
 <hr>
 <pre>public class <span class="typeNameLabel">CacheRecord&lt;V&gt;</span>
 extends java.lang.Object</pre>
+<div class="block">Implements a generic cache record.</div>
 </li>
 </ul>
 </div>
@@ -155,7 +160,9 @@ extends java.lang.Object</pre>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(V,java.time.Instant)">CacheRecord</a></span>&#8203;(<a href="CacheRecord.html" title="type parameter in CacheRecord">V</a>&nbsp;value,
            java.time.Instant&nbsp;lastAccess)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new instance.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -178,12 +185,16 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="CacheRecord.html" title="type parameter in CacheRecord">V</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getValue()">getValue</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the cached value.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isExpired(java.lang.Long)">isExpired</a></span>&#8203;(java.lang.Long&nbsp;timeToLiveMs)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Tells if the cache has expired.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
@@ -224,6 +235,12 @@ extends java.lang.Object</pre>
 <h4>CacheRecord</h4>
 <pre>public&nbsp;CacheRecord&#8203;(<a href="CacheRecord.html" title="type parameter in CacheRecord">V</a>&nbsp;value,
                    java.time.Instant&nbsp;lastAccess)</pre>
+<div class="block">Constructs a new instance.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - the value to cache</dd>
+<dd><code>lastAccess</code> - the access time stamp</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -243,6 +260,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>isExpired</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isExpired&#8203;(java.lang.Long&nbsp;timeToLiveMs)</pre>
+<div class="block">Tells if the cache has expired.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>timeToLiveMs</code> - milliseconds after last access</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="getValue()">
@@ -252,6 +276,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getValue</h4>
 <pre class="methodSignature">public&nbsp;<a href="CacheRecord.html" title="type parameter in CacheRecord">V</a>&nbsp;getValue()</pre>
+<div class="block">Gets the cached value.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a value</dd>
+</dl>
 </li>
 </ul>
 <a id="toString()">

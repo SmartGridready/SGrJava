@@ -133,6 +133,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">DriverFactoryLoader</span>
 extends java.lang.Object</pre>
+<div class="block">Implements a driver factory loader.
+ Provides registered factories of communication interface drivers.
+ Uses the <code>ServiceLoader</code> mechanism to load interface driver factories from the classpath.</div>
 </li>
 </ul>
 </div>
@@ -156,42 +159,58 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>static java.util.List&lt;com.smartgridready.driver.api.contacts.GenDriverAPI4ContactsFactory&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAllContactsDrivers()">getAllContactsDrivers</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets all implementations of contacts driver factories.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static java.util.List&lt;com.smartgridready.driver.api.messaging.GenMessagingClientFactory&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAllMessagingDrivers()">getAllMessagingDrivers</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets all implementations of messaging driver factories.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static java.util.List&lt;com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAllModbusDrivers()">getAllModbusDrivers</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets all implementations of Modbus driver factories.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static java.util.List&lt;com.smartgridready.driver.api.http.GenHttpClientFactory&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAllRestApiDrivers()">getAllRestApiDrivers</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets all implementations of HTTP / REST driver factories.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static com.smartgridready.driver.api.contacts.GenDriverAPI4ContactsFactory</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getContactsDriver()">getContactsDriver</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the primary contacts driver factory.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static com.smartgridready.driver.api.messaging.GenMessagingClientFactory</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMessagingDriver(com.smartgridready.driver.api.messaging.model.MessagingPlatformType)">getMessagingDriver</a></span>&#8203;(com.smartgridready.driver.api.messaging.model.MessagingPlatformType&nbsp;platform)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the primary messaging driver factory.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>static com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getModbusDriver()">getModbusDriver</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the primary Modbus driver factory.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>static com.smartgridready.driver.api.http.GenHttpClientFactory</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRestApiDriver()">getRestApiDriver</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the primary HTTP / REST driver factory.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -224,6 +243,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getAllModbusDrivers</h4>
 <pre class="methodSignature">public static&nbsp;java.util.List&lt;com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory&gt;&nbsp;getAllModbusDrivers()</pre>
+<div class="block">Gets all implementations of Modbus driver factories.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a list of <code>GenDriverAPI4ModbusFactory</code></dd>
+</dl>
 </li>
 </ul>
 <a id="getAllRestApiDrivers()">
@@ -233,6 +257,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getAllRestApiDrivers</h4>
 <pre class="methodSignature">public static&nbsp;java.util.List&lt;com.smartgridready.driver.api.http.GenHttpClientFactory&gt;&nbsp;getAllRestApiDrivers()</pre>
+<div class="block">Gets all implementations of HTTP / REST driver factories.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a list of <code>GenHttpClientFactory</code></dd>
+</dl>
 </li>
 </ul>
 <a id="getAllMessagingDrivers()">
@@ -242,6 +271,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getAllMessagingDrivers</h4>
 <pre class="methodSignature">public static&nbsp;java.util.List&lt;com.smartgridready.driver.api.messaging.GenMessagingClientFactory&gt;&nbsp;getAllMessagingDrivers()</pre>
+<div class="block">Gets all implementations of messaging driver factories.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a list of <code>GenMessagingClientFactory</code></dd>
+</dl>
 </li>
 </ul>
 <a id="getAllContactsDrivers()">
@@ -251,6 +285,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getAllContactsDrivers</h4>
 <pre class="methodSignature">public static&nbsp;java.util.List&lt;com.smartgridready.driver.api.contacts.GenDriverAPI4ContactsFactory&gt;&nbsp;getAllContactsDrivers()</pre>
+<div class="block">Gets all implementations of contacts driver factories.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a list of <code>GenDriverAPI4ContactsFactory</code></dd>
+</dl>
 </li>
 </ul>
 <a id="getModbusDriver()">
@@ -260,6 +299,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getModbusDriver</h4>
 <pre class="methodSignature">public static&nbsp;com.smartgridready.driver.api.modbus.GenDriverAPI4ModbusFactory&nbsp;getModbusDriver()</pre>
+<div class="block">Gets the primary Modbus driver factory.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>GenDriverAPI4ModbusFactory</code>, or null if none is registered</dd>
+</dl>
 </li>
 </ul>
 <a id="getRestApiDriver()">
@@ -269,6 +313,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getRestApiDriver</h4>
 <pre class="methodSignature">public static&nbsp;com.smartgridready.driver.api.http.GenHttpClientFactory&nbsp;getRestApiDriver()</pre>
+<div class="block">Gets the primary HTTP / REST driver factory.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>GenHttpClientFactory</code>, or null if none is registered</dd>
+</dl>
 </li>
 </ul>
 <a id="getMessagingDriver(com.smartgridready.driver.api.messaging.model.MessagingPlatformType)">
@@ -278,6 +327,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getMessagingDriver</h4>
 <pre class="methodSignature">public static&nbsp;com.smartgridready.driver.api.messaging.GenMessagingClientFactory&nbsp;getMessagingDriver&#8203;(com.smartgridready.driver.api.messaging.model.MessagingPlatformType&nbsp;platform)</pre>
+<div class="block">Gets the primary messaging driver factory.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>platform</code> - the type of messaging platfrom</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>GenMessagingClientFactory</code>, or null if none is registered</dd>
+</dl>
 </li>
 </ul>
 <a id="getContactsDriver()">
@@ -287,6 +343,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getContactsDriver</h4>
 <pre class="methodSignature">public static&nbsp;com.smartgridready.driver.api.contacts.GenDriverAPI4ContactsFactory&nbsp;getContactsDriver()</pre>
+<div class="block">Gets the primary contacts driver factory.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <code>GenDriverAPI4ContactsFactory</code>, or null if none is registered</dd>
+</dl>
 </li>
 </ul>
 </li>

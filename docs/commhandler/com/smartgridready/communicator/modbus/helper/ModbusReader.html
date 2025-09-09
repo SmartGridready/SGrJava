@@ -90,13 +90,13 @@ loadScripts(document, 'script');</script>
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -133,33 +133,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">ModbusReader</span>
 extends java.lang.Object</pre>
+<div class="block">Implements Modbus read commands.</div>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<section>
-<ul class="blockList">
-<li class="blockList"><a id="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Constructor</th>
-<th class="colLast" scope="col">Description</th>
-</tr>
-<tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">ModbusReader</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
-</section>
 <!-- ========== METHOD SUMMARY =========== -->
 <section>
 <ul class="blockList">
@@ -182,7 +162,9 @@ extends java.lang.Object</pre>
     int&nbsp;regAddr,
     boolean&nbsp;isFirstRegAddrOne,
     int&nbsp;length)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Reads from Modbus transport.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -201,25 +183,6 @@ extends java.lang.Object</pre>
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<section>
-<ul class="blockList">
-<li class="blockList"><a id="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a id="&lt;init&gt;()">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>ModbusReader</h4>
-<pre>public&nbsp;ModbusReader()</pre>
-</li>
-</ul>
-</li>
-</ul>
-</section>
 <!-- ============ METHOD DETAIL ========== -->
 <section>
 <ul class="blockList">
@@ -242,11 +205,21 @@ extends java.lang.Object</pre>
                                  throws com.smartgridready.driver.api.common.GenDriverException,
                                         com.smartgridready.driver.api.modbus.GenDriverModbusException,
                                         com.smartgridready.driver.api.modbus.GenDriverSocketException</pre>
+<div class="block">Reads from Modbus transport.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>drv4Modbus</code> - the Modbus driver instance</dd>
+<dd><code>unitIdentifier</code> - the slave identifier</dd>
+<dd><code>regType</code> - the type of Modbus register</dd>
+<dd><code>regAddr</code> - the starting address</dd>
+<dd><code>isFirstRegAddrOne</code> - address offset of one when true</dd>
+<dd><code>length</code> - the number of elements to read</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <a href="ModbusReaderResponse.html" title="class in com.smartgridready.communicator.modbus.helper"><code>ModbusReaderResponse</code></a></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>com.smartgridready.driver.api.common.GenDriverException</code></dd>
-<dd><code>com.smartgridready.driver.api.modbus.GenDriverModbusException</code></dd>
-<dd><code>com.smartgridready.driver.api.modbus.GenDriverSocketException</code></dd>
+<dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - when any other error occurred</dd>
+<dd><code>com.smartgridready.driver.api.modbus.GenDriverModbusException</code> - when a protocol error occurred</dd>
+<dd><code>com.smartgridready.driver.api.modbus.GenDriverSocketException</code> - when a network error occurred</dd>
 </dl>
 </li>
 </ul>
@@ -303,13 +276,13 @@ extends java.lang.Object</pre>
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>

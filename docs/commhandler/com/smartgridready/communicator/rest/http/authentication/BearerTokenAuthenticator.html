@@ -90,13 +90,13 @@ loadScripts(document, 'script');</script>
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -138,33 +138,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public class <span class="typeNameLabel">BearerTokenAuthenticator</span>
 extends java.lang.Object
 implements <a href="Authenticator.html" title="interface in com.smartgridready.communicator.rest.http.authentication">Authenticator</a></pre>
+<div class="block">Implements an HTTP authenticator using JWT bearer tokens.</div>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<section>
-<ul class="blockList">
-<li class="blockList"><a id="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Constructor</th>
-<th class="colLast" scope="col">Description</th>
-</tr>
-<tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">BearerTokenAuthenticator</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
-</section>
 <!-- ========== METHOD SUMMARY =========== -->
 <section>
 <ul class="blockList">
@@ -183,18 +163,24 @@ implements <a href="Authenticator.html" title="interface in com.smartgridready.c
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAuthorizationHeaderValue(com.smartgridready.ns.v0.DeviceFrame,com.smartgridready.driver.api.http.GenHttpClientFactory)">getAuthorizationHeaderValue</a></span>&#8203;(com.smartgridready.ns.v0.DeviceFrame&nbsp;deviceDescription,
                            com.smartgridready.driver.api.http.GenHttpClientFactory&nbsp;httpClientFactory)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Retrieves the value of the authorization header of HTTP requests.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isTokenRenewalSupported()">isTokenRenewalSupported</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Tells if access tokens can be renewed instead of re-authenticating.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#renewToken(com.smartgridready.ns.v0.DeviceFrame,com.smartgridready.driver.api.http.GenHttpClientFactory)">renewToken</a></span>&#8203;(com.smartgridready.ns.v0.DeviceFrame&nbsp;deviceDescription,
           com.smartgridready.driver.api.http.GenHttpClientFactory&nbsp;httpClientFactory)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Renews the access token.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -213,25 +199,6 @@ implements <a href="Authenticator.html" title="interface in com.smartgridready.c
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<section>
-<ul class="blockList">
-<li class="blockList"><a id="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a id="&lt;init&gt;()">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>BearerTokenAuthenticator</h4>
-<pre>public&nbsp;BearerTokenAuthenticator()</pre>
-</li>
-</ul>
-</li>
-</ul>
-</section>
 <!-- ============ METHOD DETAIL ========== -->
 <section>
 <ul class="blockList">
@@ -249,12 +216,19 @@ implements <a href="Authenticator.html" title="interface in com.smartgridready.c
                                                     com.smartgridready.driver.api.http.GenHttpClientFactory&nbsp;httpClientFactory)
                                              throws java.io.IOException,
                                                     <a href="../../exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="Authenticator.html#getAuthorizationHeaderValue(com.smartgridready.ns.v0.DeviceFrame,com.smartgridready.driver.api.http.GenHttpClientFactory)">Authenticator</a></code></span></div>
+<div class="block">Retrieves the value of the authorization header of HTTP requests.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Authenticator.html#getAuthorizationHeaderValue(com.smartgridready.ns.v0.DeviceFrame,com.smartgridready.driver.api.http.GenHttpClientFactory)">getAuthorizationHeaderValue</a></code>&nbsp;in interface&nbsp;<code><a href="Authenticator.html" title="interface in com.smartgridready.communicator.rest.http.authentication">Authenticator</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>deviceDescription</code> - the SGr device specification</dd>
+<dd><code>httpClientFactory</code> - the SGr HTTP client factory</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a string</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
-<dd><code><a href="../../exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></code></dd>
+<dd><code>java.io.IOException</code> - when a communication error occurred</dd>
+<dd><code><a href="../../exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></code> - when the authentication failed</dd>
 </dl>
 </li>
 </ul>
@@ -265,9 +239,14 @@ implements <a href="Authenticator.html" title="interface in com.smartgridready.c
 <li class="blockList">
 <h4>isTokenRenewalSupported</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;isTokenRenewalSupported()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="Authenticator.html#isTokenRenewalSupported()">Authenticator</a></code></span></div>
+<div class="block">Tells if access tokens can be renewed instead of re-authenticating.
+ Defaults to <code>false</code>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Authenticator.html#isTokenRenewalSupported()">isTokenRenewalSupported</a></code>&nbsp;in interface&nbsp;<code><a href="Authenticator.html" title="interface in com.smartgridready.communicator.rest.http.authentication">Authenticator</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a boolean</dd>
 </dl>
 </li>
 </ul>
@@ -281,12 +260,18 @@ implements <a href="Authenticator.html" title="interface in com.smartgridready.c
                        com.smartgridready.driver.api.http.GenHttpClientFactory&nbsp;httpClientFactory)
                 throws java.io.IOException,
                        <a href="../../exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="Authenticator.html#renewToken(com.smartgridready.ns.v0.DeviceFrame,com.smartgridready.driver.api.http.GenHttpClientFactory)">Authenticator</a></code></span></div>
+<div class="block">Renews the access token.
+ Defaults to an empty implementation.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Authenticator.html#renewToken(com.smartgridready.ns.v0.DeviceFrame,com.smartgridready.driver.api.http.GenHttpClientFactory)">renewToken</a></code>&nbsp;in interface&nbsp;<code><a href="Authenticator.html" title="interface in com.smartgridready.communicator.rest.http.authentication">Authenticator</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>deviceDescription</code> - the SGr device specification</dd>
+<dd><code>httpClientFactory</code> - the SGr HTTP client factory</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
-<dd><code><a href="../../exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></code></dd>
+<dd><code>java.io.IOException</code> - when a communication error occurred</dd>
+<dd><code><a href="../../exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></code> - when the renewal failed</dd>
 </dl>
 </li>
 </ul>
@@ -343,13 +328,13 @@ implements <a href="Authenticator.html" title="interface in com.smartgridready.c
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>

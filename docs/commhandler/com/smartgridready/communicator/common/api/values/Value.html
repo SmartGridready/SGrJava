@@ -137,6 +137,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public abstract class <span class="typeNameLabel">Value</span>
 extends java.lang.Object</pre>
+<div class="block">The base class for all SGr value types.</div>
 </li>
 </ul>
 </div>
@@ -160,7 +161,9 @@ extends java.lang.Object</pre>
 <tr class="altColor">
 <td class="colFirst"><code>static java.math.BigInteger</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#UNSIGNED_LONG_MASK">UNSIGNED_LONG_MASK</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">A bit mask to convert to unsigned 64-bit integers, which are not natively supported by Java.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -176,12 +179,16 @@ extends java.lang.Object</pre>
 <table class="memberSummary">
 <caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colFirst" scope="col">Constructor</th>
+<th class="colFirst" scope="col">Modifier</th>
+<th class="colSecond" scope="col">Constructor</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected </code></td>
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">Value</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new instance.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -204,135 +211,187 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>abstract void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#absValue()">absValue</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the instance's value to its absolute value, if possible.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>abstract <a href="Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#asArray()">asArray</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as array.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="Int64Value.html" title="class in com.smartgridready.communicator.common.api.values">Int64Value</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#enumToOrdinalValue(com.smartgridready.ns.v0.EnumMapProduct)">enumToOrdinalValue</a></span>&#8203;(com.smartgridready.ns.v0.EnumMapProduct&nbsp;enumMapProduct)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the ordinal value of an enumeration.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#fromDiscreteInput(com.smartgridready.ns.v0.ModbusDataType,boolean%5B%5D)">fromDiscreteInput</a></span>&#8203;(com.smartgridready.ns.v0.ModbusDataType&nbsp;modbusDataType,
                  boolean[]&nbsp;bitregister)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets a value from a Modbus discrete input.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#fromModbusRegister(com.smartgridready.ns.v0.ModbusDataType,int%5B%5D)">fromModbusRegister</a></span>&#8203;(com.smartgridready.ns.v0.ModbusDataType&nbsp;modbusDataType,
                   int[]&nbsp;registers)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts a list of Modbus registers to a given value.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#fromString(com.smartgridready.ns.v0.DataTypeProduct,java.lang.String)">fromString</a></span>&#8203;(com.smartgridready.ns.v0.DataTypeProduct&nbsp;dataType,
           java.lang.String&nbsp;value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts a string to a different to a <a href="Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a>.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>abstract java.util.Map&lt;java.lang.String,&#8203;java.lang.Boolean&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getBitmap()">getBitmap</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as SGr bitmap.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>abstract boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getBoolean()">getBoolean</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as boolean.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>abstract java.time.Instant</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDateTime()">getDateTime</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as time stamp.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>abstract <a href="EnumRecord.html" title="class in com.smartgridready.communicator.common.api.values">EnumRecord</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getEnum()">getEnum</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as SGr enumeration record.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>abstract float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getFloat32()">getFloat32</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as 32-bit floating-point.</div>
+</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>abstract double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getFloat64()">getFloat64</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as 64-bit floating-point.</div>
+</td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>abstract short</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInt16()">getInt16</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as 16-bit integer.</div>
+</td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>abstract int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInt16U()">getInt16U</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as unsigned 16-bit integer.</div>
+</td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code>abstract int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInt32()">getInt32</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as 32-bit integer.</div>
+</td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code>abstract long</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInt32U()">getInt32U</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as unsigned 32-bit integer.</div>
+</td>
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>abstract long</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInt64()">getInt64</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as 64-bit integer.</div>
+</td>
 </tr>
 <tr id="i17" class="rowColor">
 <td class="colFirst"><code>abstract java.math.BigInteger</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInt64U()">getInt64U</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as unsigned 64-bit integer.</div>
+</td>
 </tr>
 <tr id="i18" class="altColor">
 <td class="colFirst"><code>abstract byte</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInt8()">getInt8</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as 8-bit integer.</div>
+</td>
 </tr>
 <tr id="i19" class="rowColor">
 <td class="colFirst"><code>abstract short</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInt8U()">getInt8U</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as unsigned 8-bit integer.</div>
+</td>
 </tr>
 <tr id="i20" class="altColor">
 <td class="colFirst"><code>abstract com.fasterxml.jackson.databind.JsonNode</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getJson()">getJson</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as JSON.</div>
+</td>
 </tr>
 <tr id="i21" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getJson(java.lang.Class)">getJson</a></span>&#8203;(java.lang.Class&lt;T&gt;&nbsp;aClass)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as JSON and converts to an instance of a given class.</div>
+</td>
 </tr>
 <tr id="i22" class="altColor">
 <td class="colFirst"><code>abstract java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getString()">getString</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the value as string.</div>
+</td>
 </tr>
 <tr id="i23" class="rowColor">
 <td class="colFirst"><code>abstract void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#roundToInt()">roundToInt</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Rounds the instance's value to the nearest integer, if possible.</div>
+</td>
 </tr>
 <tr id="i24" class="altColor">
 <td class="colFirst"><code>byte[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toModbusDiscreteVal(com.smartgridready.ns.v0.ModbusDataType)">toModbusDiscreteVal</a></span>&#8203;(com.smartgridready.ns.v0.ModbusDataType&nbsp;modbusDataType)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts the value to a list of Modbus discrete inputs.</div>
+</td>
 </tr>
 <tr id="i25" class="rowColor">
 <td class="colFirst"><code>int[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toModbusRegister(com.smartgridready.ns.v0.ModbusDataType)">toModbusRegister</a></span>&#8203;(com.smartgridready.ns.v0.ModbusDataType&nbsp;modbusDataType)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts the value to a list of Modbus registers.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -365,6 +424,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>UNSIGNED_LONG_MASK</h4>
 <pre>public static final&nbsp;java.math.BigInteger UNSIGNED_LONG_MASK</pre>
+<div class="block">A bit mask to convert to unsigned 64-bit integers, which are not natively supported by Java.</div>
 </li>
 </ul>
 </li>
@@ -383,7 +443,8 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>Value</h4>
-<pre>public&nbsp;Value()</pre>
+<pre>protected&nbsp;Value()</pre>
+<div class="block">Constructs a new instance.</div>
 </li>
 </ul>
 </li>
@@ -403,6 +464,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getInt8</h4>
 <pre class="methodSignature">public abstract&nbsp;byte&nbsp;getInt8()</pre>
+<div class="block">Gets the value as 8-bit integer.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a byte</dd>
+</dl>
 </li>
 </ul>
 <a id="getInt8U()">
@@ -412,6 +478,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getInt8U</h4>
 <pre class="methodSignature">public abstract&nbsp;short&nbsp;getInt8U()</pre>
+<div class="block">Gets the value as unsigned 8-bit integer.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a short</dd>
+</dl>
 </li>
 </ul>
 <a id="getInt16()">
@@ -421,6 +492,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getInt16</h4>
 <pre class="methodSignature">public abstract&nbsp;short&nbsp;getInt16()</pre>
+<div class="block">Gets the value as 16-bit integer.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a short</dd>
+</dl>
 </li>
 </ul>
 <a id="getInt16U()">
@@ -430,6 +506,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getInt16U</h4>
 <pre class="methodSignature">public abstract&nbsp;int&nbsp;getInt16U()</pre>
+<div class="block">Gets the value as unsigned 16-bit integer.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an int</dd>
+</dl>
 </li>
 </ul>
 <a id="getInt32()">
@@ -439,6 +520,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getInt32</h4>
 <pre class="methodSignature">public abstract&nbsp;int&nbsp;getInt32()</pre>
+<div class="block">Gets the value as 32-bit integer.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an int</dd>
+</dl>
 </li>
 </ul>
 <a id="getInt32U()">
@@ -448,6 +534,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getInt32U</h4>
 <pre class="methodSignature">public abstract&nbsp;long&nbsp;getInt32U()</pre>
+<div class="block">Gets the value as unsigned 32-bit integer.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a long</dd>
+</dl>
 </li>
 </ul>
 <a id="getInt64()">
@@ -457,6 +548,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getInt64</h4>
 <pre class="methodSignature">public abstract&nbsp;long&nbsp;getInt64()</pre>
+<div class="block">Gets the value as 64-bit integer.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a long</dd>
+</dl>
 </li>
 </ul>
 <a id="getInt64U()">
@@ -466,6 +562,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getInt64U</h4>
 <pre class="methodSignature">public abstract&nbsp;java.math.BigInteger&nbsp;getInt64U()</pre>
+<div class="block">Gets the value as unsigned 64-bit integer.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a BigInteger</dd>
+</dl>
 </li>
 </ul>
 <a id="getFloat32()">
@@ -475,6 +576,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getFloat32</h4>
 <pre class="methodSignature">public abstract&nbsp;float&nbsp;getFloat32()</pre>
+<div class="block">Gets the value as 32-bit floating-point.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a float</dd>
+</dl>
 </li>
 </ul>
 <a id="getFloat64()">
@@ -484,6 +590,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getFloat64</h4>
 <pre class="methodSignature">public abstract&nbsp;double&nbsp;getFloat64()</pre>
+<div class="block">Gets the value as 64-bit floating-point.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a double</dd>
+</dl>
 </li>
 </ul>
 <a id="getString()">
@@ -493,6 +604,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getString</h4>
 <pre class="methodSignature">public abstract&nbsp;java.lang.String&nbsp;getString()</pre>
+<div class="block">Gets the value as string.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a string</dd>
+</dl>
 </li>
 </ul>
 <a id="getBoolean()">
@@ -502,6 +618,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getBoolean</h4>
 <pre class="methodSignature">public abstract&nbsp;boolean&nbsp;getBoolean()</pre>
+<div class="block">Gets the value as boolean.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="getEnum()">
@@ -511,6 +632,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getEnum</h4>
 <pre class="methodSignature">public abstract&nbsp;<a href="EnumRecord.html" title="class in com.smartgridready.communicator.common.api.values">EnumRecord</a>&nbsp;getEnum()</pre>
+<div class="block">Gets the value as SGr enumeration record.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an EnumRecord</dd>
+</dl>
 </li>
 </ul>
 <a id="getBitmap()">
@@ -520,6 +646,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getBitmap</h4>
 <pre class="methodSignature">public abstract&nbsp;java.util.Map&lt;java.lang.String,&#8203;java.lang.Boolean&gt;&nbsp;getBitmap()</pre>
+<div class="block">Gets the value as SGr bitmap.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a map of strings to boolean values</dd>
+</dl>
 </li>
 </ul>
 <a id="getDateTime()">
@@ -529,6 +660,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getDateTime</h4>
 <pre class="methodSignature">public abstract&nbsp;java.time.Instant&nbsp;getDateTime()</pre>
+<div class="block">Gets the value as time stamp.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an Instant</dd>
+</dl>
 </li>
 </ul>
 <a id="getJson()">
@@ -538,6 +674,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getJson</h4>
 <pre class="methodSignature">public abstract&nbsp;com.fasterxml.jackson.databind.JsonNode&nbsp;getJson()</pre>
+<div class="block">Gets the value as JSON.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a JsonNode</dd>
+</dl>
 </li>
 </ul>
 <a id="absValue()">
@@ -547,6 +688,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>absValue</h4>
 <pre class="methodSignature">public abstract&nbsp;void&nbsp;absValue()</pre>
+<div class="block">Sets the instance's value to its absolute value, if possible.</div>
 </li>
 </ul>
 <a id="roundToInt()">
@@ -556,6 +698,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>roundToInt</h4>
 <pre class="methodSignature">public abstract&nbsp;void&nbsp;roundToInt()</pre>
+<div class="block">Rounds the instance's value to the nearest integer, if possible.</div>
 </li>
 </ul>
 <a id="asArray()">
@@ -565,6 +708,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>asArray</h4>
 <pre class="methodSignature">public abstract&nbsp;<a href="Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>[]&nbsp;asArray()</pre>
+<div class="block">Gets the value as array.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of <a href="Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a></dd>
+</dl>
 </li>
 </ul>
 <a id="getJson(java.lang.Class)">
@@ -574,6 +722,15 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getJson</h4>
 <pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;getJson&#8203;(java.lang.Class&lt;T&gt;&nbsp;aClass)</pre>
+<div class="block">Gets the value as JSON and converts to an instance of a given class.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the generic type</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>aClass</code> - the class to convert to</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of the given class</dd>
+</dl>
 </li>
 </ul>
 <a id="toModbusRegister(com.smartgridready.ns.v0.ModbusDataType)">
@@ -583,6 +740,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>toModbusRegister</h4>
 <pre class="methodSignature">public&nbsp;int[]&nbsp;toModbusRegister&#8203;(com.smartgridready.ns.v0.ModbusDataType&nbsp;modbusDataType)</pre>
+<div class="block">Converts the value to a list of Modbus registers.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>modbusDataType</code> - the Modbus data type to convert to</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of integer</dd>
+</dl>
 </li>
 </ul>
 <a id="toModbusDiscreteVal(com.smartgridready.ns.v0.ModbusDataType)">
@@ -592,6 +756,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>toModbusDiscreteVal</h4>
 <pre class="methodSignature">public&nbsp;byte[]&nbsp;toModbusDiscreteVal&#8203;(com.smartgridready.ns.v0.ModbusDataType&nbsp;modbusDataType)</pre>
+<div class="block">Converts the value to a list of Modbus discrete inputs.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>modbusDataType</code> - the Modbus data type to convert to</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an array of byte</dd>
+</dl>
 </li>
 </ul>
 <a id="fromModbusRegister(com.smartgridready.ns.v0.ModbusDataType,int[])">
@@ -602,6 +773,14 @@ extends java.lang.Object</pre>
 <h4>fromModbusRegister</h4>
 <pre class="methodSignature">public static&nbsp;<a href="Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&nbsp;fromModbusRegister&#8203;(com.smartgridready.ns.v0.ModbusDataType&nbsp;modbusDataType,
                                        int[]&nbsp;registers)</pre>
+<div class="block">Converts a list of Modbus registers to a given value.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>modbusDataType</code> - the Modbus data type to convert to</dd>
+<dd><code>registers</code> - the Modbus registers</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <a href="Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a></dd>
+</dl>
 </li>
 </ul>
 <a id="fromString(com.smartgridready.ns.v0.DataTypeProduct,java.lang.String)">
@@ -612,6 +791,14 @@ extends java.lang.Object</pre>
 <h4>fromString</h4>
 <pre class="methodSignature">public static&nbsp;<a href="Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&nbsp;fromString&#8203;(com.smartgridready.ns.v0.DataTypeProduct&nbsp;dataType,
                                java.lang.String&nbsp;value)</pre>
+<div class="block">Converts a string to a different to a <a href="Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a>.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dataType</code> - the data type to convert to</dd>
+<dd><code>value</code> - the string value to convert</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <a href="Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a></dd>
+</dl>
 </li>
 </ul>
 <a id="enumToOrdinalValue(com.smartgridready.ns.v0.EnumMapProduct)">
@@ -621,6 +808,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>enumToOrdinalValue</h4>
 <pre class="methodSignature">public&nbsp;<a href="Int64Value.html" title="class in com.smartgridready.communicator.common.api.values">Int64Value</a>&nbsp;enumToOrdinalValue&#8203;(com.smartgridready.ns.v0.EnumMapProduct&nbsp;enumMapProduct)</pre>
+<div class="block">Gets the ordinal value of an enumeration.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>enumMapProduct</code> - the enumeration definition</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a 64-bit integer value</dd>
+</dl>
 </li>
 </ul>
 <a id="fromDiscreteInput(com.smartgridready.ns.v0.ModbusDataType,boolean[])">
@@ -631,6 +825,14 @@ extends java.lang.Object</pre>
 <h4>fromDiscreteInput</h4>
 <pre class="methodSignature">public static&nbsp;<a href="Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&nbsp;fromDiscreteInput&#8203;(com.smartgridready.ns.v0.ModbusDataType&nbsp;modbusDataType,
                                       boolean[]&nbsp;bitregister)</pre>
+<div class="block">Gets a value from a Modbus discrete input.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>modbusDataType</code> - the Modbus data type</dd>
+<dd><code>bitregister</code> - the discrete input valueü</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <a href="Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a></dd>
+</dl>
 </li>
 </ul>
 </li>

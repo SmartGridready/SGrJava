@@ -128,6 +128,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <hr>
 <pre>public interface <span class="typeNameLabel">Authenticator</span></pre>
+<div class="block">Defines the interface of an HTTP authenticator.</div>
 </li>
 </ul>
 </div>
@@ -152,18 +153,24 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAuthorizationHeaderValue(com.smartgridready.ns.v0.DeviceFrame,com.smartgridready.driver.api.http.GenHttpClientFactory)">getAuthorizationHeaderValue</a></span>&#8203;(com.smartgridready.ns.v0.DeviceFrame&nbsp;deviceDescription,
                            com.smartgridready.driver.api.http.GenHttpClientFactory&nbsp;httpClientFactory)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Retrieves the value of the authorization header of HTTP requests.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>default boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isTokenRenewalSupported()">isTokenRenewalSupported</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Tells if access tokens can be renewed instead of re-authenticating.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>default void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#renewToken(com.smartgridready.ns.v0.DeviceFrame,com.smartgridready.driver.api.http.GenHttpClientFactory)">renewToken</a></span>&#8203;(com.smartgridready.ns.v0.DeviceFrame&nbsp;deviceDescription,
           com.smartgridready.driver.api.http.GenHttpClientFactory&nbsp;httpClientFactory)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Renews the access token.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -193,11 +200,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
                                       throws java.io.IOException,
                                              <a href="../../exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a>,
                                              <a href="../../exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></pre>
+<div class="block">Retrieves the value of the authorization header of HTTP requests.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>deviceDescription</code> - the SGr device specification</dd>
+<dd><code>httpClientFactory</code> - the SGr HTTP client factory</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a string</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
-<dd><code><a href="../../exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></code></dd>
-<dd><code><a href="../../exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></code></dd>
+<dd><code>java.io.IOException</code> - when a communication error occurred</dd>
+<dd><code><a href="../../exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></code> - when the authentication failed</dd>
+<dd><code><a href="../../exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></code> - when the response could not be parsed</dd>
 </dl>
 </li>
 </ul>
@@ -208,6 +221,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>isTokenRenewalSupported</h4>
 <pre class="methodSignature">default&nbsp;boolean&nbsp;isTokenRenewalSupported()</pre>
+<div class="block">Tells if access tokens can be renewed instead of re-authenticating.
+ Defaults to <code>false</code>.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="renewToken(com.smartgridready.ns.v0.DeviceFrame,com.smartgridready.driver.api.http.GenHttpClientFactory)">
@@ -221,11 +240,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
                  throws java.io.IOException,
                         <a href="../../exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a>,
                         <a href="../../exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></pre>
+<div class="block">Renews the access token.
+ Defaults to an empty implementation.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>deviceDescription</code> - the SGr device specification</dd>
+<dd><code>httpClientFactory</code> - the SGr HTTP client factory</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
-<dd><code><a href="../../exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></code></dd>
-<dd><code><a href="../../exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></code></dd>
+<dd><code>java.io.IOException</code> - when a communication error occurred</dd>
+<dd><code><a href="../../exception/RestApiServiceCallException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiServiceCallException</a></code> - when the renewal failed</dd>
+<dd><code><a href="../../exception/RestApiResponseParseException.html" title="class in com.smartgridready.communicator.rest.exception">RestApiResponseParseException</a></code> - when the response could not be parsed</dd>
 </dl>
 </li>
 </ul>

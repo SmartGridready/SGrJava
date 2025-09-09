@@ -142,6 +142,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">SGrGenericDevice</span>
 extends <a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.GenericFunctionalProfile,&#8203;com.smartgridready.ns.v0.DataPointBase&gt;</pre>
+<div class="block">Implements a generic device, which has no actual communication interface.
+ Supports constant data points only.</div>
 </li>
 </ul>
 </div>
@@ -197,7 +199,9 @@ extends <a href="../../common/impl/SGrDeviceBase.html" title="class in com.smart
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.smartgridready.ns.v0.DeviceFrame)">SGrGenericDevice</a></span>&#8203;(com.smartgridready.ns.v0.DeviceFrame&nbsp;deviceDescription)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new instance.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -235,12 +239,16 @@ extends <a href="../../common/impl/SGrDeviceBase.html" title="class in com.smart
 <td class="colFirst"><code>protected java.util.Optional&lt;com.smartgridready.ns.v0.DataPointBase&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findDataPointForProfile(com.smartgridready.ns.v0.GenericFunctionalProfile,java.lang.String)">findDataPointForProfile</a></span>&#8203;(com.smartgridready.ns.v0.GenericFunctionalProfile&nbsp;functionalProfile,
                        java.lang.String&nbsp;dataPointName)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Finds a data point of a given functional profile by name.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>protected java.util.Optional&lt;com.smartgridready.ns.v0.GenericFunctionalProfile&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findProfile(java.lang.String)">findProfile</a></span>&#8203;(java.lang.String&nbsp;profileName)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Finds a functional profile by name.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../common/api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
@@ -313,6 +321,11 @@ extends <a href="../../common/impl/SGrDeviceBase.html" title="class in com.smart
 <li class="blockList">
 <h4>SGrGenericDevice</h4>
 <pre>public&nbsp;SGrGenericDevice&#8203;(com.smartgridready.ns.v0.DeviceFrame&nbsp;deviceDescription)</pre>
+<div class="block">Constructs a new instance.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>deviceDescription</code> - the EID description</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -447,9 +460,15 @@ extends <a href="../../common/impl/SGrDeviceBase.html" title="class in com.smart
 <li class="blockList">
 <h4>findProfile</h4>
 <pre class="methodSignature">protected&nbsp;java.util.Optional&lt;com.smartgridready.ns.v0.GenericFunctionalProfile&gt;&nbsp;findProfile&#8203;(java.lang.String&nbsp;profileName)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html#findProfile(java.lang.String)">SGrDeviceBase</a></code></span></div>
+<div class="block">Finds a functional profile by name.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../common/impl/SGrDeviceBase.html#findProfile(java.lang.String)">findProfile</a></code>&nbsp;in class&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.GenericFunctionalProfile,&#8203;com.smartgridready.ns.v0.DataPointBase&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>profileName</code> - the name of the functional profile</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an optional functional profile</dd>
 </dl>
 </li>
 </ul>
@@ -461,9 +480,16 @@ extends <a href="../../common/impl/SGrDeviceBase.html" title="class in com.smart
 <h4>findDataPointForProfile</h4>
 <pre class="methodSignature">protected&nbsp;java.util.Optional&lt;com.smartgridready.ns.v0.DataPointBase&gt;&nbsp;findDataPointForProfile&#8203;(com.smartgridready.ns.v0.GenericFunctionalProfile&nbsp;functionalProfile,
                                                                                              java.lang.String&nbsp;dataPointName)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html#findDataPointForProfile(F,java.lang.String)">SGrDeviceBase</a></code></span></div>
+<div class="block">Finds a data point of a given functional profile by name.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../common/impl/SGrDeviceBase.html#findDataPointForProfile(F,java.lang.String)">findDataPointForProfile</a></code>&nbsp;in class&nbsp;<code><a href="../../common/impl/SGrDeviceBase.html" title="class in com.smartgridready.communicator.common.impl">SGrDeviceBase</a>&lt;com.smartgridready.ns.v0.DeviceFrame,&#8203;com.smartgridready.ns.v0.GenericFunctionalProfile,&#8203;com.smartgridready.ns.v0.DataPointBase&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>functionalProfile</code> - the functional profile</dd>
+<dd><code>dataPointName</code> - the name of the data point to find</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an optional data point</dd>
 </dl>
 </li>
 </ul>

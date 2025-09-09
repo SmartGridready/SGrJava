@@ -133,6 +133,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">DataTypeInfo</span>
 extends java.lang.Object</pre>
+<div class="block">Defines extended information for SGr data types.</div>
 </li>
 </ul>
 </div>
@@ -159,7 +160,9 @@ extends java.lang.Object</pre>
             java.util.function.BiConsumer&lt;com.smartgridready.ns.v0.DataTypeProduct,&#8203;com.smartgridready.ns.v0.EmptyType&gt;&nbsp;setGenValMethod,
             java.util.function.BiConsumer&lt;com.smartgridready.ns.v0.ModbusDataType,&#8203;com.smartgridready.ns.v0.EmptyType&gt;&nbsp;setModbusValMethod,
             java.util.List&lt;<a href="Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&gt;&nbsp;range)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new instance.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -187,37 +190,51 @@ extends java.lang.Object</pre>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.util.function.Function&lt;com.smartgridready.ns.v0.DataTypeProduct,&#8203;java.lang.Object&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getGetGenValMethod()">getGetGenValMethod</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the function that gets the correct data type from specification.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.util.function.Function&lt;com.smartgridready.ns.v0.ModbusDataType,&#8203;java.lang.Object&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getGetModbusValMethod()">getGetModbusValMethod</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the function that gets the correct Modbus data type from specification.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRange()">getRange</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the range of allowed values.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.function.BiConsumer&lt;com.smartgridready.ns.v0.DataTypeProduct,&#8203;com.smartgridready.ns.v0.EmptyType&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSetGenValMethod()">getSetGenValMethod</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the function that sets the correct data type in specification.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.util.function.BiConsumer&lt;com.smartgridready.ns.v0.ModbusDataType,&#8203;com.smartgridready.ns.v0.EmptyType&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSetModbusValMethod()">getSetModbusValMethod</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the function that sets the correct Modbus data type in specification.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="DataType.html" title="enum in com.smartgridready.communicator.common.api.values">DataType</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getType()">getType</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the data type enumeration.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTypeName()">getTypeName</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the data type name.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>int</code></td>
@@ -260,6 +277,16 @@ extends java.lang.Object</pre>
                     java.util.function.BiConsumer&lt;com.smartgridready.ns.v0.DataTypeProduct,&#8203;com.smartgridready.ns.v0.EmptyType&gt;&nbsp;setGenValMethod,
                     java.util.function.BiConsumer&lt;com.smartgridready.ns.v0.ModbusDataType,&#8203;com.smartgridready.ns.v0.EmptyType&gt;&nbsp;setModbusValMethod,
                     java.util.List&lt;<a href="Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&gt;&nbsp;range)</pre>
+<div class="block">Constructs a new instance.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>type</code> - the data type enumeration</dd>
+<dd><code>getGenValMethod</code> - the method to get the correct data type from specification</dd>
+<dd><code>getModbusValMethod</code> - the method to get the correct Modbus data type from specification</dd>
+<dd><code>setGenValMethod</code> - the method to set the correct data type in specification</dd>
+<dd><code>setModbusValMethod</code> - the method to set the correct Modbus data type in specification</dd>
+<dd><code>range</code> - a list of <a href="Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a> defining the valid range of values</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -279,6 +306,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getGetGenValMethod</h4>
 <pre class="methodSignature">public&nbsp;java.util.function.Function&lt;com.smartgridready.ns.v0.DataTypeProduct,&#8203;java.lang.Object&gt;&nbsp;getGetGenValMethod()</pre>
+<div class="block">Gets the function that gets the correct data type from specification.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a function</dd>
+</dl>
 </li>
 </ul>
 <a id="getGetModbusValMethod()">
@@ -288,6 +320,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getGetModbusValMethod</h4>
 <pre class="methodSignature">public&nbsp;java.util.function.Function&lt;com.smartgridready.ns.v0.ModbusDataType,&#8203;java.lang.Object&gt;&nbsp;getGetModbusValMethod()</pre>
+<div class="block">Gets the function that gets the correct Modbus data type from specification.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a function</dd>
+</dl>
 </li>
 </ul>
 <a id="getSetGenValMethod()">
@@ -297,6 +334,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getSetGenValMethod</h4>
 <pre class="methodSignature">public&nbsp;java.util.function.BiConsumer&lt;com.smartgridready.ns.v0.DataTypeProduct,&#8203;com.smartgridready.ns.v0.EmptyType&gt;&nbsp;getSetGenValMethod()</pre>
+<div class="block">Gets the function that sets the correct data type in specification.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a function</dd>
+</dl>
 </li>
 </ul>
 <a id="getSetModbusValMethod()">
@@ -306,6 +348,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getSetModbusValMethod</h4>
 <pre class="methodSignature">public&nbsp;java.util.function.BiConsumer&lt;com.smartgridready.ns.v0.ModbusDataType,&#8203;com.smartgridready.ns.v0.EmptyType&gt;&nbsp;getSetModbusValMethod()</pre>
+<div class="block">Gets the function that sets the correct Modbus data type in specification.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a function</dd>
+</dl>
 </li>
 </ul>
 <a id="getType()">
@@ -315,6 +362,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getType</h4>
 <pre class="methodSignature">public&nbsp;<a href="DataType.html" title="enum in com.smartgridready.communicator.common.api.values">DataType</a>&nbsp;getType()</pre>
+<div class="block">Gets the data type enumeration.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <a href="DataType.html" title="enum in com.smartgridready.communicator.common.api.values"><code>DataType</code></a></dd>
+</dl>
 </li>
 </ul>
 <a id="getTypeName()">
@@ -324,6 +376,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getTypeName</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getTypeName()</pre>
+<div class="block">Gets the data type name.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a string</dd>
+</dl>
 </li>
 </ul>
 <a id="getRange()">
@@ -333,6 +390,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getRange</h4>
 <pre class="methodSignature">public&nbsp;java.util.List&lt;<a href="Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&gt;&nbsp;getRange()</pre>
+<div class="block">Gets the range of allowed values.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a list of <a href="Value.html" title="class in com.smartgridready.communicator.common.api.values"><code>Value</code></a></dd>
+</dl>
 </li>
 </ul>
 <a id="equals(java.lang.Object)">
