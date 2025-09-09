@@ -20,11 +20,18 @@ package com.smartgridready.communicator.rest.http.authentication;
 import com.smartgridready.ns.v0.DeviceFrame;
 import com.smartgridready.driver.api.http.GenHttpClientFactory;
 
+/**
+ * Dummy implementation of an HTTP authenticator.
+ */
 public class DummyHttpAuthenticator implements Authenticator {
 
-	@Override
-	public String getAuthorizationHeaderValue(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) {
-		return null;
-	}
+    /**
+     * Constructs a new instance.
+     */
+    public DummyHttpAuthenticator() {}
 
+    @Override
+    public String getAuthorizationHeaderValue(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) {
+        return null;
+    }
 }

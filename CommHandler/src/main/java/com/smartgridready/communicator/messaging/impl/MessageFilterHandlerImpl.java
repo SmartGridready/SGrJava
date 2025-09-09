@@ -12,10 +12,17 @@ import com.smartgridready.driver.api.common.GenDriverException;
 import com.smartgridready.driver.api.messaging.MessageFilterHandler;
 import com.smartgridready.ns.v0.MessageFilter;
 
+/**
+ * Implements a message filter handler.
+ */
 public class MessageFilterHandlerImpl implements MessageFilterHandler {
     
     private final MessageFilter messageFilter;
 
+    /**
+     * Constructs a new instance.
+     * @param messageFilter the message filter specification
+     */
     public MessageFilterHandlerImpl(MessageFilter messageFilter) {
         this.messageFilter = messageFilter;
     }

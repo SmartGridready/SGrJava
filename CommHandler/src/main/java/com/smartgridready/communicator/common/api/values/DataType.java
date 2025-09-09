@@ -10,24 +10,60 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Defines enumerations of data types supported by SGr data points.
+ */
 public enum DataType {
 
+    /** Boolean */
     BOOLEAN,
+
+    /** 8-bit signed integer */
     INT8,
+
+    /** 16-bit signed integer */
     INT16,
+
+    /** 32-bit signed integer */
     INT32,
+
+    /** 64-bit signed integer */
     INT64,
+
+    /** 8-bit unsigned integer */
     INT8U,
+
+    /** 16-bit unsigned integer */
     INT16U,
+
+    /** 32-bit unsigned integer */
     INT32U,
+
+    /** 64-bit unsigned integer */
     INT64U,
+
+    /** 32-bit floating-point */
     FLOAT32,
+
+    /** 64-bit floating-point */
     FLOAT64,
+
+    /** String */
     STRING,
+
+    /** Time stamp */
     DATE_TIME,
+
+    /** Discrete enumeration */
     ENUM,
+
+    /** Bit map */
     BITMAP,
+
+    /** JSON */
     JSON,
+
+    /** Unknown */
     UNKNOWN;
 
     private static final Map<DataType, DataTypeInfo> TYPE_MAP = new EnumMap<>(DataType.class);
@@ -39,7 +75,7 @@ public enum DataType {
         TYPE_MAP.put(INT64, new DataTypeInfo(INT64, DataTypeProduct::getInt64, ModbusDataType::getInt64, DataTypeProduct::setInt64, ModbusDataType::setInt64, List.of(Int64Value.of(Long.MIN_VALUE), Int64Value.of(Long.MAX_VALUE))));
         TYPE_MAP.put(INT8U, new DataTypeInfo(INT8U, DataTypeProduct::getInt8U, ModbusDataType::getInt8U, DataTypeProduct::setInt8U, ModbusDataType::setInt8U, List.of(Int8UValue.of((short) 0), Int8UValue.of((short) 255))));
         TYPE_MAP.put(INT16U, new DataTypeInfo(INT16U, DataTypeProduct::getInt16U, ModbusDataType::getInt16U, DataTypeProduct::setInt16U, ModbusDataType::setInt16U, List.of(Int16UValue.of(0), Int16UValue.of(65535))));
-        TYPE_MAP.put(INT32U,new DataTypeInfo(INT32U, DataTypeProduct::getInt32U, ModbusDataType::getInt32U, DataTypeProduct::setInt32U, ModbusDataType::setInt32U, List.of(Int32UValue.of(0), Int32UValue.of(4294967295L))));
+        TYPE_MAP.put(INT32U, new DataTypeInfo(INT32U, DataTypeProduct::getInt32U, ModbusDataType::getInt32U, DataTypeProduct::setInt32U, ModbusDataType::setInt32U, List.of(Int32UValue.of(0), Int32UValue.of(4294967295L))));
         TYPE_MAP.put(INT64U, new DataTypeInfo(INT64U, DataTypeProduct::getInt64U, ModbusDataType::getInt64U, DataTypeProduct::setInt64U, ModbusDataType::setInt64U, List.of(Int64UValue.of(BigInteger.ZERO), Int64UValue.of(new BigInteger("18446744073709551615")))));
         TYPE_MAP.put(FLOAT32, new DataTypeInfo(FLOAT32, DataTypeProduct::getFloat32, ModbusDataType::getFloat32, DataTypeProduct::setFloat32, ModbusDataType::setFloat32, List.of(Float32Value.of(-Float.MAX_VALUE), Float32Value.of(Float.MAX_VALUE))));
         TYPE_MAP.put(FLOAT64, new DataTypeInfo(FLOAT64, DataTypeProduct::getFloat64, ModbusDataType::getFloat64, DataTypeProduct::setFloat64, ModbusDataType::setFloat64, List.of(Float64Value.of(-Double.MAX_VALUE), Float64Value.of(Double.MAX_VALUE))));
@@ -51,10 +87,20 @@ public enum DataType {
         TYPE_MAP.put(UNKNOWN, new DataTypeInfo(UNKNOWN, val -> null, val -> null, null, null, List.of()));
     }
 
+    /**
+     * Gets additional information from a data type enumeration.
+     * @param dataType the data type to get information from
+     * @return an instance of {@link DataTypeInfo}
+     */
     public static Optional<DataTypeInfo> getDataTypeInfo(DataType dataType) {
         return Optional.ofNullable(TYPE_MAP.get(dataType));
     }
 
+    /**
+     * Gets additional information from a data type specification.
+     * @param dataTypeProduct the data type specification to get information from
+     * @return an instance of {@link DataTypeInfo}
+     */
     public static Optional<DataTypeInfo> getDataTypeInfo(DataTypeProduct dataTypeProduct) {
         if (dataTypeProduct == null) {
             return Optional.empty();
@@ -74,6 +120,11 @@ public enum DataType {
         return dataTypeOpt;
     }
 
+    /**
+     * Gets additional information from a Modbus data type specification.
+     * @param modbusDataType the Modbus data type specification to get information from
+     * @return an instance of {@link DataTypeInfo}
+     */
     public static Optional<DataTypeInfo> getDataTypeInfo(ModbusDataType modbusDataType) {
         if (modbusDataType == null) {
             return Optional.empty();
@@ -81,10 +132,20 @@ public enum DataType {
         return TYPE_MAP.values().stream().filter(en -> en.getGetModbusValMethod().apply(modbusDataType) != null).findFirst();
     }
 
+    /**
+     * Gets the name of a data type specification.
+     * @param dataTypeProduct the data type specification to get information from
+     * @return a string
+     */
     public static String getGenDataTypeName(DataTypeProduct dataTypeProduct) {
         return getDataTypeInfo(dataTypeProduct).map(DataTypeInfo::getTypeName).orElse(DataType.UNKNOWN.name());
     }
 
+    /**
+     * Gets the name of a Modbus data type specification.
+     * @param modbusDataType the Modbus data type specification to get information from
+     * @return a string
+     */
     public static String getModbusDataTypeName(ModbusDataType modbusDataType) {
         return getDataTypeInfo(modbusDataType).map(DataTypeInfo::getTypeName).orElse(DataType.UNKNOWN.name());
     }

@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Implements an SGr value containing a JSON node.
+ */
 public class JsonValue extends Value {
 
     private JsonNode value;
@@ -257,15 +260,30 @@ public class JsonValue extends Value {
         return value.asText();
     }
 
+    /**
+     * Creates a new instance from a JSON node.
+     * @param value the JSON value
+     * @return an instance of {@link JsonValue}
+     */
     public static JsonValue of(JsonNode value) {
         return new JsonValue(value);
     }
 
+    /**
+     * Creates a new instance from a POJO.
+     * @param object the POJO
+     * @return an instance of {@link JsonValue}
+     */
     public static JsonValue of(Object object) {
         ObjectMapper objectMapper = new ObjectMapper();
         return new JsonValue(objectMapper.valueToTree(object));
     }
 
+    /**
+     * Creates a new instance from a JSON string.
+     * @param json the JSON string
+     * @return an instance of {@link JsonValue}
+     */
     public static JsonValue of(String json) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {

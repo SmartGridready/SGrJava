@@ -18,20 +18,39 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * Converts data to JSON.
+ */
 public class JsonWriter {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     private final Map<String, String> keywordMap;
 
+    /**
+     * Constructs a new instance.
+     * @param keywordMap the keyword map
+     */
     public JsonWriter(Map<String, String> keywordMap) {
         this.keywordMap = keywordMap;
     }
 
+    /**
+     * Builds a JSON string from a list of key-value pairs.
+     * @param flatDataRecords the key-value pairs
+     * @return a string
+     * @throws JsonProcessingException when a key-value pair cannot be encoded
+     */
     public String buildJsonString(Collection<Map<String, Object>> flatDataRecords) throws JsonProcessingException {
         return objectMapper.writeValueAsString(buildJsonNode(flatDataRecords));
     }
 
+    /**
+     * Builds a JSON node from a list of key-value pairs.
+     * @param flatDataRecords the key-value pairs
+     * @return a JSON node
+     * @throws JsonProcessingException when a key-value pair cannot be encoded
+     */
     public JsonNode buildJsonNode(Collection<Map<String, Object>> flatDataRecords) throws JsonProcessingException {
 
         // Group by first level group.
@@ -87,7 +106,6 @@ public class JsonWriter {
 
         return rootNode;
     }
-
 
     private void addSecondLevelNodes(ObjectNode firstLevelNode, List<Map<String, Object>> flatRecordsBelongingToGroup) {
 

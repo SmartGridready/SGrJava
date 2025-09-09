@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Implements an SGr value containing a bit map value.
+ */
 public class BitmapValue extends Value {
 
     private final List<BitmapRecord> value;
@@ -135,15 +138,23 @@ public class BitmapValue extends Value {
         // not required
     }
 
-
-    // Factory method used to write bitmaps
+    /**
+     * Creates a new instance from a map.
+     * @param bitmap a map of string to boolean
+     * @return a new instance of {@link BitmapValue}
+     */
     public static BitmapValue of(Map<String, Boolean> bitmap) {
         List<BitmapRecord> bitmapRecords = new LinkedList<>();
         bitmap.forEach( (literal, value) -> bitmapRecords.add(new BitmapRecord(literal, value, null)));
         return new BitmapValue(bitmapRecords);
     }
 
-    // Factory method used when reading bitmaps from modbus
+    /**
+     * Creates a new instance from Modbus registers.
+     * @param registers the Modbus register values
+     * @param bitMapping the bitmap specification
+     * @return a new instance of {@link BitmapValue}
+     */
     public static BitmapValue of(int[] registers, BitmapProduct bitMapping) {
         BitmapValue bitmapValue = new BitmapValue();
         ByteBuffer byteBuffer = ConversionHelper.byteBufFromRegisters(registers);
@@ -169,6 +180,12 @@ public class BitmapValue extends Value {
         bitmapValue.value.add(bitmapRecord);
     }
 
+    /**
+     * Converts to Modbus registers.
+     * @param modbusSize the number of registers
+     * @param bitMapping the bitmap specification
+     * @return an array of integers
+     */
     public int[] toModbusRegisters(int modbusSize, BitmapProduct bitMapping) {
 
         Map<BitmapRecord, BitmapEntryProduct> recordMapping = new LinkedHashMap<>();

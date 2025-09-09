@@ -32,176 +32,185 @@ import org.slf4j.LoggerFactory;
 
 import com.smartgridready.ns.v0.DeviceFrame;
 
-
+/**
+ * Implements a loader that deserializes EI-XML into device descriptions.
+ */
 public class DeviceDescriptionLoader {
 
-	private static final Logger LOG = LoggerFactory.getLogger(DeviceDescriptionLoader.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DeviceDescriptionLoader.class);
 
-	private final XmlResourceLoader<DeviceFrame> resourceLoader = new XmlResourceLoader<>(DeviceFrame.class);
+    private final XmlResourceLoader<DeviceFrame> resourceLoader;
 
-	/**
-	 * Load an external device description from an EI-XML input stream.
-	 *
-	 * @param aDescriptionFile The external interface file name.
-	 * @param aDescriptionStream The external interface EI-XML input stream.
-	 * @return An instance of the device description for the given EI-XML
-	 */
-	public DeviceFrame load(String aDescriptionFile, InputStream aDescriptionStream) {
-		return load(aDescriptionFile, aDescriptionStream, null);
-	}
+    /**
+     * Constructs a new instance.
+     */
+    public DeviceDescriptionLoader() {
+        this.resourceLoader = new XmlResourceLoader<>(DeviceFrame.class);
+    }
 
-	/**
-	 * Load an external device description from its EI-XML file.
-	 *
-	 * @param aBaseDir The path to the folder where the external interface file resides.
-	 * @param aDescriptionFile The external interface file name.
-	 * @return An instance of the device description for the given EI-XML
-	 */
-	public DeviceFrame load(String aBaseDir, String aDescriptionFile) {
-		return load(aBaseDir, aDescriptionFile, null);
-	}
+    /**
+     * Load an external device description from an EI-XML input stream.
+     *
+     * @param aDescriptionFile The external interface file name.
+     * @param aDescriptionStream The external interface EI-XML input stream.
+     * @return An instance of the device description for the given EI-XML
+     */
+    public DeviceFrame load(String aDescriptionFile, InputStream aDescriptionStream) {
+        return load(aDescriptionFile, aDescriptionStream, null);
+    }
 
-	/**
-	 * Load an external device description from its EI-XML content.
-	 *
-	 * @param deviceDescXml The external interface file XML content.
-	 * @return An instance of the device description for the given EI-XML
-	 */
-	public DeviceFrame load(String deviceDescXml) {
-		return load(deviceDescXml, (Properties) null);
-	}
+    /**
+     * Load an external device description from its EI-XML file.
+     *
+     * @param aBaseDir The path to the folder where the external interface file resides.
+     * @param aDescriptionFile The external interface file name.
+     * @return An instance of the device description for the given EI-XML
+     */
+    public DeviceFrame load(String aBaseDir, String aDescriptionFile) {
+        return load(aBaseDir, aDescriptionFile, null);
+    }
 
-	/**
-	 * Load an external device description from its EI-XML file and replace placeholder
-	 * tags with the values given by the {@code properties} parameter.
-	 * <p>
-	 * Example properties:
-	 * <p>
-	 * <pre>
-	 *   Properties properties = new Properties();
-	 *   properties.put("ipAddress", "127.0.0.1");
-	 *   deviceDescriptionLoader.load("./EI-XML", "MySGr-Device.xml", properties);
-	 * </pre>
-	 * will replace {@code {{ipAddress}}} within the EI-XML with  the value 127.0.0.1
-	 *
-	 * @param aBaseDir The path to the folder where the external interface file resides.
-	 * @param aDescriptionFile The external interface file name.
-	 * @param properties Key value pairs that replaces tags like {@code {{keyName}}} with the property {@code value}
-	 * @return An instance of the device description for the given EI-XML.
-	 */
-	public DeviceFrame load(String aBaseDir, String aDescriptionFile, Properties properties) {	
-		try {
-			// using java.nio.Path would be better, but absolute paths seem to cause problems on Windows
-			String aDescriptionPath = aBaseDir + File.separator + aDescriptionFile;
-			
-			File deviceDescFile = new File(aDescriptionPath);
-			String deviceDescXml = FileUtils.readFileToString(deviceDescFile, StandardCharsets.UTF_8);
-			
-			return loadDeviceFrame(aDescriptionPath.toString(), deviceDescXml, properties);
-		} catch (Exception e) {
-			LOG.error("Error loading XML: ", e);
-			return null;
-		}
-	}
+    /**
+     * Load an external device description from its EI-XML content.
+     *
+     * @param deviceDescXml The external interface file XML content.
+     * @return An instance of the device description for the given EI-XML
+     */
+    public DeviceFrame load(String deviceDescXml) {
+        return load(deviceDescXml, (Properties) null);
+    }
 
-	/**
-	 * Load an external device description from an EI-XML input stream and replace placeholder
-	 * tags with the values given by the {@code properties} parameter.
-	 * <p>
-	 * Example properties:
-	 * <p>
-	 * <pre>
-	 *   Properties properties = new Properties();
-	 *   properties.put("ipAddress", "127.0.0.1");
-	 *   InputStream input = FileUtils.openInputStream(new File("MySGr-Device.xml"));
-	 *   deviceDescriptionLoader.load("MySGr-Device.xml", input, properties);
-	 * </pre>
-	 * will replace {@code {{ipAddress}}} within the EI-XML with  the value 127.0.0.1
-	 *
-	 * @param aDescriptionFile The external interface file name.
-	 * @param aDescriptionStream The external interface EI-XML input stream.
-	 * @param properties Key value pairs that replaces tags like {@code {{keyName}}} with the property {@code value}
-	 * @return An instance of the device description for the given EI-XML.
-	 */
-	public DeviceFrame load(String aDescriptionFile, InputStream aDescriptionStream, Properties properties) {
-		try {
-			String deviceDescXml = new String(aDescriptionStream.readAllBytes(), StandardCharsets.UTF_8);
-			return loadDeviceFrame(aDescriptionFile, deviceDescXml, properties);
-		} catch (Exception e) {
-			LOG.error("Error loading XML: ", e);
-			return null;
-		}
-	}
+    /**
+     * Load an external device description from its EI-XML file and replace placeholder
+     * tags with the values given by the {@code properties} parameter.
+     * <p>
+     * Example properties:
+     * </p>
+     * <pre>
+     *   Properties properties = new Properties();
+     *   properties.put("ipAddress", "127.0.0.1");
+     *   deviceDescriptionLoader.load("./EI-XML", "MySGr-Device.xml", properties);
+     * </pre>
+     * will replace {@code {{ipAddress}}} within the EI-XML with the value {@code 127.0.0.1}
+     *
+     * @param aBaseDir The path to the folder where the external interface file resides.
+     * @param aDescriptionFile The external interface file name.
+     * @param properties Key value pairs that replaces tags like {@code {{keyName}}} with the property {@code value}
+     * @return An instance of the device description for the given EI-XML.
+     */
+    public DeviceFrame load(String aBaseDir, String aDescriptionFile, Properties properties) {    
+        try {
+            // using java.nio.Path would be better, but absolute paths seem to cause problems on Windows
+            String aDescriptionPath = aBaseDir + File.separator + aDescriptionFile;
+            
+            File deviceDescFile = new File(aDescriptionPath);
+            String deviceDescXml = FileUtils.readFileToString(deviceDescFile, StandardCharsets.UTF_8);
+            
+            return loadDeviceFrame(aDescriptionPath.toString(), deviceDescXml, properties);
+        } catch (Exception e) {
+            LOG.error("Error loading XML: ", e);
+            return null;
+        }
+    }
 
-	/**
-	 * Load an external device description from its EI-XML file and replace placeholder
-	 * tags with the values given by the {@code properties} parameter.
-	 * <p>
-	 * Example properties:
-	 * <p>
-	 * <pre>
-	 *   Properties properties = new Properties();
-	 *   properties.put("ipAddress", "127.0.0.1");
-	 *   String xml = "&lt;xml&gt;...&lt;/xml&gt;";
-	 *   deviceDescriptionLoader.load(xml, properties);
-	 * </pre>
-	 * will replace {@code {{ipAddress}}} within the EI-XML with  the value 127.0.0.1
-	 *
-	 * @param deviceDescXml The EI-XML file content.
-	 * @param properties Key value pairs that replaces tags like {@code {{keyName}}} with the property {@code value}
-	 * @return An instance of the device description for the given EI-XML.
-	 */
-	public DeviceFrame load(String deviceDescXml, Properties properties) {	
-		try {
-			// create random file name
-			String aDescriptionPath = UUID.randomUUID().toString() + ".xml";
-			return loadDeviceFrame(aDescriptionPath, deviceDescXml, properties);
-		} catch (Exception e) {
-			LOG.error("Error loading XML: ", e);
-			return null;
-		}
-	}
+    /**
+     * Load an external device description from an EI-XML input stream and replace placeholder
+     * tags with the values given by the {@code properties} parameter.
+     * <p>
+     * Example properties:
+     * </p>
+     * <pre>
+     *   Properties properties = new Properties();
+     *   properties.put("ipAddress", "127.0.0.1");
+     *   InputStream input = FileUtils.openInputStream(new File("MySGr-Device.xml"));
+     *   deviceDescriptionLoader.load("MySGr-Device.xml", input, properties);
+     * </pre>
+     * will replace {@code {{ipAddress}}} within the EI-XML with  the value {@code 127.0.0.1}
+     *
+     * @param aDescriptionFile The external interface file name.
+     * @param aDescriptionStream The external interface EI-XML input stream.
+     * @param properties Key value pairs that replaces tags like {@code {{keyName}}} with the property {@code value}
+     * @return An instance of the device description for the given EI-XML.
+     */
+    public DeviceFrame load(String aDescriptionFile, InputStream aDescriptionStream, Properties properties) {
+        try {
+            String deviceDescXml = new String(aDescriptionStream.readAllBytes(), StandardCharsets.UTF_8);
+            return loadDeviceFrame(aDescriptionFile, deviceDescXml, properties);
+        } catch (Exception e) {
+            LOG.error("Error loading XML: ", e);
+            return null;
+        }
+    }
 
-	private DeviceFrame loadDeviceFrame(String resourcePath, String deviceDescXml, Properties properties) throws IOException {
-		// get properties from intermediate description
-		DeviceFrame intermediateDeviceDescription = resourceLoader.load(resourcePath, deviceDescXml, false);
-		Properties finalProperties = getFinalProperties(intermediateDeviceDescription, properties);
+    /**
+     * Load an external device description from its EI-XML file and replace placeholder
+     * tags with the values given by the {@code properties} parameter.
+     * <p>
+     * Example properties:
+     * </p>
+     * <pre>
+     *   Properties properties = new Properties();
+     *   properties.put("ipAddress", "127.0.0.1");
+     *   String xml = "&lt;xml&gt;...&lt;/xml&gt;";
+     *   deviceDescriptionLoader.load(xml, properties);
+     * </pre>
+     * will replace {@code {{ipAddress}}} within the EI-XML with  the value 127.0.0.1
+     *
+     * @param deviceDescXml The EI-XML file content.
+     * @param properties Key value pairs that replaces tags like {@code {{keyName}}} with the property {@code value}
+     * @return An instance of the device description for the given EI-XML.
+     */
+    public DeviceFrame load(String deviceDescXml, Properties properties) {    
+        try {
+            // create random file name
+            String aDescriptionPath = UUID.randomUUID().toString() + ".xml";
+            return loadDeviceFrame(aDescriptionPath, deviceDescXml, properties);
+        } catch (Exception e) {
+            LOG.error("Error loading XML: ", e);
+            return null;
+        }
+    }
 
-		// replace property placeholders
-		deviceDescXml = replacePropertyPlaceholders(deviceDescXml, finalProperties);
+    private DeviceFrame loadDeviceFrame(String resourcePath, String deviceDescXml, Properties properties) throws IOException {
+        // get properties from intermediate description
+        DeviceFrame intermediateDeviceDescription = resourceLoader.load(resourcePath, deviceDescXml, false);
+        Properties finalProperties = getFinalProperties(intermediateDeviceDescription, properties);
 
-		return resourceLoader.load(resourcePath, deviceDescXml, true);		
-	}
+        // replace property placeholders
+        deviceDescXml = replacePropertyPlaceholders(deviceDescXml, finalProperties);
 
-	private static Properties getFinalProperties(DeviceFrame deviceDescription, Properties properties) {
-		final Properties finalProperties = new Properties();
-		if (null != deviceDescription.getConfigurationList()) {
-			deviceDescription.getConfigurationList().getConfigurationListElement().forEach(c -> {
-				String value = (null != c.getDefaultValue()) ? c.getDefaultValue() : "";
-				finalProperties.setProperty(c.getName(), value);
-				LOG.debug("adding default property '{}':'{}'", c.getName(), value);
-			});
-		}
+        return resourceLoader.load(resourcePath, deviceDescXml, true);        
+    }
 
-		if (properties != null) {
-			properties.entrySet().forEach(entry -> {
-				finalProperties.setProperty((String) entry.getKey(), (String) entry.getValue());
-				LOG.debug("overriding property '{}':'{}'", entry.getKey(), entry.getValue());
-			});
-		}
+    private static Properties getFinalProperties(DeviceFrame deviceDescription, Properties properties) {
+        final Properties finalProperties = new Properties();
+        if (null != deviceDescription.getConfigurationList()) {
+            deviceDescription.getConfigurationList().getConfigurationListElement().forEach(c -> {
+                String value = (null != c.getDefaultValue()) ? c.getDefaultValue() : "";
+                finalProperties.setProperty(c.getName(), value);
+                LOG.debug("adding default property '{}':'{}'", c.getName(), value);
+            });
+        }
 
-		return finalProperties;
-	}
-	
-	private static String replacePropertyPlaceholders(String deviceDescriptionXml, Properties properties) {
-		String convertedXml = deviceDescriptionXml;
-		if (deviceDescriptionXml != null && properties != null) {
-			for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-				// no regex here, string literal replacement is sufficient
-				convertedXml = convertedXml.replace("{{" + (String)entry.getKey() + "}}", (String)entry.getValue());
-				LOG.debug("replaced property '{}':'{}'", entry.getKey(), entry.getValue());
-			}
-		}
-		return convertedXml;
-	}
+        if (properties != null) {
+            properties.entrySet().forEach(entry -> {
+                finalProperties.setProperty((String) entry.getKey(), (String) entry.getValue());
+                LOG.debug("overriding property '{}':'{}'", entry.getKey(), entry.getValue());
+            });
+        }
+
+        return finalProperties;
+    }
+    
+    private static String replacePropertyPlaceholders(String deviceDescriptionXml, Properties properties) {
+        String convertedXml = deviceDescriptionXml;
+        if (deviceDescriptionXml != null && properties != null) {
+            for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+                // no regex here, string literal replacement is sufficient
+                convertedXml = convertedXml.replace("{{" + (String)entry.getKey() + "}}", (String)entry.getValue());
+                LOG.debug("replaced property '{}':'{}'", entry.getKey(), entry.getValue());
+            }
+        }
+        return convertedXml;
+    }
 }

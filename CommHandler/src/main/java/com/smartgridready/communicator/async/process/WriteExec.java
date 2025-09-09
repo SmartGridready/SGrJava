@@ -12,6 +12,10 @@ import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 
+/**
+ * Implements an asynchronous read method.
+ * @param <V> The type of value to write.
+ */
 public class WriteExec<V> extends Processor implements Executable {
 
     private static final Logger LOG = LoggerFactory.getLogger(WriteExec.class);
@@ -24,11 +28,23 @@ public class WriteExec<V> extends Processor implements Executable {
 
     private Disposable disposable;
 
-
+    /**
+     * Constructs a new instance.
+     * @param functionalProfileName the functional profile name
+     * @param dataPointName the data point name
+     * @param writeFunction a reference to the actual method to be called
+     */
     public WriteExec(String functionalProfileName, String dataPointName, WriteFunction<V> writeFunction) {
-       this(functionalProfileName, dataPointName, writeFunction, Schedulers.io());
+        this(functionalProfileName, dataPointName, writeFunction, Schedulers.io());
     }
 
+    /**
+     * Constructs a new instance with a custom scheduler.
+     * @param functionalProfileName the functional profile name
+     * @param dataPointName the data point name
+     * @param writeFunction a reference to the actual method to be called
+     * @param scheduler a task scheduler
+     */
     public WriteExec(String functionalProfileName, String dataPointName, WriteFunction<V> writeFunction, Scheduler scheduler) {
         this.scheduler = scheduler;
         this.writeCallable = new DeviceWriteCallable<>(writeFunction, functionalProfileName, dataPointName);
@@ -36,21 +52,26 @@ public class WriteExec<V> extends Processor implements Executable {
 
     @Override
     public void process(ProcessingType processingType) {
-    	  try {
-              Observable<AsyncResult<V>> observable = Observable.fromCallable(writeCallable);
-              if (ProcessingType.PARALLEL == processingType) {
-                  LOG.info("WriteExec PARALLEL: {} - {}", writeCallable.getProfileName(), writeCallable.getProfileName());
-                  disposable = observable.subscribeOn(scheduler).subscribe(this::handleSuccess, this::handleError);
-              } else {
-                  LOG.info("WriteExec SEQUENTIAL: {} - {}", writeCallable.getProfileName(), writeCallable.getDataPointName());
-                  disposable = observable.subscribe(this::handleSuccess, this::handleError);
-              }
-          } catch (Throwable e) {
-                handleError(e);
-          }
+        try {
+            Observable<AsyncResult<V>> observable = Observable.fromCallable(writeCallable);
+            if (ProcessingType.PARALLEL == processingType) {
+                LOG.info("WriteExec PARALLEL: {} - {}", writeCallable.getProfileName(), writeCallable.getProfileName());
+                disposable = observable.subscribeOn(scheduler).subscribe(this::handleSuccess, this::handleError);
+            } else {
+                LOG.info("WriteExec SEQUENTIAL: {} - {}", writeCallable.getProfileName(), writeCallable.getDataPointName());
+                disposable = observable.subscribe(this::handleSuccess, this::handleError);
+            }
+        } catch (Throwable e) {
+            handleError(e);
+        }
     }
+
+    /**
+     * Sets the value to write.
+     * @param value a value
+     */
     public void setWriteValue(V value) {
-    	this.writeCallable.setWriteValue(value);
+        this.writeCallable.setWriteValue(value);
     }
     
     private void handleSuccess(AsyncResult<V> result) {
@@ -84,27 +105,47 @@ public class WriteExec<V> extends Processor implements Executable {
         return writeCallable.getResult();
     }
 
-	public ExecStatus getExecStatus() {
-		 return getResult().getExecStatus();
-	}
+    /**
+     * Gets the execution status.
+     * @return an instance of {@link ExecStatus}
+     */
+    public ExecStatus getExecStatus() {
+        return getResult().getExecStatus();
+    }
 
-	public Throwable getExecThrowable() {
-		return getResult().getThrowable();
-	}
+    /**
+     * Gets the exception that was thrown.
+     * @return an instance of {@link Throwable}
+     */
+    public Throwable getExecThrowable() {
+        return getResult().getThrowable();
+    }
 
+    /**
+     * Gets the time stamp of sending the request.
+     * @return an instance of {@link Instant}
+     */
     public Instant getRequestTime() {
         return getResult().getRequestTime();
     }
 
+    /**
+     * Gets the time stamp of receiving the response.
+     * @return an instance of {@link Instant}
+     */
     public Instant getResponseTime() {
         return getResult().getResponseTime();
     }
 
+    /**
+     * Cleans up disposable resources.
+     */
     public void cleanup() {
         if (disposable != null) {
             disposable.dispose();
         }
     }
+
     @Override
     public String toString() {
         return getResult().toString();

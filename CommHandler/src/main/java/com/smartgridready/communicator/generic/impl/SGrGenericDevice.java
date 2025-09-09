@@ -12,11 +12,20 @@ import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.common.impl.SGrDeviceBase;
 import com.smartgridready.driver.api.common.GenDriverException;
 
+/**
+ * Implements a generic device, which has no actual communication interface.
+ * Supports constant data points only.
+ */
 public class SGrGenericDevice extends SGrDeviceBase<
         DeviceFrame,
         GenericFunctionalProfile,
         DataPointBase> {
 
+
+    /**
+     * Constructs a new instance.
+     * @param deviceDescription the EID description
+     */
     public SGrGenericDevice(DeviceFrame deviceDescription) {
         super(deviceDescription);
     }

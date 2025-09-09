@@ -2,6 +2,9 @@ package com.smartgridready.communicator.messaging.impl;
 
 import com.smartgridready.ns.v0.MessageFilter;
 
+/**
+ * Implements a message cache key.
+ */
 public class MessageCacheKey {
 
     private final String topic;
@@ -33,15 +36,29 @@ public class MessageCacheKey {
         }
     }
 
+    /**
+     * Gets the message topic.
+     * @return a string
+     */
     public String getTopic() {
         return topic;
     }
 
+    /**
+     * Gets the message filter.
+     * @return a message filter
+     */
     @SuppressWarnings("unused")
     public MessageFilter getMessageFilter() {
         return messageFilter;
     }
 
+    /**
+     * Creates a new instance.
+     * @param topic the topic string
+     * @param messageFilter the optional message filter
+     * @return a new key instance
+     */
     public static MessageCacheKey of(String topic, MessageFilter messageFilter) {
         if (topic == null) {
             throw new IllegalArgumentException("MessageCacheKey topic must not be null.");

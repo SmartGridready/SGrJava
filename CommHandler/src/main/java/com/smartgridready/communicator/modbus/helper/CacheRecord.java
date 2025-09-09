@@ -20,29 +20,49 @@ package com.smartgridready.communicator.modbus.helper;
 
 import java.time.Instant;
 
+/**
+ * Implements a generic cache record.
+ * @param <V> The type of value.
+ * 
+ */
 public class CacheRecord<V> {
-	
-	private final V value;
-	private final Instant lastAccess;
-	
-	public CacheRecord(V value, Instant lastAccess) {
-		this.value = value;
-		this.lastAccess = lastAccess;
-	}
-	
-	public boolean isExpired(Long timeToLiveMs) {
-		if (timeToLiveMs != null && lastAccess != null) {
-			return System.currentTimeMillis() >= lastAccess.toEpochMilli() + timeToLiveMs;
-		}
-		return true;
-	}	
-	public V getValue() {
-		return value;
-	}
+    
+    private final V value;
+    private final Instant lastAccess;
 
-	@Override
-	public String toString() {
-		return "value=" + (value != null ? value.toString() : "<null>")
-			+ ", lastAccess=" + (lastAccess != null ? lastAccess.toString() : "<null>");
-	}
+    /**
+     * Constructs a new instance.
+     * @param value the value to cache
+     * @param lastAccess the access time stamp
+     */
+    public CacheRecord(V value, Instant lastAccess) {
+        this.value = value;
+        this.lastAccess = lastAccess;
+    }
+
+    /**
+     * Tells if the cache has expired.
+     * @param timeToLiveMs milliseconds after last access
+     * @return a boolean
+     */
+    public boolean isExpired(Long timeToLiveMs) {
+        if (timeToLiveMs != null && lastAccess != null) {
+            return System.currentTimeMillis() >= lastAccess.toEpochMilli() + timeToLiveMs;
+        }
+        return true;
+    }
+
+    /**
+     * Gets the cached value.
+     * @return a value
+     */
+    public V getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return "value=" + (value != null ? value.toString() : "<null>")
+            + ", lastAccess=" + (lastAccess != null ? lastAccess.toString() : "<null>");
+    }
 }

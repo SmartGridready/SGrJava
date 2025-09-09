@@ -23,11 +23,18 @@ public class DeviceWriteCallable<T> extends BaseCallable<T> {
 
     private T writeValue;
 
+    /**
+     * Constructs a new instance.
+     * @param writeFunction the write function to execute
+     * @param profileName the functional profile name
+     * @param dataPointName the data point name
+     */
     public DeviceWriteCallable(WriteFunction<T> writeFunction, String profileName, String dataPointName) {
         super(profileName, dataPointName);
         this.writeFunction = writeFunction;
         this.writeValue = null;
     }
+
     @Override
     protected void doFunctionCall() throws
             GenDriverException,
@@ -44,9 +51,14 @@ public class DeviceWriteCallable<T> extends BaseCallable<T> {
         }
     }
 
+    /**
+     * Updates the value to write.
+     * @param writeValue the value to write
+     */
     public void setWriteValue(T writeValue) {
         this.writeValue = writeValue;
     }
+
     @Override
     public String toString() {
         return String.format("Device WRITE: Profile=%s Data Point=%s", profileName, dataPointName);

@@ -1,5 +1,8 @@
 package com.smartgridready.communicator.common.api.values;
 
+/**
+ * Implements an SGr value containing a 32-bit signed integer value.
+ */
 public class Int32Value extends NumberValue<Integer> {
 
     private Int32Value(int value) {
@@ -26,6 +29,11 @@ public class Int32Value extends NumberValue<Integer> {
         // not available
     }
 
+    /**
+     * Creates a new instance from int.
+     * @param value the int value
+     * @return an instance of {@link Int32Value}
+     */
     public static Int32Value of(int value) {
         return new Int32Value(value);
     }

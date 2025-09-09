@@ -56,260 +56,280 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Properties;
 
+/**
+ * Implements a device interface for HTTP / REST APIs.
+ */
 public class SGrRestApiDevice extends SGrDeviceBase<
-		DeviceFrame,
-		RestApiFunctionalProfile,
-		RestApiDataPoint> implements GenDeviceApi4Rest {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(SGrRestApiDevice.class);
-	
-	private final DeviceFrame deviceDescription;
-	private final Authenticator httpAuthenticator;
-	private final GenHttpClientFactory httpClientFactory;
+        DeviceFrame,
+        RestApiFunctionalProfile,
+        RestApiDataPoint> implements GenDeviceApi4Rest {
+    
+    private static final Logger LOG = LoggerFactory.getLogger(SGrRestApiDevice.class);
+    
+    private final DeviceFrame deviceDescription;
+    private final Authenticator httpAuthenticator;
+    private final GenHttpClientFactory httpClientFactory;
 
-	private boolean isConnected;
-	
-	public SGrRestApiDevice(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) throws RestApiAuthenticationException {
-		super(deviceDescription);
-		this.deviceDescription = deviceDescription;
-		this.httpClientFactory = httpClientFactory;
-		this.isConnected = false;
+    private boolean isConnected;
 
-		RestApiAuthenticationMethod authMethod = getRestApiInterfaceDescription().getRestApiAuthenticationMethod();
-		this.httpAuthenticator = AuthenticatorFactory.getAuthenticator(authMethod);
-	}
+    /**
+     * Constructs a new instance.
+     * @param deviceDescription the EID description
+     * @param httpClientFactory the HTTP client factory implementation
+     * @throws RestApiAuthenticationException on HTTP authentication error
+     */
+    public SGrRestApiDevice(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) throws RestApiAuthenticationException {
+        super(deviceDescription);
+        this.deviceDescription = deviceDescription;
+        this.httpClientFactory = httpClientFactory;
+        this.isConnected = false;
 
-	@Override
-	public void connect() throws GenDriverException {
-		try {
-		    authenticate();
+        RestApiAuthenticationMethod authMethod = getRestApiInterfaceDescription().getRestApiAuthenticationMethod();
+        this.httpAuthenticator = AuthenticatorFactory.getAuthenticator(authMethod);
+    }
+
+    @Override
+    public void connect() throws GenDriverException {
+        try {
+            authenticate();
         } catch (Exception e) {
             throw new GenDriverException("Error authenticating", e);
         }
-	}
+    }
 
-	@Override
-	public void disconnect() throws GenDriverException {
+    @Override
+    public void disconnect() throws GenDriverException {
         this.isConnected = false;
-	}
+    }
 
-	@Override
-	public boolean isConnected() {
-		return isConnected;
-	}
-	
-	// TODO make private after removal from interface
-	@Override
-	public void authenticate() throws RestApiAuthenticationException, IOException, RestApiServiceCallException, RestApiResponseParseException {
-		httpAuthenticator.getAuthorizationHeaderValue(deviceDescription, httpClientFactory);
-		this.isConnected = true;
-	}
+    @Override
+    public boolean isConnected() {
+        return isConnected;
+    }
+    
+    // TODO make private after removal from interface
+    @Override
+    public void authenticate() throws RestApiAuthenticationException, IOException, RestApiServiceCallException, RestApiResponseParseException {
+        httpAuthenticator.getAuthorizationHeaderValue(deviceDescription, httpClientFactory);
+        this.isConnected = true;
+    }
 
-	@Override
-	public Value getVal(String profileName, String dataPointName)
-			throws IOException, RestApiServiceCallException, RestApiResponseParseException, GenDriverException {
+    @Override
+    public Value getVal(String profileName, String dataPointName)
+            throws IOException, RestApiServiceCallException, RestApiResponseParseException, GenDriverException {
 
-		RestApiDataPoint dataPoint = findProfileDataPoint(profileName, dataPointName);
-		checkReadWritePermission(dataPoint, RwpDirections.READ);
-		return doReadWriteVal(dataPoint, null, null);
-	}
+        RestApiDataPoint dataPoint = findProfileDataPoint(profileName, dataPointName);
+        checkReadWritePermission(dataPoint, RwpDirections.READ);
+        return doReadWriteVal(dataPoint, null, null);
+    }
 
-	@Override
-	public Value getVal(String profileName, String dataPointName, Properties parameters)
-			throws IOException, RestApiServiceCallException, RestApiResponseParseException, GenDriverException {
+    @Override
+    public Value getVal(String profileName, String dataPointName, Properties parameters)
+            throws IOException, RestApiServiceCallException, RestApiResponseParseException, GenDriverException {
 
-		RestApiDataPoint dataPoint = findProfileDataPoint(profileName, dataPointName);
-		checkReadWritePermission(dataPoint, RwpDirections.READ);
-		return doReadWriteVal(dataPoint, null, parameters);
-	}
+        RestApiDataPoint dataPoint = findProfileDataPoint(profileName, dataPointName);
+        checkReadWritePermission(dataPoint, RwpDirections.READ);
+        return doReadWriteVal(dataPoint, null, parameters);
+    }
 
-	@Override
-	public void setVal(String profileName, String dataPointName, Value value)
-			throws IOException, RestApiServiceCallException, RestApiResponseParseException, GenDriverException {
+    @Override
+    public void setVal(String profileName, String dataPointName, Value value)
+            throws IOException, RestApiServiceCallException, RestApiResponseParseException, GenDriverException {
 
-		RestApiDataPoint dataPoint = findProfileDataPoint(profileName, dataPointName);
-		checkReadWritePermission(dataPoint, RwpDirections.WRITE);
-		doReadWriteVal(dataPoint, value, null);
-	}
+        RestApiDataPoint dataPoint = findProfileDataPoint(profileName, dataPointName);
+        checkReadWritePermission(dataPoint, RwpDirections.WRITE);
+        doReadWriteVal(dataPoint, value, null);
+    }
 
-	private Value doReadWriteVal(RestApiDataPoint dataPoint, Value value, Properties parameters)
-			throws IOException, RestApiServiceCallException, RestApiResponseParseException, GenDriverException {
-		
-		String host = getRestApiInterfaceDescription().getRestApiUri();
-		boolean verifyCertificate = (getRestApiInterfaceDescription().getRestApiVerifyCertificate() != null) ? Boolean.valueOf(getRestApiInterfaceDescription().getRestApiVerifyCertificate()) : true;
+    private Value doReadWriteVal(RestApiDataPoint dataPoint, Value value, Properties parameters)
+            throws IOException, RestApiServiceCallException, RestApiResponseParseException, GenDriverException {
+        
+        String host = getRestApiInterfaceDescription().getRestApiUri();
+        boolean verifyCertificate = (getRestApiInterfaceDescription().getRestApiVerifyCertificate() != null) ? Boolean.valueOf(getRestApiInterfaceDescription().getRestApiVerifyCertificate()) : true;
 
-		Optional<RestApiDataPointConfiguration> dpDescriptionOpt
-				= Optional.ofNullable(dataPoint.getRestApiDataPointConfiguration());
+        Optional<RestApiDataPointConfiguration> dpDescriptionOpt
+                = Optional.ofNullable(dataPoint.getRestApiDataPointConfiguration());
 
-		Properties substitutions = new Properties();
-		if (dpDescriptionOpt.isPresent()) {
+        Properties substitutions = new Properties();
+        if (dpDescriptionOpt.isPresent()) {
 
-			RwpDirections rwpDirection = (value != null) ? RwpDirections.WRITE : RwpDirections.READ;
+            RwpDirections rwpDirection = (value != null) ? RwpDirections.WRITE : RwpDirections.READ;
 
-			RestApiDataPointConfiguration dpDescription = dpDescriptionOpt.get();
-			RestApiServiceCall serviceCall = evaluateRestApiServiceCall(dpDescription, rwpDirection);
+            RestApiDataPointConfiguration dpDescription = dpDescriptionOpt.get();
+            RestApiServiceCall serviceCall = evaluateRestApiServiceCall(dpDescription, rwpDirection);
 
-			if (value != null) {
-				checkOutOfRange(new Value[]{value}, dataPoint);
-				value = applyUnitConversion(dataPoint, value, SGrDeviceBase::divide);
+            if (value != null) {
+                checkOutOfRange(new Value[]{value}, dataPoint);
+                value = applyUnitConversion(dataPoint, value, SGrDeviceBase::divide);
 
-				// substitute value mappings generic -> device
-				substitutions.put(
-					"value",
-					(serviceCall.getValueMapping() != null) ? getMappedDeviceValue(value.getString(), serviceCall.getValueMapping()) : value.getString()
-				);
-			}
-			// substitute default values of request parameters
-			if (null != dataPoint.getDataPoint().getParameterList()) {
-				dataPoint.getDataPoint().getParameterList().getParameterListElement().forEach(p -> {
-					String pVal = (null != p.getDefaultValue()) ? p.getDefaultValue() : "";
-					substitutions.put(p.getName(), pVal);
-				});
-			}
-			// substitute actual request parameters
-			if (parameters != null) {
-				substitutions.putAll(parameters);
-			}
+                // substitute value mappings generic -> device
+                substitutions.put(
+                    "value",
+                    (serviceCall.getValueMapping() != null) ? getMappedDeviceValue(value.getString(), serviceCall.getValueMapping()) : value.getString()
+                );
+            }
+            // substitute default values of request parameters
+            if (null != dataPoint.getDataPoint().getParameterList()) {
+                dataPoint.getDataPoint().getParameterList().getParameterListElement().forEach(p -> {
+                    String pVal = (null != p.getDefaultValue()) ? p.getDefaultValue() : "";
+                    substitutions.put(p.getName(), pVal);
+                });
+            }
+            // substitute actual request parameters
+            if (parameters != null) {
+                substitutions.putAll(parameters);
+            }
 
-			RestServiceClient restServiceClient = RestServiceClient.of(host, verifyCertificate, serviceCall, httpClientFactory, substitutions);
-			String response = handleServiceCall(restServiceClient, httpAuthenticator.isTokenRenewalSupported());
+            RestServiceClient restServiceClient = RestServiceClient.of(host, verifyCertificate, serviceCall, httpClientFactory, substitutions);
+            String response = handleServiceCall(restServiceClient, httpAuthenticator.isTokenRenewalSupported());
 
-			if (value == null) {
-				value = handleServiceResponse(serviceCall, response);
-				return applyUnitConversion(dataPoint, value, SGrDeviceBase::multiply);
-			}
+            if (value == null) {
+                value = handleServiceResponse(serviceCall, response);
+                return applyUnitConversion(dataPoint, value, SGrDeviceBase::multiply);
+            }
 
-			return StringValue.of(response);
-		}
-		throw  new GenDriverException("Missing 'restAPIDataPoint' description in device description XML file");
-	}	
+            return StringValue.of(response);
+        }
+        throw  new GenDriverException("Missing 'restAPIDataPoint' description in device description XML file");
+    }    
 
-	private String handleServiceCall(RestServiceClient serviceClient, boolean tryTokenRenewal) throws IOException, RestApiServiceCallException, RestApiResponseParseException {
+    private String handleServiceCall(RestServiceClient serviceClient, boolean tryTokenRenewal) throws IOException, RestApiServiceCallException, RestApiResponseParseException {
 
-		if (httpAuthenticator.getAuthorizationHeaderValue(deviceDescription, httpClientFactory) != null) {
-			serviceClient.addHeader(HttpHeaders.AUTHORIZATION,
-					httpAuthenticator.getAuthorizationHeaderValue(deviceDescription, httpClientFactory));
-		}
+        if (httpAuthenticator.getAuthorizationHeaderValue(deviceDescription, httpClientFactory) != null) {
+            serviceClient.addHeader(HttpHeaders.AUTHORIZATION,
+                    httpAuthenticator.getAuthorizationHeaderValue(deviceDescription, httpClientFactory));
+        }
 
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Calling REST service: {} - {}", 
-						serviceClient.getBaseUri(), 
-						RestServiceClientUtils.printServiceCall(serviceClient.getRestServiceCall()));
-		}
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Calling REST service: {} - {}", 
+                        serviceClient.getBaseUri(), 
+                        RestServiceClientUtils.printServiceCall(serviceClient.getRestServiceCall()));
+        }
 
-		GenHttpResponse result = serviceClient.callService();
-		if (result.isOk()) {
-			LOG.debug("Received response: {}", result.getResponse());
-			return result.getResponse();
-		} else if (tryTokenRenewal && result.getResponseCode() == HttpStatus.UNAUTHORIZED) {
-			LOG.info("Authorisation error received. Trying with token renewal");
-			httpAuthenticator.renewToken(deviceDescription, httpClientFactory);
-			serviceClient.addHeader(HttpHeaders.AUTHORIZATION, httpAuthenticator.getAuthorizationHeaderValue(deviceDescription, httpClientFactory));
-			// recurse into handleServiceCall, set tryTokenRenewal always to false here!
-			return handleServiceCall(serviceClient, false); 
-		} else {
-			throw new RestApiServiceCallException(result);
-		}
-	}
+        GenHttpResponse result = serviceClient.callService();
+        if (result.isOk()) {
+            LOG.debug("Received response: {}", result.getResponse());
+            return result.getResponse();
+        } else if (tryTokenRenewal && result.getResponseCode() == HttpStatus.UNAUTHORIZED) {
+            LOG.info("Authorisation error received. Trying with token renewal");
+            httpAuthenticator.renewToken(deviceDescription, httpClientFactory);
+            serviceClient.addHeader(HttpHeaders.AUTHORIZATION, httpAuthenticator.getAuthorizationHeaderValue(deviceDescription, httpClientFactory));
+            // recurse into handleServiceCall, set tryTokenRenewal always to false here!
+            return handleServiceCall(serviceClient, false); 
+        } else {
+            throw new RestApiServiceCallException(result);
+        }
+    }
 
-	private Value handleServiceResponse(RestApiServiceCall restApiServiceCall, String response) throws GenDriverException {
+    private Value handleServiceResponse(RestApiServiceCall restApiServiceCall, String response) throws GenDriverException {
 
-		if (restApiServiceCall.getResponseQuery() != null) {
-			ResponseQuery responseQuery = restApiServiceCall.getResponseQuery();
-			if (responseQuery.getQueryType() != null && ResponseQueryType.JMES_PATH_EXPRESSION == responseQuery.getQueryType()) {
-				return JsonHelper.parseJsonResponse(responseQuery.getQuery(), response);
-			} else if (responseQuery.getQueryType() != null && ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
-				return JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
-			}
-		}
+        if (restApiServiceCall.getResponseQuery() != null) {
+            ResponseQuery responseQuery = restApiServiceCall.getResponseQuery();
+            if (responseQuery.getQueryType() != null && ResponseQueryType.JMES_PATH_EXPRESSION == responseQuery.getQueryType()) {
+                return JsonHelper.parseJsonResponse(responseQuery.getQuery(), response);
+            } else if (responseQuery.getQueryType() != null && ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
+                return JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
+            }
+        }
 
-		// return plain response
-		
-		// substitute value mappings device -> generic
-		return StringValue.of(
-			(restApiServiceCall.getValueMapping() != null) ? getMappedGenericValue(response, restApiServiceCall.getValueMapping()) : response
-		);
-	}
+        // return plain response
+        
+        // substitute value mappings device -> generic
+        return StringValue.of(
+            (restApiServiceCall.getValueMapping() != null) ? getMappedGenericValue(response, restApiServiceCall.getValueMapping()) : response
+        );
+    }
 
-	private RestApiServiceCall evaluateRestApiServiceCall(RestApiDataPointConfiguration dataPointConfiguration, RwpDirections rwpDirections)
-		throws GenDriverException {
+    private RestApiServiceCall evaluateRestApiServiceCall(RestApiDataPointConfiguration dataPointConfiguration, RwpDirections rwpDirections)
+        throws GenDriverException {
 
-		for(JAXBElement<?> element : dataPointConfiguration.getContent()) {
+        for(JAXBElement<?> element : dataPointConfiguration.getContent()) {
 
-			if ("restApiServiceCall".equals(element.getName().getLocalPart())) {
-				return (RestApiServiceCall) element.getValue();
-			}
+            if ("restApiServiceCall".equals(element.getName().getLocalPart())) {
+                return (RestApiServiceCall) element.getValue();
+            }
 
-			if (element.getName().getLocalPart().equals("restApiReadServiceCall") && RwpDirections.READ == rwpDirections) {
-				return (RestApiServiceCall) element.getValue();
-			}
+            if (element.getName().getLocalPart().equals("restApiReadServiceCall") && RwpDirections.READ == rwpDirections) {
+                return (RestApiServiceCall) element.getValue();
+            }
 
-			if(element.getName().getLocalPart().equals("restApiReadServiceCall1") && RwpDirections.READ == rwpDirections) {
-				return (RestApiServiceCall) element.getValue();
-			}
+            if(element.getName().getLocalPart().equals("restApiReadServiceCall1") && RwpDirections.READ == rwpDirections) {
+                return (RestApiServiceCall) element.getValue();
+            }
 
-			if (element.getName().getLocalPart().equals("restApiWriteServiceCall") && RwpDirections.WRITE == rwpDirections) {
-				return (RestApiServiceCall) element.getValue();
-			}
+            if (element.getName().getLocalPart().equals("restApiWriteServiceCall") && RwpDirections.WRITE == rwpDirections) {
+                return (RestApiServiceCall) element.getValue();
+            }
 
-			if (element.getName().getLocalPart().equals("restApiWriteServiceCall1") && RwpDirections.WRITE == rwpDirections) {
-				return (RestApiServiceCall) element.getValue();
-			}
-		}
-		throw new GenDriverException(
-				"No suitable service call found for " + rwpDirections.name() + " operation. Check the EI-XML of your device");
-	}
+            if (element.getName().getLocalPart().equals("restApiWriteServiceCall1") && RwpDirections.WRITE == rwpDirections) {
+                return (RestApiServiceCall) element.getValue();
+            }
+        }
+        throw new GenDriverException(
+                "No suitable service call found for " + rwpDirections.name() + " operation. Check the EI-XML of your device");
+    }
 
-	private RestApiDataPoint findProfileDataPoint(String profileName, String dataPointName) throws GenDriverException {
-		
-		Optional<RestApiFunctionalProfile> profile = findProfile(profileName);
-		if (profile.isPresent()) {
-			Optional<RestApiDataPoint> dataPoint = findDataPointForProfile(profile.get(), dataPointName);
-			if (dataPoint.isPresent()) {
-				return dataPoint.get();
-			}
-		}
-		throw new GenDriverException(String.format("DataPoint profile=%s name=%s not found", profileName, dataPointName));
-	}
-	
-	protected Optional<RestApiFunctionalProfile> findProfile(String profileName) {
-		return getRestApiInterface().getFunctionalProfileList().getFunctionalProfileListElement().stream().filter(
-				restApiProfileFrame -> restApiProfileFrame.getFunctionalProfile().getFunctionalProfileName().equals(profileName))
-				.findFirst();
-	}
+    private RestApiDataPoint findProfileDataPoint(String profileName, String dataPointName) throws GenDriverException {
+        
+        Optional<RestApiFunctionalProfile> profile = findProfile(profileName);
+        if (profile.isPresent()) {
+            Optional<RestApiDataPoint> dataPoint = findDataPointForProfile(profile.get(), dataPointName);
+            if (dataPoint.isPresent()) {
+                return dataPoint.get();
+            }
+        }
+        throw new GenDriverException(String.format("DataPoint profile=%s name=%s not found", profileName, dataPointName));
+    }
 
-	protected Optional<RestApiDataPoint> findDataPointForProfile(RestApiFunctionalProfile aProfile,
-			String aDataPointName) {
-		return aProfile.getDataPointList().getDataPointListElement().stream()
-				.filter(dataPoint -> dataPoint.getDataPoint().getDataPointName().equals(aDataPointName))
-				.findFirst();				
-	}
+    /**
+     * Finds a functional profile.
+     * @param profileName the functional profile name
+     * @return an optional {@link RestApiFunctionalProfile}
+     */
+    protected Optional<RestApiFunctionalProfile> findProfile(String profileName) {
+        return getRestApiInterface().getFunctionalProfileList().getFunctionalProfileListElement().stream().filter(
+                restApiProfileFrame -> restApiProfileFrame.getFunctionalProfile().getFunctionalProfileName().equals(profileName))
+                .findFirst();
+    }
 
-	private RestApiInterface getRestApiInterface() {
-		return deviceDescription.getInterfaceList().getRestApiInterface();
-	}
+    /**
+     * Finds a data point.
+     * @param aProfile the functional profile
+     * @param aDataPointName the data point name
+     * @return an optional {@link RestApiFunctionalProfile}
+     */
+    protected Optional<RestApiDataPoint> findDataPointForProfile(RestApiFunctionalProfile aProfile,
+            String aDataPointName) {
+        return aProfile.getDataPointList().getDataPointListElement().stream()
+                .filter(dataPoint -> dataPoint.getDataPoint().getDataPointName().equals(aDataPointName))
+                .findFirst();                
+    }
 
-	private RestApiInterfaceDescription getRestApiInterfaceDescription() {
-		return getRestApiInterface().getRestApiInterfaceDescription();
-	}
+    private RestApiInterface getRestApiInterface() {
+        return deviceDescription.getInterfaceList().getRestApiInterface();
+    }
 
-	private String getMappedDeviceValue(String genericValue, RestApiValueMapping valueMapping) {
-		for (ValueMapping mapping: valueMapping.getMapping()) {
-			if (genericValue.equals(mapping.getGenericValue())) {
-				return mapping.getDeviceValue();
-			}
-		}
+    private RestApiInterfaceDescription getRestApiInterfaceDescription() {
+        return getRestApiInterface().getRestApiInterfaceDescription();
+    }
 
-		return genericValue;
-	}
+    private String getMappedDeviceValue(String genericValue, RestApiValueMapping valueMapping) {
+        for (ValueMapping mapping: valueMapping.getMapping()) {
+            if (genericValue.equals(mapping.getGenericValue())) {
+                return mapping.getDeviceValue();
+            }
+        }
 
-	private String getMappedGenericValue(String deviceValue, RestApiValueMapping valueMapping) {
-		for (ValueMapping mapping: valueMapping.getMapping()) {
-			if (deviceValue.equals(mapping.getDeviceValue())) {
-				return mapping.getGenericValue();
-			}
-		}
+        return genericValue;
+    }
 
-		return deviceValue;
-	}
+    private String getMappedGenericValue(String deviceValue, RestApiValueMapping valueMapping) {
+        for (ValueMapping mapping: valueMapping.getMapping()) {
+            if (deviceValue.equals(mapping.getDeviceValue())) {
+                return mapping.getGenericValue();
+            }
+        }
+
+        return deviceValue;
+    }
 }

@@ -24,29 +24,38 @@ import com.smartgridready.communicator.rest.exception.RestApiAuthenticationExcep
 import java.lang.reflect.Constructor;
 import java.util.EnumMap;
 
+/**
+ * Implements a factory that creates HTTP authenticators.
+ */
 public class AuthenticatorFactory {
-	
-	private AuthenticatorFactory() { /* Utility class */ }
+    
+    private AuthenticatorFactory() { /* Utility class */ }
 
-	private static final EnumMap<RestApiAuthenticationMethod, Class<? extends Authenticator>> AUTHENTICATOR_REGISTRY = new EnumMap<>(RestApiAuthenticationMethod.class);
-	static {
-		AUTHENTICATOR_REGISTRY.put(RestApiAuthenticationMethod.BEARER_SECURITY_SCHEME, BearerTokenAuthenticator.class);
-		AUTHENTICATOR_REGISTRY.put(RestApiAuthenticationMethod.BASIC_SECURITY_SCHEME, BasicAuthenticator.class);
-		AUTHENTICATOR_REGISTRY.put(RestApiAuthenticationMethod.NO_SECURITY_SCHEME, DummyHttpAuthenticator.class);
-	}
-	
-	public static Authenticator getAuthenticator(RestApiAuthenticationMethod authMethodType)
-		throws RestApiAuthenticationException {
-		Class<? extends Authenticator> authClass = AUTHENTICATOR_REGISTRY.get(authMethodType);
-		if (authClass != null) {
-			Constructor<? extends Authenticator> ctor;
-			try {
-				ctor = authClass.getDeclaredConstructor();
-				return ctor.newInstance();
-			} catch (ReflectiveOperationException e) {
-				throw new RestApiAuthenticationException("Authenticator creation failed.", e);
-			}
-		}
-		throw new RestApiAuthenticationException("Authentication method " +  authMethodType.name() + " not supported yet.");		
-	}	
+    private static final EnumMap<RestApiAuthenticationMethod, Class<? extends Authenticator>> AUTHENTICATOR_REGISTRY = new EnumMap<>(RestApiAuthenticationMethod.class);
+    static {
+        AUTHENTICATOR_REGISTRY.put(RestApiAuthenticationMethod.BEARER_SECURITY_SCHEME, BearerTokenAuthenticator.class);
+        AUTHENTICATOR_REGISTRY.put(RestApiAuthenticationMethod.BASIC_SECURITY_SCHEME, BasicAuthenticator.class);
+        AUTHENTICATOR_REGISTRY.put(RestApiAuthenticationMethod.NO_SECURITY_SCHEME, DummyHttpAuthenticator.class);
+    }
+
+    /**
+     * Creates a new HTTP authenticator using reflection.
+     * @param authMethodType the desired authentication method
+     * @return an instance of {@link Authenticator}
+     * @throws RestApiAuthenticationException when creating the instance failed
+     */
+    public static Authenticator getAuthenticator(RestApiAuthenticationMethod authMethodType)
+        throws RestApiAuthenticationException {
+        Class<? extends Authenticator> authClass = AUTHENTICATOR_REGISTRY.get(authMethodType);
+        if (authClass != null) {
+            Constructor<? extends Authenticator> ctor;
+            try {
+                ctor = authClass.getDeclaredConstructor();
+                return ctor.newInstance();
+            } catch (ReflectiveOperationException e) {
+                throw new RestApiAuthenticationException("Authenticator creation failed.", e);
+            }
+        }
+        throw new RestApiAuthenticationException("Authentication method " +  authMethodType.name() + " not supported yet.");        
+    }    
 }

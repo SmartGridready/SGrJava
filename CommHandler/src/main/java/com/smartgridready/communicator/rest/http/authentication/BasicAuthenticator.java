@@ -11,7 +11,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Optional;
 
+/**
+ * Implements an HTTP authenticator for basic authentication.
+ */
 public class BasicAuthenticator implements Authenticator {
+
+    BasicAuthenticator() {}
 
     @Override
     public String getAuthorizationHeaderValue(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) {

@@ -38,33 +38,51 @@ import java.util.stream.Stream;
 import java.util.function.Consumer;
 import java.util.function.DoubleBinaryOperator;
 
-
+/**
+ * Base class for all kinds of device communication interfaces.
+ * @param <D> The type of device specification.
+ * @param <F> The type of functional profile.
+ * @param <P> The type of data point.
+ */
 public abstract class SGrDeviceBase<
         D extends DeviceFrame,
         F extends FunctionalProfileBase,
         P extends DataPointBase> implements GenDeviceApi {
 
+    /** The interface-specific device specification. */
     protected final D device;
 
+    /**
+     * Collection of access permissions.
+     */
     public enum RwpDirections {
+        /** Data point is readable. */
         READ(Stream.of(DataDirectionProduct.R, DataDirectionProduct.RW, DataDirectionProduct.RWP, DataDirectionProduct.C).collect(Collectors.toSet())),
+        /** Data point is writable. */
         WRITE(Stream.of(DataDirectionProduct.W, DataDirectionProduct.RW, DataDirectionProduct.RWP).collect(Collectors.toSet())),
+        /** Data point is constant. */
         CONST(Collections.singleton(DataDirectionProduct.C));
 
         private final Set<DataDirectionProduct> opAllowedTypes;
+
         RwpDirections(Set<DataDirectionProduct> opAllowedTypes) {
             this.opAllowedTypes = opAllowedTypes;
         }
     }
 
+    /**
+     * Comparators.
+     */
     public enum Comparator {
+        /** Minimum. */
         MIN(((val, lim) -> val.compareTo(lim) < 0)),
+        /** Maximum. */
         MAX(((val, lim) -> val.compareTo(lim) > 0));
 
         private final BiPredicate<Double, Double> cmpFunc;
 
         Comparator(BiPredicate<Double,Double> cmpFunc) {
-           this.cmpFunc = cmpFunc;
+            this.cmpFunc = cmpFunc;
         }
 
         BiPredicate<Double,Double> getCmpFunc() {
@@ -72,14 +90,36 @@ public abstract class SGrDeviceBase<
         }
     }
 
+    /**
+     * Constructs a new instance.
+     * @param device the generic device specification
+     */
     protected SGrDeviceBase(D device) {
         this.device = device;
     }
 
+    /**
+     * Finds a functional profile by name.
+     * @param profileName the name of the functional profile
+     * @return an optional functional profile
+     */
     protected abstract Optional<F> findProfile(String profileName);
 
+    /**
+     * Finds a data point of a given functional profile by name.
+     * @param functionalProfile the functional profile
+     * @param dataPointName the name of the data point to find
+     * @return an optional data point
+     */
     protected abstract Optional<P> findDataPointForProfile(F functionalProfile, String dataPointName);
 
+    /**
+     * Finds a data point by functional profile and data point name.
+     * @param profileName the functional profile name
+     * @param dataPointName the data point name
+     * @return a generic data point
+     * @throws GenDriverException if the device specification contains errors
+     */
     protected P findDataPoint(String profileName, String dataPointName) throws GenDriverException {
         Optional<F> functionalProfile = findProfile(profileName);
         if (functionalProfile.isPresent()) {
@@ -91,6 +131,12 @@ public abstract class SGrDeviceBase<
         }
     }
 
+    /**
+     * Tests an array of SGr values against upper and lower bounds of a given data point. 
+     * @param values the values to test
+     * @param dataPoint the data point to test against
+     * @throws GenDriverException when one or more values are out of bounds
+     */
     public void checkOutOfRange(Value[] values, DataPointBase dataPoint)
         throws GenDriverException {
 
@@ -105,6 +151,12 @@ public abstract class SGrDeviceBase<
         }
     }
 
+    /**
+     * Tests a given data point's read or write permissions.
+     * @param dataPoint the data point to test
+     * @param direction the permission to test against
+     * @throws GenDriverException on generic error
+     */
     public void checkReadWritePermission(DataPointBase dataPoint, RwpDirections direction) throws GenDriverException {
 
         DataDirectionProduct dRWPType = dataPoint.getDataPoint().getDataDirection();
@@ -116,6 +168,14 @@ public abstract class SGrDeviceBase<
         }
     }
 
+    /**
+     * Checks if a value is beyond its valid range.
+     * @param values the values to test
+     * @param limit the bounds
+     * @param comparator the comparator function
+     * @return an empty instance
+     * @throws GenDriverException if at least one value is out of range
+     */
     protected Optional<String> checkOutOfRange(Value[] values, double limit, Comparator comparator) throws GenDriverException {
 
         List<Value> outOfRangeValues = Arrays.stream(values)
@@ -132,7 +192,7 @@ public abstract class SGrDeviceBase<
     @Override
     public DeviceInfo getDeviceInfo() throws GenDriverException {
 
-       var deviceWithInterface = DeviceWithInterface.of(device);
+        var deviceWithInterface = DeviceWithInterface.of(device);
 
         var genericAttributes = Optional.ofNullable(device.getGenericAttributeList())
                 .map(GenericAttributeListProduct::getGenericAttributeListElement)
@@ -290,36 +350,61 @@ public abstract class SGrDeviceBase<
         throw new GenDriverException("Unsubscribe not allowed");
     }
 
+    /**
+     * Performs conversion of units of measurements on a data point.
+     * @param <P> the generic type of data point
+     * @param dataPoint the data point instance
+     * @param value the value to convert
+     * @param conversionFunction the converter function
+     * @return the converted value
+     */
     protected static <P extends DataPointBase> Value applyUnitConversion(P dataPoint, Value value, DoubleBinaryOperator conversionFunction) {
 
-		if (dataPoint.getDataPoint().getUnitConversionMultiplicator() != null
-				&& isNumeric(value)
-				&& dataPoint.getDataPoint().getUnitConversionMultiplicator() != 0.0) {
-			return Float64Value.of(conversionFunction.applyAsDouble(value.getFloat64(), dataPoint.getDataPoint().getUnitConversionMultiplicator()));
-		}
-		return value;
-	}
+        if (dataPoint.getDataPoint().getUnitConversionMultiplicator() != null
+                && isNumeric(value)
+                && dataPoint.getDataPoint().getUnitConversionMultiplicator() != 0.0) {
+            return Float64Value.of(conversionFunction.applyAsDouble(value.getFloat64(), dataPoint.getDataPoint().getUnitConversionMultiplicator()));
+        }
+        return value;
+    }
 
-	protected static boolean isNumeric(Value value) {
-		if (value == null) {
-			return false;
-		}
+    /**
+     * Tells if a value contains a number.
+     * @param value the SGr value to test
+     * @return a boolean
+     */
+    protected static boolean isNumeric(Value value) {
+        if (value == null) {
+            return false;
+        }
 
-		try {
-			value.getFloat64();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+        try {
+            value.getFloat64();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-	protected static double divide(double dividend, double divisor) {
-		return  dividend / divisor;
-	}
+    /**
+     * Divides two numbers.
+     * @param dividend the dividend
+     * @param divisor the divisor
+     * @return the division result
+     */
+    protected static double divide(double dividend, double divisor) {
+        return  dividend / divisor;
+    }
 
-	protected static double multiply(double factor1, double factor2) {
-		return  factor1 * factor2;
-	}
+    /**
+     * Multiplies two numbers.
+     * @param factor1 the first factor
+     * @param factor2 the second factor
+     * @return the multiplication result
+     */
+    protected static double multiply(double factor1, double factor2) {
+        return  factor1 * factor2;
+    }
 
     private List<DynamicRequestParameter> mapToDynamicRequestParameters(List<DynamicParameterDescriptionListElement> reqParamDescriptions ) {
 

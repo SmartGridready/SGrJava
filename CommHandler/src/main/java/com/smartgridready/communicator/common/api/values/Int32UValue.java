@@ -1,6 +1,10 @@
 package com.smartgridready.communicator.common.api.values;
 
+/**
+ * Implements an SGr value containing a 32-bit unsigned integer value.
+ */
 public class Int32UValue extends NumberValue<Long> {
+
     private Int32UValue(long value) {
         this.value = value;
     }
@@ -26,6 +30,11 @@ public class Int32UValue extends NumberValue<Long> {
         // is already an int
     }
 
+    /**
+     * Creates a new instance from long.
+     * @param value the long value
+     * @return an instance of {@link Int32UValue}
+     */
     public static Int32UValue of(long value) {
         return new Int32UValue(value);
     }

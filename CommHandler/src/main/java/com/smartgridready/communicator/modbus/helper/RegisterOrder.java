@@ -18,4 +18,12 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package com.smartgridready.communicator.modbus.helper;
 
-public enum RegisterOrder { LowHigh, HighLow };
+/**
+ * Defines the order of Modbus registers.
+ */
+public enum RegisterOrder {
+    /** LSR first. */
+    LowHigh,
+    /** MSR first. */
+    HighLow
+}

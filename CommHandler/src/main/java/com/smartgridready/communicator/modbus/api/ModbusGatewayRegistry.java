@@ -19,7 +19,7 @@ public interface ModbusGatewayRegistry {
      * @param driverFactory the Modbus driver factory
      * @param key the unique device object key
      * @return a Modbus gateway instance
-     * @throws GenDriverException
+     * @throws GenDriverException when the gateway could not be attached
      */
     public ModbusGateway attachGateway(
         ModbusInterfaceDescription interfaceDescription,
@@ -31,18 +31,26 @@ public interface ModbusGatewayRegistry {
      * Disconnects the Modbus transport gateway of a given device.
      * @param interfaceDescription the device's Modbus interface description
      * @param key the unique device object key
-     * @throws GenDriverException
+     * @throws GenDriverException when no gateway could be detached
      */
     public void detachGateway(ModbusInterfaceDescription interfaceDescription, String key) throws GenDriverException;
 
     /**
      * Disconnects the Modbus transport gateway of a given device.
      * @param identifier the transport identifier
-     * @throws GenDriverException
+     * @param key the unique device object key
+     * @throws GenDriverException when no gateway could be detached
      */
     public void detachGateway(String identifier, String key) throws GenDriverException;
 
+    /**
+     * Disconnects all Modbus transport gateways.
+     */
     public void detachAllGateways();
 
+    /**
+     * Gets all transport identifiers.
+     * @return a list of strings
+     */
     public List<String> getAllGatewayIdentifiers();
 }

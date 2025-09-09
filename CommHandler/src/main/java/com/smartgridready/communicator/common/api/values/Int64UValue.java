@@ -7,11 +7,15 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.BigIntegerNode;
 
+/**
+ * Implements an SGr value containing a 64-bit unsigned integer value.
+ * Requires {@link BigInteger}, because Java has no matching numeric type.
+ */
 public class Int64UValue extends Value {
 
-    BigInteger value;
+    private BigInteger value;
 
-    public Int64UValue(BigInteger value) {
+    private Int64UValue(BigInteger value) {
         this.value = value;
     }
 
@@ -109,6 +113,12 @@ public class Int64UValue extends Value {
         return new Int64UValue[]{this};
     }
 
+    /**
+     * Scales down by powers of 10.
+     * @param mul the multiplicator
+     * @param powOf10 the exponent of the power of 10
+     * @return a numeric value
+     */
     public NumberValue<Double> scaleDown(int mul, int powOf10) {
         if (mul != 1 || powOf10 !=0) {
             BigInteger val = value.divide(BigInteger.valueOf(mul));
@@ -119,6 +129,12 @@ public class Int64UValue extends Value {
         return Float64Value.of(value.doubleValue());
     }
 
+    /**
+     * Scales up by powers of 10.
+     * @param mul the multiplicator
+     * @param powOf10 the exponent of the power of 10
+     * @return a numeric value
+     */
     public NumberValue<Double> scaleUp(int mul, int powOf10) {
         if (mul != 1 || powOf10 !=0) {
             BigInteger val = value.multiply(BigInteger.valueOf(mul));
@@ -139,6 +155,11 @@ public class Int64UValue extends Value {
         // is already int
     }
 
+    /**
+     * Creates a new instance from BigInteger.
+     * @param value the BigInteger value
+     * @return an instance of {@link Int64UValue}
+     */
     public static Int64UValue of(BigInteger value) {
         return new Int64UValue(value);
     }

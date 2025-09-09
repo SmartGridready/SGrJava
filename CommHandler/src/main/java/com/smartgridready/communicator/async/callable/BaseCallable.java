@@ -12,10 +12,17 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.concurrent.Callable;
 
+/**
+ * Base class for callable methods on SGr devices.
+ * @param <T> the result type
+ */
 public abstract class BaseCallable<T> implements Callable<AsyncResult<T>> {
 
+    /** The functional profile name. */
     protected final String profileName;
+    /** The data point name. */
     protected final String dataPointName;
+    /** The execution result. */
     protected final AsyncResult<T> result = new AsyncResult<>();
 
     abstract void doFunctionCall()
@@ -23,6 +30,11 @@ public abstract class BaseCallable<T> implements Callable<AsyncResult<T>> {
             RestApiServiceCallException, RestApiAuthenticationException, GenDriverSocketException,
             IOException;
 
+    /**
+     * Constructs a new instance.
+     * @param profileName the functional profile name
+     * @param dataPointName the data point name
+     */
     public BaseCallable(String profileName, String dataPointName) {
         this.profileName = profileName;
         this.dataPointName = dataPointName;
@@ -47,12 +59,26 @@ public abstract class BaseCallable<T> implements Callable<AsyncResult<T>> {
         return result;
     }
 
+    /**
+     * Gets the functional profile name.
+     * @return a string
+     */
     public String getProfileName() {
         return profileName;
     }
+
+    /**
+     * Gets the functional profile name.
+     * @return a string
+     */
     public String getDataPointName() {
         return dataPointName;
     }
+
+    /**
+     * Gets the process result.
+     * @return an instance of {@link AsyncResult}
+     */
     public AsyncResult<T> getResult() {
         return result;
     }

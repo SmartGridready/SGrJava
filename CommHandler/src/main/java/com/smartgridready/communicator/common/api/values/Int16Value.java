@@ -1,5 +1,8 @@
 package com.smartgridready.communicator.common.api.values;
 
+/**
+ * Implements an SGr value containing a 16-bit signed integer value.
+ */
 public class Int16Value extends NumberValue<Short> {
 
     private Int16Value(short value) {
@@ -27,6 +30,11 @@ public class Int16Value extends NumberValue<Short> {
         // not available
     }
 
+    /**
+     * Creates a new instance from short.
+     * @param value the short value
+     * @return an instance of {@link Int16Value}
+     */
     public static Int16Value of(short value) {
         return new Int16Value(value);
     }

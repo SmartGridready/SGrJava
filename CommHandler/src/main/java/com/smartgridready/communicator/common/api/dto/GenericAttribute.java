@@ -16,13 +16,25 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Implements a generic attribute facade.
+ */
 public class GenericAttribute {
+
     private final String name;
     private final Value value;
     private final DataTypeInfo dataType;
     private final Units unit;
     private final List<GenericAttribute> children;
 
+    /**
+     * Construct a new instance.
+     * @param name the attribute name
+     * @param value the attribute value
+     * @param dataType the attribute value's data type
+     * @param unit the attribute value's unit of measurement
+     * @param children a list of child attributes
+     */
     public GenericAttribute(
             String name,
             Value value,
@@ -36,27 +48,51 @@ public class GenericAttribute {
         this.children = children;
     }
 
+    /**
+     * Gets the attribute name.
+     * @return a string
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the attribute value.
+     * @return a value
+     */
     public Value getValue() {
         return value;
     }
 
+    /**
+     * Gets the value's data type.
+     * @return a data type info
+     */
     public DataTypeInfo getDataType() {
         return dataType;
     }
 
+    /**
+     * Gets the value's unit of measurement.
+     * @return an instance of {@link Units}
+     */
     public Units getUnit() {
         return unit;
     }
 
-    @SuppressWarnings("unused")
+    /**
+     * Gets the attribute's sub-attributes.
+     * @return a list of {@link GenericAttribute}
+     */
     public List<GenericAttribute> getChildren() {
         return children;
     }
 
+    /**
+     * Creates a new instance.
+     * @param genAttribute the attribute specification
+     * @return a new instance of {@link GenericAttribute}
+     */
     public static GenericAttribute of(GenericAttributeProduct genAttribute) {
 
         List<GenericAttribute> children = Optional.ofNullable(genAttribute.getGenericAttributeList())
@@ -80,6 +116,11 @@ public class GenericAttribute {
         );
     }
 
+    /**
+     * Creates a new instance.
+     * @param genAttributeChild the attribute specification
+     * @return a new instance of {@link GenericAttribute}
+     */
     public static GenericAttribute of(GenericAttributeProductEnd genAttributeChild) {
 
         DataTypeInfo dt = DataType.getDataTypeInfo(genAttributeChild.getDataType()).orElse(null);
@@ -112,6 +153,11 @@ public class GenericAttribute {
                         (unit!=null ?     " | unit : " + unit.name():"");
     }
 
+    /**
+     * Maps a list of generic attributes.
+     * @param genericAttributeProducts the attribute specifications
+     * @return a list of {@link GenericAttribute}
+     */
     public static List<GenericAttribute> mapGenericAttributes(List<GenericAttributeProductEnd> genericAttributeProducts) {
         ArrayList<GenericAttribute> genericAttributes = new ArrayList<>();
         genericAttributeProducts.forEach(genericAttributeProduct ->

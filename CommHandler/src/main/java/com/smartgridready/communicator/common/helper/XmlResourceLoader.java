@@ -15,28 +15,44 @@ import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
 
+/**
+ * Implements a generic XML deserializer that loads resources.
+ * @param <T> The type to deserialize into.
+ */
 public class XmlResourceLoader<T> {
 
     private final Class<T> clazz;
 
+    /**
+     * Constructs a new instance.
+     * @param clazz type to deserialize into 
+     */
     public XmlResourceLoader(Class<T> clazz) {
         this.clazz = clazz;
     }
 
+    /**
+     * Deserializes XML into an object.
+     * @param resourcePath the path of the loaded resource
+     * @param xmlContent the XML content loaded from the resource
+     * @param validate validates schema if true
+     * @return an instance of the desired type
+     * @throws IOException when deserialization failed
+     */
     public T load(String resourcePath, String xmlContent, boolean validate) throws IOException {
 
         T result;
-		try {
-			result = unmarshal(xmlContent, validate);
-		} catch (Exception e) {
+        try {
+            result = unmarshal(xmlContent, validate);
+        } catch (Exception e) {
             throw new IOException(e.getCause() != null ? e.getCause() : e);
-		}
+        }
 
         if (result == null) {
-			throw new IOException(String.format("Resource '%s' could not be loaded", resourcePath));
-		}
+            throw new IOException(String.format("Resource '%s' could not be loaded", resourcePath));
+        }
 
-		return result;
+        return result;
     }
 
     @SuppressWarnings("unchecked")

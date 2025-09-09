@@ -10,16 +10,24 @@ import com.smartgridready.communicator.rest.exception.RestApiServiceCallExceptio
 import java.io.IOException;
 
 /**
- * Callable that wraps a device read command
+ * Callable that wraps a device read command.
  * @param <T> Type of the value returned by the device read command.
  */
 public class DeviceReadCallable<T> extends BaseCallable<T> {
+
     private final ReadFunction<T> readFunction;
 
+    /**
+     * Constructs a new instance.
+     * @param readFunction the read function to execute
+     * @param profileName the functional profile name
+     * @param dataPointName the data point name
+     */
     public DeviceReadCallable(ReadFunction<T> readFunction, String profileName, String dataPointName) {
         super(profileName, dataPointName);
         this.readFunction = readFunction;
     }
+
     @Override
     protected void doFunctionCall() throws
             GenDriverException,
@@ -31,6 +39,7 @@ public class DeviceReadCallable<T> extends BaseCallable<T> {
             IOException {
             result.setValue(readFunction.apply(profileName, dataPointName));
     }
+
     @Override
     public String toString() {
         return String.format("Device READ: Profile=%s Data Point=%s", profileName, dataPointName);

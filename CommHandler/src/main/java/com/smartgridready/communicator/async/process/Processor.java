@@ -7,21 +7,40 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Base class for task processors.
+ */
 public abstract class Processor {
 
     private static final Long WAIT_TIMEOUT_MS = 1000L;
-	
-	private static final Logger LOG  = LoggerFactory.getLogger(Processor.class); 
 
-    private final List<Executable> awaitList = new ArrayList<>();
+    private static final Logger LOG  = LoggerFactory.getLogger(Processor.class); 
 
+    private final List<Executable> awaitList;
+
+    Processor() {
+        awaitList = new ArrayList<>();
+    }
+
+    /**
+     * Executes the processes.
+     * @param processingType the type of execution
+     */
     public abstract void process(ProcessingType processingType);
 
+    /**
+     * Executes the processes in parallel. 
+     */
     public void process() {
         process(ProcessingType.PARALLEL);
         handleAwait();
     }
 
+    /**
+     * Prepares awaiting processes to be finished.
+     * @param executables the processes to await
+     * @return the same instance
+     */
     public Processor await(Executable ... executables) {
         Arrays.stream(executables).forEach(exec -> exec.setFinishedNotificationReceiver(awaitList));
         awaitList.addAll(Arrays.asList(executables));

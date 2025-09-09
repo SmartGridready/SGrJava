@@ -26,12 +26,37 @@ import com.smartgridready.communicator.rest.exception.RestApiResponseParseExcept
 import com.smartgridready.communicator.rest.exception.RestApiServiceCallException;
 import com.smartgridready.driver.api.http.GenHttpClientFactory;
 
+/**
+ * Defines the interface of an HTTP authenticator.
+ */
 public interface Authenticator {
-	
-	String getAuthorizationHeaderValue(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) throws IOException, RestApiServiceCallException, RestApiResponseParseException;
-	
-	default boolean isTokenRenewalSupported() { return false; }
-	
-	default void renewToken(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) throws IOException, RestApiServiceCallException, RestApiResponseParseException {}
-	
+
+    /**
+     * Retrieves the value of the authorization header of HTTP requests.
+     * @param deviceDescription the SGr device specification
+     * @param httpClientFactory the SGr HTTP client factory
+     * @return a string
+     * @throws IOException when a communication error occurred
+     * @throws RestApiServiceCallException when the authentication failed
+     * @throws RestApiResponseParseException when the response could not be parsed
+     */
+    String getAuthorizationHeaderValue(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) throws IOException, RestApiServiceCallException, RestApiResponseParseException;
+
+    /**
+     * Tells if access tokens can be renewed instead of re-authenticating.
+     * Defaults to {@code false}.
+     * @return a boolean
+     */
+    default boolean isTokenRenewalSupported() { return false; }
+
+    /**
+     * Renews the access token.
+     * Defaults to an empty implementation.
+     * @param deviceDescription the SGr device specification
+     * @param httpClientFactory the SGr HTTP client factory
+     * @throws IOException when a communication error occurred
+     * @throws RestApiServiceCallException when the renewal failed
+     * @throws RestApiResponseParseException when the response could not be parsed
+     */
+    default void renewToken(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) throws IOException, RestApiServiceCallException, RestApiResponseParseException {}
 }

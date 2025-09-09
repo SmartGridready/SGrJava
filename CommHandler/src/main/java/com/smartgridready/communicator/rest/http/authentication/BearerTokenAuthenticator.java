@@ -39,98 +39,103 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Implements an HTTP authenticator using JWT bearer tokens.
+ */
 public class BearerTokenAuthenticator implements Authenticator {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(BearerTokenAuthenticator.class);
+    
+    private static final Logger LOG = LoggerFactory.getLogger(BearerTokenAuthenticator.class);
 
-	private String bearerToken;
-	
-	@Override
-	public String getAuthorizationHeaderValue(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory)
-			throws IOException, RestApiServiceCallException{
-		
-		if (bearerToken == null) {
-			authenticate(deviceDescription, httpClientFactory);
-		}
-		return "Bearer " + bearerToken;
-	}	
-	
-	@Override
-	public boolean isTokenRenewalSupported() {
-		return true;
-	}
-	
-	@Override
-	public void renewToken(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) throws IOException, RestApiServiceCallException {
-		bearerToken = null;
-		authenticate(deviceDescription, httpClientFactory);
-	}
-	
-	private void authenticate(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) throws IOException, RestApiServiceCallException {
-		
-		RestApiInterfaceDescription ifDescription =
-				deviceDescription.getInterfaceList().getRestApiInterface().getRestApiInterfaceDescription();
+    private String bearerToken;
 
-		String host = ifDescription.getRestApiUri();
-		boolean verifyCertificate = (ifDescription.getRestApiVerifyCertificate() != null) ? Boolean.valueOf(ifDescription.getRestApiVerifyCertificate()) : true;
+    BearerTokenAuthenticator() {}
+    
+    @Override
+    public String getAuthorizationHeaderValue(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory)
+            throws IOException, RestApiServiceCallException{
+        
+        if (bearerToken == null) {
+            authenticate(deviceDescription, httpClientFactory);
+        }
+        return "Bearer " + bearerToken;
+    }    
+    
+    @Override
+    public boolean isTokenRenewalSupported() {
+        return true;
+    }
+    
+    @Override
+    public void renewToken(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) throws IOException, RestApiServiceCallException {
+        bearerToken = null;
+        authenticate(deviceDescription, httpClientFactory);
+    }
+    
+    private void authenticate(DeviceFrame deviceDescription, GenHttpClientFactory httpClientFactory) throws IOException, RestApiServiceCallException {
+        
+        RestApiInterfaceDescription ifDescription =
+                deviceDescription.getInterfaceList().getRestApiInterface().getRestApiInterfaceDescription();
 
-		RestServiceClient restServiceClient = RestServiceClient.of(host, verifyCertificate, ifDescription.getRestApiBearer().getRestApiServiceCall(), httpClientFactory);
+        String host = ifDescription.getRestApiUri();
+        boolean verifyCertificate = (ifDescription.getRestApiVerifyCertificate() != null) ? Boolean.valueOf(ifDescription.getRestApiVerifyCertificate()) : true;
 
-		requestBearerToken(restServiceClient);
-	}
-	
-	private void requestBearerToken(RestServiceClient restServiceClient) throws IOException, RestApiServiceCallException {
-		
-		if (LOG.isInfoEnabled()) {
-				LOG.debug("Calling REST service: {} - {}", 
-							restServiceClient.getBaseUri(),
-							RestServiceClientUtils.printServiceCall(restServiceClient.getRestServiceCall()));
-		}
-		
-		GenHttpResponse result = restServiceClient.callService();
-		if (result!=null && result.isOk()) {
-			LOG.info("Received response: {}", result.getResponse());
-			bearerToken = handleResponse(result.getResponse(), restServiceClient.getRestServiceCall());
-			if (bearerToken != null) {
-				LOG.debug("Received bearer token={}", bearerToken);
-			} else {
-				LOG.error("Bearer token missing in response.");
-			}
-			
-		} else {
-			LOG.error("Authenticate failed with http status={}", result != null ? result.getResponseCode() : -1);
-			throw new RestApiServiceCallException(
-					result != null ? result : GenHttpResponse.of("", -1, "No response received"));
-		}				
-	}
+        RestServiceClient restServiceClient = RestServiceClient.of(host, verifyCertificate, ifDescription.getRestApiBearer().getRestApiServiceCall(), httpClientFactory);
 
-	private String handleResponse(String result, RestApiServiceCall restApiServiceCall) throws IOException {
+        requestBearerToken(restServiceClient);
+    }
+    
+    private void requestBearerToken(RestServiceClient restServiceClient) throws IOException, RestApiServiceCallException {
+        
+        if (LOG.isInfoEnabled()) {
+                LOG.debug("Calling REST service: {} - {}", 
+                            restServiceClient.getBaseUri(),
+                            RestServiceClientUtils.printServiceCall(restServiceClient.getRestServiceCall()));
+        }
+        
+        GenHttpResponse result = restServiceClient.callService();
+        if (result!=null && result.isOk()) {
+            LOG.info("Received response: {}", result.getResponse());
+            bearerToken = handleResponse(result.getResponse(), restServiceClient.getRestServiceCall());
+            if (bearerToken != null) {
+                LOG.debug("Received bearer token={}", bearerToken);
+            } else {
+                LOG.error("Bearer token missing in response.");
+            }
+            
+        } else {
+            LOG.error("Authenticate failed with http status={}", result != null ? result.getResponseCode() : -1);
+            throw new RestApiServiceCallException(
+                    result != null ? result : GenHttpResponse.of("", -1, "No response received"));
+        }                
+    }
 
-		Optional<String> queryOpt = Optional.ofNullable(restApiServiceCall.getResponseQuery())
-				.filter(responseQuery -> responseQuery.getQueryType() != null
-						&& responseQuery.getQueryType() == ResponseQueryType.JMES_PATH_EXPRESSION)
-				.map(ResponseQuery::getQuery);
+    private String handleResponse(String result, RestApiServiceCall restApiServiceCall) throws IOException {
 
-		if (queryOpt.isPresent()) {
-			return parseResponse(result, queryOpt.get());
-		}
-		return result;
-	}
-	
-	private String parseResponse(String jsonResp, String jmesPath) throws IOException {
-		
-		JmesPath<JsonNode> path = new JacksonRuntime();
-		Expression<JsonNode> expression = path.compile(jmesPath);
-		
-		ObjectMapper mapper = new ObjectMapper();
-		JsonNode jsonNode = mapper.readTree(jsonResp);		
-		JsonNode res = expression.search(jsonNode);
-		
-		if (res != null) {
-			return res.asText();
-		}
-		
-		LOG.error("Unable to extract bearer token from http response.");
-		return null;
-	}
+        Optional<String> queryOpt = Optional.ofNullable(restApiServiceCall.getResponseQuery())
+                .filter(responseQuery -> responseQuery.getQueryType() != null
+                        && responseQuery.getQueryType() == ResponseQueryType.JMES_PATH_EXPRESSION)
+                .map(ResponseQuery::getQuery);
+
+        if (queryOpt.isPresent()) {
+            return parseResponse(result, queryOpt.get());
+        }
+        return result;
+    }
+    
+    private String parseResponse(String jsonResp, String jmesPath) throws IOException {
+        
+        JmesPath<JsonNode> path = new JacksonRuntime();
+        Expression<JsonNode> expression = path.compile(jmesPath);
+        
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jsonNode = mapper.readTree(jsonResp);        
+        JsonNode res = expression.search(jsonNode);
+        
+        if (res != null) {
+            return res.asText();
+        }
+        
+        LOG.error("Unable to extract bearer token from http response.");
+        return null;
+    }
 }

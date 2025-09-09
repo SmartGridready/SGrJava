@@ -17,6 +17,12 @@ import com.smartgridready.driver.api.common.GenDriverException;
 import com.smartgridready.driver.api.contacts.GenDriverAPI4Contacts;
 import com.smartgridready.driver.api.contacts.GenDriverAPI4ContactsFactory;
 
+/**
+ * Implements a communication interface based on digital contacts.
+ * This class implements the generic part.
+ * As control of the digital contacts is hardware-specific, an appropriate
+ * {@link GenDriverAPI4Contacts} driver has to be implemented.
+ */
 public class SGrContactsDevice extends SGrDeviceBase<
         DeviceFrame,
         ContactFunctionalProfile,
@@ -24,6 +30,11 @@ public class SGrContactsDevice extends SGrDeviceBase<
 
     private GenDriverAPI4Contacts aDriver;
 
+    /**
+     * Constructs a new instance.
+     * @param deviceDescription the device specification
+     * @param aDriverFactory the contacts driver factory
+     */
     public SGrContactsDevice(DeviceFrame deviceDescription, GenDriverAPI4ContactsFactory aDriverFactory) {
         super(deviceDescription);
 

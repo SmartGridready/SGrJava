@@ -9,14 +9,21 @@ import java.nio.IntBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
+/**
+ * A helper class for value conversion.
+ */
 public class ConversionHelper {
 
     private static final Logger LOG = LoggerFactory.getLogger(ConversionHelper.class);
 
-    private ConversionHelper() {
-        // helper class
-    }
+    private ConversionHelper() { /* helper class */ }
 
+    /**
+     * Converts a byte array to Modbus registers.
+     * Each two bytes become a register value.
+     * @param bytes the byte array to convert.
+     * @return an array of int
+     */
     public static int[] bytesToRegisters(byte[] bytes) {
         ByteBuffer bbuf = ByteBuffer.wrap(bytes);
         IntBuffer ibuf =  IntBuffer.allocate(bytes.length/2);
@@ -33,6 +40,11 @@ public class ConversionHelper {
         return ibuf.array();
     }
 
+    /**
+     * Converts Modbus registers to a byte buffer.
+     * @param intArr the Modbus register values
+     * @return an instance of {@link ByteBuffer}
+     */
     public static ByteBuffer byteBufFromRegisters(int[] intArr) {
         ByteBuffer bbuf = ByteBuffer.allocate(intArr.length*2);
         for (int j : intArr) {
@@ -42,6 +54,11 @@ public class ConversionHelper {
         return bbuf;
     }
 
+    /**
+     * Converts a float value to two Modbus registers.
+     * @param fVal the value to convert
+     * @return an array of int
+     */
     public static int[] floatToRegisters(float fVal) {
         int[] res = new int[2];
         ByteBuffer bbuf = ByteBuffer.allocate(4);
@@ -55,6 +72,11 @@ public class ConversionHelper {
         return res;
     }
 
+    /**
+     * Converts a double value to four Modbus registers.
+     * @param dVal the value to convert
+     * @return an array of int
+     */
     public static int[] doubleToRegisters(double dVal) {
 
         int[] res = new int[4];
@@ -70,6 +92,11 @@ public class ConversionHelper {
         return res;
     }
 
+    /**
+     * Converts a long value to four Modbus registers.
+     * @param lVal the value to convert
+     * @return an array of int
+     */
     public static int[] longToRegisters(long lVal) {
         int[] res = new int[4];
 
@@ -83,6 +110,11 @@ public class ConversionHelper {
         return res;
     }
 
+    /**
+     * Converts an unsigned long value to four Modbus registers.
+     * @param value the value to convert
+     * @return an array of int
+     */
     public static int[] unsignedLongToRegister(BigInteger value) {
         byte[] res = new byte[8];
         byte[] inBytes = value.toByteArray();
@@ -93,7 +125,11 @@ public class ConversionHelper {
         return bytesToRegisters(res);
     }
 
-
+    /**
+     * Converts an int value to two Modbus registers.
+     * @param value the value to convert
+     * @return an array of int
+     */
     public static int[] intToRegisters(int value) {
         int[] res = new int[2];
         res[0] = ((short) (value >> 16) & 0x0000ffff);
@@ -104,6 +140,11 @@ public class ConversionHelper {
         return res;
     }
 
+    /**
+     * Converts an unsigned int value to two Modbus registers.
+     * @param value the value to convert
+     * @return an array of int
+     */
     public static int[] uintToRegisters(long value) {
         int[] res = intToRegisters((int)value);
         if (LOG.isDebugEnabled()) {
@@ -112,6 +153,11 @@ public class ConversionHelper {
         return res;
     }
 
+    /**
+     * Converts a short value to a Modbus register.
+     * @param value the value to convert
+     * @return an array of int
+     */
     public static int[] shortToRegister(short value) {
         int resVal = value & 0x0000ffff;
         if (LOG.isDebugEnabled()) {
@@ -168,6 +214,11 @@ public class ConversionHelper {
         return returnarray;
     }
 
+    /**
+     * Converts an int to a byte array.
+     * @param value the value to convert
+     * @return a byte array
+     */
     public static byte[] toByteArray(int value) {
         byte[] result = new byte[2];
         result[1] = (byte) (value >> 8);
@@ -175,6 +226,12 @@ public class ConversionHelper {
         return result;
     }
 
+    /**
+     * Converts a byte array to a boolean array.
+     * Each element is true if the byte value is not zero.
+     * @param bytes the byte array to convert
+     * @return an array of boolean
+     */
     public static boolean[] byteArrToBooleanArr(byte[] bytes) {
         boolean[] bools = new boolean[bytes.length];
         for (int i=0; i<bools.length; i++) {
