@@ -134,6 +134,10 @@ class StringValueTest {
 
     @Test
     void jsonConversion() {
+        // null reference
+        value = StringValue.of(null);
+        assertEquals(NullNode.getInstance(), value.getJson());
+
         // empty
         value = StringValue.of("");
         assertEquals(TextNode.valueOf(""), value.getJson());

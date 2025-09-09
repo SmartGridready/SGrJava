@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Fixed
+
+- Null reference of string value decoded as JSON null node
+
+### Added
+
+- Javadoc for all public interfaces and methods
+
+### Changed
+
+- Updated specification to `2.1_2025-09-02`, adds W/m2
+
 ## [2.4.1] - 2025-05-20
 
 ### Fixed
