@@ -4,7 +4,7 @@
     {
       "start_timestamp": "2024-02-14T00:00:00+01:00",
       "end_timestamp": "2024-02-14T00:15:00+01:00",
-      "integrated": [
+      "electricity": [
         {
           "value": 6.841903,
           "unit": "Rp./kWh",
@@ -15,7 +15,7 @@
     {
       "start_timestamp": "2024-02-14T00:15:00+01:00",
       "end_timestamp": "2024-02-14T00:30:00+01:00",
-      "integrated": [
+      "electricity": [
         {
           "value": 6.020112,
           "unit": "Rp./kWh",
@@ -26,7 +26,7 @@
     {
       "start_timestamp": "2024-02-14T00:30:00+01:00",
       "end_timestamp": "2024-02-14T00:45:00+01:00",
-      "integrated": [
+      "electricity": [
         {
           "value": 6.655699,
           "unit": "Rp./kWh",
@@ -37,7 +37,7 @@
     {
       "start_timestamp": "2024-02-14T00:45:00+01:00",
       "end_timestamp": "2024-02-14T01:00:00+01:00",
-      "integrated": [
+      "electricity": [
         {
           "value": 6.671192,
           "unit": "Rp./kWh",
