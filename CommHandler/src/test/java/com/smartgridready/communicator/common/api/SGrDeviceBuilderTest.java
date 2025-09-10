@@ -112,7 +112,7 @@ public class SGrDeviceBuilderTest {
         Properties properties = new Properties();
         properties.put("ipaddress", "127.0.0.1");
 
-        when(modbusClientFactory.createTcpTransport(anyString(), anyInt())).thenReturn(modbusDriver);
+        when(modbusClientFactory.createTcpTransport(anyString(), anyInt(), anyInt(), anyBoolean())).thenReturn(modbusDriver);
 
         GenDeviceApi device = new SGrDeviceBuilder()
                 .useModbusClientFactory(modbusClientFactory)
@@ -140,7 +140,7 @@ public class SGrDeviceBuilderTest {
         Properties properties = new Properties();
         properties.put("ipaddress", "127.0.0.1");
 
-        when(modbusClientFactory.createTcpTransport(anyString(), anyInt())).thenReturn(modbusDriver);
+        when(modbusClientFactory.createTcpTransport(anyString(), anyInt(), anyInt(), anyBoolean())).thenReturn(modbusDriver);
 
         GenDeviceApi device = new SGrDeviceBuilder()
                 .useModbusClientFactory(modbusClientFactory)

@@ -35,13 +35,16 @@ public class ModbusTransportUtil {
         switch (modbusType) {
             case RTU:
                 return createRtuTransport(interfaceDescription.getModbusRtu(), false, factory);
-            
+
             case RTU_ASCII:
                 return createRtuTransport(interfaceDescription.getModbusRtu(), true, factory);
 
             case TCP:
                 return createTcpTransport(interfaceDescription.getModbusTcp(), factory);
-            
+
+            case RTU_TCP:
+                return createRtuTcpTransport(interfaceDescription.getModbusTcp(), factory);
+
             case UDP:
                 return createUdpTransport(interfaceDescription.getModbusTcp(), factory);
 
@@ -71,8 +74,21 @@ public class ModbusTransportUtil {
 
         String tcpAddress = tcp.getAddress();
         int tcpPort = StringUtil.isNotEmpty(tcp.getPort()) ? Integer.valueOf(tcp.getPort()) : ModbusUtil.DEFAULT_MODBUS_TCP_PORT;
+        int timeout = (null != tcp.getTimeout()) ? Integer.valueOf(tcp.getTimeout()) : ModbusUtil.DEFAULT_MODBUS_TCP_TIMEOUT;
 
-        return factory.createTcpTransport(tcpAddress, tcpPort);
+        return factory.createTcpTransport(tcpAddress, tcpPort, timeout, false);
+    }
+
+    private static GenDriverAPI4Modbus createRtuTcpTransport(ModbusTcp tcp, GenDriverAPI4ModbusFactory factory) throws GenDriverException {
+        if (tcp == null) {
+            throw new GenDriverException("No Modbus TCP configuration found");
+        }
+
+        String tcpAddress = tcp.getAddress();
+        int tcpPort = ModbusUtil.isNonEmptyString(tcp.getPort()) ? Integer.valueOf(tcp.getPort()) : ModbusUtil.DEFAULT_MODBUS_TCP_PORT;
+        int timeout = (null != tcp.getTimeout()) ? Integer.valueOf(tcp.getTimeout()) : ModbusUtil.DEFAULT_MODBUS_TCP_TIMEOUT;
+
+        return factory.createTcpTransport(tcpAddress, tcpPort, timeout, true);
     }
 
     private static GenDriverAPI4Modbus createUdpTransport(ModbusTcp udp, GenDriverAPI4ModbusFactory factory) throws GenDriverException {

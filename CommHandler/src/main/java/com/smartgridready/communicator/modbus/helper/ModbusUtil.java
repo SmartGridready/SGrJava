@@ -20,6 +20,8 @@ public class ModbusUtil {
 
     /** Default TCP port. */
     public static final int DEFAULT_MODBUS_TCP_PORT = 502;
+    /** Default connection timeout in milliseconds. */
+    public static final int DEFAULT_MODBUS_TCP_TIMEOUT = 5000;
 
     /** Default baud rate. */
     public static final int DEFAULT_BAUDRATE = 9600;
@@ -233,6 +235,9 @@ public class ModbusUtil {
 
             case UDPIP:
                 return ModbusType.UDP;
+            
+            case RTU_TCPIP:
+                return ModbusType.RTU_TCP;
 
             default:
                 return ModbusType.UNKNOWN;
