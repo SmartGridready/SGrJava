@@ -23,12 +23,12 @@ class JsonMapperTest extends JsonMapperTestBase {
         Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_Swisspower_V1.0.xml");
         DeviceFrame deviceFrame = device._1;
 
-        String jmesQuery = getJmesQuery(deviceFrame);
+        JMESPathMapping jmesPathMapping = getJmesPathMapping(deviceFrame);
 
         String jsonResponse = loadJson("TariffInSwisspower.json");
         String expectedJson = loadJson("TariffOutSwisspower_withTariffName.json");
 
-        String jsonResult = JsonHelper.parseJsonResponse(jmesQuery, jsonResponse).getString();
+        String jsonResult = JsonHelper.mapJsonResponse(jmesPathMapping, jsonResponse).getString();
         LOG.info("JSON result: {}", jsonResult);
         assertEquals(MAPPER.readTree(expectedJson), MAPPER.readTree(jsonResult));
 

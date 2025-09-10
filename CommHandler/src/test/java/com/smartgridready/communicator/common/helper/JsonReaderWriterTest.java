@@ -39,8 +39,8 @@ class JsonReaderWriterTest extends JsonMapperTestBase
     static {
         KEYWORD_MAP_TARIFF_SWISSPOWER_IN.put("start_timestamp",  "prices[*].start_timestamp");
         KEYWORD_MAP_TARIFF_SWISSPOWER_IN.put("end_timestamp",    "prices[*].end_timestamp");
-        KEYWORD_MAP_TARIFF_SWISSPOWER_IN.put("value",     "prices[*].integrated[*].value");
-        KEYWORD_MAP_TARIFF_SWISSPOWER_IN.put("unit",       "prices[*].integrated[*].unit");
+        KEYWORD_MAP_TARIFF_SWISSPOWER_IN.put("value",     "prices[*].electricity[*].value");
+        KEYWORD_MAP_TARIFF_SWISSPOWER_IN.put("unit",       "prices[*].electricity[*].unit");
     }
 
     private static  final LinkedHashMap<String, String> KEYWORD_MAP_TARIFF_SWISSPOWER_OUT = new LinkedHashMap<>();
