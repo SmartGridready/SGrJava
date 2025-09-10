@@ -99,6 +99,17 @@ public class SGrDeviceBuilder {
     }
 
     /**
+     * Sets the EID source to a pre-loaded {@link com.smartgridready.ns.v0.DeviceFrame}.
+     * This ignores any given EID configuration properties.
+     * @param deviceFrame the XML content
+     * @return the same instance of {@link SGrDeviceBuilder}
+     */
+    public SGrDeviceBuilder eid(DeviceFrame deviceFrame) {
+        this.eidSource = new DirectEidSource(deviceFrame);
+        return this;
+    }
+
+    /**
      * Sets the REST API service client factory.
      * @param httpClientFactory an instance of a REST API service client factory
      * @return the same instance of {@link SGrDeviceBuilder}
@@ -309,6 +320,20 @@ public class SGrDeviceBuilder {
         @Override
         public DeviceFrame load(DeviceDescriptionLoader loader, Properties properties) {
             return loader.load(content, properties);
+        }
+    }
+
+    private static class DirectEidSource implements EidSource {
+
+        private final DeviceFrame deviceFrame;
+
+        public DirectEidSource(DeviceFrame deviceFrame) {
+            this.deviceFrame = deviceFrame;
+        }
+
+        @Override
+        public DeviceFrame load(DeviceDescriptionLoader loader, Properties properties) {
+            return deviceFrame;
         }
     }
 }

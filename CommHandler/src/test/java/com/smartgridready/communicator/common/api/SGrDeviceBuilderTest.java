@@ -10,9 +10,11 @@ import com.smartgridready.driver.api.http.HttpStatus;
 import com.smartgridready.driver.api.messaging.GenMessagingClient;
 import com.smartgridready.driver.api.messaging.GenMessagingClientFactory;
 import com.smartgridready.driver.api.messaging.model.MessagingPlatformType;
+import com.smartgridready.ns.v0.DeviceFrame;
 import com.smartgridready.ns.v0.ModbusInterfaceDescription;
 import com.smartgridready.ns.v0.ResponseQuery;
 import com.smartgridready.ns.v0.ResponseQueryType;
+import com.smartgridready.communicator.common.helper.DeviceDescriptionLoader;
 import com.smartgridready.communicator.contacts.impl.SGrContactsDevice;
 import com.smartgridready.communicator.generic.impl.SGrGenericDevice;
 import com.smartgridready.communicator.messaging.impl.SGrMessagingDevice;
@@ -264,6 +266,21 @@ public class SGrDeviceBuilderTest {
 
         GenDeviceApi device = new SGrDeviceBuilder()
                 .eid(loadResourceAsStream("test_eid_generic_V0.1.xml"))
+                .build();
+
+        assertInstanceOf(SGrGenericDevice.class, device);
+        assertDoesNotThrow(device::connect);
+    }
+
+    @SuppressWarnings("resource") // we are just checking the instance.
+    @Test
+    void buildGenericDeviceDirect() throws Exception {
+
+        DeviceFrame deviceFrame = new DeviceDescriptionLoader()
+                .load("test_eid_generic_V0.1.xml", loadResourceAsStream("test_eid_generic_V0.1.xml"));
+
+        GenDeviceApi device = new SGrDeviceBuilder()
+                .eid(deviceFrame)
                 .build();
 
         assertInstanceOf(SGrGenericDevice.class, device);
