@@ -7,9 +7,6 @@ package com.smartgridready.driver.api.modbus;
 public class GenDriverModbusException extends Exception {
 
     private static final long serialVersionUID = 1L;
-
-    /** The exception enumeration. */
-    private final ModbusExceptionType exceptionType;
     /** The numeric exception code. */
     private final int exceptionCode;
 
@@ -22,7 +19,6 @@ public class GenDriverModbusException extends Exception {
     public GenDriverModbusException(String aMessage, Throwable aCause, int exceptionCode) {
         super(aMessage, aCause);
         this.exceptionCode = exceptionCode;
-        this.exceptionType = ModbusExceptionType.fromCode(exceptionCode);
     }
 
     /**
@@ -42,7 +38,6 @@ public class GenDriverModbusException extends Exception {
     public GenDriverModbusException(String aMessage, int exceptionCode) {
         super(aMessage);
         this.exceptionCode = exceptionCode;
-        this.exceptionType = ModbusExceptionType.fromCode(exceptionCode);
     }
 
     /**
@@ -61,7 +56,6 @@ public class GenDriverModbusException extends Exception {
     public GenDriverModbusException(Throwable aCause, int exceptionCode) {
         super(aCause);
         this.exceptionCode = exceptionCode;
-        this.exceptionType = ModbusExceptionType.fromCode(exceptionCode);
     }
 
     /**
@@ -78,13 +72,5 @@ public class GenDriverModbusException extends Exception {
      */
     public int getExceptionCode() {
         return exceptionCode;
-    }
-
-    /**
-     * Gets the exception type.
-     * @return an instance of {@link ModbusExceptionType}
-     */
-    public ModbusExceptionType getExceptionType() {
-        return exceptionType;
     }
 }
