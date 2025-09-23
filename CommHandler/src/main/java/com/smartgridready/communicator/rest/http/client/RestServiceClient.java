@@ -168,12 +168,11 @@ public class RestServiceClient {
             throw new IOException("No implementation for HTTP client found");
         }
 
-        RestApiServiceCall serviceCall = getRestServiceCall();
         GenHttpRequest httpRequest = httpClientFactory.createHttpRequest(verifyCertificate);
 
-        httpRequest.setHttpMethod(mapHttpMethod(serviceCall.getRequestMethod()));
+        httpRequest.setHttpMethod(mapHttpMethod(restServiceCall.getRequestMethod()));
         try {
-            httpRequest.setUri(buildUri(serviceCall));
+            httpRequest.setUri(buildUri());
         } catch (URISyntaxException e) {
             throw new IOException("Cannot build request URI", e);
         }
@@ -184,40 +183,40 @@ public class RestServiceClient {
             );
         }
 
-        if (serviceCall.getRequestForm() != null) {
-            serviceCall.getRequestForm().getParameter().forEach(
+        if (restServiceCall.getRequestForm() != null) {
+            restServiceCall.getRequestForm().getParameter().forEach(
                     p -> httpRequest.addFormParam(p.getName(), p.getValue())
             );
 
-        } else if (serviceCall.getRequestBody() != null) {
-            String content = serviceCall.getRequestBody();
+        } else if (restServiceCall.getRequestBody() != null) {
+            String content = restServiceCall.getRequestBody();
             httpRequest.setBody(content);
         }
 
         return httpRequest.execute();
     }
 
-    private URI buildUri(RestApiServiceCall serviceCall) throws URISyntaxException {
+    private URI buildUri() throws URISyntaxException {
         final GenUriBuilder uriBuilder = httpClientFactory.createUriBuilder(getBaseUri());
 
         // add request path
-        if (serviceCall.getRequestPath() != null) {
-            int startQueryPos = serviceCall.getRequestPath().indexOf('?');
+        if (restServiceCall.getRequestPath() != null) {
+            int startQueryPos = restServiceCall.getRequestPath().indexOf('?');
             if (startQueryPos >= 0) {
                 // split path and query (old style)
-                String path = serviceCall.getRequestPath().substring(0, startQueryPos);
-                String query = serviceCall.getRequestPath().substring(startQueryPos + 1);
+                String path = restServiceCall.getRequestPath().substring(0, startQueryPos);
+                String query = restServiceCall.getRequestPath().substring(startQueryPos + 1);
                 uriBuilder.addPath(path);
                 uriBuilder.setQueryString(query);
             } else {
                 // just set path (new style)
-                uriBuilder.addPath(serviceCall.getRequestPath());
+                uriBuilder.addPath(restServiceCall.getRequestPath());
             }
         }
 
         // add query parameters
-        if (serviceCall.getRequestQuery() != null) {
-            serviceCall.getRequestQuery().getParameter().forEach(p ->
+        if (restServiceCall.getRequestQuery() != null) {
+            restServiceCall.getRequestQuery().getParameter().forEach(p ->
                 uriBuilder.addQueryParameter(p.getName(), p.getValue()));
         }
 

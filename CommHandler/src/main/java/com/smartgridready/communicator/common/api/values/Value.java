@@ -326,6 +326,10 @@ public abstract class Value  {
         if (dataType.getDateTime() != null) {
             return DateTimeValue.of(Instant.parse(value));
         }
+        if (dataType.getEnum() != null) {
+            return EnumValue.of(value, dataType.getEnum());
+        }
+
         if (dataType.getJson() != null) {
             try {
                 return JsonHelper.parseJsonResponse(null, value);

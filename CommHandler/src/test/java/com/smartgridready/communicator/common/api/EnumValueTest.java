@@ -84,12 +84,12 @@ class EnumValueTest {
 
         EnumMapProduct enumMap = createEnumMap(null);
 
-        // Invalid enum values returned from modbus
+        // Invalid enum values returned
         Value testVal = Int64Value.of(32);
         Value resVal  = EnumValue.of(testVal.getInt64(), enumMap);
         assertEquals(EnumRecord.UNDEFINED_LITERAL, resVal.getEnum().getLiteral());
         assertEquals(EnumRecord.UNDEFINED_ORDINAL, resVal.getEnum().getOrdinal());
-        assertEquals("Invalid enumeration ordinal=32 returned from modbus.",  resVal.getEnum().getDescription());
+        assertEquals("Invalid enumeration ordinal=32.",  resVal.getEnum().getDescription());
     }
 
     @Test
@@ -114,9 +114,60 @@ class EnumValueTest {
         EnumMapProduct enumMap = createEnumMap(new byte[]{0x01, (byte)0xFF});
         Value testVal = Int32Value.of(0xFFFF);
         Value resVal = EnumValue.of(testVal.getInt64(), enumMap);
-        assertEquals(EnumRecord.UNDEFINED_LITERAL, resVal.getString());
-        assertEquals("Invalid enumeration ordinal=511 returned from modbus.", resVal.getEnum().getDescription());
+        assertEquals(EnumRecord.UNDEFINED_LITERAL, resVal.getEnum().getLiteral());
+        assertEquals(EnumRecord.UNDEFINED_ORDINAL, resVal.getEnum().getOrdinal());
+        assertEquals("Invalid enumeration ordinal=511.", resVal.getEnum().getDescription());
+    }
 
+    @Test
+    void enumFromLiteralValueNoMask() {
+
+        EnumMapProduct enumMap = createEnumMap(null);
+
+        // Correct mapping
+        Value resVal = EnumValue.of("ENUM_2", enumMap);
+        assertEquals(2, resVal.getEnum().getOrdinal());
+        assertEquals("ENUM_2", resVal.getEnum().getLiteral());
+        assertEquals("ENUM_2", resVal.getString());
+        assertEquals( "ENUM_2:2 | Description of ENUM_2", resVal.toString());
+    }
+
+    @Test
+    void enumFromLiteralValueNoMask_InvalidLiteral() {
+
+        EnumMapProduct enumMap = createEnumMap(null);
+
+        // Invalid enum values returned
+        Value resVal = EnumValue.of("ENUM_32", enumMap);
+        assertEquals(EnumRecord.UNDEFINED_LITERAL, resVal.getEnum().getLiteral());
+        assertEquals(EnumRecord.UNDEFINED_ORDINAL, resVal.getEnum().getOrdinal());
+        assertEquals("Invalid enumeration literal=ENUM_32.",  resVal.getEnum().getDescription());
+    }
+
+    @Test
+    void enumFromLiteralValueWithMask() {
+
+        // Correct mapping with small mask
+        EnumMapProduct enumMap = createEnumMap(new byte[]{0x01, 0x00});
+        Value resVal = EnumValue.of("ENUM_256", enumMap);
+        assertEquals("ENUM_256", resVal.getEnum().getLiteral());
+        assertEquals("ENUM_256", resVal.getString());
+        assertEquals(256, resVal.getEnum().getOrdinal());
+
+        enumMap = createEnumMap(new byte[]{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00});
+        resVal = EnumValue.of("ENUM_256", enumMap);
+        assertEquals("ENUM_256", resVal.getEnum().getLiteral());
+        assertEquals(256, resVal.getEnum().getOrdinal());
+    }
+
+    @Test
+    void enumFromLiteralValueWithMask_InvalidLiteral() {
+
+        EnumMapProduct enumMap = createEnumMap(new byte[]{0x01, (byte)0xFF});
+        Value resVal = EnumValue.of("ENUM_32", enumMap);
+        assertEquals(EnumRecord.UNDEFINED_LITERAL, resVal.getString());
+        assertEquals(EnumRecord.UNDEFINED_ORDINAL, resVal.getEnum().getOrdinal());
+        assertEquals("Invalid enumeration literal=ENUM_32.", resVal.getEnum().getDescription());
     }
 
     private EnumMapProduct createEnumMap(byte[] hexMask) {

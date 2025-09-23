@@ -221,8 +221,7 @@ public abstract class SGrDeviceBase<
     @Override
     public List<ConfigurationValue> getDeviceConfigurationInfo() {
         return Optional.ofNullable(device.getConfigurationList())
-                .map(ConfigurationList::getConfigurationListElement).orElseGet(()
-                        -> new ConfigurationList().getConfigurationListElement())
+                .map(ConfigurationList::getConfigurationListElement).orElse(new ConfigurationList().getConfigurationListElement())
                 .stream()
                 .map(this::mapToConfigurationValue).collect(Collectors.toList());
     }
@@ -232,11 +231,8 @@ public abstract class SGrDeviceBase<
         var descriptions = new EnumMap<Language, String>(Language.class);
         configurationListElement.getConfigurationDescription().forEach(description -> descriptions.put(description.getLanguage(), description.getTextElement()));
 
-        // handle special case of enum
         Value v = (configurationListElement.getDefaultValue() != null)
-            ? (configurationListElement.getDataType().getEnum() != null)
-                ? EnumValue.of(configurationListElement.getDefaultValue())
-                : Value.fromString(configurationListElement.getDataType(), configurationListElement.getDefaultValue())
+            ? Value.fromString(configurationListElement.getDataType(), configurationListElement.getDefaultValue())
             : null;
 
         return new ConfigurationValue(

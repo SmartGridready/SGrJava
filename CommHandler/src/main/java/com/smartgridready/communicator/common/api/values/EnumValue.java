@@ -82,7 +82,21 @@ public class EnumValue extends Value {
             }
         }
 
-        return EnumValue.of(EnumRecord.UNDEFINED_LITERAL, EnumRecord.UNDEFINED_ORDINAL, String.format("Invalid enumeration ordinal=%d returned from modbus.", ordinalValue));
+        return EnumValue.of(EnumRecord.UNDEFINED_LITERAL, EnumRecord.UNDEFINED_ORDINAL, String.format("Invalid enumeration ordinal=%d.", ordinalValue));
+    }
+
+    private static EnumValue enumFromLiteralValue(String literalValue, EnumMapProduct enumMapProduct) {
+        if (literalValue != null) {
+            for (EnumEntryProductRecord rec : enumMapProduct.getEnumEntry()) {
+                String litVal = (rec.getLiteral() != null) ? rec.getLiteral() : EnumRecord.UNDEFINED_LITERAL;
+                if (litVal.equals(literalValue)) {
+                    Long ordVal = (rec.getOrdinal() != null) ? rec.getOrdinal().longValue() : null;
+                    return EnumValue.of(litVal, ordVal, rec.getDescription());
+                }
+            }
+        }
+
+        return EnumValue.of(EnumRecord.UNDEFINED_LITERAL, EnumRecord.UNDEFINED_ORDINAL, String.format("Invalid enumeration literal=%s.", literalValue));
     }
 
     @Override
@@ -245,6 +259,16 @@ public class EnumValue extends Value {
      */
     public static EnumValue of(Long ordinal, EnumMapProduct enumMapProduct) {
         return enumFromOrdinalValue(ordinal, enumMapProduct);
+    }
+
+    /**
+     * Creates a new instance from a literal and enumeration specification.
+     * @param literal the text literal
+     * @param enumMapProduct the enumeration specification
+     * @return an instance of {@link EnumValue}
+     */
+    public static EnumValue of(String literal, EnumMapProduct enumMapProduct) {
+        return enumFromLiteralValue(literal, enumMapProduct);
     }
 
     @Override
