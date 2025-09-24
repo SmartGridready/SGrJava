@@ -34,7 +34,7 @@ import com.smartgridready.ns.v0.RestApiInterfaceDescription;
 import com.smartgridready.ns.v0.RestApiServiceCall;
 import com.smartgridready.ns.v0.RestApiValueMapping;
 import com.smartgridready.ns.v0.ValueMapping;
-
+import com.smartgridready.utils.StringUtil;
 import com.smartgridready.communicator.common.api.values.StringValue;
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.common.helper.JsonHelper;
@@ -53,6 +53,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -150,7 +152,7 @@ public class SGrRestApiDevice extends SGrDeviceBase<
         Optional<RestApiDataPointConfiguration> dpDescriptionOpt
                 = Optional.ofNullable(dataPoint.getRestApiDataPointConfiguration());
 
-        Properties substitutions = new Properties();
+        Map<String, String> substitutions = new HashMap<>();
         if (dpDescriptionOpt.isPresent()) {
 
             RwpDirections rwpDirection = (value != null) ? RwpDirections.WRITE : RwpDirections.READ;
@@ -168,16 +170,15 @@ public class SGrRestApiDevice extends SGrDeviceBase<
                     (serviceCall.getValueMapping() != null) ? getMappedDeviceValue(value.getString(), serviceCall.getValueMapping()) : value.getString()
                 );
             }
-            // substitute default values of request parameters
+            // substitute default values of dynamic request parameters
             if (null != dataPoint.getDataPoint().getParameterList()) {
                 dataPoint.getDataPoint().getParameterList().getParameterListElement().forEach(p -> {
-                    String pVal = (null != p.getDefaultValue()) ? p.getDefaultValue() : "";
-                    substitutions.put(p.getName(), pVal);
+                    substitutions.put(p.getName(), StringUtil.getOrEmpty(p.getDefaultValue()));
                 });
             }
-            // substitute actual request parameters
+            // substitute actual dynamic request parameters
             if (parameters != null) {
-                substitutions.putAll(parameters);
+                parameters.entrySet().forEach(e -> substitutions.put(String.valueOf(e.getKey()), String.valueOf(e.getValue())));
             }
 
             RestServiceClient restServiceClient = RestServiceClient.of(host, verifyCertificate, serviceCall, httpClientFactory, substitutions);
@@ -190,7 +191,7 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 
             return StringValue.of(response);
         }
-        throw  new GenDriverException("Missing 'restAPIDataPoint' description in device description XML file");
+        throw  new GenDriverException("Missing 'restApiDataPointConfiguration' description in device description XML file");
     }    
 
     private String handleServiceCall(RestServiceClient serviceClient, boolean tryTokenRenewal) throws IOException, RestApiServiceCallException, RestApiResponseParseException {

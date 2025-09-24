@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.smartgridready.ns.v0.DeviceFrame;
+import com.smartgridready.utils.StringUtil;
 
 /**
  * Implements a loader that deserializes EI-XML into device descriptions.
@@ -177,7 +178,7 @@ public class DeviceDescriptionLoader {
         Properties finalProperties = getFinalProperties(intermediateDeviceDescription, properties);
 
         // replace property placeholders
-        deviceDescXml = replacePropertyPlaceholders(deviceDescXml, finalProperties);
+        deviceDescXml = substituteConfigurationPlaceholders(deviceDescXml, finalProperties);
 
         return resourceLoader.load(resourcePath, deviceDescXml, true);        
     }
@@ -186,7 +187,7 @@ public class DeviceDescriptionLoader {
         final Properties finalProperties = new Properties();
         if (null != deviceDescription.getConfigurationList()) {
             deviceDescription.getConfigurationList().getConfigurationListElement().forEach(c -> {
-                String value = (null != c.getDefaultValue()) ? c.getDefaultValue() : "";
+                String value = StringUtil.getOrEmpty(c.getDefaultValue());
                 finalProperties.setProperty(c.getName(), value);
                 LOG.debug("adding default property '{}':'{}'", c.getName(), value);
             });
@@ -194,7 +195,7 @@ public class DeviceDescriptionLoader {
 
         if (properties != null) {
             properties.entrySet().forEach(entry -> {
-                finalProperties.setProperty((String) entry.getKey(), (String) entry.getValue());
+                finalProperties.setProperty(String.valueOf(entry.getKey()), String.valueOf(entry.getValue()));
                 LOG.debug("overriding property '{}':'{}'", entry.getKey(), entry.getValue());
             });
         }
@@ -202,12 +203,12 @@ public class DeviceDescriptionLoader {
         return finalProperties;
     }
     
-    private static String replacePropertyPlaceholders(String deviceDescriptionXml, Properties properties) {
+    private static String substituteConfigurationPlaceholders(String deviceDescriptionXml, Properties properties) {
         String convertedXml = deviceDescriptionXml;
         if (deviceDescriptionXml != null && properties != null) {
             for (Map.Entry<Object, Object> entry : properties.entrySet()) {
                 // no regex here, string literal replacement is sufficient
-                convertedXml = convertedXml.replace("{{" + (String)entry.getKey() + "}}", (String)entry.getValue());
+                convertedXml = convertedXml.replace("{{" + String.valueOf(entry.getKey()) + "}}", String.valueOf(entry.getValue()));
                 LOG.debug("replaced property '{}':'{}'", entry.getKey(), entry.getValue());
             }
         }

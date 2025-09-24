@@ -514,7 +514,7 @@ class SGrDeviceBaseTest {
 
         assertEquals(1, genericAttributes.size());
 
-        var genAttr = genericAttributes.stream().findFirst().orElse(fail("Functional Profile's GenericAttribute is missing"));
+        var genAttr = genericAttributes.stream().findFirst().orElseGet(() -> fail("Functional Profile's GenericAttribute is missing"));
         assertEquals("LoadReduction", genAttr.getName());
         assertEquals(DataType.FLOAT32, genAttr.getDataType().getType());
         assertEquals(Units.PERCENT, genAttr.getUnit());

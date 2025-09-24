@@ -7,7 +7,7 @@ import com.smartgridready.ns.v0.ModbusInterfaceDescription;
 import com.smartgridready.ns.v0.ModbusInterfaceSelection;
 import com.smartgridready.ns.v0.ModbusRtu;
 import com.smartgridready.ns.v0.ModbusTcp;
-
+import com.smartgridready.utils.StringUtil;
 import com.smartgridready.driver.api.modbus.DataBits;
 import com.smartgridready.driver.api.common.GenDriverException;
 import com.smartgridready.driver.api.modbus.StopBits;
@@ -61,7 +61,7 @@ public class ModbusUtil {
         ModbusRtu rtu = interfaceDescription.getModbusRtu();
         return (
             (rtu != null) &&
-            isNonEmptyString(rtu.getPortName())
+            StringUtil.isNotEmpty(rtu.getPortName())
         );
     }
 
@@ -74,7 +74,7 @@ public class ModbusUtil {
         ModbusTcp tcp = interfaceDescription.getModbusTcp();
         return (
             (tcp != null) &&
-            isNonEmptyString(tcp.getAddress())
+            StringUtil.isNotEmpty(tcp.getAddress())
         );
     }
 
@@ -90,11 +90,11 @@ public class ModbusUtil {
         boolean isTcp = isTcp(interfaceDescription);
         if (isSerial) {
             ModbusRtu serial = interfaceDescription.getModbusRtu();
-            if (isNonEmptyString(serial.getSlaveAddr())) slaveId = Short.valueOf(serial.getSlaveAddr());
+            if (StringUtil.isNotEmpty(serial.getSlaveAddr())) slaveId = Short.valueOf(serial.getSlaveAddr());
         }
         if (isTcp) {
             ModbusTcp tcp = interfaceDescription.getModbusTcp();
-            if (isNonEmptyString(tcp.getSlaveId())) slaveId = Short.valueOf(tcp.getSlaveId());
+            if (StringUtil.isNotEmpty(tcp.getSlaveId())) slaveId = Short.valueOf(tcp.getSlaveId());
         }
 
         return slaveId;
@@ -119,7 +119,7 @@ public class ModbusUtil {
         if (isTcp) {
             ModbusTcp tcp = interfaceDescription.getModbusTcp();
             String address = tcp.getAddress();
-            int port = isNonEmptyString(tcp.getPort()) ? Integer.valueOf(tcp.getPort()) : DEFAULT_MODBUS_TCP_PORT;
+            int port = StringUtil.isNotEmpty(tcp.getPort()) ? Integer.valueOf(tcp.getPort()) : DEFAULT_MODBUS_TCP_PORT;
             return String.format("tcp:%s:%d", address, port);
         }
 
@@ -160,19 +160,7 @@ public class ModbusUtil {
      * @return an int
      */
     public static int getSerialBaudrate(String baudRate) {
-        return isNonEmptyString(baudRate) ? Integer.valueOf(baudRate) : DEFAULT_BAUDRATE;
-    }
-
-    /**
-     * Tells if a string value is not null and not empty.
-     * @param value the string value
-     * @return a boolean
-     */
-    public static boolean isNonEmptyString(String value) {
-        return (
-            (value != null) &&
-            !value.isEmpty()
-        );
+        return StringUtil.isNotEmpty(baudRate) ? Integer.valueOf(baudRate) : DEFAULT_BAUDRATE;
     }
 
     /**
