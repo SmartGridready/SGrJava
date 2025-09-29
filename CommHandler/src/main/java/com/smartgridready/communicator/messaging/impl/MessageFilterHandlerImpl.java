@@ -37,19 +37,23 @@ public class MessageFilterHandlerImpl implements MessageFilterHandler {
         }
 
         Value payloadValue = StringValue.of(payload);
-        String regex = ".";
-        if (messageFilter.getJmespathFilter() != null) {
+        String regexMatch = ".";
+        if (messageFilter.getPlaintextFilter() != null) {
+            var filter = messageFilter.getPlaintextFilter();
+            regexMatch = filter.getMatchesRegex();
+        } else if (messageFilter.getJmespathFilter() != null) {
             try {
                 var filter = messageFilter.getJmespathFilter();
-                regex = filter.getMatchesRegex();
-                payloadValue = JsonHelper.parseJsonResponse(filter.getQuery(), payload);
+                regexMatch = filter.getMatchesRegex();
+                payloadValue = JsonHelper.parseJsonResponse(filter.getQuery(), payloadValue.getString());
             } catch (GenDriverException e) {
                 return false; // no match
             }
         }
 
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(payloadValue.getString());
+        // regex matching for all filter types
+        Pattern matchPattern = Pattern.compile(regexMatch);
+        Matcher matcher = matchPattern.matcher(payloadValue.getString());
         return matcher.find();
     }
 
@@ -59,7 +63,7 @@ public class MessageFilterHandlerImpl implements MessageFilterHandler {
             return; // null means no-filter, that's fine
         }
         if (messageFilter.getPlaintextFilter() != null) {
-            throw new OperationNotSupportedException("Plaintext message filter not supported yet.");
+            return;
         }
         if (messageFilter.getRegexFilter() != null) {
             throw new OperationNotSupportedException("Regex message filter not supported yet.");
