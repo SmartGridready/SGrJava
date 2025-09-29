@@ -1,13 +1,11 @@
 package com.smartgridready.communicator.messaging.impl;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.naming.OperationNotSupportedException;
 
 import com.smartgridready.communicator.common.api.values.StringValue;
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.common.helper.JsonHelper;
+import com.smartgridready.communicator.common.helper.RegexHelper;
 import com.smartgridready.communicator.common.helper.XPathHelper;
 import com.smartgridready.driver.api.common.GenDriverException;
 import com.smartgridready.driver.api.messaging.MessageFilterHandler;
@@ -44,8 +42,8 @@ public class MessageFilterHandlerImpl implements MessageFilterHandler {
             regexMatch = filter.getMatchesRegex();
         } else if (messageFilter.getRegexFilter() != null) {
             var filter = messageFilter.getRegexFilter();
-            // TODO what to do with query?
             regexMatch = filter.getMatchesRegex();
+            payloadValue = RegexHelper.query(filter.getQuery(), payload);
         } else if (messageFilter.getJmespathFilter() != null) {
             try {
                 var filter = messageFilter.getJmespathFilter();
@@ -65,9 +63,7 @@ public class MessageFilterHandlerImpl implements MessageFilterHandler {
         }
 
         // regex matching for all filter types
-        Pattern matchPattern = Pattern.compile(regexMatch);
-        Matcher matcher = matchPattern.matcher(payloadValue.getString());
-        return matcher.find();
+        return RegexHelper.match(regexMatch, payloadValue.getString());
     }
 
     @Override

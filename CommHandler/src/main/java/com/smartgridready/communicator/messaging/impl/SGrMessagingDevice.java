@@ -24,6 +24,7 @@ import com.smartgridready.utils.StringUtil;
 import com.smartgridready.communicator.common.api.values.StringValue;
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.common.helper.JsonHelper;
+import com.smartgridready.communicator.common.helper.RegexHelper;
 import com.smartgridready.communicator.common.helper.XPathHelper;
 import com.smartgridready.communicator.common.impl.SGrDeviceBase;
 import com.smartgridready.driver.api.common.GenDriverException;
@@ -220,6 +221,8 @@ public class SGrMessagingDevice extends SGrDeviceBase<
                     value = JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
                 } else if (responseQuery.getQueryType() != null && ResponseQueryType.X_PATH_EXPRESSION == responseQuery.getQueryType()) {
                     value = XPathHelper.parseXmlResponse(responseQuery.getQuery(), response);
+                } else if (responseQuery.getQueryType() != null && ResponseQueryType.REGULAR_EXPRESSION == responseQuery.getQueryType()) {
+                    value = RegexHelper.query(responseQuery.getQuery(), response);
                 } else if (responseQuery.getQueryType() != null) {
                     throw new GenDriverException("Response query type " + responseQuery.getQueryType().name() + " not supported yet");
                 } else {
@@ -318,6 +321,12 @@ public class SGrMessagingDevice extends SGrDeviceBase<
                         break;
                     case JMES_PATH_MAPPING:
                         value = JsonHelper.mapJsonResponse(queryOpt.get().getJmesPathMappings(), response);
+                        break;
+                    case X_PATH_EXPRESSION:
+                        value = XPathHelper.parseXmlResponse(queryOpt.get().getQuery(), response);
+                        break;
+                    case REGULAR_EXPRESSION:
+                        value = RegexHelper.query(queryOpt.get().getQuery(), response);
                         break;
                     default:
                         throw new GenDriverException("Response query type " + queryOpt.get().getQueryType().name() + " not supported yet");
