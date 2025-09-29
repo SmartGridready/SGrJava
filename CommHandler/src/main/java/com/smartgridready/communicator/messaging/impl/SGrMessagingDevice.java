@@ -24,6 +24,7 @@ import com.smartgridready.utils.StringUtil;
 import com.smartgridready.communicator.common.api.values.StringValue;
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.common.helper.JsonHelper;
+import com.smartgridready.communicator.common.helper.XPathHelper;
 import com.smartgridready.communicator.common.impl.SGrDeviceBase;
 import com.smartgridready.driver.api.common.GenDriverException;
 import com.smartgridready.communicator.messaging.api.GenDeviceApi4Messaging;
@@ -217,6 +218,8 @@ public class SGrMessagingDevice extends SGrDeviceBase<
                     value = JsonHelper.parseJsonResponse(responseQuery.getQuery(), response);
                 } else if (responseQuery.getQueryType() != null && ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
                     value = JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
+                } else if (responseQuery.getQueryType() != null && ResponseQueryType.X_PATH_EXPRESSION == responseQuery.getQueryType()) {
+                    value = XPathHelper.parseXmlResponse(responseQuery.getQuery(), response);
                 } else if (responseQuery.getQueryType() != null) {
                     throw new GenDriverException("Response query type " + responseQuery.getQueryType().name() + " not supported yet");
                 } else {
