@@ -36,6 +36,7 @@ public class XPathHelper {
 
     private static final Logger LOG = LoggerFactory.getLogger(XPathHelper.class);
 
+    /** Helper class. */
     private XPathHelper() {
         throw new IllegalStateException("Helper class");
     }
@@ -43,7 +44,7 @@ public class XPathHelper {
     /**
      * Loads an XML string into a document
      * @param xmlResp the XML string
-     * @return an instance of {@Link Document}
+     * @return an instance of {@link Document}
      * @throws ParserConfigurationException when the document parser could not be initialized
      * @throws SAXException when the document could not be parsed
      * @throws IOException when an other error occurred

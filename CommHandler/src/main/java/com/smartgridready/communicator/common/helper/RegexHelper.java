@@ -11,6 +11,9 @@ import com.smartgridready.communicator.common.api.values.Value;
  */
 public class RegexHelper {
 
+    /** Helper class. */
+    private RegexHelper() {}
+
     /**
      * Matches a string.
      * @param regex the regular expression
