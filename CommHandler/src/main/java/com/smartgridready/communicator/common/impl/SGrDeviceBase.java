@@ -3,7 +3,6 @@ package com.smartgridready.communicator.common.impl;
 import com.smartgridready.communicator.common.api.dto.DynamicRequestParameter;
 import com.smartgridready.communicator.common.api.dto.InfoText;
 import com.smartgridready.communicator.common.api.values.DataType;
-import com.smartgridready.communicator.common.api.values.EnumValue;
 import com.smartgridready.communicator.common.api.values.Float64Value;
 import com.smartgridready.ns.v0.ConfigurationList;
 import com.smartgridready.ns.v0.ConfigurationListElement;

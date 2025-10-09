@@ -43,5 +43,4 @@ public class JsonMapperTestBase {
         SGrRestApiDevice restApiDevice = new SGrRestApiDevice(devDesc, factory);
         return new Tuple3<>(devDesc, restApiDevice, null);
     }
-
 }

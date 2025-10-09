@@ -29,7 +29,7 @@ class TariffProvidersTest {
         dynamicParameters.put("start_timestamp", "2025-01-01T00:00:00+01:00");
         dynamicParameters.put("end_timestamp", "2025-01-01T01:00:00+01:00");
 
-        var device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_Swisspower_V1.0.xml", properties);
+        var device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_Swisspower_Test_V1.0.xml", properties);
         
         var dynamicRequestParameters = device
                 .getDataPoint("DynamicTariff", "TariffSupply")

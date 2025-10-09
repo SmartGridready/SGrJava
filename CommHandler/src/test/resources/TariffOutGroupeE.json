@@ -1,40 +1,960 @@
 [
   {
-    "start_timestamp": "2023-09-06T00:00:00+02:00",
-    "end_timestamp": "2023-09-06T00:15:00+02:00",
+    "start_timestamp": "2025-10-03T00:00:00+02:00",
+    "end_timestamp": "2025-10-03T00:15:00+02:00",
     "integrated": [
       {
-        "value": 9.23,
+        "value": 23.75,
         "unit": "Rp./kWh"
       }
     ]
   },
   {
-    "start_timestamp": "2023-09-06T00:15:00+02:00",
-    "end_timestamp": "2023-09-06T00:30:00+02:00",
+    "start_timestamp": "2025-10-03T00:15:00+02:00",
+    "end_timestamp": "2025-10-03T00:30:00+02:00",
     "integrated": [
       {
-        "value": 8.46,
+        "value": 23.04,
         "unit": "Rp./kWh"
       }
     ]
   },
   {
-    "start_timestamp": "2023-09-06T00:30:00+02:00",
-    "end_timestamp": "2023-09-06T00:45:00+02:00",
+    "start_timestamp": "2025-10-03T00:30:00+02:00",
+    "end_timestamp": "2025-10-03T00:45:00+02:00",
     "integrated": [
       {
-        "value": 7.2,
+        "value": 21.31,
         "unit": "Rp./kWh"
       }
     ]
   },
   {
-    "start_timestamp": "2023-09-06T00:45:00+02:00",
-    "end_timestamp": "2023-09-06T01:00:00+02:00",
+    "start_timestamp": "2025-10-03T00:45:00+02:00",
+    "end_timestamp": "2025-10-03T01:00:00+02:00",
     "integrated": [
       {
-        "value": 6.06,
+        "value": 19.93,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T01:00:00+02:00",
+    "end_timestamp": "2025-10-03T01:15:00+02:00",
+    "integrated": [
+      {
+        "value": 22.56,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T01:15:00+02:00",
+    "end_timestamp": "2025-10-03T01:30:00+02:00",
+    "integrated": [
+      {
+        "value": 22.13,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T01:30:00+02:00",
+    "end_timestamp": "2025-10-03T01:45:00+02:00",
+    "integrated": [
+      {
+        "value": 20.73,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T01:45:00+02:00",
+    "end_timestamp": "2025-10-03T02:00:00+02:00",
+    "integrated": [
+      {
+        "value": 19.31,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T02:00:00+02:00",
+    "end_timestamp": "2025-10-03T02:15:00+02:00",
+    "integrated": [
+      {
+        "value": 18.36,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T02:15:00+02:00",
+    "end_timestamp": "2025-10-03T02:30:00+02:00",
+    "integrated": [
+      {
+        "value": 17.43,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T02:30:00+02:00",
+    "end_timestamp": "2025-10-03T02:45:00+02:00",
+    "integrated": [
+      {
+        "value": 16.86,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T02:45:00+02:00",
+    "end_timestamp": "2025-10-03T03:00:00+02:00",
+    "integrated": [
+      {
+        "value": 16.77,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T03:00:00+02:00",
+    "end_timestamp": "2025-10-03T03:15:00+02:00",
+    "integrated": [
+      {
+        "value": 16.92,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T03:15:00+02:00",
+    "end_timestamp": "2025-10-03T03:30:00+02:00",
+    "integrated": [
+      {
+        "value": 16.54,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T03:30:00+02:00",
+    "end_timestamp": "2025-10-03T03:45:00+02:00",
+    "integrated": [
+      {
+        "value": 16.28,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T03:45:00+02:00",
+    "end_timestamp": "2025-10-03T04:00:00+02:00",
+    "integrated": [
+      {
+        "value": 16.26,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T04:00:00+02:00",
+    "end_timestamp": "2025-10-03T04:15:00+02:00",
+    "integrated": [
+      {
+        "value": 17.01,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T04:15:00+02:00",
+    "end_timestamp": "2025-10-03T04:30:00+02:00",
+    "integrated": [
+      {
+        "value": 17.26,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T04:30:00+02:00",
+    "end_timestamp": "2025-10-03T04:45:00+02:00",
+    "integrated": [
+      {
+        "value": 17.75,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T04:45:00+02:00",
+    "end_timestamp": "2025-10-03T05:00:00+02:00",
+    "integrated": [
+      {
+        "value": 18.48,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T05:00:00+02:00",
+    "end_timestamp": "2025-10-03T05:15:00+02:00",
+    "integrated": [
+      {
+        "value": 20.4,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T05:15:00+02:00",
+    "end_timestamp": "2025-10-03T05:30:00+02:00",
+    "integrated": [
+      {
+        "value": 21.44,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T05:30:00+02:00",
+    "end_timestamp": "2025-10-03T05:45:00+02:00",
+    "integrated": [
+      {
+        "value": 22.46,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T05:45:00+02:00",
+    "end_timestamp": "2025-10-03T06:00:00+02:00",
+    "integrated": [
+      {
+        "value": 23.7,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T06:00:00+02:00",
+    "end_timestamp": "2025-10-03T06:15:00+02:00",
+    "integrated": [
+      {
+        "value": 26.47,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T06:15:00+02:00",
+    "end_timestamp": "2025-10-03T06:30:00+02:00",
+    "integrated": [
+      {
+        "value": 28.71,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T06:30:00+02:00",
+    "end_timestamp": "2025-10-03T06:45:00+02:00",
+    "integrated": [
+      {
+        "value": 30.56,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T06:45:00+02:00",
+    "end_timestamp": "2025-10-03T07:00:00+02:00",
+    "integrated": [
+      {
+        "value": 32.47,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T07:00:00+02:00",
+    "end_timestamp": "2025-10-03T07:15:00+02:00",
+    "integrated": [
+      {
+        "value": 37.95,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T07:15:00+02:00",
+    "end_timestamp": "2025-10-03T07:30:00+02:00",
+    "integrated": [
+      {
+        "value": 39.32,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T07:30:00+02:00",
+    "end_timestamp": "2025-10-03T07:45:00+02:00",
+    "integrated": [
+      {
+        "value": 39.74,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T07:45:00+02:00",
+    "end_timestamp": "2025-10-03T08:00:00+02:00",
+    "integrated": [
+      {
+        "value": 40.26,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T08:00:00+02:00",
+    "end_timestamp": "2025-10-03T08:15:00+02:00",
+    "integrated": [
+      {
+        "value": 39.75,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T08:15:00+02:00",
+    "end_timestamp": "2025-10-03T08:30:00+02:00",
+    "integrated": [
+      {
+        "value": 39.38,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T08:30:00+02:00",
+    "end_timestamp": "2025-10-03T08:45:00+02:00",
+    "integrated": [
+      {
+        "value": 38.79,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T08:45:00+02:00",
+    "end_timestamp": "2025-10-03T09:00:00+02:00",
+    "integrated": [
+      {
+        "value": 37.81,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T09:00:00+02:00",
+    "end_timestamp": "2025-10-03T09:15:00+02:00",
+    "integrated": [
+      {
+        "value": 36.71,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T09:15:00+02:00",
+    "end_timestamp": "2025-10-03T09:30:00+02:00",
+    "integrated": [
+      {
+        "value": 35.81,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T09:30:00+02:00",
+    "end_timestamp": "2025-10-03T09:45:00+02:00",
+    "integrated": [
+      {
+        "value": 34.9,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T09:45:00+02:00",
+    "end_timestamp": "2025-10-03T10:00:00+02:00",
+    "integrated": [
+      {
+        "value": 33.98,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T10:00:00+02:00",
+    "end_timestamp": "2025-10-03T10:15:00+02:00",
+    "integrated": [
+      {
+        "value": 33.85,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T10:15:00+02:00",
+    "end_timestamp": "2025-10-03T10:30:00+02:00",
+    "integrated": [
+      {
+        "value": 33.43,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T10:30:00+02:00",
+    "end_timestamp": "2025-10-03T10:45:00+02:00",
+    "integrated": [
+      {
+        "value": 32.68,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T10:45:00+02:00",
+    "end_timestamp": "2025-10-03T11:00:00+02:00",
+    "integrated": [
+      {
+        "value": 30.69,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T11:00:00+02:00",
+    "end_timestamp": "2025-10-03T11:15:00+02:00",
+    "integrated": [
+      {
+        "value": 28.89,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T11:15:00+02:00",
+    "end_timestamp": "2025-10-03T11:30:00+02:00",
+    "integrated": [
+      {
+        "value": 28.07,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T11:30:00+02:00",
+    "end_timestamp": "2025-10-03T11:45:00+02:00",
+    "integrated": [
+      {
+        "value": 29.44,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T11:45:00+02:00",
+    "end_timestamp": "2025-10-03T12:00:00+02:00",
+    "integrated": [
+      {
+        "value": 28.38,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T12:00:00+02:00",
+    "end_timestamp": "2025-10-03T12:15:00+02:00",
+    "integrated": [
+      {
+        "value": 25.69,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T12:15:00+02:00",
+    "end_timestamp": "2025-10-03T12:30:00+02:00",
+    "integrated": [
+      {
+        "value": 24.3,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T12:30:00+02:00",
+    "end_timestamp": "2025-10-03T12:45:00+02:00",
+    "integrated": [
+      {
+        "value": 21.52,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T12:45:00+02:00",
+    "end_timestamp": "2025-10-03T13:00:00+02:00",
+    "integrated": [
+      {
+        "value": 19.23,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T13:00:00+02:00",
+    "end_timestamp": "2025-10-03T13:15:00+02:00",
+    "integrated": [
+      {
+        "value": 17.58,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T13:15:00+02:00",
+    "end_timestamp": "2025-10-03T13:30:00+02:00",
+    "integrated": [
+      {
+        "value": 17.87,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T13:30:00+02:00",
+    "end_timestamp": "2025-10-03T13:45:00+02:00",
+    "integrated": [
+      {
+        "value": 17.64,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T13:45:00+02:00",
+    "end_timestamp": "2025-10-03T14:00:00+02:00",
+    "integrated": [
+      {
+        "value": 16.77,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T14:00:00+02:00",
+    "end_timestamp": "2025-10-03T14:15:00+02:00",
+    "integrated": [
+      {
+        "value": 17.32,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T14:15:00+02:00",
+    "end_timestamp": "2025-10-03T14:30:00+02:00",
+    "integrated": [
+      {
+        "value": 16.54,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T14:30:00+02:00",
+    "end_timestamp": "2025-10-03T14:45:00+02:00",
+    "integrated": [
+      {
+        "value": 16.44,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T14:45:00+02:00",
+    "end_timestamp": "2025-10-03T15:00:00+02:00",
+    "integrated": [
+      {
+        "value": 16.36,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T15:00:00+02:00",
+    "end_timestamp": "2025-10-03T15:15:00+02:00",
+    "integrated": [
+      {
+        "value": 16.85,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T15:15:00+02:00",
+    "end_timestamp": "2025-10-03T15:30:00+02:00",
+    "integrated": [
+      {
+        "value": 17.05,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T15:30:00+02:00",
+    "end_timestamp": "2025-10-03T15:45:00+02:00",
+    "integrated": [
+      {
+        "value": 17.63,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T15:45:00+02:00",
+    "end_timestamp": "2025-10-03T16:00:00+02:00",
+    "integrated": [
+      {
+        "value": 18.72,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T16:00:00+02:00",
+    "end_timestamp": "2025-10-03T16:15:00+02:00",
+    "integrated": [
+      {
+        "value": 20.7,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T16:15:00+02:00",
+    "end_timestamp": "2025-10-03T16:30:00+02:00",
+    "integrated": [
+      {
+        "value": 21.89,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T16:30:00+02:00",
+    "end_timestamp": "2025-10-03T16:45:00+02:00",
+    "integrated": [
+      {
+        "value": 22.49,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T16:45:00+02:00",
+    "end_timestamp": "2025-10-03T17:00:00+02:00",
+    "integrated": [
+      {
+        "value": 23.6,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T17:00:00+02:00",
+    "end_timestamp": "2025-10-03T17:15:00+02:00",
+    "integrated": [
+      {
+        "value": 26.62,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T17:15:00+02:00",
+    "end_timestamp": "2025-10-03T17:30:00+02:00",
+    "integrated": [
+      {
+        "value": 28.26,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T17:30:00+02:00",
+    "end_timestamp": "2025-10-03T17:45:00+02:00",
+    "integrated": [
+      {
+        "value": 29.98,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T17:45:00+02:00",
+    "end_timestamp": "2025-10-03T18:00:00+02:00",
+    "integrated": [
+      {
+        "value": 31.41,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T18:00:00+02:00",
+    "end_timestamp": "2025-10-03T18:15:00+02:00",
+    "integrated": [
+      {
+        "value": 32.93,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T18:15:00+02:00",
+    "end_timestamp": "2025-10-03T18:30:00+02:00",
+    "integrated": [
+      {
+        "value": 34.08,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T18:30:00+02:00",
+    "end_timestamp": "2025-10-03T18:45:00+02:00",
+    "integrated": [
+      {
+        "value": 35.63,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T18:45:00+02:00",
+    "end_timestamp": "2025-10-03T19:00:00+02:00",
+    "integrated": [
+      {
+        "value": 35.94,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T19:00:00+02:00",
+    "end_timestamp": "2025-10-03T19:15:00+02:00",
+    "integrated": [
+      {
+        "value": 38.07,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T19:15:00+02:00",
+    "end_timestamp": "2025-10-03T19:30:00+02:00",
+    "integrated": [
+      {
+        "value": 37.74,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T19:30:00+02:00",
+    "end_timestamp": "2025-10-03T19:45:00+02:00",
+    "integrated": [
+      {
+        "value": 37.03,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T19:45:00+02:00",
+    "end_timestamp": "2025-10-03T20:00:00+02:00",
+    "integrated": [
+      {
+        "value": 36.74,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T20:00:00+02:00",
+    "end_timestamp": "2025-10-03T20:15:00+02:00",
+    "integrated": [
+      {
+        "value": 36.01,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T20:15:00+02:00",
+    "end_timestamp": "2025-10-03T20:30:00+02:00",
+    "integrated": [
+      {
+        "value": 34.85,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T20:30:00+02:00",
+    "end_timestamp": "2025-10-03T20:45:00+02:00",
+    "integrated": [
+      {
+        "value": 34.53,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T20:45:00+02:00",
+    "end_timestamp": "2025-10-03T21:00:00+02:00",
+    "integrated": [
+      {
+        "value": 33.44,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T21:00:00+02:00",
+    "end_timestamp": "2025-10-03T21:15:00+02:00",
+    "integrated": [
+      {
+        "value": 28.76,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T21:15:00+02:00",
+    "end_timestamp": "2025-10-03T21:30:00+02:00",
+    "integrated": [
+      {
+        "value": 28.35,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T21:30:00+02:00",
+    "end_timestamp": "2025-10-03T21:45:00+02:00",
+    "integrated": [
+      {
+        "value": 27.49,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T21:45:00+02:00",
+    "end_timestamp": "2025-10-03T22:00:00+02:00",
+    "integrated": [
+      {
+        "value": 26.39,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T22:00:00+02:00",
+    "end_timestamp": "2025-10-03T22:15:00+02:00",
+    "integrated": [
+      {
+        "value": 26.86,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T22:15:00+02:00",
+    "end_timestamp": "2025-10-03T22:30:00+02:00",
+    "integrated": [
+      {
+        "value": 25.94,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T22:30:00+02:00",
+    "end_timestamp": "2025-10-03T22:45:00+02:00",
+    "integrated": [
+      {
+        "value": 25,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T22:45:00+02:00",
+    "end_timestamp": "2025-10-03T23:00:00+02:00",
+    "integrated": [
+      {
+        "value": 24.01,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T23:00:00+02:00",
+    "end_timestamp": "2025-10-03T23:15:00+02:00",
+    "integrated": [
+      {
+        "value": 25.12,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T23:15:00+02:00",
+    "end_timestamp": "2025-10-03T23:30:00+02:00",
+    "integrated": [
+      {
+        "value": 24.68,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T23:30:00+02:00",
+    "end_timestamp": "2025-10-03T23:45:00+02:00",
+    "integrated": [
+      {
+        "value": 23.34,
+        "unit": "Rp./kWh"
+      }
+    ]
+  },
+  {
+    "start_timestamp": "2025-10-03T23:45:00+02:00",
+    "end_timestamp": "2025-10-04T00:00:00+02:00",
+    "integrated": [
+      {
+        "value": 22.26,
         "unit": "Rp./kWh"
       }
     ]
