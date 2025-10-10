@@ -2,40 +2,40 @@ package com.smartgridready.communicator.common.helper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.burt.jmespath.Expression;
 import io.burt.jmespath.JmesPath;
 import io.burt.jmespath.jackson.JacksonRuntime;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
+import java.util.regex.Pattern;
 
 /**
  * Maps a received JSON value into the required SmartGridready JSON output value.
  * The timestamps are converted to a canonical format first and afterwards.
  */
-public class JsonReader
+public class JsonReader extends JsonBase
 {
-    private static final JmesPath<JsonNode> jmespath = new JacksonRuntime();
+    @SuppressWarnings("unused")
+    private static final Logger LOG = LoggerFactory.getLogger(JsonReader.class);
 
-    private final Map<String, String> keywordMapInput;
+    private static final JmesPath<JsonNode> jmespath = new JacksonRuntime();
 
     /**
      * Constructs a new instance.
-     * @param keywordMapInput key/value mappings of keywords
+     * @param keywordMapInput the keyword map
      */
     public JsonReader(Map<String, String> keywordMapInput) {
-        this.keywordMapInput = keywordMapInput;
+        super(keywordMapInput);
     }
 
     /**
@@ -106,29 +106,29 @@ public class JsonReader
     /**
      * Converts a JSON string to a data structure of key-value pairs, using a keyword map.
      * @param jsonFile the JSON input
-     * @param keywordMapInput the keyword map
+     * @param keywordMap the keyword map
      * @return a map of key-value pairs
      * @throws JsonProcessingException if parsing failed
      */
-    public static Map<Key, Map<String, Object>> mapToFlatList(String jsonFile, Map<String, String> keywordMapInput)
+    public static Map<Key, Map<String, Object>> mapToFlatList(String jsonFile, Map<String, String> keywordMap)
             throws JsonProcessingException {
 
-        JsonReader mapper = new JsonReader(keywordMapInput);
+        JsonNode root = objectMapper.readTree(jsonFile);
 
-        ObjectMapper parser = new ObjectMapper();
-        JsonNode root = parser.readTree(jsonFile);
-
-        return mapper.parseJsonTree(root, null, 1);
+        var reader = new JsonReader(keywordMap);
+        return reader.parseJsonTree(root, null, 1, keywordMap);
     }
 
-    private Map<Key, Map<String, Object>> parseJsonTree(JsonNode node, Map<Key, Map<String, Object>> parentData, int iteration) {
+    private Map<Key, Map<String, Object>> parseJsonTree(JsonNode node, Map<Key, Map<String, Object>> parentData, int iteration, Map<String, String> keywordMap) {
 
-        Map<Key, Map<String, Object>> recordMap = new TreeMap<>(); // TreeMap to keep the order of element occurrence
+        // Cannot use TreeMap - it results in incorrect order
+        Map<Key, Map<String, Object>> recordMap = new LinkedHashMap<>();
 
         // Get all keywords for the given iteration depth
-        Set<Map.Entry<String, String>> keywords = getKeywordsForIteration(iteration);
+        List<Map.Entry<String, String>> keywords = getKeywordsForIteration(iteration);
 
-        if (iteration <= determineRequiredIterations(keywordMapInput)) {
+        var niterations = determineRequiredIterations(keywordMap);
+        if (iteration <= niterations) {
             if (parentData == null) {
                 processChildElements(node, iteration, recordMap, keywords, 0, null);
             } else {
@@ -138,23 +138,15 @@ public class JsonReader
                     parentIndex++;
                 }
             }
-            return parseJsonTree(node, recordMap, ++iteration);
-        } else {
-            return parentData;
+            return parseJsonTree(node, recordMap, iteration+1, keywordMap);
         }
-    }
-
-    private Set<Map.Entry<String, String>> getKeywordsForIteration(int iteration) {
-        final int iterationDepth = iteration;
-        return keywordMapInput.entrySet().stream()
-                .filter(entry -> StringUtils.countMatches(entry.getValue(), "[*]")==iterationDepth)
-                .collect(Collectors.toSet());
+        return parentData;
     }
 
     private static void processChildElements(JsonNode node,
                                              int iteration,
                                              Map<Key, Map<String, Object>> recordMap,
-                                             Set<Map.Entry<String, String>> keywords,
+                                             List<Map.Entry<String, String>> keywords,
                                              int parentIndex,
                                              Map.Entry<Key, Map<String, Object>> parentRec) {
 
@@ -169,10 +161,10 @@ public class JsonReader
                 key.add(i);
                 if (parentRec == null) {
                     // process the root node.
-                    recordMap.put(key, new HashMap<>());
+                    recordMap.put(key, new LinkedHashMap<>());
                 } else {
                     // process the child nodes, mix-in the values of the parent node.
-                    recordMap.put(key, new HashMap<>(parentRec.getValue()));
+                    recordMap.put(key, new LinkedHashMap<>(parentRec.getValue()));
                 }
 
                 final int iter = iteration;
@@ -190,18 +182,22 @@ public class JsonReader
 
         String pattern = kw.getValue();
 
+        Pattern regex = Pattern.compile("\\[\\*\\]");
         for (int i=0; i<iteration; i++) {
             // noinspection RegExpRedundantEscape
-            pattern = pattern.replaceFirst("\\[\\*\\]", String.format("[%d]", key.indexAt(i)));
+            pattern = regex.matcher(pattern).replaceFirst(String.format("[%d]", key.indexAt(i)));
         }
         Expression<JsonNode> expression = jmespath.compile(pattern);
         JsonNode value = expression.search(node);
 
         if (value.isTextual()) {
             recordMap.get(key).put(kw.getKey(), value.asText());
-        }
-        if (value.isFloatingPointNumber()) {
+        } else if (value.isFloatingPointNumber()) {
             recordMap.get(key).put(kw.getKey(), value.asDouble());
+        } else if (value.isIntegralNumber()) {
+            recordMap.get(key).put(kw.getKey(), value.asLong());
+        } else if (value.isBoolean()) {
+            recordMap.get(key).put(kw.getKey(), value.asBoolean());
         }
     }
 
@@ -212,18 +208,21 @@ public class JsonReader
 
         // Get count the number of records
         String searchPattern = keyword.getValue();
+        Pattern regex = Pattern.compile("\\[\\*\\]");
         for (int i=1; i < iteration; i++) {
             // noinspection RegExpRedundantEscape
-            searchPattern = keyword.getValue().replaceFirst("\\[\\*\\]", String.format("[%d]", parentIndex));
+            searchPattern = regex.matcher(keyword.getValue()).replaceFirst(String.format("[%d]", parentIndex));
         }
+
         Expression<JsonNode> jmesQuery = jmespath.compile(searchPattern + " | length(@)");
         JsonNode result = jmesQuery.search(node);
         return result.asInt();
     }
 
-    private static int determineRequiredIterations(Map<String, String> keywordMap) {
+    static int determineRequiredIterations(Map<String, String> keywordMap) {
         return keywordMap.values().stream()
                 .map(value -> StringUtils.countMatches(value, "[*]"))
-                .max(Comparator.naturalOrder()).orElse(0);
+                .max(Comparator.naturalOrder())
+                .orElse(0);
     }
 }

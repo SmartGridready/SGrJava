@@ -20,6 +20,7 @@ import com.smartgridready.ns.v0.OutMessage;
 import com.smartgridready.ns.v0.ResponseQuery;
 import com.smartgridready.ns.v0.ResponseQueryType;
 import com.smartgridready.ns.v0.ValueMapping;
+import com.smartgridready.utils.StringUtil;
 import com.smartgridready.communicator.common.api.values.StringValue;
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.common.helper.JsonHelper;
@@ -38,7 +39,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
-
 import java.util.Properties;
 
 /**
@@ -160,17 +160,16 @@ public class SGrMessagingDevice extends SGrDeviceBase<
                 .map(InMessage::getFilter).orElse(null);
 
         if (outReadCmdTopicOpt.isPresent()) {
-            Properties substitutions = new Properties();
-            // substitute default values of dynamic parameters
+            Map<String, String> substitutions = new HashMap<>();
+            // substitute default values of dynamic request parameters
             if (null != dataPoint.getDataPoint().getParameterList()) {
                 dataPoint.getDataPoint().getParameterList().getParameterListElement().forEach(p -> {
-                    String pVal = (null != p.getDefaultValue()) ? p.getDefaultValue() : "";
-                    substitutions.put(p.getName(), pVal);
+                    substitutions.put(p.getName(), StringUtil.getOrEmpty(p.getDefaultValue()));
                 });
             }
-            // substitute actual request parameters
+            // substitute actual dynamic request parameters
             if (parameters != null) {
-                substitutions.putAll(parameters);
+                parameters.entrySet().forEach(e -> substitutions.put(String.valueOf(e.getKey()), String.valueOf(e.getValue())));
             }
 
             // Read value from device
@@ -186,7 +185,7 @@ public class SGrMessagingDevice extends SGrDeviceBase<
         }
     }
 
-    private Value getValueFromDevice(Properties parameters, long timeoutMs, MessagingDataPoint dataPoint, String outMessageTopic, String outMessageTemplate, String inMessageTopic, MessageFilter messageFilter) throws GenDriverException {
+    private Value getValueFromDevice(Map<String, String> parameters, long timeoutMs, MessagingDataPoint dataPoint, String outMessageTopic, String outMessageTemplate, String inMessageTopic, MessageFilter messageFilter) throws GenDriverException {
         if (messagingClient == null) {
             throw new GenDriverException(NOT_CONNECTED);
         }
@@ -195,7 +194,7 @@ public class SGrMessagingDevice extends SGrDeviceBase<
 
         Either<Throwable, Message> result = messagingClient.readSync(
                 outMessageTopic,
-                Message.of(replacePropertyPlaceholders(outMessageTemplate, parameters)),
+                Message.of(substituteParameterPlaceholders(outMessageTemplate, parameters)),
                 inMessageTopic,
                 messageFilterHandler,
                 timeoutMs
@@ -448,13 +447,13 @@ public class SGrMessagingDevice extends SGrDeviceBase<
         return mappedValue;
     }
 
-    private static String replacePropertyPlaceholders(String template, Properties properties) {
+    private static String substituteParameterPlaceholders(String template, Map<String, String> substitutions) {
         // this is for dynamic parameters
         String convertedTemplate = template;
-        if (template != null && properties != null) {
-            for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+        if (template != null && substitutions != null) {
+            for (Map.Entry<String, String> entry : substitutions.entrySet()) {
                 // no regex here, string literal replacement is sufficient
-                convertedTemplate = convertedTemplate.replace("[[" + (String)entry.getKey() + "]]", (String)entry.getValue());
+                convertedTemplate = convertedTemplate.replace("[[" + entry.getKey() + "]]", StringUtil.getOrEmpty(entry.getValue()));
             }
         }
         return convertedTemplate;

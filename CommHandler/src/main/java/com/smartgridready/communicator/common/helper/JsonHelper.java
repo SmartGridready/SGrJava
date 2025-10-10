@@ -11,14 +11,17 @@ import com.smartgridready.driver.api.common.GenDriverException;
 import io.burt.jmespath.Expression;
 import io.burt.jmespath.JmesPath;
 import io.burt.jmespath.jackson.JacksonRuntime;
+import io.vavr.Tuple;
+import io.vavr.Tuple2;
+
+import org.apache.commons.lang3.SerializationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Provides helper methods for JSON.
@@ -67,21 +70,10 @@ public class JsonHelper {
     public static Value mapJsonResponse(JMESPathMapping jmesPathMapping, String response) throws GenDriverException {
 
         // Build mapping tables from EI-XML mappings
-        Map<String, String> mapFrom = new HashMap<>();
-        Map<String, String> mapTo = new HashMap<>();
-        Map<String, String> names = new HashMap<>();
-        List<JMESPathMappingRecord> mappingRecords = jmesPathMapping.getMapping();
-        for (int i = 0; i < mappingRecords.size(); i++) {
-            mapFrom.put(String.valueOf(i), mappingRecords.get(i).getFrom());
-            if (mappingRecords.get(i).getFrom().startsWith("$")) {
-                mapTo.put(mappingRecords.get(i).getFrom(), mappingRecords.get(i).getTo());
-            } else {
-                mapTo.put(String.valueOf(i), mappingRecords.get(i).getTo());
-            }
-            if (mappingRecords.get(i).getName() != null) {
-                names.put(String.valueOf(i), mappingRecords.get(i).getName());
-            }
-        }
+        Map<String, String> mapFrom = new LinkedHashMap<>();
+        Map<String, String> mapTo = new LinkedHashMap<>();
+        Map<String, String> names = new LinkedHashMap<>();
+        buildMappingTables(jmesPathMapping.getMapping(), mapFrom, mapTo, names);
 
         final String errorMsg = ("Unable to map JSON response according the JSONMapping rules in EI-XML");
         try {
@@ -103,46 +95,65 @@ public class JsonHelper {
         }
     }
 
-    private  static Map<Integer, Map<String, Object>> enhanceWithNamings(
+    static int buildMappingTables(List<JMESPathMappingRecord> mappingRecords, Map<String, String> mapFrom, Map<String, String> mapTo, Map<String, String> names) {
+        for (int i = 0; i < mappingRecords.size(); i++) {
+            mapFrom.put(String.valueOf(i), mappingRecords.get(i).getFrom());
+            if (mappingRecords.get(i).getFrom().startsWith("$")) {
+                mapTo.put(mappingRecords.get(i).getFrom(), mappingRecords.get(i).getTo());
+            } else {
+                mapTo.put(String.valueOf(i), mappingRecords.get(i).getTo());
+            }
+            if (mappingRecords.get(i).getName() != null) {
+                names.put(String.valueOf(i), mappingRecords.get(i).getName());
+            }
+        }
+        return mappingRecords.size();
+    }
+
+    private static Map<Integer, Map<String, Object>> enhanceWithNamings(
             Map<JsonReader.Key, Map<String, Object>> flatRepresentation, Map<String, String> names) {
 
-        Map<Integer, Map<String, Object>> enhanced = new HashMap<>();
+        Map<Integer, Map<String, Object>> enhanced = new LinkedHashMap<>();
 
-        final AtomicInteger key = new AtomicInteger(0);
-        flatRepresentation.forEach( (valuesKey, valuesMap) -> {
-            for (int i = 0; i < valuesMap.size(); i++) {
+        int key = 0;
+        for (Map.Entry<JsonReader.Key, Map<String, Object>> e: flatRepresentation.entrySet()) {
+            for (int i = 0; i < e.getValue().size(); i++) {
                 if (!names.isEmpty()) {
-                    enhanced.putAll(flattenNamedRecords(key, valuesMap, names));
+                    var flatr = flattenNamedRecords(key, e.getValue(), names);
+                    enhanced.putAll(flatr._2);
+                    key = flatr._1;
                 } else {
-                    enhanced.put( (key.getAndIncrement()), valuesMap);
+                    enhanced.put(key, e.getValue());
+                    key++;
                 }
             }
-        });
+        }
         return enhanced;
     }
 
-    private static Map<Integer, Map<String, Object>> flattenNamedRecords(
-            AtomicInteger currentRecordKey,
+    private static Tuple2<Integer, Map<Integer, Map<String, Object>>> flattenNamedRecords(
+            int currentRecordKey,
             Map<String, Object> valuesMap,
             Map<String, String> names) {
 
-        Map<Integer, Map<String, Object>> flattenedRecords = new HashMap<>();
+        Map<Integer, Map<String, Object>> flattenedRecords = new LinkedHashMap<>();
 
-        HashMap<String, Object> unnamedValues = new HashMap<>();
+        Map<String, Object> unnamedValues = new LinkedHashMap<>();
         valuesMap.forEach((key, value) -> {
             if (!names.containsKey(key)) {
                 unnamedValues.put(key, value);
             }
         });
 
-        names.forEach((nameKey, nameValue) -> {
+        for (Map.Entry<String, String> e: names.entrySet()) {
             // Create a separate record for each name
-            Map<String, Object> newValues = new HashMap<>(unnamedValues);
-            newValues.put(nameValue, nameValue.replace("$", ""));
-            newValues.put(nameKey, valuesMap.get(nameKey));
-            flattenedRecords.put(currentRecordKey.getAndIncrement(), newValues);
-        });
+            Map<String, Object> newValues = SerializationUtils.clone((LinkedHashMap<String, Object>) unnamedValues);
+            newValues.put(e.getValue(), e.getValue().replace("$", ""));
+            newValues.put(e.getKey(), valuesMap.get(e.getKey()));
+            flattenedRecords.put(currentRecordKey, newValues);
+            currentRecordKey++;
+        }
 
-        return flattenedRecords;
+        return Tuple.of(currentRecordKey, flattenedRecords);
     }
 }

@@ -9,6 +9,7 @@ import com.smartgridready.driver.api.modbus.StopBits;
 import com.smartgridready.ns.v0.ModbusInterfaceDescription;
 import com.smartgridready.ns.v0.ModbusRtu;
 import com.smartgridready.ns.v0.ModbusTcp;
+import com.smartgridready.utils.StringUtil;
 
 /**
  * A helper class to create instances of Modbus transport connections.
@@ -69,7 +70,7 @@ public class ModbusTransportUtil {
         }
 
         String tcpAddress = tcp.getAddress();
-        int tcpPort = ModbusUtil.isNonEmptyString(tcp.getPort()) ? Integer.valueOf(tcp.getPort()) : ModbusUtil.DEFAULT_MODBUS_TCP_PORT;
+        int tcpPort = StringUtil.isNotEmpty(tcp.getPort()) ? Integer.valueOf(tcp.getPort()) : ModbusUtil.DEFAULT_MODBUS_TCP_PORT;
 
         return factory.createTcpTransport(tcpAddress, tcpPort);
     }
@@ -80,7 +81,7 @@ public class ModbusTransportUtil {
         }
 
         String udpAddress = udp.getAddress();
-        int udpPort = ModbusUtil.isNonEmptyString(udp.getPort()) ? Integer.valueOf(udp.getPort()) : ModbusUtil.DEFAULT_MODBUS_TCP_PORT;
+        int udpPort = StringUtil.isNotEmpty(udp.getPort()) ? Integer.valueOf(udp.getPort()) : ModbusUtil.DEFAULT_MODBUS_TCP_PORT;
 
         return factory.createUdpTransport(udpAddress, udpPort);
     }

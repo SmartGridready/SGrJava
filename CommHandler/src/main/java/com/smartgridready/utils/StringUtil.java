@@ -16,4 +16,13 @@ public class StringUtil {
     public static boolean isNotEmpty(String str) {
         return (str != null) && !str.isEmpty();
     }
+
+    /**
+     * Gets a string or an empty string if the given string is null.
+     * @param str the string to get
+     * @return a string
+     */
+    public static String getOrEmpty(String str) {
+        return (str != null) ? str : "";
+    }
 }

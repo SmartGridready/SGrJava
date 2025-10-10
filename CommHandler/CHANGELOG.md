@@ -5,11 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [2.4.2] - 2025-10-09
 
 ### Fixed
 
 - Null reference of string value decoded as JSON null node
+- Order of elements was not correct when using JMESpath mappings
 
 ### Added
 
@@ -18,6 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated specification to `2.1_2025-09-02`, adds W/m2
+- updated Gradle build file
+- updated JUnit 
+- query parameters and headers are not added to REST request if their value is empty
 
 ## [2.4.1] - 2025-05-20
 

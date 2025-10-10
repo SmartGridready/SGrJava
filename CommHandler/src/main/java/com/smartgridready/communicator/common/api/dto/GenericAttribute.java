@@ -100,11 +100,8 @@ public class GenericAttribute {
                 .map(GenericAttribute::mapGenericAttributes).orElse(new ArrayList<>());
 
         DataTypeInfo dt = DataType.getDataTypeInfo(genAttribute.getDataType()).orElse(null);
-        // handle special case of enum
         Value v = (genAttribute.getValue() != null)
-            ? (genAttribute.getDataType().getEnum() != null)
-                ? EnumValue.of(genAttribute.getValue())
-                : Value.fromString(genAttribute.getDataType(), genAttribute.getValue())
+            ? Value.fromString(genAttribute.getDataType(), genAttribute.getValue())
             : null;
 
         return new GenericAttribute(

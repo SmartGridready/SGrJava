@@ -36,8 +36,8 @@ sourceSets {
     test.resources.srcDirs = ['src/test/resources']
 
     integrationTest {
-        java.srcDir 'src/test/java'
-        resources.srcDir 'src/test/resources'
+        java.srcDirs = sourceSets.test.java.srcDirs
+        resources.srcDirs = test.resources.srcDirs
         compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
         runtimeClasspath += output + compileClasspath
     }
@@ -89,7 +89,7 @@ dependencies {
     api group: 'com.smartgridready', name: 'sgr-specification', version: "2.1${sgr_spec_suffix}"
     implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '4.0.5'
 
-    api group: 'com.smartgridready', name: 'sgr-driver-api', version: "2.3.1${sgr_driver_suffix}"
+    api group: 'com.smartgridready', name: 'sgr-driver-api', version: "2.3.2${sgr_driver_suffix}"
     testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-j2mod', version: "1.0.0${modbus_suffix}"
     testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-apachehttp', version: "2.1.1${apachehttp_suffix}"
     testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-hivemq', version: "2.0.1${hivemq_suffix}"
@@ -113,13 +113,13 @@ dependencies {
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.19.0'
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j2-impl', version: '2.19.0'
 
-    testImplementation group: 'org.yaml', name: 'snakeyaml', version: '1.33'
+    testImplementation group: 'org.yaml', name: 'snakeyaml', version: '1.33'    // latest version compatible with JDK 11
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.18.0'
     testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.18.0'
     testImplementation group: 'org.mockito', name: 'mockito-inline', version: '5.2.0'
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.12.2'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.13.4'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4' // latest version compatible with JDK 11
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     testImplementation group: 'org.awaitility', name: 'awaitility', version: '4.2.0'
