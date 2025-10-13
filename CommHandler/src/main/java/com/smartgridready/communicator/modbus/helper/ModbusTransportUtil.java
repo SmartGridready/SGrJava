@@ -85,7 +85,7 @@ public class ModbusTransportUtil {
         }
 
         String tcpAddress = tcp.getAddress();
-        int tcpPort = ModbusUtil.isNonEmptyString(tcp.getPort()) ? Integer.valueOf(tcp.getPort()) : ModbusUtil.DEFAULT_MODBUS_TCP_PORT;
+        int tcpPort = StringUtil.isNotEmpty(tcp.getPort()) ? Integer.valueOf(tcp.getPort()) : ModbusUtil.DEFAULT_MODBUS_TCP_PORT;
         int timeout = (null != tcp.getTimeout()) ? Integer.valueOf(tcp.getTimeout()) : ModbusUtil.DEFAULT_MODBUS_TCP_TIMEOUT;
 
         return factory.createTcpTransport(tcpAddress, tcpPort, timeout, true);
