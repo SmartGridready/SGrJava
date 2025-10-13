@@ -72,7 +72,7 @@ if (project.hasProperty("snapshots")) {
         sgr_driver_suffix = '-SNAPSHOT'
     }
     if (snapList.contains("sgr-driver-modbus")) {
-        println "using snapshots of modbus"
+        println "using snapshots of sgr-driver-modbus"
         modbus_suffix = '-SNAPSHOT'
     }
     if (snapList.contains("sgr-driver-apachehttp")) {
@@ -87,27 +87,27 @@ if (project.hasProperty("snapshots")) {
 
 dependencies {
     api group: 'com.smartgridready', name: 'sgr-specification', version: "2.2${sgr_spec_suffix}"
-    implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '4.0.5'
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '4.0.6'
 
     api group: 'com.smartgridready', name: 'sgr-driver-api', version: "2.4.0${sgr_driver_suffix}"
     testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-j2mod', version: "1.1.0${modbus_suffix}"
-    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-apachehttp', version: "2.1.1${apachehttp_suffix}"
-    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-hivemq', version: "2.0.1${hivemq_suffix}"
+    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-apachehttp', version: "2.2.0${apachehttp_suffix}"
+    testRuntimeOnly group: 'com.smartgridready', name: 'sgr-driver-hivemq', version: "2.1.0${hivemq_suffix}"
 
-    api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.2'
+    api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.4'
     implementation group: 'io.burt', name: 'jmespath-core', version: '0.6.0'
     implementation group: 'io.burt', name: 'jmespath-jackson', version: '0.6.0'
     implementation group: 'commons-io', name: 'commons-io', version: '2.15.1'
-    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.19.0'
     implementation group: 'jakarta.annotation', name: 'jakarta.annotation-api', version: '2.1.1'
-    api group: 'io.vavr', name: 'vavr', version: '0.10.5'
+    api group: 'io.vavr', name: 'vavr', version: '0.10.7'
 
-    api group: 'io.reactivex.rxjava3', name: 'rxjava', version: '3.1.5'
+    api group: 'io.reactivex.rxjava3', name: 'rxjava', version: '3.1.12'
 
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.10'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.17'
 
-    implementation "org.mapstruct:mapstruct:1.6.0"
-    annotationProcessor "org.mapstruct:mapstruct-processor:1.6.0"
+    implementation "org.mapstruct:mapstruct:1.6.3"
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.6.3"
 
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.19.0'
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.19.0'
@@ -122,7 +122,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4' // latest version compatible with JDK 11
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    testImplementation group: 'org.awaitility', name: 'awaitility', version: '4.2.0'
+    testImplementation group: 'org.awaitility', name: 'awaitility', version: '4.3.0'
 }
 
 test {
