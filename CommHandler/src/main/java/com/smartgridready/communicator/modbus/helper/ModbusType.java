@@ -13,5 +13,7 @@ public enum ModbusType {
     /** Modbus UDP. */
     UDP,
     /** Modbus RTU over serial, with ASCII encoding. */
-    RTU_ASCII
+    RTU_ASCII,
+    /** Modbus RTU over TCP. */
+    RTU_TCP
 }

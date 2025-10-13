@@ -2,10 +2,24 @@ package com.smartgridready.driver.api.modbus;
 
 /**
  * Implements a Modbus interface driver exception.
+ * Contains Modbus exception code.
  */
 public class GenDriverModbusException extends Exception {
 
     private static final long serialVersionUID = 1L;
+    /** The numeric exception code. */
+    private final int exceptionCode;
+
+    /**
+     * Construct with message and inner exception.
+     * @param aMessage the error message
+     * @param aCause the inner exception
+     * @param exceptionCode the numeric exception code
+     */
+    public GenDriverModbusException(String aMessage, Throwable aCause, int exceptionCode) {
+        super(aMessage, aCause);
+        this.exceptionCode = exceptionCode;
+    }
 
     /**
      * Construct with message and inner exception.
@@ -13,7 +27,17 @@ public class GenDriverModbusException extends Exception {
      * @param aCause the inner exception
      */
     public GenDriverModbusException(String aMessage, Throwable aCause) {
-        super(aMessage, aCause);
+        this(aMessage, aCause, 0xFF);
+    }
+
+    /**
+     * Construct with message.
+     * @param aMessage the error message
+     * @param exceptionCode the numeric exception code
+     */
+    public GenDriverModbusException(String aMessage, int exceptionCode) {
+        super(aMessage);
+        this.exceptionCode = exceptionCode;
     }
 
     /**
@@ -21,7 +45,17 @@ public class GenDriverModbusException extends Exception {
      * @param aMessage the error message
      */
     public GenDriverModbusException(String aMessage) {
-        super(aMessage);
+        this(aMessage, 0xFF);
+    }
+
+    /**
+     * Construct with inner exception.
+     * @param aCause the inner exception
+     * @param exceptionCode the numeric exception code
+     */
+    public GenDriverModbusException(Throwable aCause, int exceptionCode) {
+        super(aCause);
+        this.exceptionCode = exceptionCode;
     }
 
     /**
@@ -29,6 +63,14 @@ public class GenDriverModbusException extends Exception {
      * @param aCause the inner exception
      */
     public GenDriverModbusException(Throwable aCause) {
-        super(aCause);
+        this(aCause, 0xFF);
+    }
+
+    /**
+     * Gets the numeric exception code.
+     * @return an integer
+     */
+    public int getExceptionCode() {
+        return exceptionCode;
     }
 }

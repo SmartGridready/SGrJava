@@ -39,7 +39,7 @@ java {
 }
 
 dependencies {
-    api group: 'io.vavr', name: 'vavr', version: '0.10.5'
+    api group: 'io.vavr', name: 'vavr', version: '0.10.7'
 }
 
 publishing {

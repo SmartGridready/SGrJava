@@ -38,6 +38,8 @@ import com.smartgridready.utils.StringUtil;
 import com.smartgridready.communicator.common.api.values.StringValue;
 import com.smartgridready.communicator.common.api.values.Value;
 import com.smartgridready.communicator.common.helper.JsonHelper;
+import com.smartgridready.communicator.common.helper.RegexHelper;
+import com.smartgridready.communicator.common.helper.XPathHelper;
 import com.smartgridready.communicator.common.impl.SGrDeviceBase;
 import com.smartgridready.driver.api.common.GenDriverException;
 import com.smartgridready.communicator.rest.api.GenDeviceApi4Rest;
@@ -230,6 +232,10 @@ public class SGrRestApiDevice extends SGrDeviceBase<
                 return JsonHelper.parseJsonResponse(responseQuery.getQuery(), response);
             } else if (responseQuery.getQueryType() != null && ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
                 return JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
+            } else if (responseQuery.getQueryType() != null && ResponseQueryType.X_PATH_EXPRESSION == responseQuery.getQueryType()) {
+                return XPathHelper.parseXmlResponse(responseQuery.getQuery(), response);
+            } else if (responseQuery.getQueryType() != null && ResponseQueryType.REGULAR_EXPRESSION == responseQuery.getQueryType()) {
+                return RegexHelper.query(responseQuery.getQuery(), response);
             }
         }
 

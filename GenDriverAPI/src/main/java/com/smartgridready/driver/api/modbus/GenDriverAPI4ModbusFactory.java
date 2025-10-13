@@ -80,6 +80,25 @@ public interface GenDriverAPI4ModbusFactory {
     public GenDriverAPI4Modbus createTcpTransport(String ipAddress, int port);
 
     /**
+     * Creates a Modbus TCP transport.
+     * @param ipAddress the IP address or host name
+     * @param port the TCP port
+     * @param timeout the connection timeout in milliseconds
+     * @return a new instance of {@link GenDriverAPI4Modbus}
+     */
+    public GenDriverAPI4Modbus createTcpTransport(String ipAddress, int port, int timeout);
+
+    /**
+     * Creates a Modbus TCP transport.
+     * @param ipAddress the IP address or host name
+     * @param port the TCP port
+     * @param timeout the connection timeout in milliseconds
+     * @param rtuOverTcp uses RTU over a TCP connection, e.g. for IP-to-serial gateways
+     * @return a new instance of {@link GenDriverAPI4Modbus}
+     */
+    public GenDriverAPI4Modbus createTcpTransport(String ipAddress, int port, int timeout, boolean rtuOverTcp);
+
+    /**
      * Creates a Modbus UDP transport. Uses the default port 502.
      * @param ipAddress the IP address or host name
      * @return a new instance of {@link GenDriverAPI4Modbus}
