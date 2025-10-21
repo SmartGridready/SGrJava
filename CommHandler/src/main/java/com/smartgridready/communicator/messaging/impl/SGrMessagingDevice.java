@@ -215,18 +215,21 @@ public class SGrMessagingDevice extends SGrDeviceBase<
             Value value;
             if (queryOpt.isPresent()) {
                 ResponseQuery responseQuery = queryOpt.get();
-                if (responseQuery.getQueryType() != null && ResponseQueryType.JMES_PATH_EXPRESSION == responseQuery.getQueryType()) {
-                    value = JsonHelper.parseJsonResponse(responseQuery.getQuery(), response);
-                } else if (responseQuery.getQueryType() != null && ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
-                    value = JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
-                } else if (responseQuery.getQueryType() != null && ResponseQueryType.X_PATH_EXPRESSION == responseQuery.getQueryType()) {
-                    value = XPathHelper.parseXmlResponse(responseQuery.getQuery(), response);
-                } else if (responseQuery.getQueryType() != null && ResponseQueryType.REGULAR_EXPRESSION == responseQuery.getQueryType()) {
-                    value = RegexHelper.query(responseQuery.getQuery(), response);
-                } else if (responseQuery.getQueryType() != null) {
-                    throw new GenDriverException("Response query type " + responseQuery.getQueryType().name() + " not supported yet");
-                } else {
+                if (responseQuery.getQueryType() == null) {
                     throw new GenDriverException("Response query type missing");
+                }
+                if (ResponseQueryType.JMES_PATH_EXPRESSION == responseQuery.getQueryType()) {
+                    value = JsonHelper.parseJsonResponse(responseQuery.getQuery(), response);
+                } else if (ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
+                    value = JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
+                } else if (ResponseQueryType.X_PATH_EXPRESSION == responseQuery.getQueryType()) {
+                    value = XPathHelper.parseXmlResponse(responseQuery.getQuery(), response);
+                } else if (ResponseQueryType.REGULAR_EXPRESSION == responseQuery.getQueryType()) {
+                    value = RegexHelper.query(responseQuery.getQuery(), response);
+                } else if (ResponseQueryType.JSO_NATA_EXPRESSION == responseQuery.getQueryType()) {
+                    value = JsonHelper.parseJsonResponseWithJsonata(responseQuery.getQuery(), response);
+                } else {
+                    throw new GenDriverException("Response query type " + responseQuery.getQueryType().name() + " not supported yet");
                 }
             } else {
                 // mapping device -> generic (only for plain string values)
@@ -327,6 +330,9 @@ public class SGrMessagingDevice extends SGrDeviceBase<
                         break;
                     case REGULAR_EXPRESSION:
                         value = RegexHelper.query(queryOpt.get().getQuery(), response);
+                        break;
+                    case JSO_NATA_EXPRESSION:
+                        value = JsonHelper.parseJsonResponseWithJsonata(queryOpt.get().getQuery(), response);
                         break;
                     default:
                         throw new GenDriverException("Response query type " + queryOpt.get().getQueryType().name() + " not supported yet");

@@ -2,7 +2,6 @@ package com.smartgridready.communicator.common.helper;
 
 import com.smartgridready.ns.v0.DeviceFrame;
 import com.smartgridready.ns.v0.JMESPathMapping;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.smartgridready.communicator.common.impl.SGrDeviceBase;
 import com.smartgridready.ns.v0.RestApiServiceCall;
 import io.vavr.Tuple3;
@@ -56,6 +55,20 @@ class JsonMapperTest extends JsonMapperTestBase {
     }
 
     @Test
+    void mapSwisspower_Jsonata() throws Exception {
+
+        String expression = "prices[].{\"start_timestamp\":start_timestamp,\"end_timestamp\":end_timestamp,\"integrated\":integrated[].{\"value\":value,\"unit\":unit,\"component\":component}}";
+
+        // map JSON
+        String jsonResponse = loadJson("TariffInSwisspower.json");
+        String expectedJson = loadJson("TariffOutSwisspower_withTariffName.json");
+
+        String jsonResult = JsonHelper.parseJsonResponseWithJsonata(expression, jsonResponse).getJson().toString();
+        LOG.debug("JSON result: {}", jsonResult);
+        assertEquals(MAPPER.readTree(expectedJson).toString(), jsonResult);
+    }
+
+    @Test
     void mapGroupeE() throws Exception {
 
         Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_GroupeE_V1.0.xml");
@@ -90,6 +103,20 @@ class JsonMapperTest extends JsonMapperTestBase {
         assertEquals(MAPPER.readTree(expectedJson).toString(), jsonResult);
     }
 
+    @Test
+    void mapGroupeE_JSONata() throws Exception {
+
+        String expression = "$.{\"start_timestamp\":start_timestamp,\"end_timestamp\":end_timestamp,\"integrated\":[{\"value\":vario_plus,\"unit\":unit}]}";
+
+        // map JSON
+        String jsonResponse = loadJson("TariffInGroupeE.json");
+        String expectedJson = loadJson("TariffOutGroupeE.json");
+
+        String jsonResult = JsonHelper.parseJsonResponseWithJsonata(expression, jsonResponse).getJson().toString();
+        LOG.debug("JSON result: {}", jsonResult);
+        assertEquals(MAPPER.readTree(expectedJson).toString(), jsonResult);
+    }
+
     private static JMESPathMapping getJmesPathMapping(DeviceFrame deviceFrame) {
 
         var restApiConfigurationContent = deviceFrame
@@ -108,7 +135,7 @@ class JsonMapperTest extends JsonMapperTestBase {
         throw new IllegalArgumentException("Device Frame does not contain RestApiServiceCall");
     }
 
-    private static String getJmesQueryExpression(DeviceFrame deviceFrame) {
+    private static String getQueryExpression(DeviceFrame deviceFrame) {
 
         var restApiConfigurationContent = deviceFrame
                 .getInterfaceList()

@@ -228,14 +228,18 @@ public class SGrRestApiDevice extends SGrDeviceBase<
 
         if (restApiServiceCall.getResponseQuery() != null) {
             ResponseQuery responseQuery = restApiServiceCall.getResponseQuery();
-            if (responseQuery.getQueryType() != null && ResponseQueryType.JMES_PATH_EXPRESSION == responseQuery.getQueryType()) {
-                return JsonHelper.parseJsonResponse(responseQuery.getQuery(), response);
-            } else if (responseQuery.getQueryType() != null && ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
-                return JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
-            } else if (responseQuery.getQueryType() != null && ResponseQueryType.X_PATH_EXPRESSION == responseQuery.getQueryType()) {
-                return XPathHelper.parseXmlResponse(responseQuery.getQuery(), response);
-            } else if (responseQuery.getQueryType() != null && ResponseQueryType.REGULAR_EXPRESSION == responseQuery.getQueryType()) {
-                return RegexHelper.query(responseQuery.getQuery(), response);
+            if (responseQuery.getQueryType() != null) {
+                if (ResponseQueryType.JMES_PATH_EXPRESSION == responseQuery.getQueryType()) {
+                    return JsonHelper.parseJsonResponse(responseQuery.getQuery(), response);
+                } else if (ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
+                    return JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
+                } else if (ResponseQueryType.X_PATH_EXPRESSION == responseQuery.getQueryType()) {
+                    return XPathHelper.parseXmlResponse(responseQuery.getQuery(), response);
+                } else if (ResponseQueryType.REGULAR_EXPRESSION == responseQuery.getQueryType()) {
+                    return RegexHelper.query(responseQuery.getQuery(), response);
+                } else if (ResponseQueryType.JSO_NATA_EXPRESSION == responseQuery.getQueryType()) {
+                    return JsonHelper.parseJsonResponseWithJsonata(responseQuery.getQuery(), response);
+                }
             }
         }
 

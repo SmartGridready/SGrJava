@@ -1,5 +1,6 @@
 package com.smartgridready.communicator.common.helper;
 
+import com.dashjoin.jsonata.Jsonata;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -55,6 +56,32 @@ public class JsonHelper {
                 JsonNode res = expression.search(jsonNode);
                 return JsonValue.of(res);
             }
+        } catch (Exception e) {
+            throw new GenDriverException("Failed to parse JSON response", e);
+        }
+    }
+
+    /**
+     * Evaluates a JSONata expression on a JSON string and returns as SGr value.
+     * @param jsonataExpression the JSONata expression
+     * @param jsonResp the JSON string
+     * @return an instance of {@link JsonValue}
+     * @throws GenDriverException when an error occurred during parsing
+     */
+    public static Value parseJsonResponseWithJsonata(String jsonataExpression, String jsonResp) throws GenDriverException {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            if (jsonataExpression != null && !jsonataExpression.trim().isEmpty()) {
+                var expression = Jsonata.jsonata(jsonataExpression);
+                var jsonObj = mapper.readValue(jsonResp, Object.class);
+                var result = expression.evaluate(jsonObj);
+                return JsonValue.of(result);
+            }
+
+            return JsonValue.of(mapper.readTree(jsonResp));
+
         } catch (IOException e) {
             throw new GenDriverException("Failed to parse JSON response", e);
         }
