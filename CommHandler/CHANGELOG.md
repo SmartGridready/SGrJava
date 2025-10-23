@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - requires updated driver implementations supporting driver API 2.4
+- requires `sgr-specification` 2.2
 
 
 ## [2.4.2] - 2025-10-09
