@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class JsonMapperTest extends JsonMapperTestBase {
 
@@ -57,7 +58,11 @@ class JsonMapperTest extends JsonMapperTestBase {
     @Test
     void mapSwisspower_Jsonata() throws Exception {
 
-        String expression = "prices[].{\"start_timestamp\":start_timestamp,\"end_timestamp\":end_timestamp,\"integrated\":integrated[].{\"value\":value,\"unit\":unit,\"component\":component}}";
+        Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_Swisspower_Test_JSONata_V1.0.xml");
+        DeviceFrame deviceFrame = device._1;
+
+        String expression = getQueryExpression(deviceFrame);
+        assertNotNull(expression);
 
         // map JSON
         String jsonResponse = loadJson("TariffInSwisspower.json");
@@ -106,7 +111,11 @@ class JsonMapperTest extends JsonMapperTestBase {
     @Test
     void mapGroupeE_JSONata() throws Exception {
 
-        String expression = "$.{\"start_timestamp\":start_timestamp,\"end_timestamp\":end_timestamp,\"integrated\":[{\"value\":vario_plus,\"unit\":unit}]}";
+        Tuple3<DeviceFrame, SGrDeviceBase<?, ?, ?>, Properties> device = createDevice("SGr_05_mmmm_dddd_Dynamic_Tariffs_GroupeE_JSONata_V1.0.xml");
+        DeviceFrame deviceFrame = device._1;
+
+        String expression = getQueryExpression(deviceFrame);
+        assertNotNull(expression);
 
         // map JSON
         String jsonResponse = loadJson("TariffInGroupeE.json");
