@@ -55,7 +55,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
@@ -163,14 +165,18 @@ public class SGrRestApiDevice extends SGrDeviceBase<
             RestApiServiceCall serviceCall = evaluateRestApiServiceCall(dpDescription, rwpDirection);
 
             if (value != null) {
+                // write operation
                 checkOutOfRange(new Value[]{value}, dataPoint);
                 value = applyUnitConversion(dataPoint, value, SGrDeviceBase::divide);
 
-                // substitute value mappings generic -> device
-                substitutions.put(
-                    "value",
-                    (serviceCall.getValueMapping() != null) ? getMappedDeviceValue(value.getString(), serviceCall.getValueMapping()) : value.getString()
-                );
+                // value mappings generic -> device
+                value = getMappedDeviceValue(serviceCall, value);
+
+                // value transformation using responseQuery
+                value = getTransformedDeviceValue(serviceCall, value);
+
+                // substitute value
+                substitutions.put("value", value.getString());
             }
             // substitute default values of dynamic request parameters
             if (null != dataPoint.getDataPoint().getParameterList()) {
@@ -187,10 +193,19 @@ public class SGrRestApiDevice extends SGrDeviceBase<
             String response = handleServiceCall(restServiceClient, httpAuthenticator.isTokenRenewalSupported());
 
             if (value == null) {
-                value = handleServiceResponse(serviceCall, response);
+                // read operation
+                value = StringValue.of(response);
+
+                // value transformation using responseQuery
+                value = getTransformedGenericValue(serviceCall, value);
+
+                // value mappings device -> generic
+                value = getMappedGenericValue(serviceCall, value);
+
                 return applyUnitConversion(dataPoint, value, SGrDeviceBase::multiply);
             }
 
+            // response of write operation
             return StringValue.of(response);
         }
         throw  new GenDriverException("Missing 'restApiDataPointConfiguration' description in device description XML file");
@@ -222,33 +237,6 @@ public class SGrRestApiDevice extends SGrDeviceBase<
         } else {
             throw new RestApiServiceCallException(result);
         }
-    }
-
-    private Value handleServiceResponse(RestApiServiceCall restApiServiceCall, String response) throws GenDriverException {
-
-        if (restApiServiceCall.getResponseQuery() != null) {
-            ResponseQuery responseQuery = restApiServiceCall.getResponseQuery();
-            if (responseQuery.getQueryType() != null) {
-                if (ResponseQueryType.JMES_PATH_EXPRESSION == responseQuery.getQueryType()) {
-                    return JsonHelper.parseJsonResponse(responseQuery.getQuery(), response);
-                } else if (ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
-                    return JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
-                } else if (ResponseQueryType.X_PATH_EXPRESSION == responseQuery.getQueryType()) {
-                    return XPathHelper.parseXmlResponse(responseQuery.getQuery(), response);
-                } else if (ResponseQueryType.REGULAR_EXPRESSION == responseQuery.getQueryType()) {
-                    return RegexHelper.query(responseQuery.getQuery(), response);
-                } else if (ResponseQueryType.JSO_NATA_EXPRESSION == responseQuery.getQueryType()) {
-                    return JsonHelper.parseJsonResponseWithJsonata(responseQuery.getQuery(), response);
-                }
-            }
-        }
-
-        // return plain response
-        
-        // substitute value mappings device -> generic
-        return StringValue.of(
-            (restApiServiceCall.getValueMapping() != null) ? getMappedGenericValue(response, restApiServiceCall.getValueMapping()) : response
-        );
     }
 
     private RestApiServiceCall evaluateRestApiServiceCall(RestApiDataPointConfiguration dataPointConfiguration, RwpDirections rwpDirections)
@@ -324,23 +312,91 @@ public class SGrRestApiDevice extends SGrDeviceBase<
         return getRestApiInterface().getRestApiInterfaceDescription();
     }
 
-    private String getMappedDeviceValue(String genericValue, RestApiValueMapping valueMapping) {
-        for (ValueMapping mapping: valueMapping.getMapping()) {
-            if (genericValue.equals(mapping.getGenericValue())) {
-                return mapping.getDeviceValue();
-            }
+    private Value getMappedDeviceValue(RestApiServiceCall serviceCall, Value value) {
+        Value mappedValue = value;
+
+        List<ValueMapping> valueMappings = Optional.ofNullable(serviceCall.getValueMapping())
+            .map(RestApiValueMapping::getMapping)
+            .orElse(Collections.emptyList());
+
+        final String strVal = mappedValue.getString();
+        Optional<ValueMapping> mappingOpt = valueMappings.stream()
+            .filter(m -> strVal.equals(m.getGenericValue()))
+            .findFirst();
+        if (mappingOpt.isPresent()) {
+            mappedValue = StringValue.of(mappingOpt.get().getDeviceValue());
         }
 
-        return genericValue;
+        return mappedValue;
     }
 
-    private String getMappedGenericValue(String deviceValue, RestApiValueMapping valueMapping) {
-        for (ValueMapping mapping: valueMapping.getMapping()) {
-            if (deviceValue.equals(mapping.getDeviceValue())) {
-                return mapping.getGenericValue();
+    private Value getMappedGenericValue(RestApiServiceCall serviceCall, Value value) {
+        Value mappedValue = value;
+
+        List<ValueMapping> valueMappings = Optional.ofNullable(serviceCall.getValueMapping())
+            .map(RestApiValueMapping::getMapping)
+            .orElse(Collections.emptyList());
+
+        final String strVal = mappedValue.getString();
+        Optional<ValueMapping> mappingOpt = valueMappings.stream()
+            .filter(m -> strVal.equals(m.getDeviceValue()))
+            .findFirst();
+        if (mappingOpt.isPresent()) {
+            mappedValue = StringValue.of(mappingOpt.get().getGenericValue());
+        }
+
+        return mappedValue;
+    }
+
+    private static Value getTransformedDeviceValue(RestApiServiceCall serviceCall, Value value) throws GenDriverException {
+        Value tmpValue = value;
+
+        ResponseQuery templateQuery = serviceCall.getResponseQuery();
+        if (templateQuery != null) {
+            if (templateQuery.getQueryType() == null) {
+                throw new GenDriverException("Template query type missing");
+            }
+            if (ResponseQueryType.JMES_PATH_EXPRESSION == templateQuery.getQueryType()) {
+                tmpValue = JsonHelper.parseJsonResponse(templateQuery.getQuery(), tmpValue.getString());
+            } else if (ResponseQueryType.JMES_PATH_MAPPING == templateQuery.getQueryType()) {
+                tmpValue = JsonHelper.mapJsonResponse(templateQuery.getJmesPathMappings(), tmpValue.getString());
+            } else if (ResponseQueryType.X_PATH_EXPRESSION == templateQuery.getQueryType()) {
+                tmpValue = XPathHelper.parseXmlResponse(templateQuery.getQuery(), tmpValue.getString());
+            } else if (ResponseQueryType.REGULAR_EXPRESSION == templateQuery.getQueryType()) {
+                tmpValue = RegexHelper.query(templateQuery.getQuery(), tmpValue.getString());
+            } else if (ResponseQueryType.JSO_NATA_EXPRESSION == templateQuery.getQueryType()) {
+                tmpValue = JsonHelper.parseJsonResponseWithJsonata(templateQuery.getQuery(), tmpValue.getString());
+            } else {
+                throw new GenDriverException("Template query type " + templateQuery.getQueryType().name() + " not supported yet");
             }
         }
 
-        return deviceValue;
+        return tmpValue;
+    }
+
+    private static Value getTransformedGenericValue(RestApiServiceCall serviceCall, Value value) throws GenDriverException {
+        Value tmpValue = value;
+
+        ResponseQuery responseQuery = serviceCall.getResponseQuery();
+        if (responseQuery != null) {
+            if (responseQuery.getQueryType() == null) {
+                throw new GenDriverException("Response query type missing");
+            }
+            if (ResponseQueryType.JMES_PATH_EXPRESSION == responseQuery.getQueryType()) {
+                tmpValue = JsonHelper.parseJsonResponse(responseQuery.getQuery(), tmpValue.getString());
+            } else if (ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
+                tmpValue = JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), tmpValue.getString());
+            } else if (ResponseQueryType.X_PATH_EXPRESSION == responseQuery.getQueryType()) {
+                tmpValue = XPathHelper.parseXmlResponse(responseQuery.getQuery(), tmpValue.getString());
+            } else if (ResponseQueryType.REGULAR_EXPRESSION == responseQuery.getQueryType()) {
+                tmpValue = RegexHelper.query(responseQuery.getQuery(), tmpValue.getString());
+            } else if (ResponseQueryType.JSO_NATA_EXPRESSION == responseQuery.getQueryType()) {
+                tmpValue = JsonHelper.parseJsonResponseWithJsonata(responseQuery.getQuery(), tmpValue.getString());
+            } else {
+                throw new GenDriverException("Response query type " + responseQuery.getQueryType().name() + " not supported yet");
+            }
+        }
+
+        return tmpValue;
     }
 }

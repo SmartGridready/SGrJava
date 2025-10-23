@@ -51,6 +51,7 @@ public class SGrMessagingDevice extends SGrDeviceBase<
         MessagingFunctionalProfile,
         MessagingDataPoint> implements GenDeviceApi4Messaging {
 
+    @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger(SGrMessagingDevice.class);
 
     private static final long SYNC_READ_TIMEOUT_MSEC = 60000;
@@ -208,33 +209,14 @@ public class SGrMessagingDevice extends SGrDeviceBase<
                     .get() // returns Message
                     .getPayload();
 
-            Optional<ResponseQuery> queryOpt = Optional.ofNullable(dataPoint.getMessagingDataPointConfiguration())
-                    .map(MessagingDataPointConfiguration::getInMessage)
-                    .map(InMessage::getResponseQuery);
 
-            Value value;
-            if (queryOpt.isPresent()) {
-                ResponseQuery responseQuery = queryOpt.get();
-                if (responseQuery.getQueryType() == null) {
-                    throw new GenDriverException("Response query type missing");
-                }
-                if (ResponseQueryType.JMES_PATH_EXPRESSION == responseQuery.getQueryType()) {
-                    value = JsonHelper.parseJsonResponse(responseQuery.getQuery(), response);
-                } else if (ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
-                    value = JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), response);
-                } else if (ResponseQueryType.X_PATH_EXPRESSION == responseQuery.getQueryType()) {
-                    value = XPathHelper.parseXmlResponse(responseQuery.getQuery(), response);
-                } else if (ResponseQueryType.REGULAR_EXPRESSION == responseQuery.getQueryType()) {
-                    value = RegexHelper.query(responseQuery.getQuery(), response);
-                } else if (ResponseQueryType.JSO_NATA_EXPRESSION == responseQuery.getQueryType()) {
-                    value = JsonHelper.parseJsonResponseWithJsonata(responseQuery.getQuery(), response);
-                } else {
-                    throw new GenDriverException("Response query type " + responseQuery.getQueryType().name() + " not supported yet");
-                }
-            } else {
-                // mapping device -> generic (only for plain string values)
-                value = getMappedGenericValue(dataPoint.getMessagingDataPointConfiguration(), response);
-            }
+            Value value = StringValue.of(response);
+
+            // value transformation using responseQuery
+            value = getTransformedGenericValue(dataPoint.getMessagingDataPointConfiguration(), value);
+
+            // mapping device -> generic (only for plain string values)
+            value = getMappedGenericValue(dataPoint.getMessagingDataPointConfiguration(), value);
 
             // unit conversion before returning to client
             return applyUnitConversion(dataPoint, value, SGrDeviceBase::multiply);
@@ -267,10 +249,13 @@ public class SGrMessagingDevice extends SGrDeviceBase<
         value = applyUnitConversion(dataPoint, value, SGrDeviceBase::divide);
 
         // mapping generic -> device
-        String outValue = getMappedDeviceValue(dataPoint.getMessagingDataPointConfiguration(), value);
+        value = getMappedDeviceValue(dataPoint.getMessagingDataPointConfiguration(), value);
+
+        // value transformation using templateQuery
+        value = getTransformedDeviceValue(dataPoint.getMessagingDataPointConfiguration(), value);
 
         // no regex here, string literal replacement is sufficient
-        outMessageTemplate = outMessageTemplate.replace("[[value]]", outValue);
+        outMessageTemplate = outMessageTemplate.replace("[[value]]", value.getString());
 
         messagingClient.sendSync(outMessageTopic, Message.of(outMessageTemplate));
     }
@@ -311,38 +296,14 @@ public class SGrMessagingDevice extends SGrDeviceBase<
 
         String response = Optional.ofNullable(msgReceiveResult.get().getPayload()).orElse("");
 
-        Optional<ResponseQuery> queryOpt = Optional.ofNullable(dataPoint.getMessagingDataPointConfiguration())
-                .map(MessagingDataPointConfiguration::getInMessage)
-                .map(InMessage::getResponseQuery);
-
         try {
-            Value value;
-            if (queryOpt.isPresent()) {
-                switch (queryOpt.get().getQueryType()) {
-                    case JMES_PATH_EXPRESSION:
-                        value = JsonHelper.parseJsonResponse(queryOpt.get().getQuery(), response);
-                        break;
-                    case JMES_PATH_MAPPING:
-                        value = JsonHelper.mapJsonResponse(queryOpt.get().getJmesPathMappings(), response);
-                        break;
-                    case X_PATH_EXPRESSION:
-                        value = XPathHelper.parseXmlResponse(queryOpt.get().getQuery(), response);
-                        break;
-                    case REGULAR_EXPRESSION:
-                        value = RegexHelper.query(queryOpt.get().getQuery(), response);
-                        break;
-                    case JSO_NATA_EXPRESSION:
-                        value = JsonHelper.parseJsonResponseWithJsonata(queryOpt.get().getQuery(), response);
-                        break;
-                    default:
-                        throw new GenDriverException("Response query type " + queryOpt.get().getQueryType().name() + " not supported yet");
-                }
-            } else {
-                // mapping device -> generic (only for plain string values)
-                value = getMappedGenericValue(dataPoint.getMessagingDataPointConfiguration(), response);
-            }
-            LOG.debug("Received subscribed message on topic={}, filter={}, payload={}",
-                    inMessageTopic, queryOpt.isPresent() ? queryOpt.get().getQuery() : "none", response);
+            Value value = StringValue.of(response);
+
+            // value transformation using responseQuery
+            value = getTransformedGenericValue(dataPoint.getMessagingDataPointConfiguration(), value);
+
+            // mapping device -> generic (only for plain string values)
+            value = getMappedGenericValue(dataPoint.getMessagingDataPointConfiguration(), value);
 
             // unit conversion before inserting into cache
             value = applyUnitConversion(dataPoint, value, SGrDeviceBase::multiply);
@@ -431,38 +392,104 @@ public class SGrMessagingDevice extends SGrDeviceBase<
         return count.get();
     }
 
-    private static Value getMappedGenericValue(MessagingDataPointConfiguration dataPointConfiguration, String value) {
-        String mappedValue = value;
+    private static Value getMappedGenericValue(MessagingDataPointConfiguration dataPointConfiguration, Value value) {
+        Value mappedValue = value;
 
         List<ValueMapping> valueMappings = Optional.ofNullable(dataPointConfiguration)
             .map(MessagingDataPointConfiguration::getInMessage)
             .map(InMessage::getValueMapping)
-            .map(MessagingValueMapping::getMapping).orElse(Collections.emptyList());
-        for (ValueMapping mapping: valueMappings) {
-            if (mappedValue.equals(mapping.getDeviceValue())) {
-                mappedValue = mapping.getGenericValue();
-                break;
-            }
+            .map(MessagingValueMapping::getMapping)
+            .orElse(Collections.emptyList());
+
+        final String strVal = mappedValue.getString();
+        Optional<ValueMapping> mappingOpt = valueMappings.stream()
+            .filter(m -> strVal.equals(m.getDeviceValue()))
+            .findFirst();
+        if (mappingOpt.isPresent()) {
+            mappedValue = StringValue.of(mappingOpt.get().getGenericValue());
         }
 
-        return StringValue.of(mappedValue);
+        return mappedValue;
     }
 
-    private static String getMappedDeviceValue(MessagingDataPointConfiguration dataPointConfiguration, Value value) {
-        String mappedValue = value.getString();
+    private static Value getMappedDeviceValue(MessagingDataPointConfiguration dataPointConfiguration, Value value) {
+        Value mappedValue = value;
 
         List<ValueMapping> valueMappings = Optional.ofNullable(dataPointConfiguration)
             .map(MessagingDataPointConfiguration::getWriteCmdMessage)
             .map(OutMessage::getValueMapping)
-            .map(MessagingValueMapping::getMapping).orElse(Collections.emptyList());
-        for (ValueMapping mapping: valueMappings) {
-            if (mappedValue.equals(mapping.getGenericValue())) {
-                mappedValue = mapping.getDeviceValue();
-                break;
-            }
+            .map(MessagingValueMapping::getMapping)
+            .orElse(Collections.emptyList());
+
+        final String strVal = mappedValue.getString();
+        Optional<ValueMapping> mappingOpt = valueMappings.stream()
+            .filter(m -> strVal.equals(m.getGenericValue()))
+            .findFirst();
+        if (mappingOpt.isPresent()) {
+            mappedValue = StringValue.of(mappingOpt.get().getDeviceValue());
         }
 
         return mappedValue;
+    }
+
+    private static Value getTransformedGenericValue(MessagingDataPointConfiguration dataPointConfiguration, Value value) throws GenDriverException {
+        Value tmpValue = value;
+
+        ResponseQuery responseQuery = Optional.ofNullable(dataPointConfiguration)
+                    .map(MessagingDataPointConfiguration::getInMessage)
+                    .map(InMessage::getResponseQuery)
+                    .orElse(null);
+
+        if (responseQuery != null) {
+            if (responseQuery.getQueryType() == null) {
+                throw new GenDriverException("Response query type missing");
+            }
+            if (ResponseQueryType.JMES_PATH_EXPRESSION == responseQuery.getQueryType()) {
+                tmpValue = JsonHelper.parseJsonResponse(responseQuery.getQuery(), tmpValue.getString());
+            } else if (ResponseQueryType.JMES_PATH_MAPPING == responseQuery.getQueryType()) {
+                tmpValue = JsonHelper.mapJsonResponse(responseQuery.getJmesPathMappings(), tmpValue.getString());
+            } else if (ResponseQueryType.X_PATH_EXPRESSION == responseQuery.getQueryType()) {
+                tmpValue = XPathHelper.parseXmlResponse(responseQuery.getQuery(), tmpValue.getString());
+            } else if (ResponseQueryType.REGULAR_EXPRESSION == responseQuery.getQueryType()) {
+                tmpValue = RegexHelper.query(responseQuery.getQuery(), tmpValue.getString());
+            } else if (ResponseQueryType.JSO_NATA_EXPRESSION == responseQuery.getQueryType()) {
+                tmpValue = JsonHelper.parseJsonResponseWithJsonata(responseQuery.getQuery(), tmpValue.getString());
+            } else {
+                throw new GenDriverException("Response query type " + responseQuery.getQueryType().name() + " not supported yet");
+            }
+        }
+
+        return tmpValue;
+    }
+
+    private static Value getTransformedDeviceValue(MessagingDataPointConfiguration dataPointConfiguration, Value value) throws GenDriverException {
+        Value tmpValue = value;
+
+        ResponseQuery templateQuery = Optional.ofNullable(dataPointConfiguration)
+                .map(MessagingDataPointConfiguration::getWriteCmdMessage)
+                .map(OutMessage::getTemplateQuery)
+                .orElse(null);
+
+        if (templateQuery != null) {
+            if (templateQuery.getQueryType() == null) {
+                throw new GenDriverException("Template query type missing");
+            }
+            if (ResponseQueryType.JMES_PATH_EXPRESSION == templateQuery.getQueryType()) {
+                tmpValue = JsonHelper.parseJsonResponse(templateQuery.getQuery(), tmpValue.getString());
+            } else if (ResponseQueryType.JMES_PATH_MAPPING == templateQuery.getQueryType()) {
+                tmpValue = JsonHelper.mapJsonResponse(templateQuery.getJmesPathMappings(), tmpValue.getString());
+            } else if (ResponseQueryType.X_PATH_EXPRESSION == templateQuery.getQueryType()) {
+                tmpValue = XPathHelper.parseXmlResponse(templateQuery.getQuery(), tmpValue.getString());
+            } else if (ResponseQueryType.REGULAR_EXPRESSION == templateQuery.getQueryType()) {
+                tmpValue = RegexHelper.query(templateQuery.getQuery(), tmpValue.getString());
+            } else if (ResponseQueryType.JSO_NATA_EXPRESSION == templateQuery.getQueryType()) {
+                tmpValue = JsonHelper.parseJsonResponseWithJsonata(templateQuery.getQuery(), tmpValue.getString());
+            } else {
+                throw new GenDriverException("Template query type " + templateQuery.getQueryType().name() + " not supported yet");
+            }
+        }
+
+        return tmpValue;
     }
 
     private static String substituteParameterPlaceholders(String template, Map<String, String> substitutions) {
