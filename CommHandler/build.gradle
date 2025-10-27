@@ -97,6 +97,7 @@ dependencies {
     api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.4'
     implementation group: 'io.burt', name: 'jmespath-core', version: '0.6.0'
     implementation group: 'io.burt', name: 'jmespath-jackson', version: '0.6.0'
+    implementation group: 'com.dashjoin', name: 'jsonata', version: '0.9.8'
     implementation group: 'commons-io', name: 'commons-io', version: '2.15.1'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.19.0'
     implementation group: 'jakarta.annotation', name: 'jakarta.annotation-api', version: '2.1.1'

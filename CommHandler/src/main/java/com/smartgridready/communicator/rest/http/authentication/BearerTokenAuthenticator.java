@@ -18,8 +18,6 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package com.smartgridready.communicator.rest.http.authentication;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smartgridready.driver.api.http.GenHttpResponse;
 import com.smartgridready.communicator.rest.http.client.RestServiceClient;
 import com.smartgridready.ns.v0.DeviceFrame;
@@ -27,17 +25,15 @@ import com.smartgridready.ns.v0.ResponseQuery;
 import com.smartgridready.ns.v0.ResponseQueryType;
 import com.smartgridready.ns.v0.RestApiInterfaceDescription;
 import com.smartgridready.ns.v0.RestApiServiceCall;
+import com.smartgridready.communicator.common.helper.JsonHelper;
 import com.smartgridready.communicator.rest.exception.RestApiServiceCallException;
+import com.smartgridready.driver.api.common.GenDriverException;
 import com.smartgridready.driver.api.http.GenHttpClientFactory;
 import com.smartgridready.communicator.rest.http.client.RestServiceClientUtils;
-import io.burt.jmespath.Expression;
-import io.burt.jmespath.JmesPath;
-import io.burt.jmespath.jackson.JacksonRuntime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Optional;
 
 /**
  * Implements an HTTP authenticator using JWT bearer tokens.
@@ -111,31 +107,21 @@ public class BearerTokenAuthenticator implements Authenticator {
 
     private String handleResponse(String result, RestApiServiceCall restApiServiceCall) throws IOException {
 
-        Optional<String> queryOpt = Optional.ofNullable(restApiServiceCall.getResponseQuery())
-                .filter(responseQuery -> responseQuery.getQueryType() != null
-                        && responseQuery.getQueryType() == ResponseQueryType.JMES_PATH_EXPRESSION)
-                .map(ResponseQuery::getQuery);
+        if (restApiServiceCall.getResponseQuery() != null) {
+            ResponseQuery responseQuery = restApiServiceCall.getResponseQuery();
+            if (responseQuery.getQueryType() != null) {
+                try {
+                    if (ResponseQueryType.JMES_PATH_EXPRESSION == responseQuery.getQueryType()) {
+                        return JsonHelper.parseJsonResponse(responseQuery.getQuery(), result).getString();
+                    } else if (ResponseQueryType.JSO_NATA_EXPRESSION == responseQuery.getQueryType()) {
+                        return JsonHelper.parseJsonResponseWithJsonata(responseQuery.getQuery(), result).getString();
+                    }
+                } catch (GenDriverException e) {
+                    throw new IOException("Failed to parse response", e);
+                }
+            }
+        }
 
-        if (queryOpt.isPresent()) {
-            return parseResponse(result, queryOpt.get());
-        }
         return result;
-    }
-    
-    private String parseResponse(String jsonResp, String jmesPath) throws IOException {
-        
-        JmesPath<JsonNode> path = new JacksonRuntime();
-        Expression<JsonNode> expression = path.compile(jmesPath);
-        
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readTree(jsonResp);        
-        JsonNode res = expression.search(jsonNode);
-        
-        if (res != null) {
-            return res.asText();
-        }
-        
-        LOG.error("Unable to extract bearer token from http response.");
-        return null;
     }
 }

@@ -60,6 +60,14 @@ public class MessageFilterHandlerImpl implements MessageFilterHandler {
             } catch (GenDriverException e) {
                 return false; // no match
             }
+        } else if (messageFilter.getJsonataFilter() != null) {
+            try {
+                var filter = messageFilter.getJsonataFilter();
+                regexMatch = filter.getMatchesRegex();
+                payloadValue = JsonHelper.parseJsonResponseWithJsonata(filter.getQuery(), payload);
+            } catch (GenDriverException e) {
+                return false; // no match
+            }
         }
 
         // regex matching for all filter types
@@ -75,7 +83,8 @@ public class MessageFilterHandlerImpl implements MessageFilterHandler {
             (messageFilter.getPlaintextFilter() != null) ||
             (messageFilter.getRegexFilter() != null) ||
             (messageFilter.getXpapathFilter() != null) ||
-            (messageFilter.getJmespathFilter() != null)
+            (messageFilter.getJmespathFilter() != null) ||
+            (messageFilter.getJsonataFilter() != null)
         ) {
             return;
         }    
