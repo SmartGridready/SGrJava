@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":9,"i1":9};
+var data = {"i0":9,"i1":9,"i2":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -170,6 +170,14 @@ extends java.lang.Object</pre>
 <div class="block">Evaluates a JMESPath expression on a JSON string and returns as SGr value.</div>
 </td>
 </tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>static <a href="../api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#parseJsonResponseWithJsonata(java.lang.String,java.lang.String)">parseJsonResponseWithJsonata</a></span>&#8203;(java.lang.String&nbsp;jsonataExpression,
+                            java.lang.String&nbsp;jsonResp)</code></th>
+<td class="colLast">
+<div class="block">Evaluates a JSONata expression on a JSON string and returns as SGr value.</div>
+</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -207,6 +215,27 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>jmesPath</code> - the JMESPath expression</dd>
+<dd><code>jsonResp</code> - the JSON string</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of <a href="../api/values/JsonValue.html" title="class in com.smartgridready.communicator.common.api.values"><code>JsonValue</code></a></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>com.smartgridready.driver.api.common.GenDriverException</code> - when an error occurred during parsing</dd>
+</dl>
+</li>
+</ul>
+<a id="parseJsonResponseWithJsonata(java.lang.String,java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>parseJsonResponseWithJsonata</h4>
+<pre class="methodSignature">public static&nbsp;<a href="../api/values/Value.html" title="class in com.smartgridready.communicator.common.api.values">Value</a>&nbsp;parseJsonResponseWithJsonata&#8203;(java.lang.String&nbsp;jsonataExpression,
+                                                 java.lang.String&nbsp;jsonResp)
+                                          throws com.smartgridready.driver.api.common.GenDriverException</pre>
+<div class="block">Evaluates a JSONata expression on a JSON string and returns as SGr value.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>jsonataExpression</code> - the JSONata expression</dd>
 <dd><code>jsonResp</code> - the JSON string</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>an instance of <a href="../api/values/JsonValue.html" title="class in com.smartgridready.communicator.common.api.values"><code>JsonValue</code></a></dd>
