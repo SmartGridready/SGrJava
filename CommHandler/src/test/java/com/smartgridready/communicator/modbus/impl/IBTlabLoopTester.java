@@ -75,16 +75,16 @@ public class IBTlabLoopTester {
 	private static int devOMCCIWallboxExceptions = 0;
 
 	// device selection
-	private static boolean  devABBMeterTestIsOn = false;
+	private static boolean  devABBMeterTestIsOn = true;
 	private static boolean  devVGT_SGCPTestIsOn = true;
 	private static boolean  devFroniusSymoTestIsOn = false;
-	private static boolean  devGaroWallboxTestIsOn = false;
+	private static boolean  devGaroWallboxTestIsOn = true;
 	// TestBox
 	private static boolean  devWagoMeterTestIsOn = true;
 	private static boolean  devOMCCIWallboxTestIsOn = true;
 
 	// !! Schalter in Box umlegen fuer Test !!
-	private static boolean  devTB_ABBMeterTestIsOn = false;
+	private static boolean  devTB_ABBMeterTestIsOn = true;
 
 	private static SGrModbusGatewayRegistry  modbusPort1Registery = new SGrModbusGatewayRegistry();
 	// Set the mockModbusDriver to new GenDriverAPI4ModbusRTUMock() to mock the real devices.
@@ -193,6 +193,7 @@ public class IBTlabLoopTester {
 
 			devWagoMeter = (GenDeviceApi) new SGrDeviceBuilder()
 					.useSharedModbusGatewayRegistry(modbusPort1Registery)
+					.useSharedModbusRtu(true)
 					.eid(Path.of(aBaseDir, aDescriptionFile))
 					.properties(properties)
 					.build();
@@ -353,6 +354,7 @@ public class IBTlabLoopTester {
 
 			devABBMeter = (GenDeviceApi) new SGrDeviceBuilder()
 					.useSharedModbusGatewayRegistry(modbusPort1Registery)
+					.useSharedModbusRtu(true)
 					.eid(Path.of(aBaseDir, aDescriptionFile))
 					.properties(properties)
 					.build();
@@ -507,6 +509,7 @@ public class IBTlabLoopTester {
 
 			devTB_ABBMeter = (GenDeviceApi) new SGrDeviceBuilder()
 					.useSharedModbusGatewayRegistry(modbusPort1Registery)
+					.useSharedModbusRtu(true)
 					.eid(Path.of(aBaseDir, aDescriptionFile))
 					.properties(properties)
 					.build();
@@ -720,7 +723,7 @@ public class IBTlabLoopTester {
 			prop.put("tcp_port", "502");
 
 
-			 devGaroWallbox = new SGrDeviceBuilder()
+ 			 devGaroWallbox = new SGrDeviceBuilder()
 				//.useModbusGatewayFactory(new EasyModbusGatewayFactory())
                 .properties(prop)
 				.eid(Path.of(aBaseDir, aDescriptionFile))
@@ -752,11 +755,11 @@ public class IBTlabLoopTester {
 				devGaroWallbox.setVal("Curtailment", "HemsCurrentLimit", Float64Value.of(CurtailCurrent));
 				LOG.info("  Setting HemsCurrentLimit to :     " + CurtailCurrent + "  ");
 			}
-			fVal1 = devGaroWallbox.getVal("CurrentAC", "CurrentACL1").getFloat64();
+			fVal1 = devGaroWallbox.getVal("CurrentAC", "CurrentACL1").getFloat32();
 			Thread.sleep(200);
-			fVal2 = devGaroWallbox.getVal("CurrentAC", "CurrentACL2").getFloat64();
+			fVal2 = devGaroWallbox.getVal("CurrentAC", "CurrentACL2").getFloat32();
 			Thread.sleep(200);
-			fVal3 = devGaroWallbox.getVal("CurrentAC", "CurrentACL3").getFloat64();
+			fVal3 = devGaroWallbox.getVal("CurrentAC", "CurrentACL3").getFloat32();
 			Thread.sleep(200);
 
 			//programmer unknown setMockIntegerType(true);
@@ -769,20 +772,21 @@ public class IBTlabLoopTester {
 			Thread.sleep(200);
 			LOG.info("  OCPP-StatusCode:                  " + oEnumList.getLiteral() + "  ");
 			LOG.info("  CurrentAC[A]                      I[L1]= " + fVal1 + ",  I[L2] = "  + fVal2 + ",  I[L3] = "  + fVal3 + "  ");
-
-			fVal1 = devGaroWallbox.getVal("ActivePowerAC", "ActivePowerACL1").getFloat64();
 			Thread.sleep(200);
-			fVal2 = devGaroWallbox.getVal("ActivePowerAC", "ActivePowerACL2").getFloat64();
+			 /* power measurement suffers of a device error exception
+			fVal1 = devGaroWallbox.getVal("ActivePowerAC", "ActivePowerACL1").getFloat32();
 			Thread.sleep(200);
-			fVal3 = devGaroWallbox.getVal("ActivePowerAC", "ActivePowerACL3").getFloat64();
+			fVal2 = devGaroWallbox.getVal("ActivePowerAC", "ActivePowerACL2").getFloat32();
+			Thread.sleep(200);
+			fVal3 = devGaroWallbox.getVal("ActivePowerAC", "ActivePowerACL3").getFloat32();
 			Thread.sleep(200);
 			LOG.info("  PowerAC[kW]:                      P[1L]= " + fVal1 + ",  P[L2] = "  + fVal2 + ",  P[L3] = "  + fVal3 + "  ");
-
-			fVal1 = devGaroWallbox.getVal("ActiveEnergyAC", "ActiveEnergyACL1").getFloat64();
+            */
+			fVal1 = devGaroWallbox.getVal("ActiveEnergyAC", "ActiveEnergyACL1").getFloat32();
 			Thread.sleep(200);
-			fVal2 = devGaroWallbox.getVal("ActiveEnergyAC", "ActiveEnergyACL2").getFloat64();
+			fVal2 = devGaroWallbox.getVal("ActiveEnergyAC", "ActiveEnergyACL2").getFloat32();
 			Thread.sleep(200);
-			fVal3 = devGaroWallbox.getVal("ActiveEnergyAC", "ActiveEnergyACL3").getFloat64();
+			fVal3 = devGaroWallbox.getVal("ActiveEnergyAC", "ActiveEnergyACL3").getFloat32();
 			Thread.sleep(200);
 			LOG.info("  EnergyAC[kWh] L1/L2/L3:           W[1] = " + fVal1 + "  W[2] = "  + fVal2 + "  W[3] = "  + fVal3 + "  ");
 
@@ -795,11 +799,11 @@ public class IBTlabLoopTester {
 			LOG.info("  EVState  support (ISO/IEC 15118): " + evState + ",    EVCCID = " + evccid + "  ");
 			//programmer unknown setMockIntegerType(false);
 
-			fVal1 = devGaroWallbox.getVal("Curtailment", "SafeCurrent").getFloat64();
+			fVal1 = devGaroWallbox.getVal("Curtailment", "SafeCurrent").getFloat32();
 			Thread.sleep(200);
-			fVal2 = devGaroWallbox.getVal("Curtailment", "HemsCurrentLimit").getFloat64();
+			fVal2 = devGaroWallbox.getVal("Curtailment", "HemsCurrentLimit").getFloat32();
 			Thread.sleep(200);
-			fVal3 = devGaroWallbox.getVal("Curtailment", "HWCurrentLimit").getFloat64();
+			fVal3 = devGaroWallbox.getVal("Curtailment", "HWCurrentLimit").getFloat32();
 			Thread.sleep(200);
 			iVal1 = (int)devGaroWallbox.getVal("Curtailment", "maxReceiveTimeSec").getInt16U();
 			Thread.sleep(200);
