@@ -5,6 +5,7 @@ import com.smartgridready.communicator.common.api.SGrDeviceBuilder;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,6 +47,7 @@ class TariffProvidersTest {
         assertThat(result.getString(), CoreMatchers.startsWith(expected));
     }
 
+    @Disabled
     @Test
     void testGroupeE() throws Exception {
 

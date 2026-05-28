@@ -243,7 +243,7 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
             TimeSyncBlockNotification blockNotificationType = blockNotificationTypeOpt.get();
             BigInteger blockAddress = blockNotificationType.getFirstAddress();
         
-            BigInteger mbRegRef = aDataPoint.getModbusDataPointConfiguration().getAddress();
+            BigInteger mbRegRef = ModbusUtil.getReadAddress(aDataPoint.getModbusDataPointConfiguration());
             BigInteger addrDiff = mbRegRef.subtract(blockAddress);
             if (addrDiff.signum() < 0) {
                 throw new GenDriverException("Error in EI-XML, data point address must be >= timeSyncBlock address");
@@ -315,8 +315,8 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
         ModbusReaderResponse mbResponse = ModbusReader.read(
                 drv4ModbusGateway.getTransport(),
                 unitIdentifier,
-                mbRegRef.getRegisterType(),
-                mbRegRef.getAddress().intValue(),
+                ModbusUtil.getReadRegisterType(mbRegRef),
+                ModbusUtil.getReadAddress(mbRegRef).intValue(),
                 bMBfirstRegOne,
                 size * arrayLen);
 
@@ -526,7 +526,7 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
 
 
         ModbusDataPointConfiguration modbusDataPointConfiguration = aDataPoint.getModbusDataPointConfiguration();
-        BigInteger regad = modbusDataPointConfiguration.getAddress();
+        BigInteger regad = ModbusUtil.getWriteAddress(modbusDataPointConfiguration);
 
         boolean bMBfirstRegOne = modbusInterfaceDesc.isFirstRegisterAddressIsOne();
         if (bMBfirstRegOne) {
@@ -536,9 +536,10 @@ public class SGrModbusDevice extends SGrDeviceBase<DeviceFrame, ModbusFunctional
         int mbsize = aDataPoint.getModbusDataPointConfiguration().getNumberOfRegisters();
 
         // fill values & booleans, apply conversion scheme
-        if (modbusDataPointConfiguration.getRegisterType()==RegisterType.HOLD_REGISTER)
+        RegisterType regType = ModbusUtil.getWriteRegisterType(modbusDataPointConfiguration);
+        if (regType==RegisterType.HOLD_REGISTER)
             bRegisterCMDs = true;
-        if (modbusDataPointConfiguration.getRegisterType()==RegisterType.COIL)
+        if (regType==RegisterType.COIL)
             bDiscreteCMDs = true;
 
         IntBuffer mbRegBuf = IntBuffer.allocate(1024);

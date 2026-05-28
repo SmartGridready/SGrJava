@@ -1,12 +1,15 @@
 package com.smartgridready.communicator.modbus.helper;
 
+import java.math.BigInteger;
 import java.util.Map;
 import java.util.Objects;
 
+import com.smartgridready.ns.v0.ModbusDataPointConfiguration;
 import com.smartgridready.ns.v0.ModbusInterfaceDescription;
 import com.smartgridready.ns.v0.ModbusInterfaceSelection;
 import com.smartgridready.ns.v0.ModbusRtu;
 import com.smartgridready.ns.v0.ModbusTcp;
+import com.smartgridready.ns.v0.RegisterType;
 import com.smartgridready.utils.StringUtil;
 import com.smartgridready.driver.api.modbus.DataBits;
 import com.smartgridready.driver.api.common.GenDriverException;
@@ -242,5 +245,41 @@ public class ModbusUtil {
             default:
                 return ModbusType.UNKNOWN;
         }
+    }
+
+    /**
+     * Gets the register address of a read call.
+     * @param dpConf the data point configuration
+     * @return an instance of {@link BigInteger}
+     */
+    public static BigInteger getReadAddress(ModbusDataPointConfiguration dpConf) {
+        return (null != dpConf.getReadAddress()) ? dpConf.getReadAddress() : dpConf.getAddress();
+    }
+
+    /**
+     * Gets the register address of a write call.
+     * @param dpConf the data point configuration
+     * @return an instance of {@link BigInteger}
+     */
+    public static BigInteger getWriteAddress(ModbusDataPointConfiguration dpConf) {
+        return (null != dpConf.getWriteAddress()) ? dpConf.getWriteAddress() : dpConf.getAddress();
+    }
+
+    /**
+     * Gets the register type of a read call.
+     * @param dpConf the data point configuration
+     * @return an instance of {@link RegisterType}
+     */
+    public static RegisterType getReadRegisterType(ModbusDataPointConfiguration dpConf) {
+        return (null != dpConf.getReadRegisterType()) ? dpConf.getReadRegisterType() : dpConf.getRegisterType();
+    }
+
+    /**
+     * Gets the register type of a write call.
+     * @param dpConf the data point configuration
+     * @return an instance of {@link RegisterType}
+     */
+    public static RegisterType getWriteRegisterType(ModbusDataPointConfiguration dpConf) {
+        return (null != dpConf.getWriteRegisterType()) ? dpConf.getWriteRegisterType() : dpConf.getRegisterType();
     }
 }
